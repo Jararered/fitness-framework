@@ -45,19 +45,21 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             const loggedWeightsBest = JSON.parse(localStorage.getItem('logged_weights_best') || '{}');
 
             const weight = weights[currentSetIndex] || bestEfforts[currentExercise.name] || 0;
-            const load = currentExercise.reps * weight;
-            setTotalLoad(totalLoad + load);
+            if (weight > 0) {
+                const load = currentExercise.reps * weight;
+                setTotalLoad(totalLoad + load);
 
-            loggedWeights.push({
-                exercise: currentExercise.name,
-                reps: currentExercise.reps,
-                weight: weight,
-            });
-            localStorage.setItem('logged_weights', JSON.stringify(loggedWeights));
+                loggedWeights.push({
+                    exercise: currentExercise.name,
+                    reps: currentExercise.reps,
+                    weight: weight,
+                });
+                localStorage.setItem('logged_weights', JSON.stringify(loggedWeights));
 
-            if (!loggedWeightsBest[currentExercise.name] || weight > loggedWeightsBest[currentExercise.name]) {
-                loggedWeightsBest[currentExercise.name] = weight;
-                localStorage.setItem('logged_weights_best', JSON.stringify(loggedWeightsBest));
+                if (!loggedWeightsBest[currentExercise.name] || weight > loggedWeightsBest[currentExercise.name]) {
+                    loggedWeightsBest[currentExercise.name] = weight;
+                    localStorage.setItem('logged_weights_best', JSON.stringify(loggedWeightsBest));
+                }
             }
 
             if (currentSetIndex < currentExercise.sets - 1) {
