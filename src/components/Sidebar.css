@@ -109,3 +109,55 @@ input[type="number"]:focus {
     border-color: #007aff;
     box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
 }
+
+/* Ensure the container takes up the full width */
+.page-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Equipment categories organized in a responsive layout */
+.equipment-category {
+    margin-bottom: 20px;
+}
+
+/* Responsive styling for equipment items */
+.equipment-list {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to a new line based on screen width */
+    gap: 10px;
+    padding: 0;
+}
+
+.equipment-item {
+    flex: 1 1 calc(25% - 10px); /* Each item takes 25% of the row, minus gap, on larger screens */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.equipment-item.selected {
+    background-color: #d0f0c0; /* Light green for selected items */
+    border-color: #a3d9a5;
+}
+
+/* Adjust items to stack on smaller screens */
+@media (max-width: 768px) {
+    .equipment-item {
+        flex: 1 1 100%; /* Each item takes full width on smaller screens */
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .equipment-item {
+        flex: 1 1 calc(50% - 10px); /* Each item takes 50% on medium screens */
+    }
+}
