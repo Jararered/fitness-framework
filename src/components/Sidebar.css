@@ -1,0 +1,111 @@
+/* Sidebar base styling */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #f8f8f8;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.25s ease;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0);
+    border-right: 1px solid #e0e0e0;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+    align-items: center;
+}
+
+.app-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007aff; /* iOS blue color */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #007aff;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.menu {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.menu-item {
+    font-size: 18px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #444;
+    transition: background-color 0.25s ease;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background-color: #e0e0e0;
+}
+
+.menu-item:active {
+    background-color: #c7c7cc;
+}
+
+/* Input Field Styling */
+.input-field {
+    padding: 10px;
+    margin: 8px 0;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #ffffff; /* Light background */
+    color: #333; /* Dark text for readability */
+    transition: border-color 0.2s ease;
+}
+
+.input-field:focus {
+    border-color: #007aff;
+    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
+}
+
+/* Styling for numeric input fields to ensure light spinner controls */
+input[type="number"] {
+    -webkit-appearance: none; /* Disable default appearance for WebKit browsers */
+    -moz-appearance: textfield; /* Disable default appearance for Firefox */
+    appearance: none; /* Disable default appearance for other browsers */
+    background-color: #ffffff; /* Light background */
+    color: #333; /* Dark text for readability */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Remove default spinner appearance */
+    background-color: #f2f2f7; /* Light background for spinner controls */
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+input[type="number"]:focus {
+    border-color: #007aff;
+    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
+}

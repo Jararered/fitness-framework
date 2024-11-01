@@ -1,0 +1,93 @@
+/* Root styles */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f2f2f7;
+  color: #333;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Sidebar layout */
+.sidebar {
+  transition: width 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #e0e0e0;
+}
+
+/* Main content layout */
+.main-content {
+  flex-grow: 1;
+  padding-left: 320px; /* Space for expanded sidebar */
+  padding-top: 20px;
+  padding-right: 20px;
+  /* padding-bottom: 20px; */
+  transition: padding-left 0.3s ease;
+}
+
+/* Adjust content padding when sidebar is collapsed */
+.main-content.collapsed {
+  padding-left: 120px; /* Reduced space for collapsed sidebar */
+}
+
+/* General button styles */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: #007aff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  outline: none;
+}
+
+button:hover {
+  background-color: #005bb5;
+}
+
+button:active {
+  background-color: #004a94;
+}
+
+/* Input styling */
+input[type="text"], input[type="number"] {
+  padding: 8px;
+  margin: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+  border-color: #007aff;
+  box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-content {
+      padding-left: 80px;
+  }
+
+  .sidebar {
+      width: 60px;
+  }
+  
+  .main-content.collapsed {
+      padding-left: 60px;
+  }
+}
