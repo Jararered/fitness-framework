@@ -9,7 +9,11 @@ const categorizedEquipment = {
     Recovery: ['Foam Roller'],
 };
 
-const Equipment: React.FC = () => {
+interface EquipmentProps {
+    gym: string | null; // Accept gym name as a prop
+}
+
+const Equipment: React.FC<EquipmentProps> = ({ gym }) => {
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
     const [savedEquipmentLists, setSavedEquipmentLists] = useState<string[]>([]);
     const [selectedList, setSelectedList] = useState<string>("");
@@ -71,6 +75,17 @@ const Equipment: React.FC = () => {
     return (
         <div className="page-container">
             <h1>Equipment</h1>
+
+            {/* Display the selected gym name */}
+            <section>
+                <h2>Selected Gym</h2>
+                {gym ? (
+                    <p>Gym: {gym}</p>
+                ) : (
+                    <p>No gym selected.</p>
+                )}
+            </section>
+
             <section>
                 <h2>Available Equipment</h2>
                 {Object.entries(categorizedEquipment).map(([category, equipment]) => (
@@ -80,9 +95,8 @@ const Equipment: React.FC = () => {
                             {equipment.map((item) => (
                                 <li
                                     key={item}
-                                    className={`equipment-item ${
-                                        selectedEquipment.includes(item) ? 'selected' : ''
-                                    }`}
+                                    className={`equipment-item ${selectedEquipment.includes(item) ? 'selected' : ''
+                                        }`}
                                     onClick={() => toggleEquipment(item)}
                                 >
                                     {item}

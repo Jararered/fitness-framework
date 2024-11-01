@@ -17,7 +17,6 @@ const Settings: React.FC = () => {
         <div className="page-container">
             <h1>Settings</h1>
             <section>
-                <h2>Data</h2>
                 <div className="center-container">
                     <button onClick={handleClearData} className="action-button warning">
                         Clear All Data

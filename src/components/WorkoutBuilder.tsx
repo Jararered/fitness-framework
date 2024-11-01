@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
 import './CommonStyles.css';
+import './Input.css'
 
 interface Exercise {
     name: string;

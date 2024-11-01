@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './CommonStyles.css';
 
 interface Exercise {
     name: string;
@@ -7,7 +6,11 @@ interface Exercise {
     reps: number;
 }
 
-const TodaysWorkout: React.FC = () => {
+interface TodaysWorkoutProps {
+    gym: string | null; // Accept gym name as a prop
+}
+
+const TodaysWorkout: React.FC<TodaysWorkoutProps> = ({ gym }) => {
     const [currentRoutine, setCurrentRoutine] = useState<Exercise[]>([]);
 
     useEffect(() => {
@@ -20,8 +23,20 @@ const TodaysWorkout: React.FC = () => {
     return (
         <div className="page-container">
             <h1>Today's Workout</h1>
+
+            {/* Display selected gym name */}
+            <section>
+                <h2>Selected Gym</h2>
+                {gym ? (
+                    <p>Gym: {gym}</p>
+                ) : (
+                    <p>No gym selected.</p>
+                )}
+            </section>
+
+            {/* Display the current workout routine */}
             {currentRoutine.length === 0 ? (
-                <p>No routine set for today. Please create or load a routine in the Routine Builder.</p>
+                <p>No routine set for today. Please create or load a routine in the Workout Builder.</p>
             ) : (
                 <ul>
                     {currentRoutine.map((exercise, index) => (
