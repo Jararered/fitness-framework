@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import '../styles/Input.css';
+import '../styles/Containers.css';
 
 const Settings: React.FC = () => {
     const [weightUnit, setWeightUnit] = useState<string>('lb');
@@ -71,59 +72,64 @@ const Settings: React.FC = () => {
                 <h1>Settings</h1>
             </div>
             <div className="page-container">
-                <section>
-                    <div>
-                        <label htmlFor="weight-unit">Preferred Weight Unit:</label>
-                        <select
-                            id="weight-unit"
-                            value={weightUnit}
-                            onChange={handleWeightUnitChange}
-                            className="input-field"
-                        >
-                            <option value="lb">lb</option>
-                            <option value="kg">kg</option>
-                        </select>
+                <div className="settings-columns">
+                    <div className="settings-inputs">
+                        <section>
+                            <div>
+                                <label htmlFor="weight-unit">Preferred Weight Unit:</label>
+                                <select
+                                    id="weight-unit"
+                                    value={weightUnit}
+                                    onChange={handleWeightUnitChange}
+                                    className="input-field"
+                                >
+                                    <option value="lb">lb</option>
+                                    <option value="kg">kg</option>
+                                </select>
+                            </div>
+                        </section>
+                        
+                        <section>
+                            <div>
+                                <label htmlFor="short-rest">Short Rest (seconds):</label>
+                                <input
+                                    type="number"
+                                    id="short-rest"
+                                    value={shortRest}
+                                    onChange={(e) => handleRestChange(e, 'short')}
+                                    className="input-field"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="normal-rest">Normal Rest (seconds):</label>
+                                <input
+                                    type="number"
+                                    id="normal-rest"
+                                    value={normalRest}
+                                    onChange={(e) => handleRestChange(e, 'normal')}
+                                    className="input-field"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="long-rest">Long Rest (seconds):</label>
+                                <input
+                                    type="number"
+                                    id="long-rest"
+                                    value={longRest}
+                                    onChange={(e) => handleRestChange(e, 'long')}
+                                    className="input-field"
+                                />
+                            </div>
+                        </section>
                     </div>
-                </section>
-                
-                <section>
-                    <div>
-                        <label htmlFor="short-rest">Short Rest (seconds):</label>
-                        <input
-                            type="number"
-                            id="short-rest"
-                            value={shortRest}
-                            onChange={(e) => handleRestChange(e, 'short')}
-                            className="input-field"
-                        />
+                    <div className="settings-buttons">
+                        <section>
+                            <button onClick={handleClearData} className="bad-button">
+                                Clear All Data
+                            </button>
+                        </section>
                     </div>
-                    <div>
-                        <label htmlFor="normal-rest">Normal Rest (seconds):</label>
-                        <input
-                            type="number"
-                            id="normal-rest"
-                            value={normalRest}
-                            onChange={(e) => handleRestChange(e, 'normal')}
-                            className="input-field"
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="long-rest">Long Rest (seconds):</label>
-                        <input
-                            type="number"
-                            id="long-rest"
-                            value={longRest}
-                            onChange={(e) => handleRestChange(e, 'long')}
-                            className="input-field"
-                        />
-                    </div>
-                </section>
-                
-                <section>
-                    <button onClick={handleClearData} className="bad-button">
-                        Clear All Data
-                    </button>
-                </section>
+                </div>
             </div>
         </>
     );

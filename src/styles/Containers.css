@@ -1,0 +1,15 @@
+.settings-columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.settings-inputs, .settings-buttons {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.settings-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
