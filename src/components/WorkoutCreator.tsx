@@ -189,7 +189,7 @@ const WorkoutBuilder: React.FC = () => {
 
             <div className="page-container">
                 <h2>Load a Saved Workout</h2>
-                <div>
+                <div className="input-row">
                     <select
                         onChange={(e) => setSelectedWorkout(e.target.value)}
                         value={selectedWorkout}
