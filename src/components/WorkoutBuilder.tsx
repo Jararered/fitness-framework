@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
 import './CommonStyles.css';
-import './Input.css'
+import './Input.css';
+import { exercisesByEquipment } from './WorkoutExercises'; // Import exercises by equipment
 
 interface Exercise {
     name: string;
@@ -10,140 +10,210 @@ interface Exercise {
 }
 
 const WorkoutBuilder: React.FC = () => {
-    const [routine, setRoutine] = useState<Exercise[]>([]);
+    const [workout, setWorkout] = useState<Exercise[]>([]);
     const [newExercise, setNewExercise] = useState<Exercise>({ name: '', sets: 0, reps: 0 });
-    const [savedRoutines, setSavedRoutines] = useState<string[]>([]);
-    const [selectedRoutine, setSelectedRoutine] = useState<string>("");
+    const [savedWorkouts, setSavedWorkouts] = useState<string[]>([]);
+    const [selectedWorkout, setSelectedWorkout] = useState<string>("");
+    const [availableExercises, setAvailableExercises] = useState<string[]>([]);
 
     useEffect(() => {
-        const routines = Object.keys(localStorage).filter(key => key.startsWith('routine_'));
-        setSavedRoutines(routines);
+        // Load available exercises based on selected equipment
+        const lastLoadedGym = localStorage.getItem('lastLoadedGym');
+        if (lastLoadedGym) {
+            const selectedEquipment = JSON.parse(localStorage.getItem(lastLoadedGym) || '[]');
+            const exercises = selectedEquipment
+                .flatMap((equipment: string) => exercisesByEquipment[equipment] || [])
+            // .filter((exercise, index, self) => self.indexOf(exercise) === index); // Remove duplicates
+            setAvailableExercises(exercises);
+        }
 
-        const currentRoutine = localStorage.getItem('currentRoutine');
-        if (currentRoutine) {
-            setRoutine(JSON.parse(currentRoutine));
+        // Load saved workouts
+        const workouts = Object.keys(localStorage).filter(key => key.startsWith('workout_'));
+        setSavedWorkouts(workouts);
+
+        const currentWorkout = localStorage.getItem('currentWorkout');
+        if (currentWorkout) {
+            setWorkout(JSON.parse(currentWorkout));
         }
     }, []);
+
+    const handleExerciseChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const { value } = e.target;
+        setNewExercise((prevExercise) => ({
+            ...prevExercise,
+            name: value,
+        }));
+    };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setNewExercise((prevExercise) => ({
             ...prevExercise,
-            [name]: name === 'name' ? value : Number(value),
+            [name]: Number(value),
         }));
     };
 
-    const addExerciseToRoutine = () => {
-        setRoutine((prevRoutine) => {
-            const updatedRoutine = [...prevRoutine, newExercise];
-            localStorage.setItem('currentRoutine', JSON.stringify(updatedRoutine));
-            return updatedRoutine;
+    const addExerciseToWorkout = () => {
+        setWorkout((prevWorkout) => {
+            const updatedWorkout = [...prevWorkout, newExercise];
+            console.log('Updated Workout:', updatedWorkout); // Debugging log
+            localStorage.setItem('currentWorkout', JSON.stringify(updatedWorkout));
+            return updatedWorkout;
         });
         setNewExercise({ name: '', sets: 0, reps: 0 });
     };
 
-    const saveRoutine = () => {
-        const routineName = prompt("Enter a name for this workout:");
-        if (routineName) {
-            const storageKey = `routine_${routineName}`;
-            localStorage.setItem(storageKey, JSON.stringify(routine));
-            alert(`Workout "${routineName}" saved!`);
-            setSavedRoutines((prev) => [...prev, storageKey]);
+    const saveWorkout = () => {
+        const workoutName = prompt("Enter a name for this workout:");
+        if (workoutName) {
+            const storageKey = `workout_${workoutName}`;
+            localStorage.setItem(storageKey, JSON.stringify(workout));
+            alert(`Workout "${workoutName}" saved!`);
+            setSavedWorkouts((prev) => [...prev, storageKey]);
         }
     };
 
-    const loadRoutine = () => {
-        const storageKey = `routine_${selectedRoutine}`;
-        const savedRoutine = localStorage.getItem(storageKey);
-        if (savedRoutine) {
-            const routine = JSON.parse(savedRoutine);
-            setRoutine(routine);
-            localStorage.setItem('currentRoutine', JSON.stringify(routine));
+    const loadWorkout = () => {
+        const storageKey = `workout_${selectedWorkout}`;
+        const savedWorkout = localStorage.getItem(storageKey);
+        if (savedWorkout) {
+            const workout = JSON.parse(savedWorkout);
+            setWorkout(workout);
+            localStorage.setItem('currentWorkout', JSON.stringify(workout));
         } else {
             alert("Please select a valid workout.");
         }
     };
 
-    const clearRoutine = () => {
-        setRoutine([]);
-        localStorage.removeItem('currentRoutine');
+    const clearWorkout = () => {
+        if (window.confirm("Are you sure you want to clear this workout?")) {
+            setWorkout([]);
+            localStorage.removeItem('currentWorkout');
+        }
+    };
+
+    const generateRandomWorkout = () => {
+        if (availableExercises.length === 0) {
+            alert("Please select some gym equipment to load exercises.");
+            return;
+        }
+
+        const randomExercises: Exercise[] = []; // Explicitly type the array
+        const numberOfExercises = Math.min(5, availableExercises.length); // Generate up to 5 exercises
+
+        for (let i = 0; i < numberOfExercises; i++) {
+            const randomExercise = availableExercises[Math.floor(Math.random() * availableExercises.length)];
+            const randomSets = Math.floor(Math.random() * 3) + 3; // 3 to 5 sets
+            const randomReps = (Math.floor(Math.random() * 4) + 1) * 5; // 5, 10, 15, or 20 reps
+
+            randomExercises.push({
+                name: randomExercise,
+                sets: randomSets,
+                reps: randomReps,
+            });
+        }
+
+        setWorkout((prevWorkout) => {
+            const updatedWorkout = [...prevWorkout, ...randomExercises];
+            console.log('Generated Random Workout:', updatedWorkout); // Debugging log
+            localStorage.setItem('currentWorkout', JSON.stringify(updatedWorkout));
+            return updatedWorkout;
+        });
     };
 
     return (
-        <div className="page-container">
-            <h1>Workout Builder</h1>
-            <section>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Exercise Name"
-                    value={newExercise.name}
-                    onChange={handleInputChange}
-                    className="input-field"
-                />
-                <input
-                    type="number"
-                    name="sets"
-                    placeholder="Sets"
-                    value={newExercise.sets || ""}
-                    onChange={handleInputChange}
-                    className="input-field"
-                />
-                <input
-                    type="number"
-                    name="reps"
-                    placeholder="Reps"
-                    value={newExercise.reps || ""}
-                    onChange={handleInputChange}
-                    className="input-field"
-                />
-                <button onClick={addExerciseToRoutine} className="action-button">
-                    Add Exercise
-                </button>
-                <button onClick={saveRoutine} className="action-button">
-                    Save Workout
-                </button>
-                <button onClick={clearRoutine} className="action-button">
-                    Clear Workout
-                </button>
-            </section>
-
-            <h2>Load a Saved Workout</h2>
-            <div>
-                <select
-                    onChange={(e) => setSelectedRoutine(e.target.value)}
-                    value={selectedRoutine}
-                    className="input-field"
-                >
-                    <option value="">Select a workout</option>
-                    {savedRoutines.map((routineKey) => {
-                        const routineName = routineKey.replace('routine_', '');
-                        return (
-                            <option key={routineKey} value={routineName}>
-                                {routineName}
-                            </option>
-                        );
-                    })}
-                </select>
-                <button onClick={loadRoutine} className="action-button">
-                    Load Workout
-                </button>
+        <>
+            <div className="page-title">
+                <h1>Workout Builder</h1>
             </div>
 
-            {/* Today's Workout Section */}
-            <h2>Today's Workout</h2>
-            <ul className="routine-list">
-                {routine.length === 0 ? (
-                    <p>No exercises added yet.</p>
-                ) : (
-                    routine.map((exercise, index) => (
-                        <li key={index} className="routine-item">
-                            <strong>{exercise.name}</strong>: {exercise.sets} sets of {exercise.reps} reps
-                        </li>
-                    ))
-                )}
-            </ul>
-        </div>
+            <div className="page-container">
+                <section className="input-row">
+                    <select
+                        value={newExercise.name}
+                        onChange={handleExerciseChange}
+                        className="input-field"
+                    >
+                        <option value="">Select Exercise</option>
+                        {availableExercises.map((exercise, index) => (
+                            <option key={index} value={exercise}>
+                                {exercise}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        type="number"
+                        name="sets"
+                        placeholder="Sets"
+                        value={newExercise.sets || ""}
+                        onChange={handleInputChange}
+                        className="input-field"
+                    />
+                    <input
+                        type="number"
+                        name="reps"
+                        placeholder="Reps"
+                        value={newExercise.reps || ""}
+                        onChange={handleInputChange}
+                        className="input-field"
+                    />
+                    <button onClick={addExerciseToWorkout} className="action-button add-exercise-button">
+                        Add Exercise
+                    </button>
+                </section>
+
+                <section>
+                    <button onClick={saveWorkout} className="action-button">
+                        Save Workout
+                    </button>
+                    <button onClick={clearWorkout} className="action-button warning">
+                        Clear Workout
+                    </button>
+                </section>
+
+                <h2>Workout Generator</h2>
+                <div>
+                    <button onClick={generateRandomWorkout} className="action-button">
+                        Generate Random Workout
+                    </button>
+                </div>
+
+                <h2>Load a Saved Workout</h2>
+                <div>
+                    <select
+                        onChange={(e) => setSelectedWorkout(e.target.value)}
+                        value={selectedWorkout}
+                        className="input-field"
+                    >
+                        <option value="">Select a workout</option>
+                        {savedWorkouts.map((workoutKey) => {
+                            const workoutName = workoutKey.replace('workout_', '');
+                            return (
+                                <option key={workoutKey} value={workoutName}>
+                                    {workoutName}
+                                </option>
+                            );
+                        })}
+                    </select>
+                    <button onClick={loadWorkout} className="action-button">
+                        Load Workout
+                    </button>
+                </div>
+
+                <h2>Today's Workout</h2>
+                <ul className="workout-list">
+                    {workout.length === 0 ? (
+                        <p>No exercises added yet.</p>
+                    ) : (
+                        workout.map((exercise, index) => (
+                            <li key={index} className="workout-item">
+                                <strong>{exercise.name}</strong>: {exercise.sets} sets of {exercise.reps} reps
+                            </li>
+                        ))
+                    )}
+                </ul>
+            </div>
+        </>
     );
 };
 

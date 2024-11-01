@@ -15,12 +15,20 @@ html,
     display: flex;
     flex-direction: row;
     min-height: 100vh;
-    transition: all 0.25s ease;
+}
+
+.page-title {
+    width: 100%;
+    z-index: 1000;
+}
+
+.page-title h1 {
+    font-size: 24px;
 }
 
 .main-content {
-    margin-left: 80px;
-    transition: width 0.25s ease, margin-left 0.25s ease; /* Smooth transition */
+    flex-grow: 1; /* Ensure main-content fills the available width */
+    margin-left: 80px; /* Account for sidebar size and padding */
     padding: 10px; /* Padding for main content */
     box-sizing: border-box; /* Include padding in width calculation */
 }
@@ -34,7 +42,6 @@ button {
     background-color: #007aff;
     color: white;
     cursor: pointer;
-    transition: background-color 0.25s ease;
     outline: none;
 }
 
@@ -57,11 +64,22 @@ input[type="number"] {
     border-radius: 10px;
     outline: none;
     font-size: 16px;
-    transition: border-color 0.2s ease;
 }
 
 input[type="text"]:focus,
 input[type="number"]:focus {
     border-color: #007aff;
     box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+    .App {
+        flex-direction: column;
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-bottom: 60px; /* Account for the bottom docked sidebar */
+    }
 }

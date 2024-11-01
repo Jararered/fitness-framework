@@ -3,7 +3,7 @@
 // Define the keys we'll use for localStorage
 const LOCAL_STORAGE_KEYS = {
     RECENT_WORKOUTS: 'recentWorkouts',
-    ROUTINE: 'routine',
+    WORKOUT: 'workout',
 };
 
 // Save data to localStorage
@@ -44,10 +44,10 @@ export function loadRecentWorkouts(): any[] | null {
     return loadFromLocalStorage<any[]>(LOCAL_STORAGE_KEYS.RECENT_WORKOUTS);
 }
 
-export function saveRoutine(routine: any[]): void {
-    saveToLocalStorage(LOCAL_STORAGE_KEYS.ROUTINE, routine);
+export function saveRoutine(workout: any[]): void {
+    saveToLocalStorage(LOCAL_STORAGE_KEYS.WORKOUT, workout);
 }
 
 export function loadRoutine(): any[] | null {
-    return loadFromLocalStorage<any[]>(LOCAL_STORAGE_KEYS.ROUTINE);
+    return loadFromLocalStorage<any[]>(LOCAL_STORAGE_KEYS.WORKOUT);
 }

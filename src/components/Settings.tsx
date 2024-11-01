@@ -9,21 +9,26 @@ const Settings: React.FC = () => {
             if (secondConfirmation) {
                 localStorage.clear();
                 alert("All data has been cleared.");
+                window.location.reload(); // Reload the page
             }
         }
     };
 
     return (
-        <div className="page-container">
-            <h1>Settings</h1>
-            <section>
-                <div className="center-container">
-                    <button onClick={handleClearData} className="action-button warning">
-                        Clear All Data
-                    </button>
-                </div>
-            </section>
-        </div>
+        <>
+            <div className="page-title">
+                <h1>Settings</h1>
+            </div>
+            <div className="page-container">
+                <section>
+                    <div className="center-container">
+                        <button onClick={handleClearData} className="action-button warning">
+                            Clear All Data
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </>
     );
 };
 

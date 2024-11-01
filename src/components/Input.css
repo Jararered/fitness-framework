@@ -7,7 +7,6 @@ input[type="text"], input[type="number"] {
     padding: 10px;
     font-size: 16px;
     box-sizing: border-box;
-    transition: border-color 0.25s ease;
 }
 
 /* Styling for focus state */
@@ -25,7 +24,6 @@ select {
     padding: 10px;
     font-size: 16px;
     box-sizing: border-box;
-    transition: border-color 0.25s ease;
     appearance: none; /* Remove default dropdown styling for consistency */
 }
 

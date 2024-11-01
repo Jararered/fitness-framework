@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
-import TodaysWorkout from './components/TodaysWorkout';
+import WorkoutOverview from './components/WorkoutOverview';
 import WorkoutBuilder from './components/WorkoutBuilder';
 import Equipment from './components/Equipment';
 import Settings from './components/Settings';
+import WorkoutInProgress from './components/WorkoutInProgress';
 
 import './App.css';
 
 const App: React.FC = () => {
-    const [isSidebarCollapsed, setSidebarCollapsed] = useState(true); // Set to true for collapsed by default
-    const [currentView, setCurrentView] = useState('workout-builder');
-    const [gym, setGym] = useState<string | null>(null); // State to hold the gym name
+    const [isSidebarCollapsed, setSidebarCollapsed] = useState(true);
+    const [currentView, setCurrentView] = useState('workout-overview'); // Default to 'workout-overview'
+    const [gym, setGym] = useState<string | null>(null);
 
     useEffect(() => {
-        const lastLoadedGymKey = localStorage.getItem('lastLoadedEquipmentList');
+        const lastLoadedGymKey = localStorage.getItem('lastLoadedGym');
         if (lastLoadedGymKey) {
-            const gymName = lastLoadedGymKey.replace('equipment_', ''); // Remove prefix for display
+            const gymName = lastLoadedGymKey.replace('equipment_', '');
             setGym(gymName);
         }
     }, []);
@@ -24,18 +25,25 @@ const App: React.FC = () => {
         setSidebarCollapsed((prev) => !prev);
     };
 
+    const handleWorkoutComplete = () => {
+        setCurrentView('workout-overview');
+    };
+
     const renderContent = () => {
         switch (currentView) {
-            case 'todays-workout':
-                return <TodaysWorkout gym={gym} />;
+            case 'workout-overview':
+                return <WorkoutOverview gym={gym} onOpenWorkout={() => setCurrentView('workout-in-progress')} />;
             case 'workout-builder':
                 return <WorkoutBuilder />;
             case 'equipment':
-                return <Equipment gym={gym} />; // Pass gym to Equipment
+                return <Equipment />;
             case 'settings':
                 return <Settings />;
+            case 'workout-in-progress':
+                return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
+
             default:
-                return <TodaysWorkout gym={gym} />;
+                return <WorkoutOverview gym={gym} onOpenWorkout={() => setCurrentView('workout-in-progress')} />;
         }
     };
 
@@ -46,7 +54,7 @@ const App: React.FC = () => {
                 isCollapsed={isSidebarCollapsed}
                 onToggle={toggleSidebar}
             />
-            <div className={`main-content ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+            <div className="main-content">
                 {renderContent()}
             </div>
         </div>

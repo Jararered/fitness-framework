@@ -10,59 +10,28 @@
 
 /* Header and section styling */
 h1 {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
     text-align: center;
 }
 
-section {
-    margin-bottom: 20px;
-}
-
-ul,
-.equipment-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* List item styling for all lists */
-li,
-.equipment-item {
-    background-color: #f8f8f8;
-    padding: 15px;
-    margin: 10px 0;
-    font-size: 16px;
-    color: #333;
-    border-radius: 10px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-li.selected,
-.equipment-item.selected {
-    background-color: #d0f0c0;
-    /* Light green for selected items */
-    border-color: #a3d9a5;
-    /* Slightly darker green border */
-}
-
 /* Buttons with shared styles */
 .action-button {
-    padding: 12px 20px;
+    margin: 5px;
+    padding: 10px;
+
     font-size: 16px;
     font-weight: bold;
+
     color: white;
     background-color: #007aff;
+
     border: none;
     border-radius: 10px;
+
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 5px;
 }
 
 .action-button:hover {
@@ -73,7 +42,7 @@ li.selected,
 .equipment-category h3 {
     font-size: 18px;
     color: #007aff;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 /* Optional styling for a warning button */
@@ -90,4 +59,22 @@ li.selected,
 .center-container {
     display: flex;
     justify-content: center;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+    /* Adds spacing between each input and button */
+    align-items: center;
+    /* Aligns items vertically in the center */
+}
+
+.input-field {
+    flex: 1;
+    /* Each input takes up equal space */
+}
+
+.add-exercise-button {
+    flex: none;
+    /* Keeps the button at its natural width */
 }
