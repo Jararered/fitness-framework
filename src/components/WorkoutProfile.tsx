@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import '../styles/MainContent.css';
+
 interface Exercise {
     name: string;
     sets: number;
@@ -47,15 +49,16 @@ const WorkoutProfile: React.FC = () => {
             </div>
 
             <div className="page-container">
+
                 <h2>Recent Workouts</h2>
                 {recentWorkouts.length > 0 ? (
-                    <ul className="workout-list">
+                    <ul>
                         {recentWorkouts.map((workout, index) => (
-                            <li key={index} className="workout-list">
+                            <li key={index}>
                                 <strong>{formatDateTime(workout.date)}</strong>
                                 <li>
                                     {workout.exercises.map((exercise, idx) => (
-                                        <li key={idx} className="workout-item">
+                                        <li key={idx}>
                                             <strong>{exercise.name}</strong>: {exercise.sets} sets of {exercise.reps} reps
                                         </li>
                                     ))}
@@ -66,12 +69,13 @@ const WorkoutProfile: React.FC = () => {
                 ) : (
                     <p>No recent workouts found.</p>
                 )}
-            </div>
 
+            </div>
             <div className="page-container">
+
                 <h2>Best Efforts</h2>
                 {Object.keys(bestEfforts).length > 0 ? (
-                    <ul className="best-efforts-list">
+                    <ul>
                         {Object.entries(bestEfforts).map(([exercise, weight], index) => (
                             <ul key={index} className="best-effort-item">
                                 <strong>{exercise}</strong>: {weight} lbs
@@ -81,6 +85,7 @@ const WorkoutProfile: React.FC = () => {
                 ) : (
                     <p>No best efforts recorded.</p>
                 )}
+
             </div>
         </>
     );

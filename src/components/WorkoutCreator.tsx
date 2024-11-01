@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './CommonStyles.css';
-import '../styles/Input.css';
-import { exercisesByEquipment } from './WorkoutExercises'; // Import exercises by equipment
+
+import { exercisesByEquipment } from './WorkoutExercises';
 
 interface Exercise {
     name: string;

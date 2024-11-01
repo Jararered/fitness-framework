@@ -40,7 +40,7 @@ select:focus {
 }
 
 .input-field {
-    flex:content;
+    flex: content;
     width: 100px; /* Set a fixed width for input fields */
     padding: 8px;
     margin: 10px 0;

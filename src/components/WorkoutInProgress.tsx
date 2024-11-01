@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import './WorkoutInProgress.css';
 
 interface Exercise {

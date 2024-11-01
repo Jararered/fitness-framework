@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaDumbbell } from 'react-icons/fa';
+
 import './WorkoutEquipment.css';
 
 // List of available equipment

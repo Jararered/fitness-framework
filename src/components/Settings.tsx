@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import '../styles/Input.css';
 
 const Settings: React.FC = () => {

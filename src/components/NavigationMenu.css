@@ -3,29 +3,38 @@
     height: 100vh;
     background-color: #f8f8f8;
     color: #333;
-    position: fixed;
-    top: 0;
-    left: 0;
     padding: 10px;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     border-right: 1px solid #e0e0e0;
     z-index: 1000;
-    transform: translateX(0);
+    position: fixed; /* Fix the sidebar position */
+
+    transition: 0.3s;
 }
 
 .sidebar.collapsed {
     /* Narrow width when collapsed */
     width: 60px;
 
-    /* Keeps the sidebar in place */
-    transform: translateX(0);
+    transition: 0.3s;
 }
 
-.toggle-button {
+.expand-button {
     background: none;
-    font-size: 24px;
+    font-size: 20px;
     color: #007aff;
     box-shadow: none;
+    border-radius: 20px;
+
+    padding: 0px;
+    margin: 0px;
+    width: 60px;
+    height: 60px;
+}
+
+.expand-button:hover {
+    background:#62aeff;
+    color: #ffffff;
 }
 
 .navigation-menu {
@@ -33,18 +42,40 @@
     margin: 0px;
 }
 
-.navigation-menu-item {
+.navigation-menu-item
+{
+    width: 250px;
+    height: 60px;
+    padding: 0px;
+    margin: 0px;
+
+    font-size: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    /* Center everything */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.3s;
+}
+
+.sidebar.collapsed .navigation-menu-item {
     width: 60px;
     height: 60px;
-    font-size: 18px;
     padding: 0px;
-    border-radius: 10px;
+    margin: 0px;
+
+    font-size: 20px;
+    border-radius: 20px;
     text-align: center;
-    color: #444;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    transition: 0.3s;
 }
 
 /* Only show icons in collapsed mode */
@@ -61,49 +92,40 @@
     background-color: #c7c7cc;
 }
 
+.sidebar.collapsed .navigation-menu-item svg {
+    margin-right: 0px;
+}
+
+.navigation-menu-item svg {
+    margin-right: 10px;
+}
+
 /* Media query for small screens */
 @media (max-width: 768px) {
     .sidebar {
         width: 100%;
         height: 60px;
         bottom: 0;
-        top: auto;
-        left: 0;
+        top: auto; /* Ensure the sidebar stays at the bottom */
+        position: fixed; /* Fix the sidebar at the bottom */
         flex-direction: row;
-        padding: 0;
-        border-right: none;
-        border-top: 1px solid #e0e0e0;
+        padding: 10px;
     }
 
     .sidebar.collapsed {
         width: 100%;
         height: 60px;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     }
 
     .navigation-menu {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
-        width: 80%;
-
-        /* center the menu */
-        margin: 0 auto;
+        justify-content: center; /* Center the menu */
+        width: 100%;
     }
 
-    .navigation-menu-item {
-        flex: none;
-        width: 100px;
-        height: 60px;
-        margin: 0;
-        padding: 0px;
-        border: none;
-        box-shadow: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .toggle-button {
+    .expand-button {
         display: none;
     }
 }
