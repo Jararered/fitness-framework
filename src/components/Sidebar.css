@@ -1,32 +1,46 @@
 /* Sidebar base styling */
 .sidebar {
     width: 250px;
+    /* Full width when expanded */
     height: 100vh;
     background-color: #f8f8f8;
     color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
     position: fixed;
+    /* Overlay on top of main content */
     top: 0;
     left: 0;
-    transition: width 0.25s ease;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0);
+    padding: 10px;
+    transition: transform 0.3s ease, width 0.3s ease;
+    /* Smooth slide-in/out and width transition */
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
     border-right: 1px solid #e0e0e0;
+    z-index: 1000;
+    /* Ensure it's on top */
+    transform: translateX(0);
+    /* Fully visible by default */
 }
 
 .sidebar.collapsed {
     width: 60px;
-    align-items: center;
+    /* Narrow width when collapsed */
+    transform: translateX(0);
+    /* Keeps the sidebar in place */
 }
 
 .app-title {
     font-size: 24px;
     font-weight: bold;
-    color: #007aff; /* iOS blue color */
+    color: #007aff;
+    /* iOS blue color */
     margin-bottom: 20px;
     text-align: center;
+    display: none;
+    /* Hide app title when collapsed */
+}
+
+.sidebar:not(.collapsed) .app-title {
+    display: block;
+    /* Show title only when expanded */
 }
 
 .toggle-button {
@@ -56,108 +70,15 @@
     cursor: pointer;
 }
 
+/* Only show icons in collapsed mode */
+.sidebar.collapsed .menu-item>*:not(svg) {
+    display: none;
+}
+
 .menu-item:hover {
     background-color: #e0e0e0;
 }
 
 .menu-item:active {
     background-color: #c7c7cc;
-}
-
-/* Input Field Styling */
-.input-field {
-    padding: 10px;
-    margin: 8px 0;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: #ffffff; /* Light background */
-    color: #333; /* Dark text for readability */
-    transition: border-color 0.2s ease;
-}
-
-.input-field:focus {
-    border-color: #007aff;
-    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
-}
-
-/* Styling for numeric input fields to ensure light spinner controls */
-input[type="number"] {
-    -webkit-appearance: none; /* Disable default appearance for WebKit browsers */
-    -moz-appearance: textfield; /* Disable default appearance for Firefox */
-    appearance: none; /* Disable default appearance for other browsers */
-    background-color: #ffffff; /* Light background */
-    color: #333; /* Dark text for readability */
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 16px;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none; /* Remove default spinner appearance */
-    background-color: #f2f2f7; /* Light background for spinner controls */
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-}
-
-input[type="number"]:focus {
-    border-color: #007aff;
-    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
-}
-
-/* Ensure the container takes up the full width */
-.page-container {
-    width: 100%;
-    max-width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* Equipment categories organized in a responsive layout */
-.equipment-category {
-    margin-bottom: 20px;
-}
-
-/* Responsive styling for equipment items */
-.equipment-list {
-    display: flex;
-    flex-wrap: wrap; /* Allows items to wrap to a new line based on screen width */
-    gap: 10px;
-    padding: 0;
-}
-
-.equipment-item {
-    flex: 1 1 calc(25% - 10px); /* Each item takes 25% of the row, minus gap, on larger screens */
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #f8f8f8;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.equipment-item.selected {
-    background-color: #d0f0c0; /* Light green for selected items */
-    border-color: #a3d9a5;
-}
-
-/* Adjust items to stack on smaller screens */
-@media (max-width: 768px) {
-    .equipment-item {
-        flex: 1 1 100%; /* Each item takes full width on smaller screens */
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .equipment-item {
-        flex: 1 1 calc(50% - 10px); /* Each item takes 50% on medium screens */
-    }
 }

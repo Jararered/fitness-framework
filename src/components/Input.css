@@ -1,0 +1,36 @@
+/* Light background and text for input fields */
+input[type="text"], input[type="number"] {
+    background-color: #ffffff; /* Light background */
+    color: #333333; /* Dark text for readability */
+    border: 1px solid #e0e0e0; /* Light border */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease;
+}
+
+/* Styling for focus state */
+input[type="text"]:focus, input[type="number"]:focus {
+    border-color: #007aff; /* Highlight border on focus */
+    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
+}
+
+/* Light background and text for select dropdowns */
+select {
+    background-color: #ffffff; /* Light background */
+    color: #333333; /* Dark text for readability */
+    border: 1px solid #e0e0e0; /* Light border */
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease;
+    appearance: none; /* Remove default dropdown styling for consistency */
+}
+
+/* Styling for focus state */
+select:focus {
+    border-color: #007aff; /* Highlight border on focus */
+    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
+}

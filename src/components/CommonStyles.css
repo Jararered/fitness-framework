@@ -21,14 +21,16 @@ section {
     margin-bottom: 20px;
 }
 
-ul, .equipment-list {
+ul,
+.equipment-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
 /* List item styling for all lists */
-li, .equipment-item {
+li,
+.equipment-item {
     background-color: #f8f8f8;
     padding: 15px;
     margin: 10px 0;
@@ -41,9 +43,12 @@ li, .equipment-item {
     transition: background-color 0.3s ease;
 }
 
-li.selected, .equipment-item.selected {
-    background-color: #d0f0c0; /* Light green for selected items */
-    border-color: #a3d9a5; /* Slightly darker green border */
+li.selected,
+.equipment-item.selected {
+    background-color: #d0f0c0;
+    /* Light green for selected items */
+    border-color: #a3d9a5;
+    /* Slightly darker green border */
 }
 
 /* Buttons with shared styles */
@@ -73,7 +78,8 @@ li.selected, .equipment-item.selected {
 
 /* Optional styling for a warning button */
 .action-button.warning {
-    background-color: #d9534f; /* Red for warning */
+    background-color: #d9534f;
+    /* Red for warning */
 }
 
 .action-button.warning:hover {
