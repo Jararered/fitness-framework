@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import TodaysWorkout from './components/TodaysWorkout';
 import WorkoutBuilder from './components/WorkoutBuilder';
 import Equipment from './components/Equipment';
-import Settings from './components/Settings'; // Import the new Settings component
+import Settings from './components/Settings';
 
 import './App.css';
 
 const App: React.FC = () => {
-    const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
-    const [currentView, setCurrentView] = useState('workout-builder'); // Default view
+    const [isSidebarCollapsed, setSidebarCollapsed] = useState(true); // Set to true for collapsed by default
+    const [currentView, setCurrentView] = useState('workout-builder');
+    const [gym, setGym] = useState<string | null>(null); // State to hold the gym name
+
+    useEffect(() => {
+        const lastLoadedGymKey = localStorage.getItem('lastLoadedEquipmentList');
+        if (lastLoadedGymKey) {
+            const gymName = lastLoadedGymKey.replace('equipment_', ''); // Remove prefix for display
+            setGym(gymName);
+        }
+    }, []);
 
     const toggleSidebar = () => {
         setSidebarCollapsed((prev) => !prev);
@@ -18,15 +27,15 @@ const App: React.FC = () => {
     const renderContent = () => {
         switch (currentView) {
             case 'todays-workout':
-                return <TodaysWorkout />;
+                return <TodaysWorkout gym={gym} />;
             case 'workout-builder':
                 return <WorkoutBuilder />;
             case 'equipment':
-                return <Equipment />;
-            case 'settings': // Add case for Settings
+                return <Equipment gym={gym} />; // Pass gym to Equipment
+            case 'settings':
                 return <Settings />;
             default:
-                return <TodaysWorkout />;
+                return <TodaysWorkout gym={gym} />;
         }
     };
 
