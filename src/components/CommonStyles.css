@@ -1,12 +1,14 @@
-/* Basic page styling for iOS-inspired look */
+/* Container styling for consistent padding, background, and shadow */
 .page-container {
     background-color: #ffffff;
     border-radius: 15px;
     padding: 20px;
     margin: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
+/* Header and section styling */
 h1 {
     font-size: 24px;
     font-weight: bold;
@@ -19,17 +21,67 @@ section {
     margin-bottom: 20px;
 }
 
-ul {
+ul, .equipment-list {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
-li {
-    background-color: #f0f0f5;
+/* List item styling for all lists */
+li, .equipment-item {
+    background-color: #f8f8f8;
     padding: 15px;
-    border-radius: 10px;
     margin: 10px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    font-size: 18px;
+    font-size: 16px;
     color: #333;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+li.selected, .equipment-item.selected {
+    background-color: #d0f0c0; /* Light green for selected items */
+    border-color: #a3d9a5; /* Slightly darker green border */
+}
+
+/* Buttons with shared styles */
+.action-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007aff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+.action-button:hover {
+    background-color: #005bb5;
+}
+
+/* Equipment category headers */
+.equipment-category h3 {
+    font-size: 18px;
+    color: #007aff;
+    margin-bottom: 10px;
+}
+
+/* Optional styling for a warning button */
+.action-button.warning {
+    background-color: #d9534f; /* Red for warning */
+}
+
+.action-button.warning:hover {
+    background-color: #c9302c;
+}
+
+/* Center button horizontally */
+.center-container {
+    display: flex;
+    justify-content: center;
 }
