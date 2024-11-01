@@ -1,39 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { FaDumbbell } from 'react-icons/fa';
-
 import './WorkoutEquipment.css';
 
-// List of available equipment
 const availableEquipment = [
-    "Dumbells",
-    "Dumbells + Bench",
-    "Lat Pulldown Machine",
-    "Barbell",
-    "Barbell + Bench",
-    "Barbell + Squat Rack",
-    "EZ Bar",
-    "Smith Machine",
-    "Smith Machine + Bench",
-    "Chest Press Machine",
-    "Leg Extension Machine",
+    "Dumbells", "Dumbells + Bench", "Lat Pulldown Machine", "Barbell",
+    "Barbell + Bench", "Barbell + Squat Rack", "EZ Bar", "Smith Machine",
+    "Smith Machine + Bench", "Chest Press Machine", "Leg Extension Machine",
     "Leg Curl Machine"
 ];
 
-// Update the equipmentIcons object to use the keys from the availableEquipment list
-const equipmentIcons: { [key: string]: JSX.Element } = {
-    "Dumbells": <FaDumbbell size={48} />,
-    "Dumbells + Bench": <FaDumbbell size={48} />,
-    "Lat Pulldown Machine": <FaDumbbell size={48} />,
-    "Barbell": <FaDumbbell size={48} />,
-    "Barbell + Bench": <FaDumbbell size={48} />,
-    "Barbell + Squat Rack": <FaDumbbell size={48} />,
-    "EZ Bar": <FaDumbbell size={48} />,
-    "Smith Machine": <FaDumbbell size={48} />,
-    "Smith Machine + Bench": <FaDumbbell size={48} />,
-    "Chest Press Machine": <FaDumbbell size={48} />,
-    "Leg Extension Machine": <FaDumbbell size={48} />,
-    "Leg Curl Machine": <FaDumbbell size={48} />,
-};
+const equipmentIcons = availableEquipment.reduce((icons, item) => {
+    icons[item] = <FaDumbbell size={48} />;
+    return icons;
+}, {} as { [key: string]: JSX.Element });
 
 const Equipment: React.FC = () => {
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
@@ -54,10 +33,8 @@ const Equipment: React.FC = () => {
     }, []);
 
     const toggleEquipment = (item: string) => {
-        setSelectedEquipment((prev) =>
-            prev.includes(item)
-                ? prev.filter((e) => e !== item)
-                : [...prev, item]
+        setSelectedEquipment(prev =>
+            prev.includes(item) ? prev.filter(e => e !== item) : [...prev, item]
         );
     };
 
@@ -67,7 +44,7 @@ const Equipment: React.FC = () => {
             const storageKey = `equipment_${listName}`;
             localStorage.setItem(storageKey, JSON.stringify(selectedEquipment));
             alert(`Gym "${listName}" saved!`);
-            setSavedEquipmentLists((prev) => [...prev, storageKey]);
+            setSavedEquipmentLists(prev => [...prev, storageKey]);
             loadEquipmentList(listName);
         }
     };
@@ -78,15 +55,9 @@ const Equipment: React.FC = () => {
         if (savedList) {
             setSelectedEquipment(JSON.parse(savedList));
             localStorage.setItem('lastLoadedGym', storageKey);
-            setCurrentGym(listName); // Update the current gym state
+            setCurrentGym(listName);
         } else {
             alert("Please select a valid gym.");
-        }
-    };
-
-    const handleLoadSelectedList = () => {
-        if (selectedList) {
-            loadEquipmentList(selectedList);
         }
     };
 
@@ -105,24 +76,22 @@ const Equipment: React.FC = () => {
             </div>
 
             <div className="page-container">
-
                 <section>
                     <h2>Selected Gym</h2>
-                    {currentGym ? <p>Gym: {currentGym}</p> : <p>No gym selected.</p>}
+                    <p>{currentGym ? `Gym: ${currentGym}` : "No gym selected."}</p>
                 </section>
 
                 <section>
                     <h2>Available Equipment</h2>
                     <div className="equipment-cards">
-                        {availableEquipment.map((item) => (
+                        {availableEquipment.map(item => (
                             <div
                                 key={item}
                                 className={`equipment-item ${selectedEquipment.includes(item) ? 'selected' : ''}`}
                                 onClick={() => toggleEquipment(item)}
                             >
-                                {/* Display icon for each equipment */}
                                 <div className="equipment-icon">
-                                    {equipmentIcons[item] || <FaDumbbell size={48} />} {/* Default icon */}
+                                    {equipmentIcons[item]}
                                 </div>
                                 <p className="equipment-name">{item}</p>
                             </div>
@@ -145,12 +114,12 @@ const Equipment: React.FC = () => {
 
             <div className="page-container">
                 <select
-                    onChange={(e) => setSelectedList(e.target.value)}
+                    onChange={e => setSelectedList(e.target.value)}
                     value={selectedList}
                     className="input-field"
                 >
                     <option value="">Select a location</option>
-                    {savedEquipmentLists.map((listKey) => {
+                    {savedEquipmentLists.map(listKey => {
                         const listName = listKey.replace('equipment_', '');
                         return (
                             <option key={listKey} value={listName}>
@@ -159,7 +128,7 @@ const Equipment: React.FC = () => {
                         );
                     })}
                 </select>
-                <button onClick={handleLoadSelectedList} className="normal-button">
+                <button onClick={() => loadEquipmentList(selectedList)} className="normal-button">
                     Load Location Equipment
                 </button>
             </div>
