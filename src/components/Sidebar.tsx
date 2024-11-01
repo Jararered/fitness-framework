@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaDumbbell, FaCog, FaMapPin, FaHome } from 'react-icons/fa'; // Import icons from react-icons
+import { FaDumbbell, FaCog, FaMapPin, FaHome, FaUser } from 'react-icons/fa'; // Import FaUser icon
 import './Sidebar.css';
 
 interface SidebarProps {
@@ -18,20 +18,25 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate, isCollapsed, onToggle }) 
 
     return (
         <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+            
             <button onClick={onToggle} className="toggle-button">
                 {isCollapsed ? '☰' : '✕'}
             </button>
-            <ul className="menu">
-                <li className="menu-item" onClick={() => handleNavigate('todays-workout')}>
+
+            <ul className="navigation-menu">
+                <li className="navigation-menu-item" onClick={() => handleNavigate('todays-workout')}>
                     {isCollapsed ? <FaHome size={24} /> : <> <FaHome size={24} /> Today's Workout </>}
                 </li>
-                <li className="menu-item" onClick={() => handleNavigate('workout-builder')}>
+                <li className="navigation-menu-item" onClick={() => handleNavigate('workout-builder')}>
                     {isCollapsed ? <FaDumbbell size={24} /> : <> <FaDumbbell size={24} /> Workout Builder </>}
                 </li>
-                <li className="menu-item" onClick={() => handleNavigate('equipment')}>
+                <li className="navigation-menu-item" onClick={() => handleNavigate('equipment')}>
                     {isCollapsed ? <FaMapPin size={24} /> : <> <FaMapPin size={24} /> Equipment </>}
                 </li>
-                <li className="menu-item" onClick={() => handleNavigate('settings')}>
+                <li className="navigation-menu-item" onClick={() => handleNavigate('workout-profile')}> {/* Add this line */}
+                    {isCollapsed ? <FaUser size={24} /> : <> <FaUser size={24} /> Workout Profile </>}
+                </li>
+                <li className="navigation-menu-item" onClick={() => handleNavigate('settings')}>
                     {isCollapsed ? <FaCog size={24} /> : <> <FaCog size={24} /> Settings </>}
                 </li>
             </ul>

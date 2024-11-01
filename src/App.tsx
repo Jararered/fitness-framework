@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import WorkoutOverview from './components/WorkoutOverview';
-import WorkoutBuilder from './components/WorkoutBuilder';
-import Equipment from './components/Equipment';
+import WorkoutBuilder from './components/WorkoutCreator';
+import Equipment from './components/WorkoutEquipment';
 import Settings from './components/Settings';
 import WorkoutInProgress from './components/WorkoutInProgress';
+import WorkoutProfile from './components/WorkoutProfile';
 
 import './App.css';
 
@@ -41,7 +42,8 @@ const App: React.FC = () => {
                 return <Settings />;
             case 'workout-in-progress':
                 return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
-
+            case 'workout-profile': // Add the new view
+                return <WorkoutProfile />;
             default:
                 return <WorkoutOverview gym={gym} onOpenWorkout={() => setCurrentView('workout-in-progress')} />;
         }

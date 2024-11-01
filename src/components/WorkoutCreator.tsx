@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './CommonStyles.css';
-import './Input.css';
+import '../styles/Input.css';
 import { exercisesByEquipment } from './WorkoutExercises'; // Import exercises by equipment
 
 interface Exercise {
@@ -124,10 +124,11 @@ const WorkoutBuilder: React.FC = () => {
     return (
         <>
             <div className="page-title">
-                <h1>Workout Builder</h1>
+                <h1>Workout Creator</h1>
             </div>
 
             <div className="page-container">
+                <h2>Add Exercise to Workout</h2>
                 <section className="input-row">
                     <select
                         value={newExercise.name}
@@ -157,27 +158,37 @@ const WorkoutBuilder: React.FC = () => {
                         onChange={handleInputChange}
                         className="input-field"
                     />
-                    <button onClick={addExerciseToWorkout} className="action-button add-exercise-button">
+                    <button onClick={addExerciseToWorkout} className="normal-button">
                         Add Exercise
                     </button>
                 </section>
 
+
+
+                <h2>Current Workout</h2>
+                <ul className="workout-list">
+                    {workout.length === 0 ? (
+                        <p>No exercises added yet.</p>
+                    ) : (
+                        workout.map((exercise, index) => (
+                            <li key={index} className="workout-item">
+                                <strong>{exercise.name}</strong>: {exercise.sets} sets of {exercise.reps} reps
+                            </li>
+                        ))
+                    )}
+                </ul>
+
                 <section>
-                    <button onClick={saveWorkout} className="action-button">
+                    <button onClick={saveWorkout} className="normal-button">
                         Save Workout
                     </button>
-                    <button onClick={clearWorkout} className="action-button warning">
+                    <button onClick={clearWorkout} className="bad-button">
                         Clear Workout
                     </button>
                 </section>
+            </div>
 
-                <h2>Workout Generator</h2>
-                <div>
-                    <button onClick={generateRandomWorkout} className="action-button">
-                        Generate Random Workout
-                    </button>
-                </div>
-
+            <div className="page-container">
                 <h2>Load a Saved Workout</h2>
                 <div>
                     <select
@@ -195,23 +206,19 @@ const WorkoutBuilder: React.FC = () => {
                             );
                         })}
                     </select>
-                    <button onClick={loadWorkout} className="action-button">
+                    <button onClick={loadWorkout} className="normal-button">
                         Load Workout
                     </button>
                 </div>
+            </div>
 
-                <h2>Today's Workout</h2>
-                <ul className="workout-list">
-                    {workout.length === 0 ? (
-                        <p>No exercises added yet.</p>
-                    ) : (
-                        workout.map((exercise, index) => (
-                            <li key={index} className="workout-item">
-                                <strong>{exercise.name}</strong>: {exercise.sets} sets of {exercise.reps} reps
-                            </li>
-                        ))
-                    )}
-                </ul>
+            <div className="page-container">
+                <h2>Workout Generator</h2>
+                <div>
+                    <button onClick={generateRandomWorkout} className="normal-button">
+                        Generate Random Workout
+                    </button>
+                </div>
             </div>
         </>
     );

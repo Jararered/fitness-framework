@@ -18,6 +18,8 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     border: 1px solid #e0e0e0;
+
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .equipment-item.selected {
@@ -25,18 +27,12 @@
     background-color: #d0f0c0;
     /* Slightly darker green border */
     border-color: #a3d9a5;
+
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .equipment-name {
     font-size: 16px;
     font-weight: bold;
     color: #333;
-}
-
-.clear-button {
-    background-color: grey;
-}
-
-.clear-button:hover {
-    background-color: red;
 }

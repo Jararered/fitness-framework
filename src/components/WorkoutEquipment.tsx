@@ -1,29 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { FaDumbbell } from 'react-icons/fa';
-import './Equipment.css';
+import './WorkoutEquipment.css';
 
 // List of available equipment
 const availableEquipment = [
-    "Chest Fly Machine",
-    "Chest Press Machine",
-    "Row Machine",
-    "Cable Machine",
-    "Leg Press Machine",
+    "Dumbells",
+    "Dumbells + Bench",
     "Lat Pulldown Machine",
+    "Barbell",
+    "Barbell + Bench",
+    "Barbell + Squat Rack",
+    "EZ Bar",
     "Smith Machine",
+    "Smith Machine + Bench",
+    "Chest Press Machine",
     "Leg Extension Machine",
+    "Leg Curl Machine"
 ];
 
 // Update the equipmentIcons object to use the keys from the availableEquipment list
 const equipmentIcons: { [key: string]: JSX.Element } = {
-    "Chest Fly Machine": <FaDumbbell size={48} />,
-    "Chest Press Machine": <FaDumbbell size={48} />,
-    "Row Machine": <FaDumbbell size={48} />,
-    "Cable Machine": <FaDumbbell size={48} />,
-    "Leg Press Machine": <FaDumbbell size={48} />,
+    "Dumbells": <FaDumbbell size={48} />,
+    "Dumbells + Bench": <FaDumbbell size={48} />,
     "Lat Pulldown Machine": <FaDumbbell size={48} />,
+    "Barbell": <FaDumbbell size={48} />,
+    "Barbell + Bench": <FaDumbbell size={48} />,
+    "Barbell + Squat Rack": <FaDumbbell size={48} />,
+    "EZ Bar": <FaDumbbell size={48} />,
     "Smith Machine": <FaDumbbell size={48} />,
-    "Leg Extension Machine": <FaDumbbell size={48} />
+    "Smith Machine + Bench": <FaDumbbell size={48} />,
+    "Chest Press Machine": <FaDumbbell size={48} />,
+    "Leg Extension Machine": <FaDumbbell size={48} />,
+    "Leg Curl Machine": <FaDumbbell size={48} />,
 };
 
 const Equipment: React.FC = () => {
@@ -85,14 +93,14 @@ const Equipment: React.FC = () => {
         if (window.confirm("Are you sure you want to clear the equipment selection?")) {
             setSelectedEquipment([]);
             localStorage.removeItem('lastLoadedGym');
-            setCurrentGym(null); // Clear the current gym state
+            setCurrentGym(null);
         }
     };
 
     return (
         <>
             <div className="page-title">
-                <h1>Equipment Selection</h1>
+                <h1>Workout Equipment</h1>
             </div>
 
             <div className="page-container">
@@ -120,11 +128,11 @@ const Equipment: React.FC = () => {
                         ))}
                     </div>
 
-                    <button onClick={saveEquipmentList} className="action-button">
+                    <button onClick={saveEquipmentList} className="normal-button">
                         Save Equipment Selection
                     </button>
 
-                    <button onClick={clearEquipmentList} className="action-button clear-button">
+                    <button onClick={clearEquipmentList} className="bad-button">
                         Clear Equipment Selection
                     </button>
                 </section>
@@ -150,7 +158,7 @@ const Equipment: React.FC = () => {
                         );
                     })}
                 </select>
-                <button onClick={handleLoadSelectedList} className="action-button">
+                <button onClick={handleLoadSelectedList} className="normal-button">
                     Load Location Equipment
                 </button>
             </div>

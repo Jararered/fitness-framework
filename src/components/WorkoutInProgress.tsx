@@ -14,27 +14,74 @@ interface WorkoutInProgressProps {
 const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout }) => {
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[] | null>(null);
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
+    const [currentSetIndex, setCurrentSetIndex] = useState(0);
+    const [weights, setWeights] = useState<number[]>([]);
+    const [bestEfforts, setBestEfforts] = useState<{ [key: string]: number }>({});
+    const [totalLoad, setTotalLoad] = useState(0);
 
     useEffect(() => {
-        const WorkoutData = localStorage.getItem('currentWorkout');
-        if (WorkoutData) {
-            setCurrentWorkout(JSON.parse(WorkoutData));
+        const workoutData = localStorage.getItem('currentWorkout');
+        if (workoutData) {
+            setCurrentWorkout(JSON.parse(workoutData));
+        }
+
+        const bestEffortsData = localStorage.getItem('logged_weights_best');
+        if (bestEffortsData) {
+            setBestEfforts(JSON.parse(bestEffortsData));
         }
     }, []);
 
+    const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>, setIndex: number) => {
+        const newWeights = [...weights];
+        newWeights[setIndex] = Number(e.target.value);
+        setWeights(newWeights);
+    };
+
     const handleCompleted = () => {
-        if (currentExerciseIndex < (currentWorkout?.length ?? 0) - 1) {
-            setCurrentExerciseIndex(currentExerciseIndex + 1);
-        } else {
-            completeWorkout();
+        if (currentWorkout) {
+            const currentExercise = currentWorkout[currentExerciseIndex];
+            const loggedWeights = JSON.parse(localStorage.getItem('logged_weights') || '[]');
+            const loggedWeightsBest = JSON.parse(localStorage.getItem('logged_weights_best') || '{}');
+
+            const weight = weights[currentSetIndex] || bestEfforts[currentExercise.name] || 0;
+            const load = currentExercise.reps * weight;
+            setTotalLoad(totalLoad + load);
+
+            loggedWeights.push({
+                exercise: currentExercise.name,
+                reps: currentExercise.reps,
+                weight: weight,
+            });
+            localStorage.setItem('logged_weights', JSON.stringify(loggedWeights));
+
+            if (!loggedWeightsBest[currentExercise.name] || weight > loggedWeightsBest[currentExercise.name]) {
+                loggedWeightsBest[currentExercise.name] = weight;
+                localStorage.setItem('logged_weights_best', JSON.stringify(loggedWeightsBest));
+            }
+
+            if (currentSetIndex < currentExercise.sets - 1) {
+                setCurrentSetIndex(currentSetIndex + 1);
+            } else if (currentExerciseIndex < currentWorkout.length - 1) {
+                setCurrentExerciseIndex(currentExerciseIndex + 1);
+                setCurrentSetIndex(0);
+                setWeights([]);
+            } else {
+                completeWorkout();
+            }
         }
     };
 
     const handleSkip = () => {
-        if (currentExerciseIndex < (currentWorkout?.length ?? 0) - 1) {
-            setCurrentExerciseIndex(currentExerciseIndex + 1);
-        } else {
-            completeWorkout();
+        if (currentWorkout) {
+            if (currentSetIndex < currentWorkout[currentExerciseIndex].sets - 1) {
+                setCurrentSetIndex(currentSetIndex + 1);
+            } else if (currentExerciseIndex < currentWorkout.length - 1) {
+                setCurrentExerciseIndex(currentExerciseIndex + 1);
+                setCurrentSetIndex(0);
+                setWeights([]);
+            } else {
+                completeWorkout();
+            }
         }
     };
 
@@ -47,34 +94,51 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             };
             workoutHistory.push(workoutEntry);
             localStorage.setItem('workout_history', JSON.stringify(workoutHistory));
+
+            const totalLoadHistory = JSON.parse(localStorage.getItem('total_load_history') || '[]');
+            const totalLoadEntry = {
+                date: new Date().toISOString(),
+                totalLoad: totalLoad,
+            };
+            totalLoadHistory.push(totalLoadEntry);
+            localStorage.setItem('total_load_history', JSON.stringify(totalLoadHistory));
         }
-        
+
         onCompleteWorkout(); // Call the callback to change the view
     };
 
     if (!currentWorkout || currentWorkout.length === 0) {
-        return <p>No workout Workout found. Please create or load a Workout.</p>;
+        return <p>No workout found. Please create or load a workout.</p>;
     }
 
     const currentExercise = currentWorkout[currentExerciseIndex];
 
     return (
-        <div className="page-container">
+        <>
             <h1>Workout in Progress</h1>
-            <div className="exercise-card">
+
+            <div className="page-container">
                 <h2>{currentExercise.name}</h2>
-                <p>Sets: {currentExercise.sets}</p>
+                <p>Set {currentSetIndex + 1} of {currentExercise.sets}</p>
                 <p>Reps: {currentExercise.reps}</p>
+                <p>Total Load: {totalLoad} lbs</p>
+                <input
+                    type="number"
+                    placeholder={bestEfforts[currentExercise.name] ? `${bestEfforts[currentExercise.name]}` : "Weight"}
+                    value={weights[currentSetIndex] || ""}
+                    onChange={(e) => handleWeightChange(e, currentSetIndex)}
+                    className="input-field"
+                />
                 <div className="button-row">
-                    <button onClick={handleCompleted} className="completed-button">
-                        Completed
-                    </button>
-                    <button onClick={handleSkip} className="skip-button">
+                    <button className="bad-button" onClick={handleSkip}>
                         Skip
+                    </button>
+                    <button className="normal-button" onClick={handleCompleted}>
+                        Next
                     </button>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

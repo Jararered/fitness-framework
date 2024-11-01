@@ -28,27 +28,12 @@
     margin-top: 20px;
 }
 
-.completed-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background-color: #a3d9a5; /* Light green */
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.completed-button:hover {
-    background-color: #86c58f;
-}
-
 .skip-button {
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
     color: white;
-    background-color: #cccccc; /* Slightly grey */
+    background-color: #222222; /* Slightly grey */
     border: none;
     border-radius: 10px;
     cursor: pointer;

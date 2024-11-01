@@ -23,7 +23,7 @@ html,
 }
 
 .page-title h1 {
-    font-size: 24px;
+    font-size: 32px;
 }
 
 .main-content {
@@ -31,45 +31,6 @@ html,
     margin-left: 80px; /* Account for sidebar size and padding */
     padding: 10px; /* Padding for main content */
     box-sizing: border-box; /* Include padding in width calculation */
-}
-
-/* General button styles */
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 10px;
-    border: none;
-    background-color: #007aff;
-    color: white;
-    cursor: pointer;
-    outline: none;
-}
-
-button:hover {
-    background-color: #005bb5;
-}
-
-button:active {
-    background-color: #004a94;
-}
-
-/* Input styling */
-input[type="text"],
-input[type="number"] {
-    padding: 8px;
-    margin: 10px 0;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    outline: none;
-    font-size: 16px;
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus {
-    border-color: #007aff;
-    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
 }
 
 /* Media query for small screens */

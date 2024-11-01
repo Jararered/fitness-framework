@@ -1,4 +1,3 @@
-/* Container styling for consistent padding, background, and shadow */
 .page-container {
     background-color: #ffffff;
     border-radius: 15px;
@@ -8,73 +7,25 @@
     box-sizing: border-box;
 }
 
-/* Header and section styling */
-h1 {
-    font-size: 30px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* Buttons with shared styles */
-.action-button {
-    margin: 5px;
-    padding: 10px;
-
-    font-size: 16px;
-    font-weight: bold;
-
-    color: white;
-    background-color: #007aff;
-
-    border: none;
-    border-radius: 10px;
-
-    cursor: pointer;
-}
-
-.action-button:hover {
-    background-color: #005bb5;
-}
-
-/* Equipment category headers */
 .equipment-category h3 {
     font-size: 18px;
     color: #007aff;
     margin-bottom: 0px;
 }
 
-/* Optional styling for a warning button */
-.action-button.warning {
-    background-color: #d9534f;
-    /* Red for warning */
-}
-
-.action-button.warning:hover {
-    background-color: #c9302c;
-}
-
-/* Center button horizontally */
 .center-container {
     display: flex;
-    justify-content: center;
-}
-
-.input-row {
-    display: flex;
-    gap: 10px;
-    /* Adds spacing between each input and button */
+    flex-direction: row;
     align-items: center;
-    /* Aligns items vertically in the center */
+    gap: 10px;
 }
 
-.input-field {
-    flex: 1;
-    /* Each input takes up equal space */
+.workout-list {
+    list-style-type: none;
+    padding: 10px;
+    margin: 0;
 }
 
-.add-exercise-button {
-    flex: none;
-    /* Keeps the button at its natural width */
+.workout-item {
+    border-radius: 10px;
 }

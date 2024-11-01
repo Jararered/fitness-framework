@@ -1,26 +1,15 @@
-/* Sidebar base styling */
 .sidebar {
-    /* Full width when expanded */
     width: 250px;
-
     height: 100vh;
     background-color: #f8f8f8;
     color: #333;
-
-    /* Overlay on top of main content */
     position: fixed;
-
     top: 0;
     left: 0;
     padding: 10px;
-
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
     border-right: 1px solid #e0e0e0;
-
-    /* Ensure it's on top */
     z-index: 1000;
-
-    /* Fully visible by default */
     transform: translateX(0);
 }
 
@@ -34,26 +23,21 @@
 
 .toggle-button {
     background: none;
-    border: none;
     font-size: 24px;
     color: #007aff;
-    cursor: pointer;
-    align-self: flex-start;
-    width: 100%;
-    padding: 15px;
-    text-align: center;
+    box-shadow: none;
 }
 
-.menu {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
+.navigation-menu {
+    padding: 0px;
+    margin: 0px;
 }
 
-.menu-item {
+.navigation-menu-item {
+    width: 60px;
+    height: 60px;
     font-size: 18px;
-    padding: 15px;
+    padding: 0px;
     border-radius: 10px;
     text-align: center;
     color: #444;
@@ -64,15 +48,16 @@
 }
 
 /* Only show icons in collapsed mode */
-.sidebar.collapsed .menu-item>*:not(svg) {
+.sidebar.collapsed .navigation-menu-item>*:not(svg) {
     display: none;
 }
 
-.menu-item:hover {
+.navigation-menu-item:hover {
     background-color: #e0e0e0;
+    transition: background-color 0.3s;
 }
 
-.menu-item:active {
+.navigation-menu-item:active {
     background-color: #c7c7cc;
 }
 
@@ -95,7 +80,7 @@
         height: 60px;
     }
 
-    .menu {
+    .navigation-menu {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -105,7 +90,7 @@
         margin: 0 auto;
     }
 
-    .menu-item {
+    .navigation-menu-item {
         flex: none;
         width: 100px;
         height: 60px;
