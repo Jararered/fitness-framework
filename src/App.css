@@ -31,18 +31,24 @@ html,
     margin-left: 80px;
     padding: 10px;
     box-sizing: border-box;
+    position: relative; /* Add this line */
 }
 
 .main-content-overlay {
     flex-grow: 1;
     box-sizing: border-box;
-    position: fixed;
+    position: absolute; /* Change from fixed to absolute */
     z-index: 2000;
-
-    background-color: #333;
-
-    /* Click through */
+    /* background-color: #333; */
     pointer-events: none;
+
+    /* Match size and position of .main-content */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 10px;
 }
 
 .card {
