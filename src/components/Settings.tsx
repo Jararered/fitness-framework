@@ -55,6 +55,7 @@ const Settings: React.FC = () => {
         const preferences = savedPreferences ? JSON.parse(savedPreferences) : {};
         const updatedPreferences = { ...preferences, ...newPreferences };
         localStorage.setItem('preferences', JSON.stringify(updatedPreferences));
+        addToast('Preferences saved successfully', 'success');
     };
 
     const handleClearData = () => {
