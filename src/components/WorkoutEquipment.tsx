@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaDumbbell } from 'react-icons/fa';
+import { FaDumbbell, FaCheck } from 'react-icons/fa';
 import './WorkoutEquipment.css';
 
 const availableEquipment = [
@@ -94,6 +94,11 @@ const Equipment: React.FC = () => {
                                     {equipmentIcons[item]}
                                 </div>
                                 <p className="equipment-name">{item}</p>
+                                {selectedEquipment.includes(item) && (
+                                    <div className="checkmark-icon">
+                                        <FaCheck size={24} />
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
