@@ -167,11 +167,21 @@ const WorkoutBuilder: React.FC = () => {
             return;
         }
 
-        const randomExercises: Exercise[] = []; // Explicitly type the array
-        const numberOfExercises = Math.min(5, availableExercises.length); // Generate up to 5 exercises
+        // Get exercises for selected body part that are also in available exercises
+        const bodyPartExercises = exerciseCategories[selectedBodyPart].filter(
+            exercise => availableExercises.includes(exercise)
+        );
+
+        if (bodyPartExercises.length === 0) {
+            alert(`No exercises available for ${selectedBodyPart} with current equipment. Please select different equipment.`);
+            return;
+        }
+
+        const randomExercises: Exercise[] = [];
+        const numberOfExercises = Math.min(4, bodyPartExercises.length);
 
         for (let i = 0; i < numberOfExercises; i++) {
-            const randomExercise = availableExercises[Math.floor(Math.random() * availableExercises.length)];
+            const randomExercise = bodyPartExercises[Math.floor(Math.random() * bodyPartExercises.length)];
             const randomSets = Math.floor(Math.random() * 3) + 3; // 3 to 5 sets
             const randomReps = (Math.floor(Math.random() * 4) + 1) * 5; // 5, 10, 15, or 20 reps
 
