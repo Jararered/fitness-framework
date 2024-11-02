@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaDumbbell, FaCog, FaMapPin, FaHome, FaUser } from 'react-icons/fa';
 
 import './NavigationMenu.css';
@@ -10,6 +10,8 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ onNavigate, isCollapsed, onToggle }) => {
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
     const handleNavigate = (view: string) => {
         onNavigate(view);
         if (!isCollapsed) {
@@ -17,27 +19,39 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate, isCollapsed, onToggle }) 
         }
     };
 
+    const handleTransitionEnd = () => {
+        setIsTransitioning(false);
+    };
+
+    const handleToggle = () => {
+        setIsTransitioning(true);
+        onToggle();
+    };
+
     return (
-        <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-            <button className="expand-button" onClick={onToggle}>
+        <div 
+            className={`sidebar ${isCollapsed ? 'collapsed' : ''}`} 
+            onTransitionEnd={handleTransitionEnd}
+        >
+            <button className="expand-button" onClick={handleToggle}>
                 {isCollapsed ? '☰' : '✕'}
             </button>
 
             <ul className="navigation-menu">
                 <li className="navigation-menu-item" onClick={() => handleNavigate('todays-workout')}>
-                    {isCollapsed ? <FaHome size={24} /> : <> <FaHome size={24} /> Today's Workout </>}
+                    {isCollapsed || isTransitioning ? <FaHome size={24} /> : <> <FaHome size={24} /> Today's Workout </>}
                 </li>
                 <li className="navigation-menu-item" onClick={() => handleNavigate('workout-builder')}>
-                    {isCollapsed ? <FaDumbbell size={24} /> : <> <FaDumbbell size={24} /> Workout Builder </>}
+                    {isCollapsed || isTransitioning ? <FaDumbbell size={24} /> : <> <FaDumbbell size={24} /> Workout Builder </>}
                 </li>
                 <li className="navigation-menu-item" onClick={() => handleNavigate('equipment')}>
-                    {isCollapsed ? <FaMapPin size={24} /> : <> <FaMapPin size={24} /> Equipment </>}
+                    {isCollapsed || isTransitioning ? <FaMapPin size={24} /> : <> <FaMapPin size={24} /> Equipment </>}
                 </li>
                 <li className="navigation-menu-item" onClick={() => handleNavigate('workout-profile')}>
-                    {isCollapsed ? <FaUser size={24} /> : <> <FaUser size={24} /> Workout Profile </>}
+                    {isCollapsed || isTransitioning ? <FaUser size={24} /> : <> <FaUser size={24} /> Workout Profile </>}
                 </li>
                 <li className="navigation-menu-item" onClick={() => handleNavigate('settings')}>
-                    {isCollapsed ? <FaCog size={24} /> : <> <FaCog size={24} /> Settings </>}
+                    {isCollapsed || isTransitioning ? <FaCog size={24} /> : <> <FaCog size={24} /> Settings </>}
                 </li>
             </ul>
         </div>
