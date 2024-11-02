@@ -70,7 +70,7 @@ const Equipment: React.FC = () => {
     };
 
     return (
-        <>
+        <div className='.component-container'>
             <div className="page-title">
                 <h1>Workout Equipment</h1>
             </div>
@@ -132,7 +132,7 @@ const Equipment: React.FC = () => {
                     Load Location Equipment
                 </button>
             </div>
-        </>
+        </div>
     );
 };
 

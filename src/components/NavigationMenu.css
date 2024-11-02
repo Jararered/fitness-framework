@@ -7,7 +7,8 @@
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     border-right: 1px solid #e0e0e0;
     z-index: 1000;
-    position: fixed; /* Fix the sidebar position */
+    position: fixed;
+    /* Fix the sidebar position */
 
     transition: 0.3s;
 }
@@ -33,7 +34,7 @@
 }
 
 .expand-button:hover {
-    background:#62aeff;
+    background: #62aeff;
     color: #ffffff;
 }
 
@@ -42,8 +43,7 @@
     margin: 0px;
 }
 
-.navigation-menu-item
-{
+.navigation-menu-item {
     width: 250px;
     height: 60px;
     padding: 0px;
@@ -106,8 +106,10 @@
         width: 100%;
         height: 60px;
         bottom: 0;
-        top: auto; /* Ensure the sidebar stays at the bottom */
-        position: fixed; /* Fix the sidebar at the bottom */
+        top: auto;
+        /* Ensure the sidebar stays at the bottom */
+        position: fixed;
+        /* Fix the sidebar at the bottom */
         flex-direction: row;
         padding: 10px;
     }
@@ -121,7 +123,8 @@
     .navigation-menu {
         display: flex;
         flex-direction: row;
-        justify-content: center; /* Center the menu */
+        justify-content: center;
+        /* Center the menu */
         width: 100%;
     }
 

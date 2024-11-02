@@ -117,7 +117,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     const currentExercise = currentWorkout[currentExerciseIndex];
 
     return (
-        <>
+        <div className='.component-container'>
             <h1>Workout in Progress</h1>
 
             <div className="page-container">
@@ -141,7 +141,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                     </button>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

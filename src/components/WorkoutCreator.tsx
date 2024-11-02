@@ -121,7 +121,7 @@ const WorkoutBuilder: React.FC = () => {
     };
 
     return (
-        <>
+        <div className='.component-container'>
             <div className="page-title">
                 <h1>Workout Creator</h1>
             </div>
@@ -219,7 +219,7 @@ const WorkoutBuilder: React.FC = () => {
                     </button>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

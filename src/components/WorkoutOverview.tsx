@@ -26,7 +26,7 @@ const WorkoutOverview: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
     }, []);
 
     return (
-        <>
+        <div className='.component-container'>
             <div className="page-title">
                 <h1>Workout Overview</h1>
             </div>
@@ -52,7 +52,7 @@ const WorkoutOverview: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
                     <p>No workout selected. Please create or load a workout.</p>
                 )}
             </div>
-        </>
+        </div>
     );
 };
 

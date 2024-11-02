@@ -43,7 +43,7 @@ const WorkoutProfile: React.FC = () => {
     };
 
     return (
-        <>
+        <div className='.component-container'>
             <div className="page-title">
                 <h1>Workout Profile</h1>
             </div>
@@ -87,7 +87,7 @@ const WorkoutProfile: React.FC = () => {
                 )}
 
             </div>
-        </>
+        </div>
     );
 };
 

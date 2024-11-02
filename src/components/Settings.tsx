@@ -88,7 +88,7 @@ const Settings: React.FC = () => {
                                 </select>
                             </div>
                         </section>
-                        
+
                         <section>
                             <div>
                                 <label htmlFor="short-rest">Short Rest (seconds):</label>

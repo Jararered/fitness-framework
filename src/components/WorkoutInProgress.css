@@ -33,7 +33,8 @@
     font-size: 16px;
     font-weight: bold;
     color: white;
-    background-color: #222222; /* Slightly grey */
+    background-color: #222222;
+    /* Slightly grey */
     border: none;
     border-radius: 10px;
     cursor: pointer;
