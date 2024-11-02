@@ -120,7 +120,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         <div className='.component-container'>
             <h1>Workout in Progress</h1>
 
-            <div className="page-container">
+            <div className="card">
                 <h2>{currentExercise.name}</h2>
                 <p>Set {currentSetIndex + 1} of {currentExercise.sets}</p>
                 <p>Reps: {currentExercise.reps}</p>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaDumbbell, FaCheck } from 'react-icons/fa';
+
 import './WorkoutEquipment.css';
 
 const availableEquipment = [
@@ -70,12 +71,12 @@ const Equipment: React.FC = () => {
     };
 
     return (
-        <div className='.component-container'>
+        <div className='main-content'>
             <div className="page-title">
                 <h1>Workout Equipment</h1>
             </div>
 
-            <div className="page-container">
+            <div className="card">
                 <section>
                     <h2>Selected Gym</h2>
                     <p>{currentGym ? `Gym: ${currentGym}` : "No gym selected."}</p>
@@ -117,7 +118,7 @@ const Equipment: React.FC = () => {
                 <h1>Saved Locations</h1>
             </div>
 
-            <div className="page-container">
+            <div className="card">
                 <select
                     onChange={e => setSelectedList(e.target.value)}
                     value={selectedList}

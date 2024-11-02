@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import ToastNotificationQueue, { Toast } from './ToastNotificationQueue';
 
 import '../styles/Input.css';
-import '../styles/Containers.css';
+import './Settings.css';
 
 const Settings: React.FC = () => {
     const [weightUnit, setWeightUnit] = useState<string>('lb');
     const [shortRest, setShortRest] = useState<number>(30);
     const [normalRest, setNormalRest] = useState<number>(60);
     const [longRest, setLongRest] = useState<number>(90);
+    const [toasts, setToasts] = useState<Toast[]>([]);
 
     useEffect(() => {
         const savedPreferences = localStorage.getItem('preferences');
@@ -66,12 +68,20 @@ const Settings: React.FC = () => {
         }
     };
 
+    const addToast = useCallback((message: string, type: 'success' | 'info' | 'error') => {
+        const id = Math.random().toString(36).substr(2, 9);
+        setToasts((prevToasts) => [...prevToasts, { id, message, type }]);
+    }, []);
+
     return (
-        <>
+        <div className="main-content">
+            <ToastNotificationQueue toasts={toasts} setToasts={setToasts} />
+
             <div className="page-title">
                 <h1>Settings</h1>
             </div>
-            <div className="page-container">
+
+            <div className="card">
                 <div className="settings-columns">
                     <div className="settings-inputs">
                         <section>
@@ -122,16 +132,36 @@ const Settings: React.FC = () => {
                             </div>
                         </section>
                     </div>
-                    <div className="settings-buttons">
-                        <section>
-                            <button onClick={handleClearData} className="bad-button">
-                                Clear All Data
-                            </button>
-                        </section>
-                    </div>
                 </div>
             </div>
-        </>
+
+            <div className="page-title">
+                <h1>Debug</h1>
+            </div>
+
+            <div className="card">
+
+                <div className="settings-buttons">
+                    <button onClick={handleClearData} className="bad-button">
+                        Clear All Data
+                    </button>
+                </div>
+
+                <div className="settings-buttons">
+                    <section>
+                        <button onClick={() => addToast('Success message', 'success')} className="good-button">
+                            Show Success Toast
+                        </button>
+                        <button onClick={() => addToast('Info message', 'info')} className="good-button">
+                            Show Info Toast
+                        </button>
+                        <button onClick={() => addToast('Error message', 'error')} className="good-button">
+                            Show Error Toast
+                        </button>
+                    </section>
+                </div>
+            </div>
+        </div>
     );
 };
 

@@ -1,36 +1,26 @@
 import React, { useEffect } from 'react';
+
 import './ToastNotification.css';
 
-interface ToastProps {
+interface ToastNotificationProps {
+    id: string;
     message: string;
-    type?: 'success' | 'error' | 'info';
-    duration?: number;
-    onClose: () => void;
-    show: boolean;
+    type: 'success' | 'info' | 'error';
+    onClose: (id: string) => void;
 }
 
-const ToastNotification: React.FC<ToastProps> = ({
-    message,
-    type = 'success',
-    duration = 3000,
-    onClose,
-    show
-}) => {
+const ToastNotification: React.FC<ToastNotificationProps> = ({ id, message, type, onClose }) => {
     useEffect(() => {
-        if (show) {
-            const timer = setTimeout(() => {
-                onClose();
-            }, duration);
+        const timer = setTimeout(() => {
+            onClose(id);
+        }, 3000);
 
-            return () => clearTimeout(timer);
-        }
-    }, [show, duration, onClose]);
-
-    if (!show) return null;
+        return () => clearTimeout(timer);
+    }, [id, onClose]);
 
     return (
-        <div className={`toast-notification ${type} ${show ? 'show' : ''}`}>
-            <div className="toast-content">
+        <div className="main-content-overlay">
+            <div className={`toast-notification ${type}`}>
                 {message}
             </div>
         </div>
