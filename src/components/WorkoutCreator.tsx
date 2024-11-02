@@ -222,6 +222,9 @@ const WorkoutBuilder: React.FC = () => {
                             </option>
                         ))}
                     </select>
+                </section>
+
+                <section className="input-row">
                     <input
                         type="number"
                         name="sets"
