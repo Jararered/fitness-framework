@@ -1,4 +1,3 @@
-/* Root styles */
 body,
 html,
 #root {
@@ -31,18 +30,15 @@ html,
     margin-left: 80px;
     padding: 10px;
     box-sizing: border-box;
-    position: relative; /* Add this line */
+    position: relative;
 }
 
 .main-content-overlay {
     flex-grow: 1;
     box-sizing: border-box;
-    position: absolute; /* Change from fixed to absolute */
+    position: absolute;
     z-index: 2000;
-    /* background-color: #333; */
     pointer-events: none;
-
-    /* Match size and position of .main-content */
     top: 0;
     left: 0;
     right: 0;
@@ -60,7 +56,6 @@ html,
     box-sizing: border-box;
 }
 
-/* Media query for small screens */
 @media (max-width: 768px) {
     .App {
         flex-direction: column;
