@@ -201,12 +201,13 @@ const WorkoutBuilder: React.FC = () => {
     };
 
     return (
-        <div className='.component-container'>
+        <div className='main-content'>
+
             <div className="page-title">
                 <h1>Workout Creator</h1>
             </div>
 
-            <div className="page-container">
+            <div className="card">
                 <h2>Add Exercise to Workout</h2>
                 <section className="input-row">
                     <select
@@ -267,7 +268,7 @@ const WorkoutBuilder: React.FC = () => {
                 </section>
             </div>
 
-            <div className="page-container">
+            <div className="card">
                 <h2>Load a Saved Workout</h2>
                 <div className="input-row">
                     <select
@@ -291,7 +292,7 @@ const WorkoutBuilder: React.FC = () => {
                 </div>
             </div>
 
-            <div className="page-container">
+            <div className="card">
                 <h2>Workout Generator</h2>
                 <div className="input-row">
                     <select

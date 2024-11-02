@@ -57,9 +57,7 @@ const App: React.FC = () => {
                 isCollapsed={isSidebarCollapsed}
                 onToggle={toggleSidebar}
             />
-            <div className="main-content">
-                {renderContent()}
-            </div>
+            {renderContent()}
         </div>
     );
 };

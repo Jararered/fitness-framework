@@ -1,0 +1,44 @@
+.toast-notification {
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    animation: slide-down 0.5s ease-out, slide-up 0.5s ease-in 2.5s forwards;
+
+    /* Make the toasts only as wide as the content */
+    /* display: inline-block; */
+
+    /* Center the text */
+    text-align: center;
+
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toast-notification.success {
+    background-color: #4cd964;
+}
+
+.toast-notification.info {
+    background-color: #007aff;
+}
+
+.toast-notification.error {
+    background-color: #cc2e23;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}

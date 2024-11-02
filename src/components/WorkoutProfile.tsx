@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import '../styles/MainContent.css';
-
 interface Exercise {
     name: string;
     sets: number;
@@ -43,12 +41,12 @@ const WorkoutProfile: React.FC = () => {
     };
 
     return (
-        <div className='.component-container'>
+        <div className="main-content">
             <div className="page-title">
                 <h1>Workout Profile</h1>
             </div>
 
-            <div className="page-container">
+            <div className="card">
 
                 <h2>Recent Workouts</h2>
                 {recentWorkouts.length > 0 ? (
@@ -71,7 +69,7 @@ const WorkoutProfile: React.FC = () => {
                 )}
 
             </div>
-            <div className="page-container">
+            <div className="card">
 
                 <h2>Best Efforts</h2>
                 {Object.keys(bestEfforts).length > 0 ? (

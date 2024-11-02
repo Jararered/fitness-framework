@@ -99,7 +99,7 @@ const WorkoutExercises: React.FC = () => {
     }, []);
 
     return (
-        <div className="page-container">
+        <div className="card">
             <h1>Available Exercises</h1>
             {availableEquipment.length > 0 ? (
                 availableEquipment.map((equipment) => (

@@ -27,10 +27,37 @@ html,
 }
 
 .main-content {
-    flex-grow: 1; /* Ensure main-content fills the available width */
-    margin-left: 80px; /* Account for sidebar size and padding */
-    padding: 10px; /* Padding for main content */
-    box-sizing: border-box; /* Include padding in width calculation */
+    flex-grow: 1;
+    margin-left: 80px;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative; /* Add this line */
+}
+
+.main-content-overlay {
+    flex-grow: 1;
+    box-sizing: border-box;
+    position: absolute; /* Change from fixed to absolute */
+    z-index: 2000;
+    /* background-color: #333; */
+    pointer-events: none;
+
+    /* Match size and position of .main-content */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 10px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 /* Media query for small screens */
@@ -41,6 +68,68 @@ html,
 
     .main-content {
         margin-left: 0;
-        margin-bottom: 60px; /* Account for the bottom docked sidebar */
+        margin-bottom: 60px;
     }
+
+    .main-content-overlay {
+        margin-left: 0;
+        margin-bottom: 60px;
+    }
+}
+
+/* Button related sytles */
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+
+    border: none;
+    outline: none;
+
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    transition: background-color 0.3s;
+}
+
+.normal-button {
+    background-color: #007aff;
+}
+
+.normal-button:hover {
+    background-color: #005bb5;
+}
+
+.normal-button:active {
+    background-color: #004a94;
+}
+
+.bad-button {
+    background-color: #888888;
+}
+
+.bad-button:hover {
+    background-color: #cc2e23;
+}
+
+.bad-button:active {
+    background-color: #a4261d;
+}
+
+.confirm-button {
+    background-color: #4cd964;
+}
+
+.confirm-button:hover {
+    background-color: #34c759;
+}
+
+.confirm-button:active {
+    background-color: #30a14e;
 }

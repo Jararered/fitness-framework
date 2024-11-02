@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import '../styles/Button.css'
-
 interface Exercise {
     name: string;
     sets: number;
@@ -26,12 +24,12 @@ const WorkoutOverview: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
     }, []);
 
     return (
-        <div className='.component-container'>
+        <div className='main-content'>
             <div className="page-title">
                 <h1>Workout Overview</h1>
             </div>
 
-            <div className="page-container">
+            <div className="card">
                 {hasCurrentWorkout && currentWorkout ? (
                     <div>
                         <h2>Current Workout</h2>
