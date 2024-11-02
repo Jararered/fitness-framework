@@ -12,7 +12,7 @@ import './App.css';
 
 const App: React.FC = () => {
     const [isSidebarCollapsed, setSidebarCollapsed] = useState(true);
-    const [currentView, setCurrentView] = useState('workout-overview'); // Default to 'workout-overview'
+    const [currentView, setCurrentView] = useState('workout-overview');
     const [gym, setGym] = useState<string | null>(null);
 
     useEffect(() => {
@@ -43,7 +43,7 @@ const App: React.FC = () => {
                 return <Settings />;
             case 'workout-in-progress':
                 return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
-            case 'workout-profile': // Add the new view
+            case 'workout-profile':
                 return <WorkoutProfile />;
             default:
                 return <WorkoutOverview gym={gym} onOpenWorkout={() => setCurrentView('workout-in-progress')} />;
