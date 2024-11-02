@@ -238,12 +238,11 @@ const WorkoutBuilder: React.FC = () => {
                         onChange={handleInputChange}
                         className="input-field"
                     />
-                    <button onClick={addExerciseToWorkout} className="normal-button">
-                        Add Exercise
-                    </button>
                 </section>
 
-
+                <button onClick={addExerciseToWorkout} className="normal-button">
+                    Add Exercise
+                </button>
 
                 <h2>Current Workout</h2>
                 <ul className="workout-list">
