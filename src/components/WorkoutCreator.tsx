@@ -8,12 +8,82 @@ interface Exercise {
     reps: number;
 }
 
+type BodyPart = 'Legs' | 'Biceps' | 'Triceps' | 'Chest' | 'Back' | 'Shoulders';
+
+const exerciseCategories: Record<BodyPart, string[]> = {
+    Legs: [
+        "Barbell Squat",
+        "Barbell Front Squat",
+        "Barbell Lunge",
+        "Smith Machine Squat",
+        "Smith Machine Lunges",
+        "Leg Extension",
+        "Leg Extension + Isometric Hold",
+        "Leg Curl",
+        "Leg Curl + Isometric Hold",
+        "Barbell Deadlift",
+        "Barbell Sumo Deadlift",
+        "Barbell Romanian Deadlift",
+    ],
+    Biceps: [
+        "Dumbbell Bicep Curl",
+        "Dumbbell Hammer Curl",
+        "Barbell Curl",
+        "EZ Bar Curl",
+        "EZ Bar Wide-Grip Curl",
+        "EZ Bar Close-Grip Curl",
+    ],
+    Triceps: [
+        "Dumbbell Tricep Extension",
+        "Dumbbell Skull Crushers",
+        "EZ Bar Skull Crusher",
+    ],
+    Chest: [
+        "Dumbbell Bench Press",
+        "Dumbbell Incline Chest Press",
+        "Dumbbell Decline Chest Press",
+        "Dumbbell Fly",
+        "Barbell Bench Press",
+        "Barbell Incline Bench Press",
+        "Barbell Decline Bench Press",
+        "Smith Machine Bench Press",
+        "Smith Machine Close-Grip Bench Press",
+        "Smith Machine Incline Bench Press",
+        "Machine Chest Press",
+        "Machine Incline Chest Press",
+    ],
+    Back: [
+        "Dumbbell Bent-Over Row",
+        "Dumbbell Single-Arm Row",
+        "Barbell Bent-Over Row",
+        "Lat Pulldown",
+        "Lat Pulldown Wide-Grip",
+        "Lat Pulldown Narrow-Grip",
+        "Lat Pulldown Reverse-Grip",
+        "Lat Pulldown Single-Arm",
+        "Lat Pulldown Behind-the-Head",
+        "Smith Machine Bent-Over Row",
+    ],
+    Shoulders: [
+        "Dumbbell Shoulder Press",
+        "Dumbbell Lateral Raise",
+        "Dumbbell Front Raise",
+        "Dumbbell Shrugs",
+        "Dumbbell Upright Row",
+        "Barbell Overhead Press",
+        "Smith Machine Overhead Press",
+        "Smith Machine Shrugs",
+        "Machine Shoulder Press",
+    ],
+};
+
 const WorkoutBuilder: React.FC = () => {
     const [workout, setWorkout] = useState<Exercise[]>([]);
     const [newExercise, setNewExercise] = useState<Exercise>({ name: '', sets: 0, reps: 0 });
     const [savedWorkouts, setSavedWorkouts] = useState<string[]>([]);
     const [selectedWorkout, setSelectedWorkout] = useState<string>("");
     const [availableExercises, setAvailableExercises] = useState<string[]>([]);
+    const [selectedBodyPart, setSelectedBodyPart] = useState<BodyPart>('Legs');
 
     useEffect(() => {
         // Load available exercises based on selected equipment
@@ -97,11 +167,21 @@ const WorkoutBuilder: React.FC = () => {
             return;
         }
 
-        const randomExercises: Exercise[] = []; // Explicitly type the array
-        const numberOfExercises = Math.min(5, availableExercises.length); // Generate up to 5 exercises
+        // Get exercises for selected body part that are also in available exercises
+        const bodyPartExercises = exerciseCategories[selectedBodyPart].filter(
+            exercise => availableExercises.includes(exercise)
+        );
+
+        if (bodyPartExercises.length === 0) {
+            alert(`No exercises available for ${selectedBodyPart} with current equipment. Please select different equipment.`);
+            return;
+        }
+
+        const randomExercises: Exercise[] = [];
+        const numberOfExercises = Math.min(4, bodyPartExercises.length);
 
         for (let i = 0; i < numberOfExercises; i++) {
-            const randomExercise = availableExercises[Math.floor(Math.random() * availableExercises.length)];
+            const randomExercise = bodyPartExercises[Math.floor(Math.random() * bodyPartExercises.length)];
             const randomSets = Math.floor(Math.random() * 3) + 3; // 3 to 5 sets
             const randomReps = (Math.floor(Math.random() * 4) + 1) * 5; // 5, 10, 15, or 20 reps
 
@@ -213,7 +293,18 @@ const WorkoutBuilder: React.FC = () => {
 
             <div className="page-container">
                 <h2>Workout Generator</h2>
-                <div>
+                <div className="input-row">
+                    <select
+                        value={selectedBodyPart}
+                        onChange={(e) => setSelectedBodyPart(e.target.value as BodyPart)}
+                        className="input-field"
+                    >
+                        {Object.keys(exerciseCategories).map((bodyPart) => (
+                            <option key={bodyPart} value={bodyPart}>
+                                {bodyPart}
+                            </option>
+                        ))}
+                    </select>
                     <button onClick={generateRandomWorkout} className="normal-button">
                         Generate Random Workout
                     </button>
