@@ -83,6 +83,7 @@ const WorkoutBuilder: React.FC = () => {
     const [savedWorkouts, setSavedWorkouts] = useState<string[]>([]);
     const [selectedWorkout, setSelectedWorkout] = useState<string>("");
     const [availableExercises, setAvailableExercises] = useState<string[]>([]);
+    const [selectedBodyPart, setSelectedBodyPart] = useState<BodyPart>('Legs');
 
     useEffect(() => {
         // Load available exercises based on selected equipment
@@ -282,7 +283,18 @@ const WorkoutBuilder: React.FC = () => {
 
             <div className="page-container">
                 <h2>Workout Generator</h2>
-                <div>
+                <div className="input-row">
+                    <select
+                        value={selectedBodyPart}
+                        onChange={(e) => setSelectedBodyPart(e.target.value as BodyPart)}
+                        className="input-field"
+                    >
+                        {Object.keys(exerciseCategories).map((bodyPart) => (
+                            <option key={bodyPart} value={bodyPart}>
+                                {bodyPart}
+                            </option>
+                        ))}
+                    </select>
                     <button onClick={generateRandomWorkout} className="normal-button">
                         Generate Random Workout
                     </button>
