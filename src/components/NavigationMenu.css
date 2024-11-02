@@ -22,7 +22,9 @@
 
 .expand-button {
     background: none;
-    font-size: 20px;
+    font-size: 30px; /* Increase font size */
+    line-height: 55px; /* Adjust line height to move text up */
+    vertical-align: middle; /* Ensure text is vertically aligned */
     color: #007aff;
     box-shadow: none;
     border-radius: 20px;
@@ -126,6 +128,10 @@
         justify-content: center;
         /* Center the menu */
         width: 100%;
+    }    
+
+    .sidebar.collapsed .navigation-menu-item {
+        margin: 0px 10px;
     }
 
     .expand-button {
