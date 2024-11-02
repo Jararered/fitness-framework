@@ -18,7 +18,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate, isCollapsed, onToggle }) 
     };
 
     return (
-        <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+        <div className={`navbar ${isCollapsed ? 'collapsed' : ''}`}>
             <button className="expand-button" onClick={onToggle}>
                 {isCollapsed ? '☰' : '✕'}
             </button>

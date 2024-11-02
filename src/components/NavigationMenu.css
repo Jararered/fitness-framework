@@ -1,4 +1,4 @@
-.sidebar {
+.navbar {
     width: 250px;
     height: 100vh;
     background-color: #f8f8f8;
@@ -8,12 +8,12 @@
     border-right: 1px solid #e0e0e0;
     z-index: 1000;
     position: fixed;
-    /* Fix the sidebar position */
+    /* Fix the navbar position */
 
     transition: 0.3s;
 }
 
-.sidebar.collapsed {
+.navbar.collapsed {
     /* Narrow width when collapsed */
     width: 60px;
 
@@ -63,7 +63,7 @@
     transition: 0.3s;
 }
 
-.sidebar.collapsed .navigation-menu-item {
+.navbar.collapsed .navigation-menu-item {
     width: 60px;
     height: 60px;
     padding: 0px;
@@ -81,7 +81,7 @@
 }
 
 /* Only show icons in collapsed mode */
-.sidebar.collapsed .navigation-menu-item>*:not(svg) {
+.navbar.collapsed .navigation-menu-item>*:not(svg) {
     display: none;
 }
 
@@ -94,7 +94,7 @@
     background-color: #c7c7cc;
 }
 
-.sidebar.collapsed .navigation-menu-item svg {
+.navbar.collapsed .navigation-menu-item svg {
     margin-right: 0px;
 }
 
@@ -104,19 +104,19 @@
 
 /* Media query for small screens */
 @media (max-width: 768px) {
-    .sidebar {
+    .navbar {
         width: 100%;
         height: 60px;
         bottom: 0;
         top: auto;
-        /* Ensure the sidebar stays at the bottom */
+        /* Ensure the navbar stays at the bottom */
         position: fixed;
-        /* Fix the sidebar at the bottom */
+        /* Fix the navbar at the bottom */
         flex-direction: row;
         padding: 10px;
     }
 
-    .sidebar.collapsed {
+    .navbar.collapsed {
         width: 100%;
         height: 60px;
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
@@ -130,7 +130,7 @@
         width: 100%;
     }    
 
-    .sidebar.collapsed .navigation-menu-item {
+    .navbar.collapsed .navigation-menu-item {
         margin: 0px 10px;
     }
 
