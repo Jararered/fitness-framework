@@ -149,13 +149,13 @@ const Settings: React.FC = () => {
 
                 <div className="settings-buttons">
                     <section>
-                        <button onClick={() => addToast('Success message', 'success')} className="good-button">
+                        <button onClick={() => addToast('Success message', 'success')} className="normal-button">
                             Show Success Toast
                         </button>
-                        <button onClick={() => addToast('Info message', 'info')} className="good-button">
+                        <button onClick={() => addToast('Info message', 'info')} className="normal-button">
                             Show Info Toast
                         </button>
-                        <button onClick={() => addToast('Error message', 'error')} className="good-button">
+                        <button onClick={() => addToast('Error message', 'error')} className="normal-button">
                             Show Error Toast
                         </button>
                     </section>
