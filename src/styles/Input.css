@@ -37,6 +37,7 @@ select:focus {
     display: flex;
     gap: 20px;
     align-items: center;
+    justify-content: flex-end;  /* Align to the right */
 }
 
 .input-field {
@@ -45,4 +46,18 @@ select:focus {
     padding: 10px;
     border-radius: 10px;
     font-size: 16px;
+}
+
+/* Add new styles for label alignment */
+label {
+    text-align: right;
+    margin-right: 10px;
+    min-width: 150px; /* Ensure consistent width for labels */
+}
+
+div:has(> label) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
 }
