@@ -72,27 +72,6 @@ html,
     }
 }
 
-/* Button related sytles */
-button {
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 16px;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-
-    border: none;
-    outline: none;
-
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    transition: background-color 0.3s;
-}
-
 .normal-button {
     background-color: #007aff;
 }
