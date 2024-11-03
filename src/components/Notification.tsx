@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 
-import './ToastNotification.css';
+import './Notification.css';
 
-interface ToastNotificationProps {
+interface NotificationProps {
     id: string;
     message: string;
     type: 'success' | 'info' | 'error';
     onClose: (id: string) => void;
 }
 
-const ToastNotification: React.FC<ToastNotificationProps> = ({ id, message, type, onClose }) => {
+const NotificationComponent: React.FC<NotificationProps> = ({ id, message, type, onClose }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             onClose(id);
@@ -20,11 +20,11 @@ const ToastNotification: React.FC<ToastNotificationProps> = ({ id, message, type
 
     return (
         <div className="main-content-overlay">
-            <div className={`toast-notification ${type}`}>
+            <div className={`notification ${type}`}>
                 {message}
             </div>
         </div>
     );
 };
 
-export default ToastNotification;
+export default NotificationComponent;

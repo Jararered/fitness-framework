@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import ToastNotificationQueue, { Toast } from './ToastNotificationQueue';
+import NotificationQueue, { Notification } from './NotificationQueue';
 
 import '../styles/Input.css';
 import './Settings.css';
@@ -9,7 +9,7 @@ const Settings: React.FC = () => {
     const [shortRest, setShortRest] = useState<number>(30);
     const [normalRest, setNormalRest] = useState<number>(60);
     const [longRest, setLongRest] = useState<number>(90);
-    const [toasts, setToasts] = useState<Toast[]>([]);
+    const [notifications, setNotifications] = useState<Notification[]>([]);
 
     useEffect(() => {
         const savedPreferences = localStorage.getItem('preferences');
@@ -55,7 +55,7 @@ const Settings: React.FC = () => {
         const preferences = savedPreferences ? JSON.parse(savedPreferences) : {};
         const updatedPreferences = { ...preferences, ...newPreferences };
         localStorage.setItem('preferences', JSON.stringify(updatedPreferences));
-        addToast('Preferences saved successfully', 'success');
+        addNotification('Preferences saved successfully', 'success');
     };
 
     const handleClearData = () => {
@@ -69,14 +69,16 @@ const Settings: React.FC = () => {
         }
     };
 
-    const addToast = useCallback((message: string, type: 'success' | 'info' | 'error') => {
+    const addNotification = useCallback((message: string, type: 'success' | 'info' | 'error') => {
+        // Generate a random ID for the notification
         const id = Math.random().toString(36).substr(2, 9);
-        setToasts((prevToasts) => [...prevToasts, { id, message, type }]);
+        // Add the notification to the list
+        setNotifications((previousNotifications) => [...previousNotifications, { id, message, type }]);
     }, []);
 
     return (
         <div className="main-content">
-            <ToastNotificationQueue toasts={toasts} setToasts={setToasts} />
+            <NotificationQueue notifications={notifications} setNotifications={setNotifications} />
 
             <div className="page-title">
                 <h1>Settings</h1>
@@ -142,6 +144,10 @@ const Settings: React.FC = () => {
 
             <div className="card">
 
+                <div className="container-section-title">
+                    <h2>Manage Data</h2>
+                </div>
+
                 <div className="settings-buttons">
                     <button onClick={handleClearData} className="bad-button">
                         Clear All Data
@@ -150,14 +156,14 @@ const Settings: React.FC = () => {
 
                 <div className="settings-buttons">
                     <section>
-                        <button onClick={() => addToast('Success message', 'success')} className="normal-button">
-                            Show Success Toast
+                        <button onClick={() => addNotification('Success message', 'success')} className="normal-button">
+                            Show Success Notification
                         </button>
-                        <button onClick={() => addToast('Info message', 'info')} className="normal-button">
-                            Show Info Toast
+                        <button onClick={() => addNotification('Info message', 'info')} className="normal-button">
+                            Show Info Notification
                         </button>
-                        <button onClick={() => addToast('Error message', 'error')} className="normal-button">
-                            Show Error Toast
+                        <button onClick={() => addNotification('Error message', 'error')} className="normal-button">
+                            Show Error Notification
                         </button>
                     </section>
                 </div>
