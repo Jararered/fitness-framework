@@ -1,3 +1,4 @@
+/* Styles for the container holding the equipment cards */
 .equipment-cards {
     display: flex;
     flex-wrap: wrap;
@@ -5,6 +6,7 @@
     justify-content: center;
 }
 
+/* Styles for individual equipment items */
 .equipment-item {
     display: flex;
     margin: 10px 0;
@@ -13,34 +15,33 @@
     background-color: #f9f9f9;
     border-radius: 10px;
     padding: 10px;
-    padding-bottom: 30px; /* Add this line */
+    padding-bottom: 30px;
     width: 100px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     border: 1px solid #e0e0e0;
     position: relative;
-
     transition: background-color 0.3s, border-color 0.3s;
 }
 
+/* Styles for selected equipment items */
 .equipment-item.selected {
-    /* Light green for selected items */
     background-color: #d0f0c0;
-    /* Slightly darker green border */
     border-color: #a3d9a5;
-
     transition: background-color 0.3s, border-color 0.3s;
 }
 
+/* Styles for the equipment name text */
 .equipment-name {
     font-size: 16px;
     font-weight: bold;
     color: #333;
 }
 
+/* Styles for the checkmark icon */
 .checkmark-icon {
     position: absolute;
     bottom: 10px;
-    color: #4caf50; /* Green color for the checkmark */
+    color: #4caf50;
 }

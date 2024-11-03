@@ -1,30 +1,29 @@
+/* Base styles for toast notifications */
 .toast-notification {
     padding: 10px 20px;
     border-radius: 10px;
     color: white;
     animation: slide-down 0.5s ease-out, slide-up 0.5s ease-in 2.5s forwards;
-
-    /* Make the toasts only as wide as the content */
-    /* display: inline-block; */
-
-    /* Center the text */
     text-align: center;
-
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Success toast notification styles */
 .toast-notification.success {
     background-color: #4cd964;
 }
 
+/* Info toast notification styles */
 .toast-notification.info {
     background-color: #007aff;
 }
 
+/* Error toast notification styles */
 .toast-notification.error {
     background-color: #cc2e23;
 }
 
+/* Slide down animation */
 @keyframes slide-down {
     from {
         transform: translateY(-100%);
@@ -34,6 +33,7 @@
     }
 }
 
+/* Slide up animation */
 @keyframes slide-up {
     from {
         transform: translateY(0);

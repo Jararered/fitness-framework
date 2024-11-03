@@ -1,13 +1,16 @@
+/* Layout for settings columns */
 .settings-columns {
     display: flex;
     justify-content: space-between;
 }
 
+/* Styling for settings inputs and buttons */
 .settings-inputs, .settings-buttons {
     flex: 1;
     margin: 0 10px;
 }
 
+/* Layout for settings buttons */
 .settings-buttons {
     display: flex;
     align-items: center;

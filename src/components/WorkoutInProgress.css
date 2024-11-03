@@ -1,7 +1,9 @@
+/* Styles for the WorkoutInProgress component */
 .card {
     text-align: center;
 }
 
+/* Styles for the exercise card */
 .exercise-card {
     background-color: #ffffff;
     border-radius: 15px;
@@ -11,35 +13,39 @@
     max-width: 300px;
 }
 
+/* Styles for the exercise card content */
 .exercise-card h2 {
     font-size: 24px;
     margin-bottom: 10px;
     color: #333;
 }
 
+/* Styles for the exercise card content */
 .exercise-card p {
     font-size: 18px;
     margin: 5px 0;
 }
 
+/* Styles for the exercise card content */
 .button-row {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
+/* Styles for the exercise card content */
 .skip-button {
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
     color: white;
     background-color: #222222;
-    /* Slightly grey */
     border: none;
     border-radius: 10px;
     cursor: pointer;
 }
 
+/* Styles for the exercise card content */
 .skip-button:hover {
     background-color: #b3b3b3;
 }
