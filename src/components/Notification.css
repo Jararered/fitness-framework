@@ -1,5 +1,5 @@
-/* Base styles for toast notifications */
-.toast-notification {
+/* Base styles for notifications */
+.notification {
     padding: 10px 20px;
     border-radius: 10px;
     color: white;
@@ -8,18 +8,18 @@
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Success toast notification styles */
-.toast-notification.success {
+/* Success notification styles */
+.notification.success {
     background-color: #4cd964;
 }
 
-/* Info toast notification styles */
-.toast-notification.info {
+/* Info notification styles */
+.notification.info {
     background-color: #007aff;
 }
 
-/* Error toast notification styles */
-.toast-notification.error {
+/* Error notification styles */
+.notification.error {
     background-color: #cc2e23;
 }
 
