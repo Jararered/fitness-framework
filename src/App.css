@@ -71,39 +71,3 @@ html,
         margin-bottom: 60px;
     }
 }
-
-.normal-button {
-    background-color: #007aff;
-}
-
-.normal-button:hover {
-    background-color: #005bb5;
-}
-
-.normal-button:active {
-    background-color: #004a94;
-}
-
-.bad-button {
-    background-color: #888888;
-}
-
-.bad-button:hover {
-    background-color: #cc2e23;
-}
-
-.bad-button:active {
-    background-color: #a4261d;
-}
-
-.confirm-button {
-    background-color: #4cd964;
-}
-
-.confirm-button:hover {
-    background-color: #34c759;
-}
-
-.confirm-button:active {
-    background-color: #30a14e;
-}
