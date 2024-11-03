@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
-import Sidebar from './components/NavigationMenu';
+// Navigation Menu
+import NavigationMenu from './components/NavigationMenu';
+
+// Pages / Views / Components
 import WorkoutOverview from './components/WorkoutOverview';
 import WorkoutBuilder from './components/WorkoutCreator';
 import Equipment from './components/WorkoutEquipment';
-import Settings from './components/Settings';
-import WorkoutInProgress from './components/WorkoutInProgress';
 import WorkoutProfile from './components/WorkoutProfile';
+import Settings from './components/Settings';
 
+// Workout In Progress
+import WorkoutInProgress from './components/WorkoutInProgress';
+
+// Styles
 import './App.css';
 
 const App: React.FC = () => {
-    const [isSidebarCollapsed, setSidebarCollapsed] = useState(true);
+    const [isNavigationBarCollapsed, setNavigationBarCollapsed] = useState(true);
     const [currentView, setCurrentView] = useState('workout-overview');
     const [gym, setGym] = useState<string | null>(null);
 
@@ -23,8 +29,8 @@ const App: React.FC = () => {
         }
     }, []);
 
-    const toggleSidebar = () => {
-        setSidebarCollapsed((prev) => !prev);
+    const toggleNavigationBar = () => {
+        setNavigationBarCollapsed((prev) => !prev);
     };
 
     const handleWorkoutComplete = () => {
@@ -52,10 +58,10 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <Sidebar
+            <NavigationMenu
                 onNavigate={setCurrentView}
-                isCollapsed={isSidebarCollapsed}
-                onToggle={toggleSidebar}
+                isCollapsed={isNavigationBarCollapsed}
+                onToggle={toggleNavigationBar}
             />
             {renderContent()}
         </div>

@@ -3,13 +3,13 @@ import { FaDumbbell, FaCog, FaMapPin, FaHome, FaUser } from 'react-icons/fa';
 
 import './NavigationMenu.css';
 
-interface SidebarProps {
+interface NavigationBarProps {
     onNavigate: (view: string) => void;
     isCollapsed: boolean;
     onToggle: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onNavigate, isCollapsed, onToggle }) => {
+const NavigationBar: React.FC<NavigationBarProps> = ({ onNavigate, isCollapsed, onToggle }) => {
     const handleNavigate = (view: string) => {
         onNavigate(view);
         if (!isCollapsed) {
@@ -44,4 +44,4 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate, isCollapsed, onToggle }) 
     );
 };
 
-export default Sidebar;
+export default NavigationBar;
