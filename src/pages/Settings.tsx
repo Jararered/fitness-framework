@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import NotificationQueue, { Notification } from './NotificationQueue';
+import React, { useState, useEffect } from 'react';
 
 import '../styles/Input.css';
 import './Settings.css';
@@ -9,7 +8,6 @@ const Settings: React.FC = () => {
     const [shortRest, setShortRest] = useState<number>(30);
     const [normalRest, setNormalRest] = useState<number>(60);
     const [longRest, setLongRest] = useState<number>(90);
-    const [notifications, setNotifications] = useState<Notification[]>([]);
 
     useEffect(() => {
         const savedPreferences = localStorage.getItem('preferences');
@@ -55,7 +53,6 @@ const Settings: React.FC = () => {
         const preferences = savedPreferences ? JSON.parse(savedPreferences) : {};
         const updatedPreferences = { ...preferences, ...newPreferences };
         localStorage.setItem('preferences', JSON.stringify(updatedPreferences));
-        addNotification('Preferences saved successfully', 'success');
     };
 
     const handleClearData = () => {
@@ -69,17 +66,8 @@ const Settings: React.FC = () => {
         }
     };
 
-    const addNotification = useCallback((message: string, type: 'success' | 'info' | 'error') => {
-        // Generate a random ID for the notification
-        const id = Math.random().toString(36).substr(2, 9);
-        // Add the notification to the list
-        setNotifications((previousNotifications) => [...previousNotifications, { id, message, type }]);
-    }, []);
-
     return (
         <div className="main-content">
-            <NotificationQueue notifications={notifications} setNotifications={setNotifications} />
-
             <div className="page-title">
                 <h1>Settings</h1>
             </div>
@@ -152,20 +140,6 @@ const Settings: React.FC = () => {
                     <button onClick={handleClearData} className="bad-button">
                         Clear All Data
                     </button>
-                </div>
-
-                <div className="settings-buttons">
-                    <section>
-                        <button onClick={() => addNotification('Success message', 'success')} className="normal-button">
-                            Show Success Notification
-                        </button>
-                        <button onClick={() => addNotification('Info message', 'info')} className="normal-button">
-                            Show Info Notification
-                        </button>
-                        <button onClick={() => addNotification('Error message', 'error')} className="normal-button">
-                            Show Error Notification
-                        </button>
-                    </section>
                 </div>
             </div>
         </div>

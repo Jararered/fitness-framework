@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 // Navigation Menu
-import NavigationMenu from './components/NavigationMenu';
+import NavigationMenu from './pages/NavigationMenu';
 
-// Pages / Views / Components
-import WorkoutOverview from './components/WorkoutOverview';
-import WorkoutBuilder from './components/WorkoutCreator';
-import Equipment from './components/WorkoutEquipment';
-import WorkoutProfile from './components/WorkoutProfile';
-import Settings from './components/Settings';
+// Pages / Views / pages
+import WorkoutOverview from './pages/WorkoutOverview';
+import WorkoutBuilder from './pages/WorkoutCreator';
+import Equipment from './pages/WorkoutEquipment';
+import WorkoutProfile from './pages/WorkoutProfile';
+import Settings from './pages/Settings';
 
 // Workout In Progress
-import WorkoutInProgress from './components/WorkoutInProgress';
+import WorkoutInProgress from './pages/WorkoutInProgress';
 
 // Styles
 import './App.css';
