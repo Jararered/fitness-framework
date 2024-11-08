@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import SectionTitle from './buttons/SectionTitle';
 import { exercisesByEquipment } from './WorkoutExercises';
 

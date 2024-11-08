@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import './WorkoutInProgress.css';
+import SectionTitle from './buttons/SectionTitle';
 
 interface Exercise {
     name: string;
@@ -117,14 +118,17 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     const currentExercise = currentWorkout[currentExerciseIndex];
 
     return (
-        <div className='.component-container'>
-            <h1>Workout in Progress</h1>
+        <div className='main-content'>
+
+            <SectionTitle title="Workout in Progress" />
 
             <div className="card">
                 <h2>{currentExercise.name}</h2>
+                
                 <p>Set {currentSetIndex + 1} of {currentExercise.sets}</p>
                 <p>Reps: {currentExercise.reps}</p>
                 <p>Total Load: {totalLoad} lbs</p>
+
                 <input
                     type="number"
                     placeholder={bestEfforts[currentExercise.name] ? `${bestEfforts[currentExercise.name]}` : "Weight"}
@@ -132,10 +136,12 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                     onChange={(e) => handleWeightChange(e, currentSetIndex)}
                     className="input-field"
                 />
+
                 <div className="button-row">
                     <button className="bad-button" onClick={handleSkip}>
                         Skip
                     </button>
+
                     <button className="normal-button" onClick={handleCompleted}>
                         Next
                     </button>
