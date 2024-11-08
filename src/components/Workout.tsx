@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import SectionTitle from './buttons/SectionTitle';
 import { exercisesByEquipment } from './WorkoutExercises';
 
 interface Exercise {
@@ -86,17 +86,13 @@ const WorkoutBuilder: React.FC = () => {
     const [selectedBodyPart, setSelectedBodyPart] = useState<BodyPart>('Legs');
 
     useEffect(() => {
-        // Load available exercises based on selected equipment
         const lastLoadedGym = localStorage.getItem('lastLoadedGym');
         if (lastLoadedGym) {
             const selectedEquipment = JSON.parse(localStorage.getItem(lastLoadedGym) || '[]');
             const exercises = selectedEquipment
                 .flatMap((equipment: string) => exercisesByEquipment[equipment] || [])
-            // .filter((exercise, index, self) => self.indexOf(exercise) === index); // Remove duplicates
             setAvailableExercises(exercises);
         }
-
-        // Load saved workouts
         const workouts = Object.keys(localStorage).filter(key => key.startsWith('workout_'));
         setSavedWorkouts(workouts);
 
@@ -123,12 +119,23 @@ const WorkoutBuilder: React.FC = () => {
     };
 
     const addExerciseToWorkout = () => {
+        // Validate input
+        if (!newExercise.name) {
+            alert("Please select an exercise.");
+            return;
+        }
+        if (newExercise.sets < 1 || newExercise.reps < 1) {
+            alert("Sets and reps must be 1 or greater.");
+            return;
+        }
+
         setWorkout((prevWorkout) => {
             const updatedWorkout = [...prevWorkout, newExercise];
             console.log('Updated Workout:', updatedWorkout); // Debugging log
             localStorage.setItem('currentWorkout', JSON.stringify(updatedWorkout));
             return updatedWorkout;
         });
+
         setNewExercise({ name: '', sets: 0, reps: 0 });
     };
 
@@ -167,7 +174,6 @@ const WorkoutBuilder: React.FC = () => {
             return;
         }
 
-        // Get exercises for selected body part that are also in available exercises
         const bodyPartExercises = exerciseCategories[selectedBodyPart].filter(
             exercise => availableExercises.includes(exercise)
         );
@@ -202,11 +208,7 @@ const WorkoutBuilder: React.FC = () => {
 
     return (
         <div className='main-content'>
-
-            <div className="page-title">
-                <h1>Workout Creator</h1>
-            </div>
-
+            <SectionTitle title="Workout" />
             <div className="card">
                 <h2>Add Exercise to Workout</h2>
                 <section className="input-row">

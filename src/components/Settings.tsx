@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import SectionTitle from './buttons/SectionTitle';
 import '../styles/Input.css';
 import './Settings.css';
 
@@ -68,10 +68,7 @@ const Settings: React.FC = () => {
 
     return (
         <div className="main-content">
-            <div className="page-title">
-                <h1>Settings</h1>
-            </div>
-
+            <SectionTitle title="Settings" />
             <div className="card">
                 <div className="settings-columns">
                     <div className="settings-inputs">
@@ -126,10 +123,7 @@ const Settings: React.FC = () => {
                 </div>
             </div>
 
-            <div className="page-title">
-                <h1>Debug</h1>
-            </div>
-
+            <SectionTitle title="Debug" />
             <div className="card">
 
                 <div className="container-section-title">

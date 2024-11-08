@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SectionTitle from './buttons/SectionTitle';
 
 interface Exercise {
     name: string;
@@ -42,10 +43,7 @@ const WorkoutProfile: React.FC = () => {
 
     return (
         <div className="main-content">
-            <div className="page-title">
-                <h1>Workout Profile</h1>
-            </div>
-
+            <SectionTitle title="Workout Profile" />
             <div className="card">
 
                 <h2>Recent Workouts</h2>

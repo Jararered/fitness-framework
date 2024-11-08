@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SectionTitle from './buttons/SectionTitle';
 
 interface Exercise {
     name: string;
@@ -25,10 +26,7 @@ const WorkoutOverview: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
 
     return (
         <div className='main-content'>
-            <div className="page-title">
-                <h1>Workout Overview</h1>
-            </div>
-
+            <SectionTitle title="Workout Overview" />
             <div className="card">
                 {hasCurrentWorkout && currentWorkout ? (
                     <div>

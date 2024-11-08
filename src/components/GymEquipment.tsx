@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaDumbbell, FaCheck } from 'react-icons/fa';
-
-import './WorkoutEquipment.css';
+import SectionTitle from './buttons/SectionTitle';
+import './GymEquipment.css';
 
 const availableEquipment = [
     "Dumbells", "Dumbells + Bench", "Lat Pulldown Machine", "Barbell",
@@ -72,9 +72,7 @@ const Equipment: React.FC = () => {
 
     return (
         <div className='main-content'>
-            <div className="page-title">
-                <h1>Workout Equipment</h1>
-            </div>
+            <SectionTitle title="Workout Equipment" />
 
             <div className="card">
                 <section>
@@ -114,9 +112,7 @@ const Equipment: React.FC = () => {
                 </section>
             </div>
 
-            <div className="page-title">
-                <h1>Saved Locations</h1>
-            </div>
+            <SectionTitle title="Saved Locations" />
 
             <div className="card">
                 <select
