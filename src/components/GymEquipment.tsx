@@ -72,7 +72,7 @@ const Equipment: React.FC = () => {
 
     return (
         <div className='main-content'>
-            <SectionTitle title="Workout Equipment" />
+            <SectionTitle title="Gym Equipment" />
 
             <div className="card">
                 <section>
@@ -112,7 +112,7 @@ const Equipment: React.FC = () => {
                 </section>
             </div>
 
-            <SectionTitle title="Saved Locations" />
+            <SectionTitle title="Saved Gyms" />
 
             <div className="card">
                 <select
@@ -131,7 +131,7 @@ const Equipment: React.FC = () => {
                     })}
                 </select>
                 <button onClick={() => loadEquipmentList(selectedList)} className="normal-button">
-                    Load Location Equipment
+                    Load Gym Equipment
                 </button>
             </div>
         </div>
