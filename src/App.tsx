@@ -15,6 +15,7 @@ import WorkoutInProgress from './components/WorkoutInProgress';
 
 // Styles
 import './App.css';
+import './components/buttons/ButtonColors.css';
 
 const App: React.FC = () => {
     const [isNavigationBarCollapsed, setNavigationBarCollapsed] = useState(true);
