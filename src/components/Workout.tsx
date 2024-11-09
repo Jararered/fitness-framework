@@ -23,10 +23,10 @@ const WorkoutCreator: React.FC = () => {
 
     useEffect(() => {
         const lastGym = localStorage.getItem('lastGym');
-        const gymList = localStorage.getItem('gymList');
+        const savedGyms = localStorage.getItem('savedGyms');
 
-        if (lastGym && gymList) {
-            const gym = JSON.parse(gymList).find((entry: { name: string }) => entry.name === lastGym);
+        if (lastGym && savedGyms) {
+            const gym = JSON.parse(savedGyms).find((entry: { name: string }) => entry.name === lastGym);
             if (gym) {
                 const exercises = gym.equipment.flatMap((equipment: string) => equipmentExercises[equipment] || []);
                 setAvailableExercises(exercises);
@@ -224,7 +224,7 @@ const WorkoutCreator: React.FC = () => {
                 </div>
             </div>
             <div className="card">
-                <h2>Workout Generator</h2>
+                <h2>Random Workout</h2>
                 <div className="input-row">
                     <select
                         value={selectedBodyPart}

@@ -13,7 +13,7 @@ const Equipment: React.FC = () => {
     const [currentGym, setCurrentGym] = useState<string | null>(null);
 
     useEffect(() => {
-        const savedLists = localStorage.getItem('gymList');
+        const savedLists = localStorage.getItem('savedGyms');
         if (savedLists) {
             const parsedLists = JSON.parse(savedLists);
             parsedLists.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
@@ -39,7 +39,7 @@ const Equipment: React.FC = () => {
             const newGym = { name: gymName, equipment: selectedEquipment };
             setSavedEquipmentLists(prev => {
                 const updatedLists = prev.filter(gym => gym.name !== gymName).concat(newGym);
-                localStorage.setItem('gymList', JSON.stringify(updatedLists));
+                localStorage.setItem('savedGyms', JSON.stringify(updatedLists));
                 return updatedLists;
             });
             localStorage.setItem('lastGym', gymName);
@@ -47,7 +47,7 @@ const Equipment: React.FC = () => {
     };
 
     const loadEquipmentList = (gymName: string) => {
-        const savedLists = localStorage.getItem('gymList');
+        const savedLists = localStorage.getItem('savedGyms');
         if (savedLists) {
             const gym = JSON.parse(savedLists).find((entry: { name: string }) => entry.name === gymName);
             if (gym) {
@@ -61,11 +61,11 @@ const Equipment: React.FC = () => {
     };
 
     const deleteEquipmentList = (gymName: string) => {
-        const savedLists = localStorage.getItem('gymList');
+        const savedLists = localStorage.getItem('savedGyms');
         if (savedLists) {
             const parsedLists = JSON.parse(savedLists).filter((entry: { name: string }) => entry.name !== gymName);
             setSavedEquipmentLists(parsedLists);
-            localStorage.setItem('gymList', JSON.stringify(parsedLists));
+            localStorage.setItem('savedGyms', JSON.stringify(parsedLists));
             if (currentGym === gymName) {
                 setCurrentGym(null);
                 setSelectedEquipment([]);
