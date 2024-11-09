@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 // Navigation Menu
-import NavigationMenu from './components/SideBar';
-import DockBar from './components/DockBar';
+import NavigationMenu from './components/navigation/SideBar';
+import DockBar from './components/navigation/DockBar';
 
 // Pages
 import WorkoutOverview from './components/Home';

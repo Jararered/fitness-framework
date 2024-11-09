@@ -1,11 +1,10 @@
-
 import React from 'react';
 
-import HomeButton from './buttons/HomeButton';
-import WorkoutButton from './buttons/WorkoutButton';
-import GymButton from './buttons/GymButton';
-import ProfileButton from './buttons/ProfileButton';
-import SettingsButton from './buttons/SettingsButton';
+import HomeButton from '../buttons/HomeButton';
+import WorkoutButton from '../buttons/WorkoutButton';
+import GymButton from '../buttons/GymButton';
+import ProfileButton from '../buttons/ProfileButton';
+import SettingsButton from '../buttons/SettingsButton';
 
 import './DockBar.css';
 
