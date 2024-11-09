@@ -42,6 +42,7 @@ const Equipment: React.FC = () => {
                 localStorage.setItem('savedGyms', JSON.stringify(updatedLists));
                 return updatedLists;
             });
+            setCurrentGym(gymName);
             localStorage.setItem('lastGym', gymName);
         }
     };
