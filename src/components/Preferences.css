@@ -1,0 +1,19 @@
+/* Layout for preferences columns */
+.preferences-columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Styling for preferences inputs and buttons */
+.preferences-inputs,
+.preferences-buttons {
+    flex: 1;
+    margin: 0 10px;
+}
+
+/* Layout for preferences buttons */
+.preferences-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

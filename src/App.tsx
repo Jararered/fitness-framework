@@ -9,14 +9,18 @@ import Home from './components/Home';
 import Workout from './components/Workout';
 import GymEquipment from './components/GymEquipment';
 import Profile from './components/Profile';
-import Settings from './components/Settings';
+import Preferences from './components/Preferences';
 
 // Workout In Progress
 import WorkoutInProgress from './components/WorkoutInProgress';
 
 // Styles
 import './App.css';
+
 import './components/buttons/ButtonColors.css';
+import './components/shared/Card.css';
+import './components/shared/HorizontalSection.css';
+import './components/shared/VerticalSection.css';
 
 const App: React.FC = () => {
     const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);
@@ -50,7 +54,7 @@ const App: React.FC = () => {
             case 'profile':
                 return <Profile />;
             case 'settings':
-                return <Settings />;
+                return <Preferences />;
 
             case 'workout-in-progress':
                 return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
