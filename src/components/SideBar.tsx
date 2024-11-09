@@ -6,15 +6,15 @@ import GymButton from './buttons/GymButton';
 import ProfileButton from './buttons/ProfileButton';
 import SettingsButton from './buttons/SettingsButton';
 
-import './NavigationMenu.css';
+import './SideBar.css';
 
-interface NavigationBarProps {
+interface SideBarProps {
     onNavigate: (view: string) => void;
     isCollapsed: boolean;
     onToggle: () => void;
 }
 
-const NavigationBar: React.FC<NavigationBarProps> = ({ onNavigate, isCollapsed, onToggle }) => {
+const SideBar: React.FC<SideBarProps> = ({ onNavigate, isCollapsed, onToggle }) => {
     const handleNavigate = (view: string) => {
         onNavigate(view);
         if (!isCollapsed) {
@@ -23,26 +23,26 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ onNavigate, isCollapsed, 
     };
 
     return (
-        <div className={`navbar ${isCollapsed ? 'collapsed' : ''}`}>
-            <button className="expand-button" onClick={onToggle}>
-                {isCollapsed ? '☰' : '✕'}
-            </button>
+        <div>
+            <ul className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+                <button className="expand-button" onClick={onToggle}>
+                    {isCollapsed ? '☰' : '✕'}
+                </button>
 
-            <ul className="navigation-menu">
                 <HomeButton
-                    onClick={() => handleNavigate('todays-workout')}
+                    onClick={() => handleNavigate('home')}
                     isCollapsed={isCollapsed}
                 />
                 <WorkoutButton
-                    onClick={() => handleNavigate('workout-builder')}
+                    onClick={() => handleNavigate('workout')}
                     isCollapsed={isCollapsed}
                 />
                 <GymButton
-                    onClick={() => handleNavigate('equipment')}
+                    onClick={() => handleNavigate('gym-equipment')}
                     isCollapsed={isCollapsed}
                 />
                 <ProfileButton
-                    onClick={() => handleNavigate('workout-profile')}
+                    onClick={() => handleNavigate('profile')}
                     isCollapsed={isCollapsed}
                 />
                 <SettingsButton
@@ -54,4 +54,4 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ onNavigate, isCollapsed, 
     );
 };
 
-export default NavigationBar;
+export default SideBar;

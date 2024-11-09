@@ -1,0 +1,66 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    padding: 10px 10px;
+    margin: 0px;
+
+    background-color: #f8f8f8;
+    color: #333;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    border-right: 1px solid #e0e0e0;
+    z-index: 1000;
+    position: fixed;
+
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+}
+
+/* Styles for the collapsed sidebar */
+.sidebar.collapsed {
+    width: 60px;
+    transition: 0.3s;
+}
+
+.sidebar .button {
+    width: 250px;
+    margin-right: 10px;
+}
+
+.sidebar .button svg {
+    margin-right: 10px;
+}
+
+.sidebar.collapsed .button svg {
+    margin-right: 0px;
+}
+
+
+.sidebar.collapsed .button {
+    width: 60px;
+    margin-right: 0px;
+}
+
+.expand-button {
+    width: 60px;
+    height: 60px;
+    padding: 0px;
+    margin: 0px;
+
+    background: none;
+    font-size: 30px;
+    line-height: 55px;
+    vertical-align: middle;
+    color: #007aff;
+    box-shadow: none;
+    border-radius: 20px;
+}
+
+.expand-button:hover {
+    background: #62aeff;
+    color: #ffffff;
+}
