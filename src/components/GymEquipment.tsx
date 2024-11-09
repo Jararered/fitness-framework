@@ -8,19 +8,22 @@ import './GymEquipment.css';
 
 const Equipment: React.FC = () => {
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
-    const [savedEquipmentLists, setSavedEquipmentLists] = useState<string[]>([]);
+    const [savedEquipmentLists, setSavedEquipmentLists] = useState<{ name: string, equipment: string[] }[]>([]);
     const [selectedList, setSelectedList] = useState<string>("");
     const [currentGym, setCurrentGym] = useState<string | null>(null);
 
     useEffect(() => {
-        const lists = Object.keys(localStorage).filter(key => key.startsWith('equipment_'));
-        setSavedEquipmentLists(lists);
+        const savedLists = localStorage.getItem('gymLists');
+        if (savedLists) {
+            const parsedLists = JSON.parse(savedLists);
+            parsedLists.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
+            setSavedEquipmentLists(parsedLists);
+        }
 
         const lastLoadedList = localStorage.getItem('lastLoadedGym');
         if (lastLoadedList) {
-            const listName = lastLoadedList.replace('equipment_', '');
-            loadEquipmentList(listName);
-            setSelectedList(listName);
+            loadEquipmentList(lastLoadedList);
+            setSelectedList(lastLoadedList);
         }
     }, []);
 
@@ -31,32 +34,35 @@ const Equipment: React.FC = () => {
     };
 
     const saveEquipmentList = () => {
-        const listName = prompt("Enter a name for this gym:");
-        if (listName) {
-            const storageKey = `equipment_${listName}`;
-            localStorage.setItem(storageKey, JSON.stringify(selectedEquipment));
-            alert(`Gym "${listName}" saved!`);
-            setSavedEquipmentLists(prev => [...prev, storageKey]);
-            loadEquipmentList(listName);
+        const gymName = prompt("Enter a name for this gym:");
+        if (gymName) {
+            const newGym = { name: gymName, equipment: selectedEquipment };
+            setSavedEquipmentLists(prev => {
+                const updatedLists = prev.filter(gym => gym.name !== gymName).concat(newGym);
+                localStorage.setItem('gymLists', JSON.stringify(updatedLists));
+                return updatedLists;
+            });
+            localStorage.setItem('lastLoadedGym', gymName);
         }
     };
 
-    const loadEquipmentList = (listName: string) => {
-        const storageKey = `equipment_${listName}`;
-        const savedList = localStorage.getItem(storageKey);
-        if (savedList) {
-            setSelectedEquipment(JSON.parse(savedList));
-            localStorage.setItem('lastLoadedGym', storageKey);
-            setCurrentGym(listName);
-        } else {
-            alert("Please select a valid gym.");
+    const loadEquipmentList = (gymName: string) => {
+        const savedLists = localStorage.getItem('gymLists');
+        if (savedLists) {
+            const gymList = JSON.parse(savedLists).find((gym: { name: string }) => gym.name === gymName);
+            if (gymList) {
+                setSelectedEquipment(gymList.equipment);
+                localStorage.setItem('lastLoadedGym', gymName);
+                setCurrentGym(gymName);
+            } else {
+                alert("Please select a valid gym.");
+            }
         }
     };
 
     const clearEquipmentList = () => {
         if (window.confirm("Are you sure you want to clear the equipment selection?")) {
             setSelectedEquipment([]);
-            localStorage.removeItem('lastLoadedGym');
             setCurrentGym(null);
         }
     };
@@ -75,17 +81,17 @@ const Equipment: React.FC = () => {
                 <section>
                     <h2>Available Equipment</h2>
                     <div className="equipment-cards">
-                        {equipment.map(item => (
+                        {equipment.map(equipment => (
                             <div
-                                key={item}
-                                className={`equipment-item ${selectedEquipment.includes(item) ? 'selected' : ''}`}
-                                onClick={() => toggleEquipment(item)}
+                                key={equipment}
+                                className={`equipment-item ${selectedEquipment.includes(equipment) ? 'selected' : ''}`}
+                                onClick={() => toggleEquipment(equipment)}
                             >
                                 <div className="equipment-icon">
-                                    {equipmentIcons[item]}
+                                    {equipmentIcons[equipment]}
                                 </div>
-                                <p className="equipment-name">{item}</p>
-                                {selectedEquipment.includes(item) && (
+                                <p className="equipment-name">{equipment}</p>
+                                {selectedEquipment.includes(equipment) && (
                                     <div className="checkmark-icon">
                                         <FaCheck size={24} />
                                     </div>
@@ -113,18 +119,17 @@ const Equipment: React.FC = () => {
                     className="input-field"
                 >
                     <option value="">Select a location</option>
-                    {savedEquipmentLists.map(listKey => {
-                        const listName = listKey.replace('equipment_', '');
-                        return (
-                            <option key={listKey} value={listName}>
-                                {listName}
-                            </option>
-                        );
-                    })}
+                    {savedEquipmentLists.map((gym: { name: string }) => (
+                        <option key={gym.name} value={gym.name}>
+                            {gym.name}
+                        </option>
+                    ))}
                 </select>
+
                 <button onClick={() => loadEquipmentList(selectedList)} className="normal-button">
                     Load Gym Equipment
                 </button>
+
             </div>
         </div>
     );
