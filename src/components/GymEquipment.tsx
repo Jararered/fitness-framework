@@ -60,6 +60,20 @@ const Equipment: React.FC = () => {
         }
     };
 
+    const deleteEquipmentList = (gymName: string) => {
+        const savedLists = localStorage.getItem('gymLists');
+        if (savedLists) {
+            const parsedLists = JSON.parse(savedLists).filter((entry: { name: string }) => entry.name !== gymName);
+            setSavedEquipmentLists(parsedLists);
+            localStorage.setItem('gymLists', JSON.stringify(parsedLists));
+            if (currentGym === gymName) {
+                setCurrentGym(null);
+                setSelectedEquipment([]);
+                localStorage.removeItem('lastLoadedGym');
+            }
+        }
+    };
+
     const clearEquipmentList = () => {
         if (window.confirm("Are you sure you want to clear the equipment selection?")) {
             setSelectedEquipment([]);
@@ -118,7 +132,7 @@ const Equipment: React.FC = () => {
                     value={selectedList}
                     className="input-field"
                 >
-                    <option value="">Select a location</option>
+                    {!selectedList && <option value="">Select a location</option>}
                     {savedEquipmentLists.map((gym: { name: string }) => (
                         <option key={gym.name} value={gym.name}>
                             {gym.name}
@@ -130,6 +144,9 @@ const Equipment: React.FC = () => {
                     Load Gym Equipment
                 </button>
 
+                <button onClick={() => deleteEquipmentList(selectedList)} className="bad-button">
+                    Delete Gym Equipment
+                </button>
             </div>
 
             <SectionTitle title="Available Exercises" />
