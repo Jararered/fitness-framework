@@ -28,7 +28,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             setCurrentWorkout(JSON.parse(workoutData));
         }
 
-        const bestEffortsData = localStorage.getItem('logged_weights_best');
+        const bestEffortsData = localStorage.getItem('loggedBestWeights');
         if (bestEffortsData) {
             setBestEfforts(JSON.parse(bestEffortsData));
         }
@@ -44,7 +44,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         if (currentWorkout) {
             const currentExercise = currentWorkout[currentExerciseIndex];
             const loggedWeights = JSON.parse(localStorage.getItem('logged_weights') || '[]');
-            const loggedWeightsBest = JSON.parse(localStorage.getItem('logged_weights_best') || '{}');
+            const loggedWeightsBest = JSON.parse(localStorage.getItem('loggedBestWeights') || '{}');
 
             const weight = weights[currentSetIndex] || bestEfforts[currentExercise.name] || 0;
             if (weight > 0) {
@@ -60,7 +60,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
                 if (!loggedWeightsBest[currentExercise.name] || weight > loggedWeightsBest[currentExercise.name]) {
                     loggedWeightsBest[currentExercise.name] = weight;
-                    localStorage.setItem('logged_weights_best', JSON.stringify(loggedWeightsBest));
+                    localStorage.setItem('loggedBestWeights', JSON.stringify(loggedWeightsBest));
                 }
             }
 
@@ -92,13 +92,13 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
     const completeWorkout = () => {
         if (currentWorkout) {
-            const workoutHistory = JSON.parse(localStorage.getItem('workout_history') || '[]');
+            const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
             const workoutEntry = {
                 date: new Date().toISOString(),
                 exercises: currentWorkout,
             };
-            workoutHistory.push(workoutEntry);
-            localStorage.setItem('workout_history', JSON.stringify(workoutHistory));
+            loggedWorkouts.push(workoutEntry);
+            localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
 
             const totalLoadHistory = JSON.parse(localStorage.getItem('total_load_history') || '[]');
             const totalLoadEntry = {

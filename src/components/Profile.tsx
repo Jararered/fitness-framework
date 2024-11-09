@@ -18,12 +18,12 @@ const WorkoutProfile: React.FC = () => {
     const [bestEfforts, setBestEfforts] = useState<{ [key: string]: number }>({});
 
     useEffect(() => {
-        const workoutsData = localStorage.getItem('workout_history');
+        const workoutsData = localStorage.getItem('loggedWorkouts');
         if (workoutsData) {
             setRecentWorkouts(JSON.parse(workoutsData).slice(-5).reverse());
         }
 
-        const bestEffortsData = localStorage.getItem('logged_weights_best');
+        const bestEffortsData = localStorage.getItem('loggedBestWeights');
         if (bestEffortsData) {
             setBestEfforts(JSON.parse(bestEffortsData));
         }
@@ -44,7 +44,7 @@ const WorkoutProfile: React.FC = () => {
 
     return (
         <div className="main-content">
-            <SectionTitle title="Workout Profile" />
+            <SectionTitle title="Profile" />
             <div className="card">
 
                 <h2>Recent Workouts</h2>
