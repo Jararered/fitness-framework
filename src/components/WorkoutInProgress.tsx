@@ -20,7 +20,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     const [currentSetIndex, setCurrentSetIndex] = useState(0);
     const [weights, setWeights] = useState<number[]>([]);
     const [bestEfforts, setBestEfforts] = useState<{ [key: string]: number }>({});
-    const [totalLoad, setTotalLoad] = useState(0);
 
     useEffect(() => {
         const workoutData = localStorage.getItem('currentWorkout');
@@ -40,51 +39,64 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         setWeights(newWeights);
     };
 
-    const handleCompleted = () => {
+    const handleNextExercise = () => {
         if (currentWorkout) {
             const currentExercise = currentWorkout[currentExerciseIndex];
-            const loggedWeights = JSON.parse(localStorage.getItem('logged_weights') || '[]');
+            const loggedWeights = JSON.parse(localStorage.getItem('loggedWeights') || '[]');
             const loggedWeightsBest = JSON.parse(localStorage.getItem('loggedBestWeights') || '{}');
 
             const weight = weights[currentSetIndex] || bestEfforts[currentExercise.name] || 0;
             if (weight > 0) {
-                const load = currentExercise.reps * weight;
-                setTotalLoad(totalLoad + load);
-
+                // Save the weight to the log
                 loggedWeights.push({
+                    date: new Date().toISOString(),
                     exercise: currentExercise.name,
                     reps: currentExercise.reps,
                     weight: weight,
                 });
-                localStorage.setItem('logged_weights', JSON.stringify(loggedWeights));
+                localStorage.setItem('loggedWeights', JSON.stringify(loggedWeights));
 
-                if (!loggedWeightsBest[currentExercise.name] || weight > loggedWeightsBest[currentExercise.name]) {
-                    loggedWeightsBest[currentExercise.name] = weight;
+                // Update the best effort if this is a new best
+                if (!loggedWeightsBest[currentExercise.name] || weight > loggedWeightsBest[currentExercise.name].weight) {
+                    loggedWeightsBest[currentExercise.name] = {
+                        weight: weight,
+                        date: new Date().toISOString(),
+                    };
                     localStorage.setItem('loggedBestWeights', JSON.stringify(loggedWeightsBest));
                 }
             }
 
+            // Move to the next set or exercise
             if (currentSetIndex < currentExercise.sets - 1) {
+                // Move to the next set
                 setCurrentSetIndex(currentSetIndex + 1);
             } else if (currentExerciseIndex < currentWorkout.length - 1) {
+                // Move to the next exercise
                 setCurrentExerciseIndex(currentExerciseIndex + 1);
+                // Reset the set index and weights
                 setCurrentSetIndex(0);
                 setWeights([]);
             } else {
+                // Finish the workout
                 completeWorkout();
             }
         }
     };
 
-    const handleSkip = () => {
+    const handleSkipExercise = () => {
         if (currentWorkout) {
+            // Skip the current exercise
             if (currentSetIndex < currentWorkout[currentExerciseIndex].sets - 1) {
+                // Move to the next set
                 setCurrentSetIndex(currentSetIndex + 1);
             } else if (currentExerciseIndex < currentWorkout.length - 1) {
+                // Move to the next exercise
                 setCurrentExerciseIndex(currentExerciseIndex + 1);
+                // Reset the set index and weights
                 setCurrentSetIndex(0);
                 setWeights([]);
             } else {
+                // Finish the workout
                 completeWorkout();
             }
         }
@@ -92,6 +104,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
     const completeWorkout = () => {
         if (currentWorkout) {
+            // Save the workout to the log
             const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
             const workoutEntry = {
                 date: new Date().toISOString(),
@@ -99,14 +112,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             };
             loggedWorkouts.push(workoutEntry);
             localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
-
-            const totalLoadHistory = JSON.parse(localStorage.getItem('total_load_history') || '[]');
-            const totalLoadEntry = {
-                date: new Date().toISOString(),
-                totalLoad: totalLoad,
-            };
-            totalLoadHistory.push(totalLoadEntry);
-            localStorage.setItem('total_load_history', JSON.stringify(totalLoadHistory));
         }
 
         onCompleteWorkout(); // Call the callback to change the view
@@ -128,7 +133,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
                 <p>Set {currentSetIndex + 1} of {currentExercise.sets}</p>
                 <p>Reps: {currentExercise.reps}</p>
-                <p>Total Load: {totalLoad} lbs</p>
 
                 <input
                     type="number"
@@ -139,11 +143,11 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                 />
 
                 <div className="button-row">
-                    <button className="bad-button" onClick={handleSkip}>
+                    <button className="bad-button" onClick={handleSkipExercise}>
                         Skip
                     </button>
 
-                    <button className="normal-button" onClick={handleCompleted}>
+                    <button className="normal-button" onClick={handleNextExercise}>
                         Next
                     </button>
                 </div>
