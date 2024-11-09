@@ -1,82 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 import SectionTitle from './buttons/SectionTitle';
-import { equipmentExersices } from './WorkoutExercises';
+import { equipmentExersices, BodyPart, exerciseCategories } from './Equipment';
 
 interface Exercise {
     name: string;
     sets: number;
     reps: number;
 }
-
-type BodyPart = 'Legs' | 'Biceps' | 'Triceps' | 'Chest' | 'Back' | 'Shoulders';
-
-const exerciseCategories: Record<BodyPart, string[]> = {
-    Legs: [
-        "Barbell Squat",
-        "Barbell Front Squat",
-        "Barbell Lunge",
-        "Smith Machine Squat",
-        "Smith Machine Lunges",
-        "Leg Extension",
-        "Leg Extension + Isometric Hold",
-        "Leg Curl",
-        "Leg Curl + Isometric Hold",
-        "Barbell Deadlift",
-        "Barbell Sumo Deadlift",
-        "Barbell Romanian Deadlift",
-    ],
-    Biceps: [
-        "Dumbbell Bicep Curl",
-        "Dumbbell Hammer Curl",
-        "Barbell Curl",
-        "EZ Bar Curl",
-        "EZ Bar Wide-Grip Curl",
-        "EZ Bar Close-Grip Curl",
-    ],
-    Triceps: [
-        "Dumbbell Tricep Extension",
-        "Dumbbell Skull Crushers",
-        "EZ Bar Skull Crusher",
-    ],
-    Chest: [
-        "Dumbbell Bench Press",
-        "Dumbbell Incline Chest Press",
-        "Dumbbell Decline Chest Press",
-        "Dumbbell Fly",
-        "Barbell Bench Press",
-        "Barbell Incline Bench Press",
-        "Barbell Decline Bench Press",
-        "Smith Machine Bench Press",
-        "Smith Machine Close-Grip Bench Press",
-        "Smith Machine Incline Bench Press",
-        "Machine Chest Press",
-        "Machine Incline Chest Press",
-    ],
-    Back: [
-        "Dumbbell Bent-Over Row",
-        "Dumbbell Single-Arm Row",
-        "Barbell Bent-Over Row",
-        "Lat Pulldown",
-        "Lat Pulldown Wide-Grip",
-        "Lat Pulldown Narrow-Grip",
-        "Lat Pulldown Reverse-Grip",
-        "Lat Pulldown Single-Arm",
-        "Lat Pulldown Behind-the-Head",
-        "Smith Machine Bent-Over Row",
-    ],
-    Shoulders: [
-        "Dumbbell Shoulder Press",
-        "Dumbbell Lateral Raise",
-        "Dumbbell Front Raise",
-        "Dumbbell Shrugs",
-        "Dumbbell Upright Row",
-        "Barbell Overhead Press",
-        "Smith Machine Overhead Press",
-        "Smith Machine Shrugs",
-        "Machine Shoulder Press",
-    ],
-};
 
 const WorkoutBuilder: React.FC = () => {
     const [workout, setWorkout] = useState<Exercise[]>([]);

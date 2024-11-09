@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa';
+
 import SectionTitle from './buttons/SectionTitle';
+import { equipment, equipmentIcons } from './Equipment';
 
 import './GymEquipment.css';
-import { equipment, equipmentIcons } from './Equipment';
 
 const Equipment: React.FC = () => {
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
@@ -62,7 +63,7 @@ const Equipment: React.FC = () => {
 
     return (
         <div className='main-content'>
-            
+
             <SectionTitle title="Gym Equipment" />
 
             <div className="card">
