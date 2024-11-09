@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import SectionTitle from './buttons/SectionTitle';
-import { equipmentExersices, BodyPart, exerciseCategories } from './Equipment';
+import { equipmentExercises, BodyPart, exerciseCategories } from './Equipment';
 
 interface Exercise {
     name: string;
@@ -22,7 +22,7 @@ const WorkoutCreator: React.FC = () => {
         if (lastLoadedGym) {
             const selectedEquipment = JSON.parse(localStorage.getItem(lastLoadedGym) || '[]');
             const exercises = selectedEquipment
-                .flatMap((equipment: string) => equipmentExersices[equipment] || [])
+                .flatMap((equipment: string) => equipmentExercises[equipment] || [])
             setAvailableExercises(exercises);
         }
         const workouts = Object.keys(localStorage).filter(key => key.startsWith('workout_'));
