@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import SectionTitle from './buttons/SectionTitle';
 
 interface Exercise {

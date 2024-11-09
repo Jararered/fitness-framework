@@ -9,7 +9,7 @@ interface Exercise {
     reps: number;
 }
 
-const WorkoutBuilder: React.FC = () => {
+const WorkoutCreator: React.FC = () => {
     const [workout, setWorkout] = useState<Exercise[]>([]);
     const [newExercise, setNewExercise] = useState<Exercise>({ name: '', sets: 0, reps: 0 });
     const [savedWorkouts, setSavedWorkouts] = useState<string[]>([]);
@@ -251,4 +251,4 @@ const WorkoutBuilder: React.FC = () => {
     );
 };
 
-export default WorkoutBuilder;
+export default WorkoutCreator;
