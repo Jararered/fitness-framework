@@ -51,6 +51,10 @@
     margin: 20px;
     text-align: center;
   }
+
+  h2 {
+    margin-top: 0px;
+  }
   
   button {
     border-radius: 10px;
