@@ -1,89 +1,68 @@
 import React, { useEffect, useState } from 'react';
-
 import SectionTitle from './buttons/SectionTitle';
-
-interface Exercise {
-    name: string;
-    sets: number;
-    reps: number;
-}
-
-interface Workout {
-    date: string;
-    exercises: Exercise[];
-}
+import { Exercise } from './Workout';
 
 const WorkoutProfile: React.FC = () => {
-    const [recentWorkouts, setRecentWorkouts] = useState<Workout[]>([]);
-    const [bestEfforts, setBestEfforts] = useState<{ [key: string]: number }>({});
+    const [bestWeights, setBestWeights] = useState<{ [key: string]: { weight: number, date: string } }>({});
+    const [recentWorkouts, setRecentWorkouts] = useState<{ date: string, exercises: Exercise[] }[]>([]);
 
     useEffect(() => {
-        const workoutsData = localStorage.getItem('loggedWorkouts');
-        if (workoutsData) {
-            setRecentWorkouts(JSON.parse(workoutsData).slice(-5).reverse());
+        const bestWeightsData = localStorage.getItem('loggedBestWeights');
+        if (bestWeightsData) {
+            setBestWeights(JSON.parse(bestWeightsData));
         }
 
-        const bestEffortsData = localStorage.getItem('loggedBestWeights');
-        if (bestEffortsData) {
-            setBestEfforts(JSON.parse(bestEffortsData));
+        const loggedWorkoutsData = localStorage.getItem('loggedWorkouts');
+        if (loggedWorkoutsData) {
+            const workouts = JSON.parse(loggedWorkoutsData);
+            setRecentWorkouts(workouts.slice(-5).reverse());
         }
     }, []);
 
     const formatDateTime = (dateString: string) => {
         const date = new Date(dateString);
-        const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true,
-        };
-        return date.toLocaleDateString(undefined, options);
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     };
 
     return (
         <div className="main-content">
             <SectionTitle title="Profile" />
-            <div className="card">
 
+            <div className="card">
                 <h2>Recent Workouts</h2>
-                {recentWorkouts.length > 0 ? (
-                    <ul>
-                        {recentWorkouts.map((workout, index) => (
+                <ul>
+                    {recentWorkouts.length === 0 ? (
+                        <p>No recent workouts logged yet.</p>
+                    ) : (
+                        recentWorkouts.map((workout, index) => (
                             <li key={index}>
                                 <strong>{formatDateTime(workout.date)}</strong>
-                                <li>
+                                <ul>
                                     {workout.exercises.map((exercise, idx) => (
-                                        <li key={idx}>
-                                            <strong>{exercise.name}</strong>: {exercise.sets} sets of {exercise.reps} reps
-                                        </li>
+                                        <li key={idx}>{exercise.name}: {exercise.sets} sets of {exercise.reps} reps</li>
                                     ))}
-                                </li>
+                                </ul>
                             </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>No recent workouts found.</p>
-                )}
-
+                        ))
+                    )}
+                </ul>
             </div>
+            
             <div className="card">
-
-                <h2>Best Efforts</h2>
-                {Object.keys(bestEfforts).length > 0 ? (
-                    <ul>
-                        {Object.entries(bestEfforts).map(([exercise, weight], index) => (
-                            <ul key={index} className="best-effort-item">
-                                <strong>{exercise}</strong>: {weight} lbs
-                            </ul>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>No best efforts recorded.</p>
-                )}
-
+                <h2>Best Weights</h2>
+                <ul>
+                    {Object.keys(bestWeights).length === 0 ? (
+                        <p>No best weights logged yet.</p>
+                    ) : (
+                        Object.entries(bestWeights).map(([exercise, { weight, date }]) => (
+                            <li key={exercise}>
+                                <strong>{exercise}</strong>: {weight} lbs on {formatDateTime(date)}
+                            </li>
+                        ))
+                    )}
+                </ul>
             </div>
+
         </div>
     );
 };
