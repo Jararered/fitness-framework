@@ -34,21 +34,6 @@ html,
     transition: 0.3s;
 }
 
-.main-content-overlay {
-    flex-grow: 1;
-    box-sizing: border-box;
-    position: absolute;
-    z-index: 2000;
-    pointer-events: none;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0;
-    padding: 10px;
-    transition: 0.3s;
-}
-
 .card {
     background-color: #ffffff;
     border-radius: 20px;
@@ -64,12 +49,6 @@ html,
     }
 
     .main-content {
-        margin-left: 0;
-        margin-bottom: 60px;
-        transition: 0.3s;
-    }
-    
-    .main-content-overlay {
         margin-left: 0;
         margin-bottom: 60px;
         transition: 0.3s;
