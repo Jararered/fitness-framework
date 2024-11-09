@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Navigation Menu
-import NavigationMenu from './components/navigation/SideBar';
+import SideBar from './components/navigation/SideBar';
 import DockBar from './components/navigation/DockBar';
 
 // Pages
@@ -19,8 +19,8 @@ import './App.css';
 import './components/buttons/ButtonColors.css';
 
 const App: React.FC = () => {
-    const [isNavigationBarCollapsed, setNavigationBarCollapsed] = useState(true);
-    const [currentView, setCurrentView] = useState('home');
+    const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);
+    const [content, setContent] = useState('home');
     const [gym, setGym] = useState<string | null>(null);
 
     useEffect(() => {
@@ -31,19 +31,19 @@ const App: React.FC = () => {
         }
     }, []);
 
-    const toggleNavigationBar = () => {
-        setNavigationBarCollapsed((prev) => !prev);
+    const toggleSideBar = () => {
+        setSideBarCollapsed((prev) => !prev);
     };
 
     const handleWorkoutComplete = () => {
-        setCurrentView('home');
+        setContent('home');
     };
 
     const renderContent = () => {
-        switch (currentView) {
+        switch (content) {
 
             case 'home':
-                return <WorkoutOverview gym={gym} onOpenWorkout={() => setCurrentView('workout-in-progress')} />;
+                return <WorkoutOverview gym={gym} onOpenWorkout={() => setContent('workout-in-progress')} />;
             case 'workout':
                 return <WorkoutCreator />;
             case 'gym-equipment':
@@ -57,21 +57,21 @@ const App: React.FC = () => {
                 return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
 
             default:
-                return <WorkoutOverview gym={gym} onOpenWorkout={() => setCurrentView('workout-in-progress')} />;
+                return <WorkoutOverview gym={gym} onOpenWorkout={() => setContent('workout-in-progress')} />;
         }
     };
 
     return (
         <div className="App">
 
-            <NavigationMenu
-                onNavigate={setCurrentView}
-                isCollapsed={isNavigationBarCollapsed}
-                onToggle={toggleNavigationBar}
+            <SideBar
+                onNavigate={setContent}
+                isCollapsed={isSideBarCollapsed}
+                onToggle={toggleSideBar}
             />
 
             <DockBar
-                onNavigate={setCurrentView}
+                onNavigate={setContent}
             />
 
             {renderContent()}
