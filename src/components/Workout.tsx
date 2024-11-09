@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { equipmentExercises, exerciseCategories, BodyPart } from './Equipment';
 import SectionTitle from './buttons/SectionTitle';
 
-interface Exercise {
+export interface Exercise {
     name: string;
     sets: number;
     reps: number;
 }
 
-interface SavedWorkout {
+export interface SavedWorkout {
     name: string;
     exercises: Exercise[];
 }
 
 const WorkoutCreator: React.FC = () => {
-    const [workout, setWorkout] = useState<Exercise[]>([]);
+    const [currentWorkout, setWorkout] = useState<Exercise[]>([]);
     const [newExercise, setNewExercise] = useState<Exercise>({ name: '', sets: 0, reps: 0 });
     const [savedWorkouts, setSavedWorkouts] = useState<SavedWorkout[]>([]);
     const [selectedWorkout, setSelectedWorkout] = useState<string>("");
@@ -76,9 +76,17 @@ const WorkoutCreator: React.FC = () => {
     };
 
     const saveWorkout = () => {
+        // Check if there are any exercises in the workout
+        if (currentWorkout.length === 0) {
+            alert("Please add some exercises to save a workout.");
+            return;
+        }
+
+        // Prompt user for workout name
         const workoutName = prompt("Enter a name for this workout:");
+
         if (workoutName) {
-            const newWorkout = { name: workoutName, exercises: workout };
+            const newWorkout = { name: workoutName, exercises: currentWorkout };
             setSavedWorkouts((prev) => {
                 const updatedWorkouts = prev.filter(w => w.name !== workoutName).concat(newWorkout);
                 localStorage.setItem('savedWorkouts', JSON.stringify(updatedWorkouts));
@@ -98,7 +106,7 @@ const WorkoutCreator: React.FC = () => {
         }
     };
 
-    const clearWorkout = () => {
+    const clearCurrentWorkout = () => {
         if (window.confirm("Are you sure you want to clear this workout?")) {
             setWorkout([]);
             localStorage.removeItem('currentWorkout');
@@ -140,6 +148,18 @@ const WorkoutCreator: React.FC = () => {
             localStorage.setItem('currentWorkout', JSON.stringify(updatedWorkout));
             return updatedWorkout;
         });
+    };
+
+    const deleteWorkout = () => {
+        if (window.confirm("Are you sure you want to delete this workout?")) {
+            setSavedWorkouts((prev) => {
+                const updatedWorkouts = prev.filter(w => w.name !== selectedWorkout);
+                localStorage.setItem('savedWorkouts', JSON.stringify(updatedWorkouts));
+                return updatedWorkouts;
+            });
+            setSelectedWorkout("");
+            alert("Workout deleted.");
+        }
     };
 
     return (
@@ -191,10 +211,10 @@ const WorkoutCreator: React.FC = () => {
                 <h2>Current Workout</h2>
 
                 <ul className="workout-list">
-                    {workout.length === 0 ? (
+                    {currentWorkout.length === 0 ? (
                         <p>No exercises added yet.</p>
                     ) : (
-                        workout.map((exercise, index) => (
+                        currentWorkout.map((exercise, index) => (
                             <li key={index} className="workout-item">
                                 <strong>{exercise.name}</strong>: {exercise.sets} sets of {exercise.reps} reps
                             </li>
@@ -207,7 +227,7 @@ const WorkoutCreator: React.FC = () => {
                         Save Workout
                     </button>
 
-                    <button onClick={clearWorkout} className="bad-button">
+                    <button onClick={clearCurrentWorkout} className="bad-button">
                         Clear Workout
                     </button>
                 </section>
@@ -234,6 +254,9 @@ const WorkoutCreator: React.FC = () => {
                     <button onClick={loadWorkout} className="normal-button">
                         Load Workout
                     </button>
+                    <button onClick={deleteWorkout} className="bad-button">
+                        Delete Workout
+                    </button>
                 </div>
             </div>
 
@@ -252,7 +275,7 @@ const WorkoutCreator: React.FC = () => {
                             </option>
                         ))}
                     </select>
-                    
+
                     <button onClick={generateRandomWorkout} className="normal-button">
                         Generate Random Workout
                     </button>
