@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { FaDumbbell, FaCheck } from 'react-icons/fa';
+import { FaCheck } from 'react-icons/fa';
 import SectionTitle from './buttons/SectionTitle';
+
 import './GymEquipment.css';
-
-const availableEquipment = [
-    "Dumbells", "Dumbells + Bench", "Lat Pulldown Machine", "Barbell",
-    "Barbell + Bench", "Barbell + Squat Rack", "EZ Bar", "Smith Machine",
-    "Smith Machine + Bench", "Chest Press Machine", "Leg Extension Machine",
-    "Leg Curl Machine"
-];
-
-const equipmentIcons = availableEquipment.reduce((icons, item) => {
-    icons[item] = <FaDumbbell size={48} />;
-    return icons;
-}, {} as { [key: string]: JSX.Element });
+import { equipment, equipmentIcons } from './Equipment';
 
 const Equipment: React.FC = () => {
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
@@ -72,6 +62,7 @@ const Equipment: React.FC = () => {
 
     return (
         <div className='main-content'>
+            
             <SectionTitle title="Gym Equipment" />
 
             <div className="card">
@@ -83,7 +74,7 @@ const Equipment: React.FC = () => {
                 <section>
                     <h2>Available Equipment</h2>
                     <div className="equipment-cards">
-                        {availableEquipment.map(item => (
+                        {equipment.map(item => (
                             <div
                                 key={item}
                                 className={`equipment-item ${selectedEquipment.includes(item) ? 'selected' : ''}`}
