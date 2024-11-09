@@ -13,14 +13,14 @@ const Equipment: React.FC = () => {
     const [currentGym, setCurrentGym] = useState<string | null>(null);
 
     useEffect(() => {
-        const savedLists = localStorage.getItem('gymLists');
+        const savedLists = localStorage.getItem('gymList');
         if (savedLists) {
             const parsedLists = JSON.parse(savedLists);
             parsedLists.sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
             setSavedEquipmentLists(parsedLists);
         }
 
-        const lastLoadedList = localStorage.getItem('lastLoadedGym');
+        const lastLoadedList = localStorage.getItem('lastGym');
         if (lastLoadedList) {
             loadEquipmentList(lastLoadedList);
             setSelectedList(lastLoadedList);
@@ -39,21 +39,21 @@ const Equipment: React.FC = () => {
             const newGym = { name: gymName, equipment: selectedEquipment };
             setSavedEquipmentLists(prev => {
                 const updatedLists = prev.filter(gym => gym.name !== gymName).concat(newGym);
-                localStorage.setItem('gymLists', JSON.stringify(updatedLists));
+                localStorage.setItem('gymList', JSON.stringify(updatedLists));
                 return updatedLists;
             });
-            localStorage.setItem('lastLoadedGym', gymName);
+            localStorage.setItem('lastGym', gymName);
         }
     };
 
     const loadEquipmentList = (gymName: string) => {
-        const savedLists = localStorage.getItem('gymLists');
+        const savedLists = localStorage.getItem('gymList');
         if (savedLists) {
             const gym = JSON.parse(savedLists).find((entry: { name: string }) => entry.name === gymName);
             if (gym) {
                 setCurrentGym(gym.name);
                 setSelectedEquipment(gym.equipment);
-                localStorage.setItem('lastLoadedGym', gym.name);
+                localStorage.setItem('lastGym', gym.name);
             } else {
                 alert("Please select a valid gym.");
             }
@@ -61,15 +61,15 @@ const Equipment: React.FC = () => {
     };
 
     const deleteEquipmentList = (gymName: string) => {
-        const savedLists = localStorage.getItem('gymLists');
+        const savedLists = localStorage.getItem('gymList');
         if (savedLists) {
             const parsedLists = JSON.parse(savedLists).filter((entry: { name: string }) => entry.name !== gymName);
             setSavedEquipmentLists(parsedLists);
-            localStorage.setItem('gymLists', JSON.stringify(parsedLists));
+            localStorage.setItem('gymList', JSON.stringify(parsedLists));
             if (currentGym === gymName) {
                 setCurrentGym(null);
                 setSelectedEquipment([]);
-                localStorage.removeItem('lastLoadedGym');
+                localStorage.removeItem('lastGym');
             }
         }
     };

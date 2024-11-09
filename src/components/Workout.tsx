@@ -19,11 +19,11 @@ const WorkoutCreator: React.FC = () => {
     const [selectedBodyPart, setSelectedBodyPart] = useState<BodyPart>('Legs');
 
     useEffect(() => {
-        const lastLoadedGym = localStorage.getItem('lastLoadedGym');
-        const savedLists = localStorage.getItem('gymLists');
+        const lastGym = localStorage.getItem('lastGym');
+        const gymList = localStorage.getItem('gymList');
 
-        if (lastLoadedGym && savedLists) {
-            const gym = JSON.parse(savedLists).find((entry: { name: string }) => entry.name === lastLoadedGym);
+        if (lastGym && gymList) {
+            const gym = JSON.parse(gymList).find((entry: { name: string }) => entry.name === lastGym);
             if (gym) {
                 const exercises = gym.equipment.flatMap((equipment: string) => equipmentExercises[equipment] || []);
                 setAvailableExercises(exercises);
