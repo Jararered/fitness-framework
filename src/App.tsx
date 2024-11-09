@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './styles/tailwind.css'
 
 // Navigation Menu
 import SideBar from './components/navigation/SideBar';
