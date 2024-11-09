@@ -5,10 +5,10 @@ import SideBar from './components/navigation/SideBar';
 import DockBar from './components/navigation/DockBar';
 
 // Pages
-import WorkoutOverview from './components/Home';
-import WorkoutCreator from './components/Workout';
-import Equipment from './components/GymEquipment';
-import WorkoutProfile from './components/Profile';
+import Home from './components/Home';
+import Workout from './components/Workout';
+import GymEquipment from './components/GymEquipment';
+import Profile from './components/Profile';
 import Settings from './components/Settings';
 
 // Workout In Progress
@@ -43,13 +43,13 @@ const App: React.FC = () => {
         switch (content) {
 
             case 'home':
-                return <WorkoutOverview gym={gym} onOpenWorkout={() => setContent('workout-in-progress')} />;
+                return <Home gym={gym} onOpenWorkout={() => setContent('workout-in-progress')} />;
             case 'workout':
-                return <WorkoutCreator />;
+                return <Workout />;
             case 'gym-equipment':
-                return <Equipment />;
+                return <GymEquipment />;
             case 'profile':
-                return <WorkoutProfile />;
+                return <Profile />;
             case 'settings':
                 return <Settings />;
 
@@ -57,7 +57,7 @@ const App: React.FC = () => {
                 return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
 
             default:
-                return <WorkoutOverview gym={gym} onOpenWorkout={() => setContent('workout-in-progress')} />;
+                return <Home gym={gym} onOpenWorkout={() => setContent('workout-in-progress')} />;
         }
     };
 

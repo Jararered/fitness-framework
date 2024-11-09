@@ -12,7 +12,7 @@ interface WorkoutOverviewProps {
     onOpenWorkout: () => void;
 }
 
-const WorkoutOverview: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
+const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
     const [hasCurrentWorkout, setHasCurrentWorkout] = useState(false);
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[] | null>(null);
 
@@ -52,4 +52,4 @@ const WorkoutOverview: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
     );
 };
 
-export default WorkoutOverview;
+export default Home;
