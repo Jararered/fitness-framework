@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
 import SectionTitle from './buttons/SectionTitle';
-import { equipment, equipmentIcons } from './Equipment';
+import { equipment, equipmentIcons, equipmentExercises } from './Equipment';
 
 import './GymEquipment.css';
 
@@ -49,11 +49,11 @@ const Equipment: React.FC = () => {
     const loadEquipmentList = (gymName: string) => {
         const savedLists = localStorage.getItem('gymLists');
         if (savedLists) {
-            const gymList = JSON.parse(savedLists).find((gym: { name: string }) => gym.name === gymName);
-            if (gymList) {
-                setSelectedEquipment(gymList.equipment);
-                localStorage.setItem('lastLoadedGym', gymName);
-                setCurrentGym(gymName);
+            const gym = JSON.parse(savedLists).find((entry: { name: string }) => entry.name === gymName);
+            if (gym) {
+                setCurrentGym(gym.name);
+                setSelectedEquipment(gym.equipment);
+                localStorage.setItem('lastLoadedGym', gym.name);
             } else {
                 alert("Please select a valid gym.");
             }
@@ -130,6 +130,25 @@ const Equipment: React.FC = () => {
                     Load Gym Equipment
                 </button>
 
+            </div>
+
+            <SectionTitle title="Available Exercises" />
+
+            <div className="card">
+                {selectedEquipment.length > 0 ? (
+                    selectedEquipment.map((equipment) => (
+                        <div key={equipment}>
+                            <h2>{equipment}</h2>
+                            <ul>
+                                {equipmentExercises[equipment]?.map((exercise, index) => (
+                                    <li key={index}>{exercise}</li>
+                                )) || <li>No exercises available for this equipment.</li>}
+                            </ul>
+                        </div>
+                    ))
+                ) : (
+                    <p>No equipment selected. Please select equipment to see available exercises.</p>
+                )}
             </div>
         </div>
     );
