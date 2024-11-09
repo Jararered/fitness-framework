@@ -112,13 +112,3 @@ export const exerciseCategories: Record<BodyPart, string[]> = {
         "Machine Shoulder Press",
     ],
 };
-
-// Function to get exercises by body part
-export const getExercisesByBodyPart = (bodyPart: BodyPart): string[] => {
-    return exerciseCategories[bodyPart];
-};
-
-// Function to get exercises by equipment
-export const getExercisesByEquipment = (equipmentName: string): string[] => {
-    return equipmentExercises[equipmentName] || [];
-};
