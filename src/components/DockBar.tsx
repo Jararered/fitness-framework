@@ -20,13 +20,11 @@ const DockBar: React.FC<DockBarProps> = ({ onNavigate }) => {
 
     return (
         <div className="dockbar">
-            <ul>
-                <HomeButton onClick={() => handleNavigate('todays-workout')} isCollapsed={true} />
-                <WorkoutButton onClick={() => handleNavigate('workout-builder')} isCollapsed={true} />
-                <GymButton onClick={() => handleNavigate('equipment')} isCollapsed={true} />
-                <ProfileButton onClick={() => handleNavigate('workout-profile')} isCollapsed={true} />
-                <SettingsButton onClick={() => handleNavigate('settings')} isCollapsed={true} />
-            </ul>
+            <HomeButton onClick={() => handleNavigate('home')} isCollapsed={true} />
+            <WorkoutButton onClick={() => handleNavigate('workout')} isCollapsed={true} />
+            <GymButton onClick={() => handleNavigate('gym-equipment')} isCollapsed={true} />
+            <ProfileButton onClick={() => handleNavigate('profile')} isCollapsed={true} />
+            <SettingsButton onClick={() => handleNavigate('settings')} isCollapsed={true} />
         </div>
     );
 };
