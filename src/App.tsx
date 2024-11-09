@@ -24,9 +24,8 @@ const App: React.FC = () => {
     const [gym, setGym] = useState<string | null>(null);
 
     useEffect(() => {
-        const lastLoadedGymKey = localStorage.getItem('lastLoadedGym');
-        if (lastLoadedGymKey) {
-            const gymName = lastLoadedGymKey.replace('equipment_', '');
+        const gymName = localStorage.getItem('lastLoadedGym');
+        if (gymName) {
             setGym(gymName);
         }
     }, []);
