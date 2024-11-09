@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { equipmentExersices } from './Equipment.tsx';
+import { equipmentExercises } from './Equipment.tsx';
 
 const WorkoutExercises: React.FC = () => {
     const [availableEquipment, setAvailableEquipment] = useState<string[]>([]);
@@ -22,7 +22,7 @@ const WorkoutExercises: React.FC = () => {
                     <div key={equipment}>
                         <h2>{equipment}</h2>
                         <div className="exercise-list">
-                            {equipmentExersices[equipment]?.map((exercise) => (
+                            {equipmentExercises[equipment]?.map((exercise) => (
                                 <div key={exercise}>
                                     <p>{exercise}</p>
                                 </div>
