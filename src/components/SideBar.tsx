@@ -23,33 +23,31 @@ const SideBar: React.FC<SideBarProps> = ({ onNavigate, isCollapsed, onToggle }) 
     };
 
     return (
-        <div>
-            <ul className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-                <button className="expand-button" onClick={onToggle}>
-                    {isCollapsed ? '☰' : '✕'}
-                </button>
+        <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+            <button className="expand-button" onClick={onToggle}>
+                {isCollapsed ? '☰' : '✕'}
+            </button>
 
-                <HomeButton
-                    onClick={() => handleNavigate('home')}
-                    isCollapsed={isCollapsed}
-                />
-                <WorkoutButton
-                    onClick={() => handleNavigate('workout')}
-                    isCollapsed={isCollapsed}
-                />
-                <GymButton
-                    onClick={() => handleNavigate('gym-equipment')}
-                    isCollapsed={isCollapsed}
-                />
-                <ProfileButton
-                    onClick={() => handleNavigate('profile')}
-                    isCollapsed={isCollapsed}
-                />
-                <SettingsButton
-                    onClick={() => handleNavigate('settings')}
-                    isCollapsed={isCollapsed}
-                />
-            </ul>
+            <HomeButton
+                onClick={() => handleNavigate('home')}
+                isCollapsed={isCollapsed}
+            />
+            <WorkoutButton
+                onClick={() => handleNavigate('workout')}
+                isCollapsed={isCollapsed}
+            />
+            <GymButton
+                onClick={() => handleNavigate('gym-equipment')}
+                isCollapsed={isCollapsed}
+            />
+            <ProfileButton
+                onClick={() => handleNavigate('profile')}
+                isCollapsed={isCollapsed}
+            />
+            <SettingsButton
+                onClick={() => handleNavigate('settings')}
+                isCollapsed={isCollapsed}
+            />
         </div>
     );
 };

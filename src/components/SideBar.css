@@ -1,8 +1,7 @@
 .sidebar {
     width: 250px;
-    height: 100vh;
+    height: 100%; /* 100% Full-height */
     padding: 10px 10px;
-    margin: 0px;
 
     background-color: #f8f8f8;
     color: #333;
@@ -15,8 +14,13 @@
 }
 
 @media (max-width: 768px) {
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+        transition: 0.3s;
+    }
     .sidebar {
-        display: none;
+        transform: translateX(-100%);
+        transition: 0.3s;
     }
 }
 
@@ -38,7 +42,6 @@
 .sidebar.collapsed .button svg {
     margin-right: 0px;
 }
-
 
 .sidebar.collapsed .button {
     width: 60px;
