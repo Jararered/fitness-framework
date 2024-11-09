@@ -144,9 +144,12 @@ const WorkoutCreator: React.FC = () => {
 
     return (
         <div className='main-content'>
+
             <SectionTitle title="Workout" />
+            
             <div className="card">
                 <h2>Add Exercise to Workout</h2>
+
                 <section className="input-row">
                     <select
                         value={newExercise.name}
@@ -161,6 +164,7 @@ const WorkoutCreator: React.FC = () => {
                         ))}
                     </select>
                 </section>
+
                 <section className="input-row">
                     <input
                         type="number"
@@ -179,10 +183,13 @@ const WorkoutCreator: React.FC = () => {
                         className="input-field"
                     />
                 </section>
+
                 <button onClick={addExerciseToWorkout} className="normal-button">
                     Add Exercise
                 </button>
+
                 <h2>Current Workout</h2>
+
                 <ul className="workout-list">
                     {workout.length === 0 ? (
                         <p>No exercises added yet.</p>
@@ -194,17 +201,22 @@ const WorkoutCreator: React.FC = () => {
                         ))
                     )}
                 </ul>
+
                 <section>
                     <button onClick={saveWorkout} className="normal-button">
                         Save Workout
                     </button>
+
                     <button onClick={clearWorkout} className="bad-button">
                         Clear Workout
                     </button>
                 </section>
+
             </div>
+
             <div className="card">
                 <h2>Load a Saved Workout</h2>
+
                 <div className="input-row">
                     <select
                         onChange={(e) => setSelectedWorkout(e.target.value)}
@@ -218,13 +230,16 @@ const WorkoutCreator: React.FC = () => {
                             </option>
                         ))}
                     </select>
+
                     <button onClick={loadWorkout} className="normal-button">
                         Load Workout
                     </button>
                 </div>
             </div>
+
             <div className="card">
                 <h2>Random Workout</h2>
+
                 <div className="input-row">
                     <select
                         value={selectedBodyPart}
@@ -237,6 +252,7 @@ const WorkoutCreator: React.FC = () => {
                             </option>
                         ))}
                     </select>
+                    
                     <button onClick={generateRandomWorkout} className="normal-button">
                         Generate Random Workout
                     </button>
