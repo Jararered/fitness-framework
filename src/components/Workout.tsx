@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
+import { equipmentExercises, exerciseCategories, BodyPart } from './Equipment';
+
 import SectionTitle from './buttons/SectionTitle';
-import { equipmentExercises, BodyPart, exerciseCategories } from './Equipment';
 
 interface Exercise {
     name: string;
@@ -19,16 +20,21 @@ const WorkoutCreator: React.FC = () => {
 
     useEffect(() => {
         const lastLoadedGym = localStorage.getItem('lastLoadedGym');
-        if (lastLoadedGym) {
-            const selectedEquipment = JSON.parse(localStorage.getItem(lastLoadedGym) || '[]');
-            const exercises = selectedEquipment
-                .flatMap((equipment: string) => equipmentExercises[equipment] || [])
-            setAvailableExercises(exercises);
+        const savedLists = localStorage.getItem('gymLists');
+
+        if (lastLoadedGym && savedLists) {
+            const gym = JSON.parse(savedLists).find((entry: { name: string }) => entry.name === lastLoadedGym);
+            if (gym) {
+                const exercises = gym.equipment.flatMap((equipment: string) => equipmentExercises[equipment] || []);
+                setAvailableExercises(exercises);
+            }
         }
+
         const workouts = Object.keys(localStorage).filter(key => key.startsWith('workout_'));
         setSavedWorkouts(workouts);
 
         const currentWorkout = localStorage.getItem('currentWorkout');
+
         if (currentWorkout) {
             setWorkout(JSON.parse(currentWorkout));
         }
@@ -140,9 +146,13 @@ const WorkoutCreator: React.FC = () => {
 
     return (
         <div className='main-content'>
+
             <SectionTitle title="Workout" />
+
             <div className="card">
+                
                 <h2>Add Exercise to Workout</h2>
+
                 <section className="input-row">
                     <select
                         value={newExercise.name}
