@@ -26,7 +26,7 @@ const WorkoutOverview: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
 
     return (
         <div className='main-content'>
-            <SectionTitle title="Workout Overview" />
+            <SectionTitle title="Home" />
             <div className="card">
                 {hasCurrentWorkout && currentWorkout ? (
                     <div>
