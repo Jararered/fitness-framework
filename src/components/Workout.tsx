@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
 import { equipmentExercises, exerciseCategories, BodyPart } from './Equipment';
-
 import SectionTitle from './buttons/SectionTitle';
 
 interface Exercise {
@@ -10,10 +8,15 @@ interface Exercise {
     reps: number;
 }
 
+interface SavedWorkout {
+    name: string;
+    exercises: Exercise[];
+}
+
 const WorkoutCreator: React.FC = () => {
     const [workout, setWorkout] = useState<Exercise[]>([]);
     const [newExercise, setNewExercise] = useState<Exercise>({ name: '', sets: 0, reps: 0 });
-    const [savedWorkouts, setSavedWorkouts] = useState<string[]>([]);
+    const [savedWorkouts, setSavedWorkouts] = useState<SavedWorkout[]>([]);
     const [selectedWorkout, setSelectedWorkout] = useState<string>("");
     const [availableExercises, setAvailableExercises] = useState<string[]>([]);
     const [selectedBodyPart, setSelectedBodyPart] = useState<BodyPart>('Legs');
@@ -30,11 +33,12 @@ const WorkoutCreator: React.FC = () => {
             }
         }
 
-        const workouts = Object.keys(localStorage).filter(key => key.startsWith('workout_'));
-        setSavedWorkouts(workouts);
+        const savedWorkoutsData = localStorage.getItem('savedWorkouts');
+        if (savedWorkoutsData) {
+            setSavedWorkouts(JSON.parse(savedWorkoutsData));
+        }
 
         const currentWorkout = localStorage.getItem('currentWorkout');
-
         if (currentWorkout) {
             setWorkout(JSON.parse(currentWorkout));
         }
@@ -57,19 +61,13 @@ const WorkoutCreator: React.FC = () => {
     };
 
     const addExerciseToWorkout = () => {
-        // Validate input
-        if (!newExercise.name) {
-            alert("Please select an exercise.");
-            return;
-        }
-        if (newExercise.sets < 1 || newExercise.reps < 1) {
-            alert("Sets and reps must be 1 or greater.");
+        if (!newExercise.name || newExercise.sets < 1 || newExercise.reps < 1) {
+            alert("Please provide valid exercise details.");
             return;
         }
 
         setWorkout((prevWorkout) => {
             const updatedWorkout = [...prevWorkout, newExercise];
-            console.log('Updated Workout:', updatedWorkout); // Debugging log
             localStorage.setItem('currentWorkout', JSON.stringify(updatedWorkout));
             return updatedWorkout;
         });
@@ -80,20 +78,21 @@ const WorkoutCreator: React.FC = () => {
     const saveWorkout = () => {
         const workoutName = prompt("Enter a name for this workout:");
         if (workoutName) {
-            const storageKey = `workout_${workoutName}`;
-            localStorage.setItem(storageKey, JSON.stringify(workout));
+            const newWorkout = { name: workoutName, exercises: workout };
+            setSavedWorkouts((prev) => {
+                const updatedWorkouts = prev.filter(w => w.name !== workoutName).concat(newWorkout);
+                localStorage.setItem('savedWorkouts', JSON.stringify(updatedWorkouts));
+                return updatedWorkouts;
+            });
             alert(`Workout "${workoutName}" saved!`);
-            setSavedWorkouts((prev) => [...prev, storageKey]);
         }
     };
 
     const loadWorkout = () => {
-        const storageKey = `workout_${selectedWorkout}`;
-        const savedWorkout = localStorage.getItem(storageKey);
-        if (savedWorkout) {
-            const workout = JSON.parse(savedWorkout);
-            setWorkout(workout);
-            localStorage.setItem('currentWorkout', JSON.stringify(workout));
+        const workout = savedWorkouts.find(w => w.name === selectedWorkout);
+        if (workout) {
+            setWorkout(workout.exercises);
+            localStorage.setItem('currentWorkout', JSON.stringify(workout.exercises));
         } else {
             alert("Please select a valid workout.");
         }
@@ -126,8 +125,8 @@ const WorkoutCreator: React.FC = () => {
 
         for (let i = 0; i < numberOfExercises; i++) {
             const randomExercise = bodyPartExercises[Math.floor(Math.random() * bodyPartExercises.length)];
-            const randomSets = Math.floor(Math.random() * 3) + 3; // 3 to 5 sets
-            const randomReps = (Math.floor(Math.random() * 4) + 1) * 5; // 5, 10, 15, or 20 reps
+            const randomSets = Math.floor(Math.random() * 3) + 3;
+            const randomReps = (Math.floor(Math.random() * 4) + 1) * 5;
 
             randomExercises.push({
                 name: randomExercise,
@@ -138,7 +137,6 @@ const WorkoutCreator: React.FC = () => {
 
         setWorkout((prevWorkout) => {
             const updatedWorkout = [...prevWorkout, ...randomExercises];
-            console.log('Generated Random Workout:', updatedWorkout); // Debugging log
             localStorage.setItem('currentWorkout', JSON.stringify(updatedWorkout));
             return updatedWorkout;
         });
@@ -146,13 +144,9 @@ const WorkoutCreator: React.FC = () => {
 
     return (
         <div className='main-content'>
-
             <SectionTitle title="Workout" />
-
             <div className="card">
-                
                 <h2>Add Exercise to Workout</h2>
-
                 <section className="input-row">
                     <select
                         value={newExercise.name}
@@ -167,7 +161,6 @@ const WorkoutCreator: React.FC = () => {
                         ))}
                     </select>
                 </section>
-
                 <section className="input-row">
                     <input
                         type="number"
@@ -186,11 +179,9 @@ const WorkoutCreator: React.FC = () => {
                         className="input-field"
                     />
                 </section>
-
                 <button onClick={addExerciseToWorkout} className="normal-button">
                     Add Exercise
                 </button>
-
                 <h2>Current Workout</h2>
                 <ul className="workout-list">
                     {workout.length === 0 ? (
@@ -203,7 +194,6 @@ const WorkoutCreator: React.FC = () => {
                         ))
                     )}
                 </ul>
-
                 <section>
                     <button onClick={saveWorkout} className="normal-button">
                         Save Workout
@@ -213,7 +203,6 @@ const WorkoutCreator: React.FC = () => {
                     </button>
                 </section>
             </div>
-
             <div className="card">
                 <h2>Load a Saved Workout</h2>
                 <div className="input-row">
@@ -223,21 +212,17 @@ const WorkoutCreator: React.FC = () => {
                         className="input-field"
                     >
                         <option value="">Select a workout</option>
-                        {savedWorkouts.map((workoutKey) => {
-                            const workoutName = workoutKey.replace('workout_', '');
-                            return (
-                                <option key={workoutKey} value={workoutName}>
-                                    {workoutName}
-                                </option>
-                            );
-                        })}
+                        {savedWorkouts.map((workout) => (
+                            <option key={workout.name} value={workout.name}>
+                                {workout.name}
+                            </option>
+                        ))}
                     </select>
                     <button onClick={loadWorkout} className="normal-button">
                         Load Workout
                     </button>
                 </div>
             </div>
-
             <div className="card">
                 <h2>Workout Generator</h2>
                 <div className="input-row">
