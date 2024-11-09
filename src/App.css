@@ -31,6 +31,7 @@ html,
     padding: 10px;
     box-sizing: border-box;
     position: relative;
+    transition: 0.3s;
 }
 
 .main-content-overlay {
@@ -45,6 +46,7 @@ html,
     bottom: 0;
     margin: 0;
     padding: 10px;
+    transition: 0.3s;
 }
 
 .card {
@@ -64,10 +66,12 @@ html,
     .main-content {
         margin-left: 0;
         margin-bottom: 60px;
+        transition: 0.3s;
     }
-
+    
     .main-content-overlay {
         margin-left: 0;
         margin-bottom: 60px;
+        transition: 0.3s;
     }
 }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 // Navigation Menu
-import NavigationMenu from './components/NavigationMenu';
+import NavigationMenu from './components/SideBar';
+import DockBar from './components/DockBar';
 
-// Pages / Views / pages
+// Pages
 import WorkoutOverview from './components/Home';
 import WorkoutBuilder from './components/Workout';
 import Equipment from './components/GymEquipment';
@@ -19,7 +20,7 @@ import './components/buttons/ButtonColors.css';
 
 const App: React.FC = () => {
     const [isNavigationBarCollapsed, setNavigationBarCollapsed] = useState(true);
-    const [currentView, setCurrentView] = useState('workout-overview');
+    const [currentView, setCurrentView] = useState('home');
     const [gym, setGym] = useState<string | null>(null);
 
     useEffect(() => {
@@ -35,23 +36,26 @@ const App: React.FC = () => {
     };
 
     const handleWorkoutComplete = () => {
-        setCurrentView('workout-overview');
+        setCurrentView('home');
     };
 
     const renderContent = () => {
         switch (currentView) {
-            case 'workout-overview':
+
+            case 'home':
                 return <WorkoutOverview gym={gym} onOpenWorkout={() => setCurrentView('workout-in-progress')} />;
-            case 'workout-builder':
+            case 'workout':
                 return <WorkoutBuilder />;
-            case 'equipment':
+            case 'gym-equipment':
                 return <Equipment />;
+            case 'profile':
+                return <WorkoutProfile />;
             case 'settings':
                 return <Settings />;
+
             case 'workout-in-progress':
                 return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
-            case 'workout-profile':
-                return <WorkoutProfile />;
+
             default:
                 return <WorkoutOverview gym={gym} onOpenWorkout={() => setCurrentView('workout-in-progress')} />;
         }
@@ -59,11 +63,17 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
+
             <NavigationMenu
                 onNavigate={setCurrentView}
                 isCollapsed={isNavigationBarCollapsed}
                 onToggle={toggleNavigationBar}
             />
+
+            <DockBar
+                onNavigate={setCurrentView}
+            />
+
             {renderContent()}
         </div>
     );
