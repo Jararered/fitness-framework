@@ -14,23 +14,19 @@ export interface SavedWorkout {
 }
 
 const WorkoutCreator: React.FC = () => {
-    const [currentWorkout, setWorkout] = useState<Exercise[]>([]);
+    const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);
     const [newExercise, setNewExercise] = useState<Exercise>({ name: '', sets: 0, reps: 0 });
     const [savedWorkouts, setSavedWorkouts] = useState<SavedWorkout[]>([]);
     const [selectedWorkout, setSelectedWorkout] = useState<string>("");
     const [availableExercises, setAvailableExercises] = useState<string[]>([]);
-    const [selectedBodyPart, setSelectedBodyPart] = useState<BodyPart>('Legs');
+    const [selectedBodyPart, setSelectedBodyPart] = useState<BodyPart>('Chest');
 
     useEffect(() => {
-        const lastGym = localStorage.getItem('lastGym');
-        const savedGyms = localStorage.getItem('savedGyms');
-
-        if (lastGym && savedGyms) {
-            const gym = JSON.parse(savedGyms).find((entry: { name: string }) => entry.name === lastGym);
-            if (gym) {
-                const exercises = gym.equipment.flatMap((equipment: string) => equipmentExercises[equipment] || []);
-                setAvailableExercises(exercises);
-            }
+        const selectedEquipment = localStorage.getItem('selectedEquipment');
+        if (selectedEquipment) {
+            const equipment = JSON.parse(selectedEquipment);
+            const exercises = equipment.flatMap((item: string) => equipmentExercises[item] || []);
+            setAvailableExercises(exercises);
         }
 
         const savedWorkoutsData = localStorage.getItem('savedWorkouts');
@@ -40,7 +36,7 @@ const WorkoutCreator: React.FC = () => {
 
         const currentWorkout = localStorage.getItem('currentWorkout');
         if (currentWorkout) {
-            setWorkout(JSON.parse(currentWorkout));
+            setCurrentWorkout(JSON.parse(currentWorkout));
         }
     }, []);
 
@@ -66,7 +62,7 @@ const WorkoutCreator: React.FC = () => {
             return;
         }
 
-        setWorkout((prevWorkout) => {
+        setCurrentWorkout((prevWorkout) => {
             const updatedWorkout = [...prevWorkout, newExercise];
             localStorage.setItem('currentWorkout', JSON.stringify(updatedWorkout));
             return updatedWorkout;
@@ -92,14 +88,13 @@ const WorkoutCreator: React.FC = () => {
                 localStorage.setItem('savedWorkouts', JSON.stringify(updatedWorkouts));
                 return updatedWorkouts;
             });
-            alert(`Workout "${workoutName}" saved!`);
         }
     };
 
     const loadWorkout = () => {
         const workout = savedWorkouts.find(w => w.name === selectedWorkout);
         if (workout) {
-            setWorkout(workout.exercises);
+            setCurrentWorkout(workout.exercises);
             localStorage.setItem('currentWorkout', JSON.stringify(workout.exercises));
         } else {
             alert("Please select a valid workout.");
@@ -108,7 +103,7 @@ const WorkoutCreator: React.FC = () => {
 
     const clearCurrentWorkout = () => {
         if (window.confirm("Are you sure you want to clear this workout?")) {
-            setWorkout([]);
+            setCurrentWorkout([]);
             localStorage.removeItem('currentWorkout');
         }
     };
@@ -143,7 +138,7 @@ const WorkoutCreator: React.FC = () => {
             });
         }
 
-        setWorkout((prevWorkout) => {
+        setCurrentWorkout((prevWorkout) => {
             const updatedWorkout = [...prevWorkout, ...randomExercises];
             localStorage.setItem('currentWorkout', JSON.stringify(updatedWorkout));
             return updatedWorkout;
