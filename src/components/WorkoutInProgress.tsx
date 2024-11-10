@@ -3,14 +3,11 @@ import React, { useState, useEffect } from 'react';
 // Import Components
 import SectionTitle from './buttons/SectionTitle';
 
+// Import Interfaces
+import { Exercise } from './Exercise';
+
 // Import Styles
 import './WorkoutInProgress.css';
-
-interface Exercise {
-    name: string;
-    sets: number;
-    reps: number;
-}
 
 interface WorkoutInProgressProps {
     onCompleteWorkout: () => void; // Callback to change the view in App.tsx
