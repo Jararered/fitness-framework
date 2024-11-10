@@ -17,6 +17,7 @@ const Equipment: React.FC = () => {
     const [currentGym, setCurrentGym] = useState<string | null>(null);
 
     useEffect(() => {
+        // Load saved gyms from local storage
         const savedLists = localStorage.getItem('savedGyms');
         if (savedLists) {
             const parsedLists = JSON.parse(savedLists);
@@ -24,25 +25,29 @@ const Equipment: React.FC = () => {
             setSavedEquipmentLists(parsedLists);
         }
 
-        // Load saved equipment if no gym is selected
-        const savedEquipment = localStorage.getItem('selectedEquipment');
-        if (savedEquipment) {
-            setSelectedEquipment(JSON.parse(savedEquipment));
+        // Load selected equipment from local storage
+        const selectedEquipment = localStorage.getItem('selectedEquipment');
+        if (selectedEquipment) {
+            setSelectedEquipment(JSON.parse(selectedEquipment));
         }
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem('selectedEquipment', JSON.stringify(selectedEquipment));
-    }, [selectedEquipment]);
-
     // This function toggles the selected equipment in the list
     const toggleEquipment = (item: string) => {
-        setSelectedEquipment(prev =>
-            prev.includes(item) ? prev.filter(e => e !== item) : [...prev, item]
-        );
+        setSelectedEquipment(prev => {
+            const updatedEquipment = prev.includes(item) ? prev.filter(e => e !== item) : [...prev, item];
+            localStorage.setItem('selectedEquipment', JSON.stringify(updatedEquipment));
+            return updatedEquipment;
+        });
     };
 
     const saveEquipmentList = () => {
+        // Check if selected equipment is empty
+        if (selectedEquipment.length === 0) {
+            alert("Please select equipment before saving.");
+            return;
+        }
+
         const gymName = prompt("Enter a name for this gym:");
         if (gymName) {
             const newGym = { name: gymName, equipment: selectedEquipment };
@@ -62,6 +67,7 @@ const Equipment: React.FC = () => {
             if (gym) {
                 setCurrentGym(gym.name);
                 setSelectedEquipment(gym.equipment);
+                localStorage.setItem('selectedEquipment', JSON.stringify(gym.equipment));
             } else {
                 alert("Please select a valid gym.");
             }
@@ -82,7 +88,13 @@ const Equipment: React.FC = () => {
 
     const clearEquipmentList = () => {
         if (window.confirm("Are you sure you want to clear the equipment selection?")) {
+            // Clear selected equipment
             setSelectedEquipment([]);
+
+            // Clear selected equipment from local storage
+            localStorage.removeItem('selectedEquipment');
+
+            // Clear saved gyms
             setCurrentGym(null);
         }
     };
