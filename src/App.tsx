@@ -17,6 +17,7 @@ import WorkoutInProgress from './components/WorkoutInProgress';
 
 // Styles
 import './App.css';
+import './styles/BaseStyles.css'
 
 import './components/buttons/ButtonColors.css';
 import './components/shared/Card.css';
