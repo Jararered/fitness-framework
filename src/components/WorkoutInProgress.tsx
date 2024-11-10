@@ -20,13 +20,18 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     const [currentSetIndex, setCurrentSetIndex] = useState(0);
     const [weights, setWeights] = useState<number[]>([]);
     const [bestEfforts, setBestEfforts] = useState<{ [key: string]: number }>({});
+    const [startTime, setStartTime] = useState<string>('');
 
     useEffect(() => {
+        // Load the current workout and best efforts from local storage
         const workoutData = localStorage.getItem('currentWorkout');
         if (workoutData) {
             setCurrentWorkout(JSON.parse(workoutData));
+            // Set the start time when workout is loaded
+            setStartTime(new Date().toISOString());
         }
 
+        // Load the best efforts from local storage
         const bestEffortsData = localStorage.getItem('loggedBestWeights');
         if (bestEffortsData) {
             setBestEfforts(JSON.parse(bestEffortsData));
@@ -107,8 +112,9 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             // Save the workout to the log
             const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
             const workoutEntry = {
-                date: new Date().toISOString(),
-                exercises: currentWorkout,
+                startTime: startTime,
+                endTime: new Date().toISOString(),
+                exercises: currentWorkout
             };
             loggedWorkouts.push(workoutEntry);
             localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
