@@ -4,39 +4,53 @@ import '../styles/Input.css';
 import './Preferences.css';
 import './shared/HorizontalSection.css'
 
+interface PreferencesInterface {
+    // Weight unit can be either 'lb' or 'kg'
+    units: string;
+
+    // Rest times in seconds
+    shortRest: number;
+    normalRest: number;
+    longRest: number;
+}
 
 const Preferences: React.FC = () => {
-    const [preferences, setPreferences] = useState({
-        weightUnit: 'lb',
+    // Load preferences from local storage or use default values
+    const [preferences, setPreferences] = useState<PreferencesInterface>({
+        units: 'lb',
         shortRest: 30,
         normalRest: 60,
         longRest: 90,
     });
 
     useEffect(() => {
-        const savedPreferences = localStorage.getItem('preferences');
-        if (savedPreferences) {
-            setPreferences(JSON.parse(savedPreferences));
+        // Load preferences from local storage
+        const preferences = localStorage.getItem('preferences');
+        if (preferences) {
+            setPreferences(JSON.parse(preferences));
         }
     }, []);
 
-    const handleWeightUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newWeightUnit = e.target.value;
-        setPreferences((prev) => ({ ...prev, weightUnit: newWeightUnit }));
-        savePreferences({ weightUnit: newWeightUnit });
-    };
-
-    const handleRestChange = (e: React.ChangeEvent<HTMLInputElement>, restType: string) => {
-        const newRestValue = Number(e.target.value);
-        setPreferences((prev) => ({ ...prev, [`${restType}Rest`]: newRestValue }));
-        savePreferences({ [`${restType}Rest`]: newRestValue });
-    };
-
-    const savePreferences = (newPreferences: Partial<{ weightUnit: string; shortRest: number; normalRest: number; longRest: number }>) => {
-        const updatedPreferences = { ...preferences, ...newPreferences };
+    // Save preferences to local storage
+    const savePreference = <T,>(key: keyof PreferencesInterface, value: T) => {
+        setPreferences((prev) => ({ ...prev, [key]: value }));
+        const updatedPreferences = { ...preferences, [key]: value };
         localStorage.setItem('preferences', JSON.stringify(updatedPreferences));
     };
 
+    // Handle changes in the weight unit
+    const handleWeightUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newWeightUnit = e.target.value;
+        savePreference('units', newWeightUnit);
+    };
+
+    // Handle changes in the rest times
+    const handleRestChange = (e: React.ChangeEvent<HTMLInputElement>, restType: string) => {
+        const newRestValue = Number(e.target.value);
+        savePreference(`${restType}Rest` as keyof typeof preferences, newRestValue);
+    };
+
+    // Handle clearing all data
     const handleClearData = () => {
         const firstConfirmation = window.confirm("Are you sure you want to clear all saved data?");
         if (firstConfirmation) {
@@ -59,7 +73,7 @@ const Preferences: React.FC = () => {
                         <label htmlFor="weight-unit">Preferred Weight Unit:</label>
                         <select
                             id="weight-unit"
-                            value={preferences.weightUnit}
+                            value={preferences.units}
                             onChange={handleWeightUnitChange}
                             className="input-field"
                         >
