@@ -8,7 +8,7 @@ import { Exercise } from './Exercise';
 
 const WorkoutProfile: React.FC = () => {
     const [bestWeights, setBestWeights] = useState<{ [key: string]: { weight: number, date: string } }>({});
-    const [lastFiveWorkouts, setLastFiveWorkouts] = useState<{ startTime: string, endTime: string, exercises: Exercise[] }[]>([]);
+    const [recentWorkouts, setRecentWorkouts] = useState<{ startTime: string, endTime: string, exercises: Exercise[] }[]>([]);
     const [units, setUnits] = useState<'lbs' | 'kg'>('lbs');
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const WorkoutProfile: React.FC = () => {
         if (loggedWorkouts) {
             const workouts = JSON.parse(loggedWorkouts);
             // Show the last 5 workouts
-            setLastFiveWorkouts(workouts.slice(-5).reverse());
+            setRecentWorkouts(workouts.slice(-5).reverse());
         }
     }, []);
 
@@ -46,10 +46,10 @@ const WorkoutProfile: React.FC = () => {
             <div className="card">
                 <h2>Recent Workouts</h2>
                 <ul>
-                    {lastFiveWorkouts.length === 0 ? (
+                    {recentWorkouts.length === 0 ? (
                         <p>No recent workouts logged yet.</p>
                     ) : (
-                        lastFiveWorkouts.map((workout, index) => (
+                        recentWorkouts.map((workout, index) => (
                             <li key={index}>
                                 <strong>Completed On: {formatDateTime(workout.endTime)}</strong>
                                 <ul>
