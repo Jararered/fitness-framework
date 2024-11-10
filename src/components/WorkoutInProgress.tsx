@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Import Components
-import SectionTitle from './buttons/SectionTitle';
+import SectionTitle from './shared/SectionTitle';
 
 // Import Interfaces
 import { Exercise } from './Exercise';

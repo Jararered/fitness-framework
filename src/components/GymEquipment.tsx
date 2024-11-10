@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
 // Import Components
-import SectionTitle from './buttons/SectionTitle';
+import SectionTitle from './shared/SectionTitle';
 
 // Import Interfaces
 import { equipment, equipmentIcons, equipmentExercises } from './Equipment';
