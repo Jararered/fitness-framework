@@ -100,7 +100,7 @@ const Equipment: React.FC = () => {
 
                 <section>
                     <h2>Available Equipment</h2>
-                    <div className="equipment-cards">
+                    <div className="flexible-container">
                         {equipment.map(equipment => (
                             <div
                                 key={equipment}

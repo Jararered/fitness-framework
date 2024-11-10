@@ -1,11 +1,3 @@
-/* Styles for the container holding the equipment cards */
-.equipment-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
 /* Styles for individual equipment items */
 .equipment-item {
     display: flex;
