@@ -158,7 +158,7 @@ const WorkoutCreator: React.FC = () => {
     return (
         <div className='main-content'>
 
-            <SectionTitle title="Workout" />
+            <SectionTitle title="Workout Creator" />
             
             <div className="card">
                 <h2>Add Exercise to Workout</h2>

@@ -7,7 +7,7 @@ import DockBar from './components/navigation/DockBar';
 
 // Pages
 import Home from './components/Home';
-import Workout from './components/Workout';
+import Workout from './components/WorkoutCreator';
 import GymEquipment from './components/GymEquipment';
 import Profile from './components/Profile';
 import Preferences from './components/Preferences';
@@ -41,7 +41,7 @@ const App: React.FC = () => {
 
             case 'home':
                 return <Home onOpenWorkout={() => setContent('workout-in-progress')} />;
-            case 'workout':
+            case 'workout-creator':
                 return <Workout />;
             case 'gym-equipment':
                 return <GymEquipment />;
