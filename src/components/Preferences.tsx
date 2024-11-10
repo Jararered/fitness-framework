@@ -5,6 +5,10 @@ import './Preferences.css';
 import './shared/HorizontalSection.css'
 
 interface PreferencesInterface {
+    // User
+    user: string;
+    weight: number;
+
     // Weight unit can be either 'lb' or 'kg'
     units: string;
 
@@ -17,6 +21,8 @@ interface PreferencesInterface {
 const Preferences: React.FC = () => {
     // Load preferences from local storage or use default values
     const [preferences, setPreferences] = useState<PreferencesInterface>({
+        user: 'User',
+        weight: 0,
         units: 'lb',
         shortRest: 30,
         normalRest: 60,
@@ -68,7 +74,29 @@ const Preferences: React.FC = () => {
 
             <div className="vertical-section">
                 <div className="card">
-                    <h2>Workout Preferences</h2>
+
+                    <h2>User Preferences</h2>
+
+                    <div>
+                        <label htmlFor="user-name">User Name:</label>
+                        <input
+                            type="text"
+                            id="user-name"
+                            value={preferences.user}
+                            onChange={(e) => savePreference('user', e.target.value)}
+                            className="input-field"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="user-weight">User Weight:</label>
+                        <input
+                            type="number"
+                            id="user-weight"
+                            value={preferences.weight}
+                            onChange={(e) => savePreference('weight', Number(e.target.value))}
+                            className="input-field"
+                        />  
+                    </div>
                     <div>
                         <label htmlFor="weight-unit">Preferred Weight Unit:</label>
                         <select
