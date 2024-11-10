@@ -13,7 +13,7 @@ const WorkoutProfile: React.FC = () => {
 
     useEffect(() => {
         // Load the best weights and recent workouts from local storage
-        const bestWeightsData = localStorage.getItem('loggedBestWeights');
+        const bestWeightsData = localStorage.getItem('loggedMaxWeights');
         if (bestWeightsData) {
             setBestWeights(JSON.parse(bestWeightsData));
         }
