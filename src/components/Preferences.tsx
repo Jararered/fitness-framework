@@ -95,7 +95,7 @@ const Preferences: React.FC = () => {
                             value={preferences.weight}
                             onChange={(e) => savePreference('weight', Number(e.target.value))}
                             className="input-field"
-                        />  
+                        />
                     </div>
                     <div>
                         <label htmlFor="weight-unit">Preferred Units:</label>
@@ -153,11 +153,37 @@ const Preferences: React.FC = () => {
                     <div className="container-section-title">
                         <h2>Manage Data</h2>
                     </div>
+
+                    <div className="preferences-buttons">
+                        <button
+                            onClick={() => {
+                                savePreference('user', 'User');
+                                savePreference('weight', 0);
+                                savePreference('units', 'lb');
+                            }}
+                            className="bad-button">
+                            Reset User Preferences
+                        </button>
+                    </div>
+
+                    <div className="preferences-buttons">
+                        <button
+                            onClick={() => {
+                                savePreference('shortRest', 30);
+                                savePreference('normalRest', 60);
+                                savePreference('longRest', 90);
+                            }}
+                            className="bad-button">
+                            Reset Timing Preferences
+                        </button>
+                    </div>
+
                     <div className="preferences-buttons">
                         <button onClick={handleClearData} className="bad-button">
                             Clear All Data
                         </button>
                     </div>
+
                 </div>
             </div>
 
