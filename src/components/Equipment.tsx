@@ -1,5 +1,6 @@
 import { FaDumbbell } from 'react-icons/fa';
 
+// Equipment list
 export const equipment = [
     "Barbell + Bench",
     "Barbell + Squat Rack",
@@ -14,6 +15,7 @@ export const equipment = [
     "Smith Machine + Bench",
 ];
 
+// Equipment icons lsit (key is equipment name, value is icon)
 export const equipmentIcons: { [key: string]: JSX.Element } = {
     "Barbell + Bench": <FaDumbbell size={48} />,
     "Barbell + Squat Rack": <FaDumbbell size={48} />,
@@ -29,6 +31,7 @@ export const equipmentIcons: { [key: string]: JSX.Element } = {
     "Smith Machine": <FaDumbbell size={48} />,
 };
 
+// Equipment exercises list (key is equipment name, value is list of exercises)
 export const equipmentExercises: { [key: string]: string[] } = {
     "Barbell + Bench": ["Barbell Bench Press", "Barbell Incline Bench Press", "Barbell Decline Bench Press"],
     "Barbell + Squat Rack": ["Barbell Squat", "Barbell Overhead Press", "Barbell Front Squat", "Barbell Romanian Deadlift", "Barbell Lunge"],
@@ -44,8 +47,10 @@ export const equipmentExercises: { [key: string]: string[] } = {
     "Smith Machine": ["Smith Machine Squat", "Smith Machine Shoulder Press", "Smith Machine Deadlift", "Smith Machine Lunges", "Smith Machine Bent-Over Row", "Smith Machine Front Squat", "Smith Machine Overhead Press", "Smith Machine Shrugs", "Smith Machine Reverse Lunge"],
 };
 
+// Body parts list 
 export type BodyPart = 'Legs' | 'Biceps' | 'Triceps' | 'Chest' | 'Back' | 'Shoulders';
 
+// Exercise categories list (key is body part, value is list of exercises)
 export const exerciseCategories: Record<BodyPart, string[]> = {
     Legs: [
         "Barbell Squat",
