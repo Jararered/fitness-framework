@@ -13,22 +13,27 @@ interface WorkoutOverviewProps {
 }
 
 const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
-    const [hasCurrentWorkout, setHasCurrentWorkout] = useState(false);
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[] | null>(null);
+    const [userName, setUserName] = useState<string>('');
 
     useEffect(() => {
+        const preferences = localStorage.getItem('preferences');
+        if (preferences) {
+            const { user } = JSON.parse(preferences);
+            setUserName(user || '');
+        }
+
         const workoutData = localStorage.getItem('currentWorkout');
         if (workoutData) {
             setCurrentWorkout(JSON.parse(workoutData));
-            setHasCurrentWorkout(true);
         }
     }, []);
 
     return (
         <div className='main-content'>
-            <SectionTitle title="Home" />
+            <SectionTitle title={userName ? `Welcome, ${userName}` : 'Home'} />
             <div className="card">
-                {hasCurrentWorkout && currentWorkout ? (
+                {currentWorkout ? (
                     <div>
                         <h2>Current Workout</h2>
 
