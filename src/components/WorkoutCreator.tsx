@@ -184,6 +184,7 @@ const WorkoutCreator: React.FC = () => {
                         placeholder="Sets"
                         value={newExercise.sets || ""}
                         onChange={handleInputChange}
+                        inputMode="numeric"
                     />
                     <input className="input-field"
                         type="number"
@@ -191,6 +192,7 @@ const WorkoutCreator: React.FC = () => {
                         placeholder="Reps"
                         value={newExercise.reps || ""}
                         onChange={handleInputChange}
+                        inputMode="numeric"
                     />
                 </section>
 

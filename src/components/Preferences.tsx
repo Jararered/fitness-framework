@@ -60,6 +60,18 @@ const Preferences: React.FC = () => {
         savePreference(`${restType}Rest` as keyof typeof preferences, newRestValue);
     };
 
+    // Handle changes in the weight
+    const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+
+        // Allow zero and positive numbers only
+        if (value !== '' && Number(value) <= 0) {
+            return;
+        }
+
+        savePreference('weight', value === '' ? 0 : Number(value));
+    };
+
     // Handle clearing all data
     const handleClearData = () => {
         const firstConfirmation = window.confirm("Are you sure you want to clear all saved data?");
@@ -95,8 +107,9 @@ const Preferences: React.FC = () => {
                         <input className="input-field"
                             type="number"
                             id="user-weight"
-                            value={preferences.weight}
-                            onChange={(e) => savePreference('weight', Number(e.target.value))}
+                            value={preferences.weight === 0 ? '' : preferences.weight}
+                            onChange={handleWeightChange}
+                            inputMode="numeric"
                         />
                     </div>
                     <div>
@@ -123,6 +136,7 @@ const Preferences: React.FC = () => {
                             value={preferences.shortRest}
                             onChange={(e) => handleRestChange(e, 'short')}
                             className="input-field"
+                            inputMode="numeric"
                         />
                     </div>
                     <div>
@@ -132,6 +146,7 @@ const Preferences: React.FC = () => {
                             id="normal-rest"
                             value={preferences.normalRest}
                             onChange={(e) => handleRestChange(e, 'normal')}
+                            inputMode="numeric"
                         />
                     </div>
                     <div>
@@ -141,6 +156,7 @@ const Preferences: React.FC = () => {
                             id="long-rest"
                             value={preferences.longRest}
                             onChange={(e) => handleRestChange(e, 'long')}
+                            inputMode="numeric"
                         />
                     </div>
                 </div>
@@ -157,7 +173,7 @@ const Preferences: React.FC = () => {
                         <button
                             onClick={() => {
                                 savePreference('user', 'User');
-                                savePreference('weight', 0);
+                                savePreference('weight', '0');
                                 savePreference('units', 'lb');
                             }}
                             className="bad-button">
