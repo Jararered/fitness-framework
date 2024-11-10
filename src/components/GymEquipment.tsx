@@ -86,9 +86,9 @@ const Equipment: React.FC = () => {
         }
     };
 
-    const clearEquipmentList = () => {
+    const clearEquipmentList = () => 
+            {
         if (window.confirm("Are you sure you want to clear the equipment selection?")) {
-            // Clear selected equipment
             setSelectedEquipment([]);
 
             // Clear selected equipment from local storage
