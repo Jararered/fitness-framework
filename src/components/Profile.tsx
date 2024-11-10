@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
+
+// Import Components
 import SectionTitle from './buttons/SectionTitle';
-import { Exercise } from './Workout';
+
+// Import Interfaces
+import { Exercise } from './Exercise';
 
 const WorkoutProfile: React.FC = () => {
     const [bestWeights, setBestWeights] = useState<{ [key: string]: { weight: number, date: string } }>({});

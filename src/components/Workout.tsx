@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { equipmentExercises, exerciseCategories, BodyPart } from './Equipment';
+
+// Import Components
 import SectionTitle from './buttons/SectionTitle';
 
-export interface Exercise {
-    name: string;
-    sets: number;
-    reps: number;
-}
+// Import Interfaces
+import { Exercise } from './Exercise';
+import { equipmentExercises, exerciseCategories, BodyPart } from './Equipment';
 
 export interface SavedWorkout {
     name: string;

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
+// Import Components
 import SectionTitle from './buttons/SectionTitle';
+
+// Import Interfaces
 import { equipment, equipmentIcons, equipmentExercises } from './Equipment';
 
+// Import Styles
 import './GymEquipment.css';
 
 const Equipment: React.FC = () => {

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+
+// Import Components
 import SectionTitle from './buttons/SectionTitle';
+
+// Import Styles
 import '../styles/Input.css';
 import './Preferences.css';
 import './shared/HorizontalSection.css'

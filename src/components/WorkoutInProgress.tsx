@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+// Import Components
 import SectionTitle from './buttons/SectionTitle';
 
+// Import Styles
 import './WorkoutInProgress.css';
 
 interface Exercise {

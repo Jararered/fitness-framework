@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
+
+// Import Components
 import SectionTitle from './buttons/SectionTitle';
 
-interface Exercise {
-    name: string;
-    sets: number;
-    reps: number;
-}
+// Import Interfaces
+import { Exercise } from './Exercise';
 
 interface WorkoutOverviewProps {
     gym: string | null;
