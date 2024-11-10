@@ -17,7 +17,6 @@ html,
     flex-direction: row;
     min-height: 100vh;
     background-color: transparent;
-    /* Ensure the background is visible */
 }
 
 .page-title {
