@@ -20,13 +20,18 @@ const Equipment: React.FC = () => {
             setSavedEquipmentLists(parsedLists);
         }
 
-        const lastLoadedList = localStorage.getItem('lastGym');
-        if (lastLoadedList) {
-            loadEquipmentList(lastLoadedList);
-            setSelectedList(lastLoadedList);
+        // Load saved equipment if no gym is selected
+        const savedEquipment = localStorage.getItem('selectedEquipment');
+        if (savedEquipment) {
+            setSelectedEquipment(JSON.parse(savedEquipment));
         }
     }, []);
 
+    useEffect(() => {
+        localStorage.setItem('selectedEquipment', JSON.stringify(selectedEquipment));
+    }, [selectedEquipment]);
+
+    // This function toggles the selected equipment in the list
     const toggleEquipment = (item: string) => {
         setSelectedEquipment(prev =>
             prev.includes(item) ? prev.filter(e => e !== item) : [...prev, item]
@@ -43,7 +48,6 @@ const Equipment: React.FC = () => {
                 return updatedLists;
             });
             setCurrentGym(gymName);
-            localStorage.setItem('lastGym', gymName);
         }
     };
 
@@ -54,7 +58,6 @@ const Equipment: React.FC = () => {
             if (gym) {
                 setCurrentGym(gym.name);
                 setSelectedEquipment(gym.equipment);
-                localStorage.setItem('lastGym', gym.name);
             } else {
                 alert("Please select a valid gym.");
             }
@@ -69,8 +72,6 @@ const Equipment: React.FC = () => {
             localStorage.setItem('savedGyms', JSON.stringify(parsedLists));
             if (currentGym === gymName) {
                 setCurrentGym(null);
-                setSelectedEquipment([]);
-                localStorage.removeItem('lastGym');
             }
         }
     };
