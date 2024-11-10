@@ -21,7 +21,7 @@ interface PreferencesInterface {
 const Preferences: React.FC = () => {
     // Load preferences from local storage or use default values
     const [preferences, setPreferences] = useState<PreferencesInterface>({
-        user: 'User',
+        user: '',
         weight: 0,
         units: 'lb',
         shortRest: 30,
