@@ -30,7 +30,7 @@ select:focus {
 /* Styles for input fields within input rows */
 .input-field {
     flex: auto;
-    width: auto;
+    width: 50%;
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
