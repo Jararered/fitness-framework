@@ -36,7 +36,7 @@ const App: React.FC = () => {
         setContent('home');
     };
 
-    const renderContent = () => {
+    const renderMainContent = () => {
         switch (content) {
 
             case 'home':
@@ -71,7 +71,8 @@ const App: React.FC = () => {
                 onNavigate={setContent}
             />
 
-            {renderContent()}
+            {renderMainContent()}
+
         </div>
     );
 };
