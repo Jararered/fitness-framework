@@ -98,7 +98,7 @@ const Preferences: React.FC = () => {
                         />  
                     </div>
                     <div>
-                        <label htmlFor="weight-unit">Preferred Weight Unit:</label>
+                        <label htmlFor="weight-unit">Preferred Units:</label>
                         <select
                             id="weight-unit"
                             value={preferences.units}
@@ -115,7 +115,7 @@ const Preferences: React.FC = () => {
                     <h2>Timing Preferences</h2>
 
                     <div>
-                        <label htmlFor="short-rest">Short Rest (seconds):</label>
+                        <label htmlFor="short-rest">Short Rest (sec):</label>
                         <input
                             type="number"
                             id="short-rest"
@@ -125,7 +125,7 @@ const Preferences: React.FC = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="normal-rest">Normal Rest (seconds):</label>
+                        <label htmlFor="normal-rest">Normal Rest (sec):</label>
                         <input
                             type="number"
                             id="normal-rest"
@@ -135,7 +135,7 @@ const Preferences: React.FC = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="long-rest">Long Rest (seconds):</label>
+                        <label htmlFor="long-rest">Long Rest (sec):</label>
                         <input
                             type="number"
                             id="long-rest"
