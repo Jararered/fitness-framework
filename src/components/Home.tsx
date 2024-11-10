@@ -7,7 +7,6 @@ import SectionTitle from './buttons/SectionTitle';
 import { Exercise } from './Exercise';
 
 interface WorkoutOverviewProps {
-    gym: string | null;
     onOpenWorkout: () => void;
 }
 

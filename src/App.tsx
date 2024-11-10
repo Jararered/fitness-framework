@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './styles/tailwind.css'
 
 // Navigation Menu
@@ -27,14 +27,6 @@ import './components/shared/VerticalSection.css';
 const App: React.FC = () => {
     const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);
     const [content, setContent] = useState('home');
-    const [gym, setGym] = useState<string | null>(null);
-
-    useEffect(() => {
-        const gymName = localStorage.getItem('lastLoadedGym');
-        if (gymName) {
-            setGym(gymName);
-        }
-    }, []);
 
     const toggleSideBar = () => {
         setSideBarCollapsed((prev) => !prev);
@@ -48,7 +40,7 @@ const App: React.FC = () => {
         switch (content) {
 
             case 'home':
-                return <Home gym={gym} onOpenWorkout={() => setContent('workout-in-progress')} />;
+                return <Home onOpenWorkout={() => setContent('workout-in-progress')} />;
             case 'workout':
                 return <Workout />;
             case 'gym-equipment':
@@ -62,7 +54,7 @@ const App: React.FC = () => {
                 return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
 
             default:
-                return <Home gym={gym} onOpenWorkout={() => setContent('workout-in-progress')} />;
+                return <Home onOpenWorkout={() => setContent('workout-in-progress')} />;
         }
     };
 
