@@ -1,36 +1,23 @@
-/* Styles for input fields */
-input[type="text"], input[type="number"] {
-    background-color: #ffffff;
-    color: #333333;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
 /* Styles for select dropdowns */
 select {
-    background-color: #ffffff;
-    color: #333333;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 16px;
-    box-sizing: border-box;
-    appearance: none;
+    appearance: auto;
+    height: 40px;
 }
 
-/* Focus state for select dropdowns */
-select:focus {
-    border-color: #007aff;
-    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
-}
 
 /* Styles for input fields within input rows */
 .input-field {
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+
+
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #e0e0e0;
+
     flex: auto;
-    width: 50%;
+    width: 75%;
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
