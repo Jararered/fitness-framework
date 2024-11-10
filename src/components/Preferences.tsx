@@ -83,31 +83,28 @@ const Preferences: React.FC = () => {
 
                     <div>
                         <label htmlFor="user-name">User Name:</label>
-                        <input
+                        <input className="input-field"
                             type="text"
                             id="user-name"
                             value={preferences.user}
                             onChange={(e) => savePreference('user', e.target.value)}
-                            className="input-field"
                         />
                     </div>
                     <div>
                         <label htmlFor="user-weight">User Weight:</label>
-                        <input
+                        <input className="input-field"
                             type="number"
                             id="user-weight"
                             value={preferences.weight}
                             onChange={(e) => savePreference('weight', Number(e.target.value))}
-                            className="input-field"
                         />
                     </div>
                     <div>
                         <label htmlFor="weight-unit">Preferred Units:</label>
-                        <select
+                        <select className="input-field"
                             id="weight-unit"
                             value={preferences.units}
                             onChange={handleWeightUnitChange}
-                            className="input-field"
                         >
                             <option value="lb">lb</option>
                             <option value="kg">kg</option>
@@ -130,22 +127,20 @@ const Preferences: React.FC = () => {
                     </div>
                     <div>
                         <label htmlFor="normal-rest">Normal Rest (sec):</label>
-                        <input
+                        <input className="input-field"
                             type="number"
                             id="normal-rest"
                             value={preferences.normalRest}
                             onChange={(e) => handleRestChange(e, 'normal')}
-                            className="input-field"
                         />
                     </div>
                     <div>
                         <label htmlFor="long-rest">Long Rest (sec):</label>
-                        <input
+                        <input className="input-field"
                             type="number"
                             id="long-rest"
                             value={preferences.longRest}
                             onChange={(e) => handleRestChange(e, 'long')}
-                            className="input-field"
                         />
                     </div>
                 </div>
