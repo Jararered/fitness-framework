@@ -18,7 +18,8 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
     const [currentSetIndex, setCurrentSetIndex] = useState(0);
     const [weights, setWeights] = useState<number[]>([]);
-    const [bestEfforts, setBestEfforts] = useState<{ [key: string]: number }>({});
+    const [maxWeights, setMaxWeights] = useState<{ [key: string]: number }>({});
+    const [lastWeights, setLastWeights] = useState<{ [key: string]: number }>({});
     const [startTime, setStartTime] = useState<string>('');
 
     useEffect(() => {
@@ -31,9 +32,15 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         }
 
         // Load the best efforts from local storage
-        const bestEffortsData = localStorage.getItem('loggedBestWeights');
-        if (bestEffortsData) {
-            setBestEfforts(JSON.parse(bestEffortsData));
+        const maxWeights = localStorage.getItem('loggedMaxWeights');
+        if (maxWeights) {
+            setMaxWeights(JSON.parse(maxWeights));
+        }
+
+        // Load the last weights from local storage
+        const lastWeights = localStorage.getItem('loggedLastWeights');
+        if (lastWeights) {
+            setLastWeights(JSON.parse(lastWeights));
         }
     }, []);
 
@@ -47,9 +54,10 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         if (currentWorkout) {
             const currentExercise = currentWorkout[currentExerciseIndex];
             const loggedWeights = JSON.parse(localStorage.getItem('loggedWeights') || '[]');
-            const loggedWeightsBest = JSON.parse(localStorage.getItem('loggedBestWeights') || '{}');
+            const loggedMaxWeights = JSON.parse(localStorage.getItem('loggedMaxWeights') || '{}');
+            const loggedLastWeights = JSON.parse(localStorage.getItem('loggedLastWeights') || '{}');
 
-            const weight = weights[currentSetIndex] || bestEfforts[currentExercise.name] || 0;
+            const weight = weights[currentSetIndex] || maxWeights[currentExercise.name] || 0;
             if (weight > 0) {
                 // Save the weight to the log
                 loggedWeights.push({
@@ -61,13 +69,24 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                 localStorage.setItem('loggedWeights', JSON.stringify(loggedWeights));
 
                 // Update the best effort if this is a new best
-                if (!loggedWeightsBest[currentExercise.name] || weight > loggedWeightsBest[currentExercise.name].weight) {
-                    loggedWeightsBest[currentExercise.name] = {
+                if (!loggedMaxWeights[currentExercise.name] || weight > loggedMaxWeights[currentExercise.name].weight) {
+                    loggedMaxWeights[currentExercise.name] = {
                         weight: weight,
                         date: new Date().toISOString(),
                     };
-                    localStorage.setItem('loggedBestWeights', JSON.stringify(loggedWeightsBest));
+                    localStorage.setItem('loggedMaxWeights', JSON.stringify(loggedMaxWeights));
                 }
+
+                // Update the last weight
+                loggedLastWeights[currentExercise.name] = {
+                    weight: weight,
+                    date: new Date().toISOString(),
+                };
+                localStorage.setItem('loggedLastWeights', JSON.stringify(loggedLastWeights));
+                setLastWeights(prevState => ({
+                    ...prevState,
+                    [currentExercise.name]: weight
+                }));
             }
 
             // Move to the next set or exercise
@@ -141,7 +160,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
                 <input
                     type="number"
-                    placeholder={bestEfforts[currentExercise.name] ? `${bestEfforts[currentExercise.name]}` : "Weight"}
+                    placeholder={maxWeights[currentExercise.name] ? `${maxWeights[currentExercise.name]}` : "Weight"}
                     value={weights[currentSetIndex] || ""}
                     onChange={(e) => handleWeightChange(e, currentSetIndex)}
                     className="input-field"

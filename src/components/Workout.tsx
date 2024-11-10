@@ -152,7 +152,6 @@ const WorkoutCreator: React.FC = () => {
                 return updatedWorkouts;
             });
             setSelectedWorkout("");
-            alert("Workout deleted.");
         }
     };
 
