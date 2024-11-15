@@ -27,7 +27,7 @@
 
 /* Styles for the collapsed sidebar */
 .sidebar.collapsed {
-    width: 60px;
+    width: 80px;
     transition: 0.3s;
 }
 
