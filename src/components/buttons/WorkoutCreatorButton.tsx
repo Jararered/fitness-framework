@@ -1,17 +1,11 @@
 import React from 'react';
 import { FaDumbbell } from 'react-icons/fa';
-import { IconType } from 'react-icons';
-
+import IconButton from './IconButton';
 import { ClickableButtonProps } from './ButtonProps';
 import './Button.css';
 
-const WorkoutCreatorButton: React.FC<ClickableButtonProps> = ({ onClick, isCollapsed }) => {
-    const Icon: IconType = FaDumbbell;
-    return (
-        <div className="button" onClick={onClick}>
-            {isCollapsed ? <Icon size={24} /> : <> <Icon size={24} /> Workout Creator </>}
-        </div>
-    );
+const WorkoutCreatorButton: React.FC<ClickableButtonProps> = (props) => {
+    return <IconButton {...props} icon={FaDumbbell} label="Workout Creator" />;
 };
 
 export default WorkoutCreatorButton;

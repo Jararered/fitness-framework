@@ -1,17 +1,11 @@
 import React from 'react';
 import { FaHome } from 'react-icons/fa';
-import { IconType } from 'react-icons';
-
+import IconButton from './IconButton';
 import { ClickableButtonProps } from './ButtonProps';
 import './Button.css';
 
-const HomeButton: React.FC<ClickableButtonProps> = ({ onClick, isCollapsed }) => {
-    const Icon: IconType = FaHome;
-    return (
-        <div className="button" onClick={onClick}>
-            {isCollapsed ? <Icon size={24} /> : <> <Icon size={24} /> Home </>}
-        </div>
-    );
+const HomeButton: React.FC<ClickableButtonProps> = (props) => {
+    return <IconButton {...props} icon={FaHome} label="Home" />;
 };
 
 export default HomeButton;

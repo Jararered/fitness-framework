@@ -1,17 +1,11 @@
 import React from 'react';
 import { FaUser } from 'react-icons/fa';
-import { IconType } from 'react-icons';
-
+import IconButton from './IconButton';
 import { ClickableButtonProps } from './ButtonProps';
 import './Button.css';
 
-const ProfileButton: React.FC<ClickableButtonProps> = ({ onClick, isCollapsed }) => {
-    const Icon: IconType = FaUser;
-    return (
-        <div className="button" onClick={onClick}>
-            {isCollapsed ? <Icon size={24} /> : <> <Icon size={24} /> Profile </>}
-        </div>
-    );
+const ProfileButton: React.FC<ClickableButtonProps> = (props) => {
+    return <IconButton {...props} icon={FaUser} label="Profile" />;
 };
 
 export default ProfileButton;
