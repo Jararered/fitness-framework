@@ -14,7 +14,7 @@ export interface SavedWorkout {
 
 const WorkoutCreator: React.FC = () => {
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);
-    const [newExercise, setNewExercise] = useState<Exercise>({ name: '', sets: 0, reps: 0 });
+    const [newExercise, setNewExercise] = useState<Exercise>({ name: '', sets: [{ reps: 0 }] });
     const [savedWorkouts, setSavedWorkouts] = useState<SavedWorkout[]>([]);
     const [selectedWorkout, setSelectedWorkout] = useState<string>("");
     const [availableExercises, setAvailableExercises] = useState<string[]>([]);
@@ -48,15 +48,16 @@ const WorkoutCreator: React.FC = () => {
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+        const { value } = e.target;
+        const repsArray = value.split(',').map(rep => ({ reps: Number(rep.trim()) }));
         setNewExercise((prevExercise) => ({
             ...prevExercise,
-            [name]: Number(value),
+            sets: repsArray,
         }));
     };
 
     const addExerciseToWorkout = () => {
-        if (!newExercise.name || newExercise.sets < 1 || newExercise.reps < 1) {
+        if (!newExercise.name || newExercise.sets[0].reps < 1) {
             alert("Please provide valid exercise details.");
             return;
         }
@@ -67,7 +68,7 @@ const WorkoutCreator: React.FC = () => {
             return updatedWorkout;
         });
 
-        setNewExercise({ name: '', sets: 0, reps: 0 });
+        setNewExercise({ name: '', sets: [{ reps: 0 }] });
     };
 
     const saveWorkout = () => {
@@ -132,8 +133,7 @@ const WorkoutCreator: React.FC = () => {
 
             randomExercises.push({
                 name: randomExercise,
-                sets: randomSets,
-                reps: randomReps,
+                sets: Array(randomSets).fill({ reps: randomReps }),
             });
         }
 
@@ -179,20 +179,11 @@ const WorkoutCreator: React.FC = () => {
 
                 <section>
                     <input className="input-field"
-                        type="number"
-                        name="sets"
-                        placeholder="Sets"
-                        value={newExercise.sets || ""}
-                        onChange={handleInputChange}
-                        inputMode="numeric"
-                    />
-                    <input className="input-field"
-                        type="number"
+                        type="text"
                         name="reps"
-                        placeholder="Reps"
-                        value={newExercise.reps || ""}
+                        placeholder="Reps (comma separated)"
+                        value={newExercise.sets.map(set => set.reps).join(', ') || ""}
                         onChange={handleInputChange}
-                        inputMode="numeric"
                     />
                 </section>
 
@@ -208,7 +199,9 @@ const WorkoutCreator: React.FC = () => {
                     ) : (
                         currentWorkout.map((exercise, index) => (
                             <li key={index} className="workout-item">
-                                <strong>{exercise.name}</strong>: {exercise.sets} sets of {exercise.reps} reps
+                                <strong>{exercise.name}</strong>: {exercise.sets.map((set, setIndex) => (
+                                    <span key={setIndex}>{set.reps} reps{setIndex < exercise.sets.length - 1 ? ', ' : ''}</span>
+                                ))}
                             </li>
                         ))
                     )}
