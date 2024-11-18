@@ -1,6 +1,6 @@
-# Muscle ME
+# Fitness Framework
 
-Muscle ME is a fitness application that allows users to create, manage, and track their workouts.
+Fitness Framework is a fitness application that allows users to create, manage, and track their workouts.
 
 ## Features
 
@@ -25,8 +25,8 @@ To start the development server using Vite after cloning the repository, follow 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/Jararered/muscle-me.git
-    cd muscle-me
+    git clone https://github.com/Jararered/fitness-framework.git
+    cd fitness-framework
     ```
 
 2. Install the dependencies:
