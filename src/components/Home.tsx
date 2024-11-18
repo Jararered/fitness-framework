@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 // Import Components
 import SectionTitle from './shared/SectionTitle';
+import CurrentWorkout from './CurrentWorkout';
 
 // Import Interfaces
 import { Exercise } from './Exercise';
@@ -33,16 +34,7 @@ const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
             <div className="card">
                 {currentWorkout ? (
                     <div>
-                        <h2>Current Workout</h2>
-
-                        <ul className="workout-list">
-                            {currentWorkout.map((exercise, index) => (
-                                <li key={index} className="workout-item">
-                                    <strong>{exercise.name}</strong>: {exercise.sets} sets of {exercise.reps} reps
-                                </li>
-                            ))}
-                        </ul>
-
+                        <CurrentWorkout currentWorkout={currentWorkout} />
                         <button onClick={onOpenWorkout} className="normal-button">
                             Start Workout
                         </button>

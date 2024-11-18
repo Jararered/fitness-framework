@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // Import Components
 import SectionTitle from './shared/SectionTitle';
+import CurrentWorkout from './CurrentWorkout';
 
 // Import Interfaces
 import { Exercise } from './Exercise';
@@ -191,21 +192,7 @@ const WorkoutCreator: React.FC = () => {
                     Add Exercise
                 </button>
 
-                <h2>Current Workout</h2>
-
-                <ul className="workout-list">
-                    {currentWorkout.length === 0 ? (
-                        <p>No exercises added yet.</p>
-                    ) : (
-                        currentWorkout.map((exercise, index) => (
-                            <li key={index} className="workout-item">
-                                <strong>{exercise.name}</strong>: {exercise.sets.map((set, setIndex) => (
-                                    <span key={setIndex}>{set.reps} reps{setIndex < exercise.sets.length - 1 ? ', ' : ''}</span>
-                                ))}
-                            </li>
-                        ))
-                    )}
-                </ul>
+                <CurrentWorkout currentWorkout={currentWorkout} />
 
                 <section>
                     <button onClick={saveWorkout} className="normal-button">

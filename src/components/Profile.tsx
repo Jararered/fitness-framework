@@ -54,7 +54,11 @@ const WorkoutProfile: React.FC = () => {
                                 <strong>Completed On: {formatDateTime(workout.endTime)}</strong>
                                 <ul>
                                     {workout.exercises.map((exercise, idx) => (
-                                        <li key={idx}>{exercise.name}: {exercise.sets} sets of {exercise.reps} reps</li>
+                                        <li key={idx}>
+                                            <strong>{exercise.name}</strong>: {exercise.sets.map((set, setIndex) => (
+                                                <span key={setIndex}>{set.reps} reps x {set.weight || 0} lbs{setIndex < exercise.sets.length - 1 ? ', ' : ''}</span>
+                                            ))}
+                                        </li>
                                     ))}
                                 </ul>
                             </li>
