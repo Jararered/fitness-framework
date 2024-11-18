@@ -106,8 +106,8 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             const loggedMaxWeights = JSON.parse(localStorage.getItem('loggedMaxWeights') || '{}');
             const loggedLastWeights = JSON.parse(localStorage.getItem('loggedLastWeights') || '{}');
 
-            const weight = weightTracking.currentWeights[workoutState.currentSetIndex] || 
-                         weightTracking.maxWeights[currentExercise.name] || 0;
+            let weight = weightTracking.currentWeights[workoutState.currentSetIndex] || 
+                         weightTracking.lastWeights[currentExercise.name]?.weight || 0;
             if (weight > 0) {
                 // Save the weight to the log
                 loggedWeights.push({

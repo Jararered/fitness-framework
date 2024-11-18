@@ -56,11 +56,12 @@ const WorkoutProfile: React.FC = () => {
                                     {workout.exercises.map((exercise, idx) => (
                                         <li key={idx}>
                                             <strong>{exercise.name}</strong>: {exercise.sets.map((set, setIndex) => (
-                                                <span key={setIndex}>{set.reps} reps x {set.weight || 0} lbs{setIndex < exercise.sets.length - 1 ? ', ' : ''}</span>
+                                                <span key={setIndex}>{set.reps} x {set.weight || 0} lbs{setIndex < exercise.sets.length - 1 ? ', ' : ''}</span>
                                             ))}
                                         </li>
                                     ))}
                                 </ul>
+                                <br></br>
                             </li>
                         ))
                     )}
