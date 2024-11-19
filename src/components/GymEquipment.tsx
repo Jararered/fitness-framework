@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa';
-import SectionTitle from './shared/SectionTitle';
+
 import { equipment, equipmentIcons, equipmentExercises } from './Equipment';
 import './GymEquipment.css';
 
@@ -67,8 +67,10 @@ const Equipment: React.FC = () => {
 
     return (
         <div className='gym-equipment'>
-            <SectionTitle title="Gym Equipment" />
-            <div className='vertical-section'>
+
+            <h1>Gym Equipment</h1>
+
+            <div className='column'>
                 <div className="card">
                     <section>
                         <h2>Available Equipment</h2>
@@ -89,7 +91,9 @@ const Equipment: React.FC = () => {
                         <button onClick={clearEquipmentList} className="bad-button">Clear Equipment Selection</button>
                     </section>
                 </div>
-                <SectionTitle title="Saved Gyms" />
+
+                <h1>Saved Gyms</h1>
+
                 <div className="card">
                     <select onChange={e => setSelectedList(e.target.value)} value={selectedList} className="input-field">
                         <option value="">Select a location</option>
@@ -100,7 +104,9 @@ const Equipment: React.FC = () => {
                     <button onClick={() => loadEquipmentList(selectedList)} className="normal-button">Load Gym Equipment</button>
                     <button onClick={() => deleteEquipmentList(selectedList)} className="bad-button">Delete Gym Equipment</button>
                 </div>
-                <SectionTitle title="Available Exercises" />
+
+                <h1>Available Exercises</h1>
+
                 <div className="card">
                     {selectedEquipment.length > 0 ? (
                         selectedEquipment.map(equipment => (
