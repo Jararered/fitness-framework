@@ -64,7 +64,6 @@ const WorkoutProfile: React.FC = () => {
                                             </li>
                                         ))}
                                     </ul>
-                                    <br></br>
                                 </li>
                             ))
                         )}
