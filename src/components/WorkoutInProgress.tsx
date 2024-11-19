@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
-// Import Components
 import SectionTitle from './shared/SectionTitle';
-
-// Import Interfaces
 import { Exercise } from './Exercise';
 
 interface WorkoutInProgressProps {
-    onCompleteWorkout: () => void; // Callback to change the view in App.tsx
+    onCompleteWorkout: () => void;
 }
 
 interface LastWeight {
@@ -15,7 +11,7 @@ interface LastWeight {
     weight: number;
 }
 
-interface WorkoutState {
+export interface WorkoutState {
     exercises: Exercise[] | null;
     currentExerciseIndex: number;
     currentSetIndex: number;
@@ -43,24 +39,29 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     });
 
     useEffect(() => {
-        // Load the current workout and best efforts from local storage
-        const workoutData = localStorage.getItem('currentWorkout');
+        const loadFromLocalStorage = (key: string, defaultValue: any) => {
+            const data = localStorage.getItem(key);
+            return data ? JSON.parse(data) : defaultValue;
+        };
+
+        const workoutData = loadFromLocalStorage('currentWorkout', null);
+        const savedWorkoutState = loadFromLocalStorage('workoutState', {});
+        const maxWeights = loadFromLocalStorage('loggedMaxWeights', {});
+        const lastWeights = loadFromLocalStorage('loggedLastWeights', {});
+
         if (workoutData) {
             setWorkoutState(prev => ({
                 ...prev,
-                exercises: JSON.parse(workoutData),
+                exercises: workoutData,
+                ...savedWorkoutState,
                 startTime: new Date().toISOString()
             }));
         }
 
-        // Load the best efforts from local storage
-        const maxWeights = localStorage.getItem('loggedMaxWeights');
-        const lastWeights = localStorage.getItem('loggedLastWeights');
-
         setWeightTracking(prev => ({
             ...prev,
-            maxWeights: maxWeights ? JSON.parse(maxWeights) : {},
-            lastWeights: lastWeights ? JSON.parse(lastWeights) : {}
+            maxWeights,
+            lastWeights
         }));
     }, []);
 
@@ -95,112 +96,98 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         }
     };
 
+    const logWeight = (currentExercise: Exercise, currentSet: any, weight: number) => {
+        const loggedWeights = JSON.parse(localStorage.getItem('loggedWeights') || '[]');
+        const loggedMaxWeights = JSON.parse(localStorage.getItem('loggedMaxWeights') || '{}');
+        const loggedLastWeights = JSON.parse(localStorage.getItem('loggedLastWeights') || '{}');
+
+        loggedWeights.push({
+            date: new Date().toISOString(),
+            exercise: currentExercise.name,
+            reps: currentSet.reps,
+            weight: weight,
+        });
+        localStorage.setItem('loggedWeights', JSON.stringify(loggedWeights));
+
+        if (!loggedMaxWeights[currentExercise.name] || weight > loggedMaxWeights[currentExercise.name].weight) {
+            loggedMaxWeights[currentExercise.name] = {
+                weight: weight,
+                date: new Date().toISOString(),
+            };
+            localStorage.setItem('loggedMaxWeights', JSON.stringify(loggedMaxWeights));
+        }
+
+        loggedLastWeights[currentExercise.name] = {
+            exercise: currentExercise.name,
+            weight: weight
+        };
+        localStorage.setItem('loggedLastWeights', JSON.stringify(loggedLastWeights));
+        setWeightTracking(prev => ({
+            ...prev,
+            lastWeights: {
+                ...prev.lastWeights,
+                [currentExercise.name]: {
+                    exercise: currentExercise.name,
+                    weight: weight
+                }
+            }
+        }));
+    };
+
     const handleNextExercise = () => {
         if (workoutState.exercises) {
             const currentExercise = workoutState.exercises[workoutState.currentExerciseIndex];
             const currentSet = currentExercise.sets[workoutState.currentSetIndex];
-            const loggedWeights = JSON.parse(localStorage.getItem('loggedWeights') || '[]');
-            const loggedMaxWeights = JSON.parse(localStorage.getItem('loggedMaxWeights') || '{}');
-            const loggedLastWeights = JSON.parse(localStorage.getItem('loggedLastWeights') || '{}');
-
-            let weight = weightTracking.currentWeights[workoutState.currentSetIndex] ||
+            const weight = weightTracking.currentWeights[workoutState.currentSetIndex] ||
                 weightTracking.lastWeights[currentExercise.name]?.weight || 0;
+
             if (weight > 0) {
-                // Save the weight to the log
-                loggedWeights.push({
-                    date: new Date().toISOString(),
-                    exercise: currentExercise.name,
-                    reps: currentSet.reps,
-                    weight: weight,
-                });
-                localStorage.setItem('loggedWeights', JSON.stringify(loggedWeights));
-
-                // Update the best effort if this is a new best
-                if (!loggedMaxWeights[currentExercise.name] || weight > loggedMaxWeights[currentExercise.name].weight) {
-                    loggedMaxWeights[currentExercise.name] = {
-                        weight: weight,
-                        date: new Date().toISOString(),
-                    };
-                    localStorage.setItem('loggedMaxWeights', JSON.stringify(loggedMaxWeights));
-                }
-
-                // Update the last weight
-                loggedLastWeights[currentExercise.name] = {
-                    exercise: currentExercise.name,
-                    weight: weight
-                };
-                localStorage.setItem('loggedLastWeights', JSON.stringify(loggedLastWeights));
-                setWeightTracking(prev => ({
-                    ...prev,
-                    lastWeights: {
-                        ...prev.lastWeights,
-                        [currentExercise.name]: {
-                            exercise: currentExercise.name,
-                            weight: weight
-                        }
-                    }
-                }));
-
-                // Assign the weight to the current set
+                logWeight(currentExercise, currentSet, weight);
                 currentSet.weight = weight;
             }
 
-            // Move to the next set or exercise
+            let newWorkoutState = { ...workoutState };
             if (workoutState.currentSetIndex < currentExercise.sets.length - 1) {
-                // Move to the next set
-                setWorkoutState(prev => ({
-                    ...prev,
-                    currentSetIndex: prev.currentSetIndex + 1
-                }));
-            } else if (workoutState.currentExerciseIndex < workoutState.exercises!.length - 1) {
-                // Move to the next exercise
-                setWorkoutState(prev => ({
-                    ...prev,
-                    currentExerciseIndex: prev.currentExerciseIndex + 1,
-                    currentSetIndex: 0
-                }));
+                newWorkoutState.currentSetIndex += 1;
+            } else if (workoutState.currentExerciseIndex < workoutState.exercises.length - 1) {
+                newWorkoutState.currentExerciseIndex += 1;
+                newWorkoutState.currentSetIndex = 0;
                 setWeightTracking(prev => ({
                     ...prev,
                     currentWeights: []
                 }));
             } else {
-                // Finish the workout
                 completeWorkout();
+                return;
             }
+            setWorkoutState(newWorkoutState);
+            localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
         }
     };
 
     const handleSkipExercise = () => {
         if (workoutState.exercises) {
-            const currentExercise = workoutState.exercises[workoutState.currentExerciseIndex];
-            // Skip the current exercise
-            if (workoutState.currentSetIndex < currentExercise.sets.length - 1) {
-                // Move to the next set
-                setWorkoutState(prev => ({
-                    ...prev,
-                    currentSetIndex: prev.currentSetIndex + 1
-                }));
+            let newWorkoutState = { ...workoutState };
+            if (workoutState.currentSetIndex < workoutState.exercises[workoutState.currentExerciseIndex].sets.length - 1) {
+                newWorkoutState.currentSetIndex += 1;
             } else if (workoutState.currentExerciseIndex < workoutState.exercises.length - 1) {
-                // Move to the next exercise
-                setWorkoutState(prev => ({
-                    ...prev,
-                    currentExerciseIndex: prev.currentExerciseIndex + 1,
-                    currentSetIndex: 0
-                }));
+                newWorkoutState.currentExerciseIndex += 1;
+                newWorkoutState.currentSetIndex = 0;
                 setWeightTracking(prev => ({
                     ...prev,
                     currentWeights: []
                 }));
             } else {
-                // Finish the workout
                 completeWorkout();
+                return;
             }
+            setWorkoutState(newWorkoutState);
+            localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
         }
     };
 
     const completeWorkout = () => {
         if (workoutState.exercises) {
-            // Save the workout to the log
             const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
             const workoutEntry = {
                 startTime: workoutState.startTime,
@@ -211,7 +198,8 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
         }
 
-        onCompleteWorkout(); // Call the callback to change the view
+        localStorage.removeItem('workoutState');
+        onCompleteWorkout();
     };
 
     if (!workoutState.exercises || workoutState.exercises.length === 0) {
@@ -223,15 +211,11 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
     return (
         <div className='main-content'>
-
             <SectionTitle title="Workout in Progress" />
-
             <div className='vertical-section'>
                 <div className="card">
                     <h2>{currentExercise.name}</h2>
-
                     <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.sets.length}</p>
-
                     <p>Reps: </p>
                     <input
                         type="number"
@@ -239,7 +223,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                         onChange={(e) => handleRepsChange(e, workoutState.currentSetIndex)}
                         className="input-field"
                     />
-
                     <input
                         type="number"
                         inputMode="numeric"
@@ -248,12 +231,10 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                         onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
                         className="input-field"
                     />
-
                     <div className="button-row">
                         <button className="bad-button" onClick={handleSkipExercise}>
                             Skip
                         </button>
-
                         <button className="normal-button" onClick={handleNextExercise}>
                             Next
                         </button>
