@@ -31,17 +31,19 @@ const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
     return (
         <div className='main-content'>
             <SectionTitle title={userName ? `Welcome, ${userName}` : 'Home'} />
-            <div className="card">
-                {currentWorkout ? (
-                    <div>
-                        <CurrentWorkout currentWorkout={currentWorkout} />
-                        <button onClick={onOpenWorkout} className="normal-button">
-                            Start Workout
-                        </button>
-                    </div>
-                ) : (
-                    <p>No workout selected. Please create or load a workout.</p>
-                )}
+            <div className='vertical-section'>
+                <div className="card">
+                    {currentWorkout ? (
+                        <div>
+                            <CurrentWorkout currentWorkout={currentWorkout} />
+                            <button onClick={onOpenWorkout} className="normal-button">
+                                Start Workout
+                            </button>
+                        </div>
+                    ) : (
+                        <p>No workout selected. Please create or load a workout.</p>
+                    )}
+                </div>
             </div>
         </div>
     );

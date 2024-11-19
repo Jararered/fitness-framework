@@ -6,9 +6,6 @@ import SectionTitle from './shared/SectionTitle';
 // Import Interfaces
 import { Exercise } from './Exercise';
 
-// Import Styles
-import './WorkoutInProgress.css';
-
 interface WorkoutInProgressProps {
     onCompleteWorkout: () => void; // Callback to change the view in App.tsx
 }
@@ -59,7 +56,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         // Load the best efforts from local storage
         const maxWeights = localStorage.getItem('loggedMaxWeights');
         const lastWeights = localStorage.getItem('loggedLastWeights');
-        
+
         setWeightTracking(prev => ({
             ...prev,
             maxWeights: maxWeights ? JSON.parse(maxWeights) : {},
@@ -106,8 +103,8 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             const loggedMaxWeights = JSON.parse(localStorage.getItem('loggedMaxWeights') || '{}');
             const loggedLastWeights = JSON.parse(localStorage.getItem('loggedLastWeights') || '{}');
 
-            let weight = weightTracking.currentWeights[workoutState.currentSetIndex] || 
-                         weightTracking.lastWeights[currentExercise.name]?.weight || 0;
+            let weight = weightTracking.currentWeights[workoutState.currentSetIndex] ||
+                weightTracking.lastWeights[currentExercise.name]?.weight || 0;
             if (weight > 0) {
                 // Save the weight to the log
                 loggedWeights.push({
@@ -229,34 +226,38 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
             <SectionTitle title="Workout in Progress" />
 
-            <div className="card">
-                <h2>{currentExercise.name}</h2>
+            <div className='vertical-section'>
+                <div className="card">
+                    <h2>{currentExercise.name}</h2>
 
-                <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.sets.length}</p>
-                <p>Reps: <input
-                    type="number"
-                    value={currentSet.reps}
-                    onChange={(e) => handleRepsChange(e, workoutState.currentSetIndex)}
-                    className="input-field"
-                /></p>
+                    <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.sets.length}</p>
 
-                <input
-                    type="number"
-                    inputMode="numeric"
-                    placeholder={weightTracking.lastWeights[currentExercise.name]?.weight.toString() || "Enter weight"}
-                    value={weightTracking.currentWeights[workoutState.currentSetIndex] || ""}
-                    onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
-                    className="input-field"
-                />
+                    <p>Reps: </p>
+                    <input
+                        type="number"
+                        value={currentSet.reps}
+                        onChange={(e) => handleRepsChange(e, workoutState.currentSetIndex)}
+                        className="input-field"
+                    />
 
-                <div className="button-row">
-                    <button className="bad-button" onClick={handleSkipExercise}>
-                        Skip
-                    </button>
+                    <input
+                        type="number"
+                        inputMode="numeric"
+                        placeholder={weightTracking.lastWeights[currentExercise.name]?.weight.toString() || "Enter weight"}
+                        value={weightTracking.currentWeights[workoutState.currentSetIndex] || ""}
+                        onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
+                        className="input-field"
+                    />
 
-                    <button className="normal-button" onClick={handleNextExercise}>
-                        Next
-                    </button>
+                    <div className="button-row">
+                        <button className="bad-button" onClick={handleSkipExercise}>
+                            Skip
+                        </button>
+
+                        <button className="normal-button" onClick={handleNextExercise}>
+                            Next
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

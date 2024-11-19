@@ -161,99 +161,101 @@ const WorkoutCreator: React.FC = () => {
 
             <SectionTitle title="Workout Creator" />
 
-            <div className="card">
-                <h2>Add Exercise to Workout</h2>
+            <div className='vertical-section'>
+                <div className="card">
+                    <h2>Add Exercise to Workout</h2>
 
-                <section>
-                    <select className="input-field"
-                        value={newExercise.name}
-                        onChange={handleExerciseChange}
-                    >
-                        <option value="">Select Exercise</option>
-                        {availableExercises.map((exercise, index) => (
-                            <option key={index} value={exercise}>
-                                {exercise}
-                            </option>
-                        ))}
-                    </select>
-                </section>
+                    <section>
+                        <select className="input-field"
+                            value={newExercise.name}
+                            onChange={handleExerciseChange}
+                        >
+                            <option value="">Select Exercise</option>
+                            {availableExercises.map((exercise, index) => (
+                                <option key={index} value={exercise}>
+                                    {exercise}
+                                </option>
+                            ))}
+                        </select>
+                    </section>
 
-                <section>
-                    <input className="input-field"
-                        type="text"
-                        name="reps"
-                        placeholder="Reps (comma separated)"
-                        value={newExercise.sets.map(set => set.reps).join(', ') || ""}
-                        onChange={handleInputChange}
-                    />
-                </section>
+                    <section>
+                        <input className="input-field"
+                            type="text"
+                            name="reps"
+                            placeholder="Reps (comma separated)"
+                            value={newExercise.sets.map(set => set.reps).join(', ') || ""}
+                            onChange={handleInputChange}
+                        />
+                    </section>
 
-                <button onClick={addExerciseToWorkout} className="normal-button">
-                    Add Exercise
-                </button>
-
-                <CurrentWorkout currentWorkout={currentWorkout} />
-
-                <section>
-                    <button onClick={saveWorkout} className="normal-button">
-                        Save Workout
+                    <button onClick={addExerciseToWorkout} className="normal-button">
+                        Add Exercise
                     </button>
 
-                    <button onClick={clearCurrentWorkout} className="bad-button">
-                        Clear Workout
-                    </button>
-                </section>
+                    <CurrentWorkout currentWorkout={currentWorkout} />
 
-            </div>
+                    <section>
+                        <button onClick={saveWorkout} className="normal-button">
+                            Save Workout
+                        </button>
 
-            <div className="card">
-                <h2>Load a Saved Workout</h2>
+                        <button onClick={clearCurrentWorkout} className="bad-button">
+                            Clear Workout
+                        </button>
+                    </section>
 
-                <div>
-                    <select
-                        onChange={(e) => setSelectedWorkout(e.target.value)}
-                        value={selectedWorkout}
-                        className="input-field"
-                    >
-                        <option value="">Select a workout</option>
-                        {savedWorkouts.map((workout) => (
-                            <option key={workout.name} value={workout.name}>
-                                {workout.name}
-                            </option>
-                        ))}
-                    </select>
                 </div>
-                <div>
 
-                    <button onClick={loadWorkout} className="normal-button">
-                        Load Workout
-                    </button>
+                <div className="card">
+                    <h2>Load a Saved Workout</h2>
 
-                    <button onClick={deleteWorkout} className="bad-button">
-                        Delete Workout
-                    </button>
+                    <div>
+                        <select
+                            onChange={(e) => setSelectedWorkout(e.target.value)}
+                            value={selectedWorkout}
+                            className="input-field"
+                        >
+                            <option value="">Select a workout</option>
+                            {savedWorkouts.map((workout) => (
+                                <option key={workout.name} value={workout.name}>
+                                    {workout.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+
+                        <button onClick={loadWorkout} className="normal-button">
+                            Load Workout
+                        </button>
+
+                        <button onClick={deleteWorkout} className="bad-button">
+                            Delete Workout
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <div className="card">
-                <h2>Random Workout</h2>
+                <div className="card">
+                    <h2>Random Workout</h2>
 
-                <div>
-                    <select
-                        value={selectedBodyPart}
-                        onChange={(e) => setSelectedBodyPart(e.target.value as BodyPart)}
-                        className="input-field"
-                    >
-                        {Object.keys(exerciseCategories).map((bodyPart) => (
-                            <option key={bodyPart} value={bodyPart}>
-                                {bodyPart}
-                            </option>
-                        ))}
-                    </select>
+                    <div>
+                        <select
+                            value={selectedBodyPart}
+                            onChange={(e) => setSelectedBodyPart(e.target.value as BodyPart)}
+                            className="input-field"
+                        >
+                            {Object.keys(exerciseCategories).map((bodyPart) => (
+                                <option key={bodyPart} value={bodyPart}>
+                                    {bodyPart}
+                                </option>
+                            ))}
+                        </select>
 
-                    <button onClick={generateRandomWorkout} className="normal-button">
-                        Generate Random Workout
-                    </button>
+                        <button onClick={generateRandomWorkout} className="normal-button">
+                            Generate Random Workout
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

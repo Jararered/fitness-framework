@@ -1,7 +1,7 @@
 /* Styles for individual equipment items */
 .equipment-item {
     display: flex;
-    margin: 10px 0;
+    margin: 10px 10px;
     flex-direction: column;
     align-items: center;
     background-color: #f9f9f9;

@@ -68,53 +68,55 @@ const Equipment: React.FC = () => {
     return (
         <div className='main-content'>
             <SectionTitle title="Gym Equipment" />
-            <div className="card">
-                <section>
-                    <h2>Available Equipment</h2>
-                    <div className="flexible-container">
-                        {equipment.map(equipment => (
-                            <div
-                                key={equipment}
-                                className={`equipment-item ${selectedEquipment.includes(equipment) ? 'selected' : ''}`}
-                                onClick={() => toggleEquipment(equipment)}
-                            >
-                                <div className="equipment-icon">{equipmentIcons[equipment]}</div>
-                                <p className="equipment-name">{equipment}</p>
-                                {selectedEquipment.includes(equipment) && <FaCheck size={24} className="checkmark-icon" />}
-                            </div>
-                        ))}
-                    </div>
-                    <button onClick={saveEquipmentList} className="normal-button">Save Equipment Selection</button>
-                    <button onClick={clearEquipmentList} className="bad-button">Clear Equipment Selection</button>
-                </section>
-            </div>
-            <SectionTitle title="Saved Gyms" />
-            <div className="card">
-                <select onChange={e => setSelectedList(e.target.value)} value={selectedList} className="input-field">
-                    <option value="">Select a location</option>
-                    {savedEquipmentLists.map(gym => (
-                        <option key={gym.name} value={gym.name}>{gym.name}</option>
-                    ))}
-                </select>
-                <button onClick={() => loadEquipmentList(selectedList)} className="normal-button">Load Gym Equipment</button>
-                <button onClick={() => deleteEquipmentList(selectedList)} className="bad-button">Delete Gym Equipment</button>
-            </div>
-            <SectionTitle title="Available Exercises" />
-            <div className="card">
-                {selectedEquipment.length > 0 ? (
-                    selectedEquipment.map(equipment => (
-                        <div key={equipment}>
-                            <h2>{equipment}</h2>
-                            <ul>
-                                {equipmentExercises[equipment]?.map((exercise, index) => (
-                                    <li key={index}>{exercise}</li>
-                                )) || <li>No exercises available for this equipment.</li>}
-                            </ul>
+            <div className='vertical-section'>
+                <div className="card">
+                    <section>
+                        <h2>Available Equipment</h2>
+                        <div className="flexible-container">
+                            {equipment.map(equipment => (
+                                <div
+                                    key={equipment}
+                                    className={`equipment-item ${selectedEquipment.includes(equipment) ? 'selected' : ''}`}
+                                    onClick={() => toggleEquipment(equipment)}
+                                >
+                                    <div className="equipment-icon">{equipmentIcons[equipment]}</div>
+                                    <p className="equipment-name">{equipment}</p>
+                                    {selectedEquipment.includes(equipment) && <FaCheck size={24} className="checkmark-icon" />}
+                                </div>
+                            ))}
                         </div>
-                    ))
-                ) : (
-                    <p>No equipment selected. Please select equipment to see available exercises.</p>
-                )}
+                        <button onClick={saveEquipmentList} className="normal-button">Save Equipment Selection</button>
+                        <button onClick={clearEquipmentList} className="bad-button">Clear Equipment Selection</button>
+                    </section>
+                </div>
+                <SectionTitle title="Saved Gyms" />
+                <div className="card">
+                    <select onChange={e => setSelectedList(e.target.value)} value={selectedList} className="input-field">
+                        <option value="">Select a location</option>
+                        {savedEquipmentLists.map(gym => (
+                            <option key={gym.name} value={gym.name}>{gym.name}</option>
+                        ))}
+                    </select>
+                    <button onClick={() => loadEquipmentList(selectedList)} className="normal-button">Load Gym Equipment</button>
+                    <button onClick={() => deleteEquipmentList(selectedList)} className="bad-button">Delete Gym Equipment</button>
+                </div>
+                <SectionTitle title="Available Exercises" />
+                <div className="card">
+                    {selectedEquipment.length > 0 ? (
+                        selectedEquipment.map(equipment => (
+                            <div key={equipment}>
+                                <h2>{equipment}</h2>
+                                <ul>
+                                    {equipmentExercises[equipment]?.map((exercise, index) => (
+                                        <li key={index}>{exercise}</li>
+                                    )) || <li>No exercises available for this equipment.</li>}
+                                </ul>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No equipment selected. Please select equipment to see available exercises.</p>
+                    )}
+                </div>
             </div>
         </div>
     );
