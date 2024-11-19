@@ -22,6 +22,12 @@ interface PreferencesInterface {
     longRest: number;
 }
 
+const REST_TYPES = [
+    { key: 'short', label: 'Short Rest' },
+    { key: 'normal', label: 'Normal Rest' },
+    { key: 'long', label: 'Long Rest' }
+] as const;
+
 const Preferences: React.FC = () => {
     // Load preferences from local storage or use default values
     const [preferences, setPreferences] = useState<PreferencesInterface>({
@@ -140,38 +146,19 @@ const Preferences: React.FC = () => {
 
                 <div className="card">
                     <h2>Timing Preferences</h2>
-
-                    <div>
-                        <label htmlFor="short-rest">Short Rest (sec):</label>
-                        <input
-                            type="number"
-                            id="short-rest"
-                            value={preferences.shortRest}
-                            onChange={(e) => handleRestChange(e, 'short')}
-                            className="input-field"
-                            inputMode="numeric"
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="normal-rest">Normal Rest (sec):</label>
-                        <input className="input-field"
-                            type="number"
-                            id="normal-rest"
-                            value={preferences.normalRest}
-                            onChange={(e) => handleRestChange(e, 'normal')}
-                            inputMode="numeric"
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="long-rest">Long Rest (sec):</label>
-                        <input className="input-field"
-                            type="number"
-                            id="long-rest"
-                            value={preferences.longRest}
-                            onChange={(e) => handleRestChange(e, 'long')}
-                            inputMode="numeric"
-                        />
-                    </div>
+                    {REST_TYPES.map(({ key, label }) => (
+                        <div key={key}>
+                            <label htmlFor={`${key}-rest`}>{label} (sec):</label>
+                            <input
+                                type="number"
+                                id={`${key}-rest`}
+                                value={preferences[`${key}Rest` as keyof typeof preferences]}
+                                onChange={(e) => handleRestChange(e, key)}
+                                className="input-field"
+                                inputMode="numeric"
+                            />
+                        </div>
+                    ))}
                 </div>
             </div>
 
