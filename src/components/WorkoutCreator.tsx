@@ -15,7 +15,7 @@ export interface SavedWorkout {
 
 const WorkoutCreator: React.FC = () => {
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);
-    const [newExercise, setNewExercise] = useState<Exercise>({ name: '', sets: [{ reps: 0 }] });
+    const [newExercise, setNewExercise] = useState<Exercise>({ name: '', sets: [] });
     const [savedWorkouts, setSavedWorkouts] = useState<SavedWorkout[]>([]);
     const [selectedWorkout, setSelectedWorkout] = useState<string>("");
     const [availableExercises, setAvailableExercises] = useState<string[]>([]);
@@ -50,7 +50,14 @@ const WorkoutCreator: React.FC = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
-        const repsArray = value.split(',').map(rep => ({ reps: Number(rep.trim()) }));
+        if (!value.trim()) {
+            setNewExercise((prevExercise) => ({
+                ...prevExercise,
+                sets: [],
+            }));
+            return;
+        }
+        const repsArray = value.split('.').map(rep => ({ reps: Number(rep.trim()) }));
         setNewExercise((prevExercise) => ({
             ...prevExercise,
             sets: repsArray,
@@ -179,15 +186,14 @@ const WorkoutCreator: React.FC = () => {
                         </select>
                     </section>
 
-                    <section>
-                        <input className="input-field"
-                            type="text"
-                            name="reps"
-                            placeholder="Reps (comma separated)"
-                            value={newExercise.sets.map(set => set.reps).join(', ') || ""}
-                            onChange={handleInputChange}
-                        />
-                    </section>
+                    <input className="input-field"
+                        type="text"
+                        inputMode="decimal"
+                        name="reps"
+                        placeholder="Reps (decimal separated)"
+                        value={newExercise.sets.map(set => set.reps).join('. ') || ""}
+                        onChange={handleInputChange}
+                    />
 
                     <button onClick={addExerciseToWorkout} className="normal-button">
                         Add Exercise
@@ -210,20 +216,18 @@ const WorkoutCreator: React.FC = () => {
                 <div className="card">
                     <h2>Load a Saved Workout</h2>
 
-                    <div>
-                        <select
-                            onChange={(e) => setSelectedWorkout(e.target.value)}
-                            value={selectedWorkout}
-                            className="input-field"
-                        >
-                            <option value="">Select a workout</option>
-                            {savedWorkouts.map((workout) => (
-                                <option key={workout.name} value={workout.name}>
-                                    {workout.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                    <select
+                        onChange={(e) => setSelectedWorkout(e.target.value)}
+                        value={selectedWorkout}
+                        className="input-field"
+                    >
+                        <option value="">Select a workout</option>
+                        {savedWorkouts.map((workout) => (
+                            <option key={workout.name} value={workout.name}>
+                                {workout.name}
+                            </option>
+                        ))}
+                    </select>
                     <div>
 
                         <button onClick={loadWorkout} className="normal-button">
