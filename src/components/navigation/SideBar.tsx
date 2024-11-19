@@ -1,12 +1,12 @@
 import React from 'react';
 
+import './SideBar.css';
+
 import HomeButton from '../buttons/HomeButton';
 import WorkoutButton from '../buttons/WorkoutCreatorButton';
 import GymButton from '../buttons/GymButton';
 import ProfileButton from '../buttons/ProfileButton';
 import SettingsButton from '../buttons/SettingsButton';
-
-import './SideBar.css';
 
 interface SideBarProps {
     onNavigate: (view: string) => void;

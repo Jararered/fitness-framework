@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import SectionTitle from './shared/SectionTitle';
 import { Exercise } from './Exercise';
 import WorkoutBreak from './WorkoutBreak';
 
@@ -216,7 +215,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
     return (
         <div className='workout-in-progress'>
-            <SectionTitle title="Workout in Progress" />
+            <h1>Workout in Progress</h1>
             <TransitionGroup>
                 <CSSTransition
                     key={isBreak ? 'break' : 'workout'}
@@ -225,10 +224,10 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                 >
                     <div>
                         {isBreak ? (
-                            <WorkoutBreak 
-                                duration={60} 
-                                onBreakEnd={() => setIsBreak(false)} 
-                                onSkip={() => setIsBreak(false)} 
+                            <WorkoutBreak
+                                duration={60}
+                                onBreakEnd={() => setIsBreak(false)}
+                                onSkip={() => setIsBreak(false)}
                             />
                         ) : (
                             <div className='vertical-section'>

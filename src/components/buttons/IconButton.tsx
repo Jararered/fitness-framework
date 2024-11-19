@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconType } from 'react-icons';
-import './Button.css';
+import './IconButton.css';
 
 interface IconButtonProps {
     onClick: () => void;
@@ -11,7 +11,7 @@ interface IconButtonProps {
 
 const IconButton: React.FC<IconButtonProps> = ({ onClick, isCollapsed, icon: Icon, label }) => {
     return (
-        <div className="button" onClick={onClick}>
+        <div className="icon-button" onClick={onClick}>
             {isCollapsed ? <Icon size={24} /> : <> <Icon size={24} /> {label} </>}
         </div>
     );

@@ -19,11 +19,7 @@ import WorkoutInProgress from './components/WorkoutInProgress';
 import './App.css';
 import './styles/BaseStyles.css'
 import './styles/Transitions.css';
-
-import './components/buttons/ButtonColors.css';
-import './components/shared/Card.css';
-import './components/shared/HorizontalSection.css';
-import './components/shared/VerticalSection.css';
+import './styles/Colors.css';
 
 const App: React.FC = () => {
     const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);

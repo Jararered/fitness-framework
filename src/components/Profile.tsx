@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-// Import Components
-import SectionTitle from './shared/SectionTitle';
-
 // Import Interfaces
 import { Exercise } from './Exercise';
 
-import './shared/Card.css'
+import '../styles/Card.css'
 
 const WorkoutProfile: React.FC = () => {
     const [bestWeights, setBestWeights] = useState<{ [key: string]: { weight: number, date: string } }>({});
@@ -44,7 +41,7 @@ const WorkoutProfile: React.FC = () => {
 
     return (
         <div className="profile">
-            <SectionTitle title="Profile" />
+            <h1>Profile</h1>
             <div className='vertical-section'>
                 <div className="card">
                     <h2>Recent Workouts</h2>
