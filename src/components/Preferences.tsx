@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-// Import Components
-import SectionTitle from './shared/SectionTitle';
-
 // Import Styles
-import '../styles/Input.css';
 import './Preferences.css';
-import './shared/HorizontalSection.css'
 
 interface PreferencesInterface {
     // User
@@ -105,9 +100,10 @@ const Preferences: React.FC = () => {
 
     return (
         <div className="preferences">
-            <SectionTitle title="Preferences" />
 
-            <div className="vertical-section">
+            <h1>Preferences</h1>
+
+            <div className="column">
                 <div className="card">
 
                     <h2>User Preferences</h2>
@@ -162,8 +158,9 @@ const Preferences: React.FC = () => {
                 </div>
             </div>
 
-            <SectionTitle title="Debug" />
-            <div className="horizontal-section">
+            <h1>Debug</h1>
+
+            <div className="row">
                 <div className="card">
                     <div className="container-section-title">
                         <h2>Manage Data</h2>

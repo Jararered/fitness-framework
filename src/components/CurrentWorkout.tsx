@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Exercise } from './Exercise';
 
 const CurrentWorkout: React.FC<{ currentWorkout: Exercise[] }> = ({ currentWorkout }) => {

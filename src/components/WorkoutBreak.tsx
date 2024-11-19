@@ -21,7 +21,7 @@ const WorkoutBreak: React.FC<{ duration: number, onBreakEnd: () => void, onSkip:
 
     return (
         <div className="break-timer">
-            <div className='vertical-section'>
+            <div className='column'>
                 <div className='card'>
                     <h2>Break Time</h2>
                     <div>
