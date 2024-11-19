@@ -8,43 +8,16 @@ html,
     background-image: radial-gradient(circle, #d2d2d2 1px, transparent 2px);
     background-size: 40px 40px;
     color: #333;
-    height: 100%;
-    overflow-x: hidden;
-}
-
-.App {
-    display: flex;
-    flex-direction: row;
-    min-height: 100vh;
-    background-color: transparent;
-}
-
-.page-title {
-    width: 100%;
-    z-index: 1000;
-}
-
-.page-title h1 {
-    font-size: 32px;
 }
 
 .main-content {
-    flex-grow: 1;
     margin-left: 80px;
     padding: 10px;
-    box-sizing: border-box;
-    position: relative;
-    transition: 0.3s;
 }
 
 @media (max-width: 768px) {
-    .App {
-        flex-direction: column;
-    }
-
     .main-content {
         margin-left: 0;
-        margin-bottom: 60px;
         transition: 0.3s;
     }
 }
