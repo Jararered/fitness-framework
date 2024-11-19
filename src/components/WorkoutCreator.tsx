@@ -157,7 +157,7 @@ const WorkoutCreator: React.FC = () => {
     };
 
     return (
-        <div className='main-content'>
+        <div className='workout-creator'>
 
             <SectionTitle title="Workout Creator" />
 

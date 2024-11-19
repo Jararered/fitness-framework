@@ -66,7 +66,7 @@ const Equipment: React.FC = () => {
     };
 
     return (
-        <div className='main-content'>
+        <div className='gym-equipment'>
             <SectionTitle title="Gym Equipment" />
             <div className='vertical-section'>
                 <div className="card">
