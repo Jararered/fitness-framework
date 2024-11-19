@@ -98,7 +98,7 @@ const Preferences: React.FC = () => {
     };
 
     return (
-        <div className="main-content">
+        <div className="preferences">
             <SectionTitle title="Preferences" />
 
             <div className="vertical-section">

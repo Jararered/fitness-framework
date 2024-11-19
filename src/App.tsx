@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // Navigation Menu
 import SideBar from './components/navigation/SideBar';
@@ -17,15 +18,18 @@ import WorkoutInProgress from './components/WorkoutInProgress';
 // Styles
 import './App.css';
 import './styles/BaseStyles.css'
+import './styles/Transitions.css';
 
 import './components/buttons/ButtonColors.css';
 import './components/shared/Card.css';
 import './components/shared/HorizontalSection.css';
 import './components/shared/VerticalSection.css';
 
+
 const App: React.FC = () => {
     const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);
     const [content, setContent] = useState('home');
+    const [, setPrevContent] = useState('');
 
     const toggleSideBar = () => {
         setSideBarCollapsed((prev) => !prev);
@@ -33,6 +37,11 @@ const App: React.FC = () => {
 
     const handleWorkoutComplete = () => {
         setContent('home');
+    };
+
+    const handleNavigate = (newContent: string) => {
+        setPrevContent(content);
+        setContent(newContent);
     };
 
     const renderMainContent = () => {
@@ -61,16 +70,24 @@ const App: React.FC = () => {
         <div className="App">
 
             <SideBar
-                onNavigate={setContent}
+                onNavigate={handleNavigate}
                 isCollapsed={isSideBarCollapsed}
                 onToggle={toggleSideBar}
             />
 
             <DockBar
-                onNavigate={setContent}
+                onNavigate={handleNavigate}
             />
 
-            {renderMainContent()}
+            <TransitionGroup className="main-content">
+                <CSSTransition
+                    key={content}
+                    timeout={200}
+                    classNames="slide"
+                >
+                    {renderMainContent()}
+                </CSSTransition>
+            </TransitionGroup>
 
         </div>
     );

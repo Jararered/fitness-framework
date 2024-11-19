@@ -43,7 +43,7 @@ const WorkoutProfile: React.FC = () => {
     };
 
     return (
-        <div className="main-content">
+        <div className="profile">
             <SectionTitle title="Profile" />
             <div className='vertical-section'>
                 <div className="card">

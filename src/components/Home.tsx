@@ -44,7 +44,7 @@ const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
     };
 
     return (
-        <div className='main-content'>
+        <div>
             <SectionTitle title={userName ? `Welcome, ${userName}` : 'Home'} />
             <div className='vertical-section'>
                 <div className="card">
