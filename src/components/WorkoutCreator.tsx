@@ -75,7 +75,7 @@ const WorkoutCreator: React.FC = () => {
             return updatedWorkout;
         });
 
-        setNewExercise({ name: '', sets: [{ reps: 0 }] });
+        setNewExercise({ name: '', sets: [] });
     };
 
     const saveWorkout = () => {
