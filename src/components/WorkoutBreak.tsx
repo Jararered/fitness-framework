@@ -12,7 +12,10 @@ const WorkoutBreak: React.FC<{ duration: number, onBreakEnd: () => void, onSkip:
         }
     }, [timeLeft, onBreakEnd]);
 
-    const radius = 50;
+    const radius = 80;
+    const cradius = radius + 10;
+    const length = radius * 2 + 20;
+    const thickness = 10;
     const circumference = 2 * Math.PI * radius;
     const progress = (timeLeft / duration) * circumference;
 
@@ -22,26 +25,26 @@ const WorkoutBreak: React.FC<{ duration: number, onBreakEnd: () => void, onSkip:
                 <div className='card'>
                     <h2>Break Time</h2>
                     <div>
-                        <svg width="120" height="120" className="countdown-circle">
+                        <svg width={length} height={length} className="countdown-circle">
                             <circle
                                 stroke="#eeeeee"
                                 fill="transparent"
-                                strokeWidth="5"
+                                strokeWidth={thickness}
                                 r={radius}
-                                cx="60"
-                                cy="60"
+                                cx={cradius}
+                                cy={cradius}
                             />
                             <circle
                                 stroke="#007aff"
                                 fill="transparent"
-                                strokeWidth="5"
+                                strokeWidth={thickness}
                                 r={radius}
-                                cx="60"
-                                cy="60"
+                                cx={cradius}
+                                cy={cradius}
                                 strokeDasharray={circumference}
                                 strokeDashoffset={circumference - progress}
                             />
-                            <text x="60" y="65" textAnchor="middle" fontSize="20" fill="black">{timeLeft}</text>
+                            <text x={cradius} y={cradius + 10} textAnchor="middle" fontSize={radius / 2} fill="black">{timeLeft}</text>
                         </svg>
                     </div>
                     <button className="bad-button" onClick={onSkip}>
