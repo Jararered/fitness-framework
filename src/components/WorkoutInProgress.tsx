@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SectionTitle from './shared/SectionTitle';
 import { Exercise } from './Exercise';
+import WorkoutBreak from './WorkoutBreak';
 
 interface WorkoutInProgressProps {
     onCompleteWorkout: () => void;
@@ -37,6 +38,8 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         maxWeights: {},
         lastWeights: {}
     });
+
+    const [isBreak, setIsBreak] = useState(false);
 
     useEffect(() => {
         const loadFromLocalStorage = (key: string, defaultValue: any) => {
@@ -162,6 +165,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             }
             setWorkoutState(newWorkoutState);
             localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
+            setIsBreak(true);
         }
     };
 
@@ -212,35 +216,39 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     return (
         <div className='main-content'>
             <SectionTitle title="Workout in Progress" />
-            <div className='vertical-section'>
-                <div className="card">
-                    <h2>{currentExercise.name}</h2>
-                    <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.sets.length}</p>
-                    <p>Reps: </p>
-                    <input
-                        type="number"
-                        value={currentSet.reps}
-                        onChange={(e) => handleRepsChange(e, workoutState.currentSetIndex)}
-                        className="input-field"
-                    />
-                    <input
-                        type="number"
-                        inputMode="numeric"
-                        placeholder={weightTracking.lastWeights[currentExercise.name]?.weight.toString() || "Enter weight"}
-                        value={weightTracking.currentWeights[workoutState.currentSetIndex] || ""}
-                        onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
-                        className="input-field"
-                    />
-                    <div className="button-row">
-                        <button className="bad-button" onClick={handleSkipExercise}>
-                            Skip
-                        </button>
-                        <button className="normal-button" onClick={handleNextExercise}>
-                            Next
-                        </button>
+            {isBreak ? (
+                <WorkoutBreak duration={60} onBreakEnd={() => setIsBreak(false)} onSkip={() => setIsBreak(false)} />
+            ) : (
+                <div className='vertical-section'>
+                    <div className="card">
+                        <h2>{currentExercise.name}</h2>
+                        <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.sets.length}</p>
+                        <p>Reps: </p>
+                        <input
+                            type="number"
+                            value={currentSet.reps}
+                            onChange={(e) => handleRepsChange(e, workoutState.currentSetIndex)}
+                            className="input-field"
+                        />
+                        <input
+                            type="number"
+                            inputMode="numeric"
+                            placeholder={weightTracking.lastWeights[currentExercise.name]?.weight.toString() || "Enter weight"}
+                            value={weightTracking.currentWeights[workoutState.currentSetIndex] || ""}
+                            onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
+                            className="input-field"
+                        />
+                        <div className="button-row">
+                            <button className="bad-button" onClick={handleSkipExercise}>
+                                Skip
+                            </button>
+                            <button className="normal-button" onClick={handleNextExercise}>
+                                Next
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
