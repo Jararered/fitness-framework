@@ -1,12 +1,12 @@
 import React from 'react';
 
-import './DockBar.css';
-
 import HomeButton from '../buttons/HomeButton';
 import WorkoutButton from '../buttons/WorkoutCreatorButton';
 import GymButton from '../buttons/GymButton';
 import ProfileButton from '../buttons/ProfileButton';
 import SettingsButton from '../buttons/SettingsButton';
+
+import './DockBar.css';
 
 interface DockBarProps {
     onNavigate: (view: string) => void;

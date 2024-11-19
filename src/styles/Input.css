@@ -8,7 +8,7 @@ select {
 
 /* Styles for input fields within input rows */
 .input-field {
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: 16px;
     box-sizing: border-box;
 
@@ -17,9 +17,11 @@ select {
     color: #333333;
     border: 1px solid #e0e0e0;
 
-    text-align: center;
+    flex: auto;
+    width: auto;
     padding: 10px;
     margin: 10px;
+    border-radius: 10px;
     font-size: 16px;
 }
 

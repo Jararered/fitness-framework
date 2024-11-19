@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 // Import Components
+import SectionTitle from './shared/SectionTitle';
 import CurrentWorkout from './CurrentWorkout';
 
 // Import Interfaces
@@ -44,7 +45,7 @@ const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
 
     return (
         <div>
-            <h1>{userName ? `Welcome, ${userName}` : 'Home'}</h1>
+            <SectionTitle title={userName ? `Welcome, ${userName}` : 'Home'} />
             <div className='vertical-section'>
                 <div className="card">
                     {hasOngoingWorkout ? (

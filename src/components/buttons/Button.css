@@ -1,4 +1,4 @@
-.icon-button {
+.button {
     width: 60px;
     height: 60px;
     padding: 0px;
@@ -14,7 +14,7 @@
     transition: 0.3s;
 }
 
-.icon-button:hover {
+.button:hover {
     background-color: #e0e0e0;
     transition: background-color 0.3s;
 

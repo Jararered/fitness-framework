@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Import Components
+import SectionTitle from './shared/SectionTitle';
 import CurrentWorkout from './CurrentWorkout';
 
 // Import Interfaces
@@ -165,7 +166,7 @@ const WorkoutCreator: React.FC = () => {
     return (
         <div className='workout-creator'>
 
-            <h1>Workout Creator</h1>
+            <SectionTitle title="Workout Creator" />
 
             <div className='vertical-section'>
                 <div className="card">
