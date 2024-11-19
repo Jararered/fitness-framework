@@ -44,7 +44,7 @@ const WorkoutBreak: React.FC<{ duration: number, onBreakEnd: () => void, onSkip:
                                 strokeDasharray={circumference}
                                 strokeDashoffset={circumference - progress}
                             />
-                            <text x={cradius} y={cradius + 10} textAnchor="middle" fontSize={radius / 2} fill="black">{timeLeft}</text>
+                            <text x={cradius} y={cradius + 10} textAnchor="middle" fontSize={radius / 2}>{timeLeft}</text>
                         </svg>
                     </div>
                     <button className="bad-button" onClick={onSkip}>
