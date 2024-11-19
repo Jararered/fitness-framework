@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-// Navigation Menu
+// Navigation
 import SideBar from './components/navigation/SideBar';
 import DockBar from './components/navigation/DockBar';
 
-// Pages
+// Components
 import Home from './components/Home';
 import Workout from './components/WorkoutCreator';
 import GymEquipment from './components/GymEquipment';
 import Profile from './components/Profile';
 import Preferences from './components/Preferences';
-
-// Workout In Progress
 import WorkoutInProgress from './components/WorkoutInProgress';
 
 // Styles
 import './App.css';
-import './styles/BaseStyles.css'
 import './styles/ButtonColors.css';
 import './styles/Card.css';
 import './styles/Input.css';
