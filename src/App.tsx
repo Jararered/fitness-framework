@@ -25,7 +25,6 @@ import './components/shared/Card.css';
 import './components/shared/HorizontalSection.css';
 import './components/shared/VerticalSection.css';
 
-
 const App: React.FC = () => {
     const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);
     const [content, setContent] = useState('home');
@@ -82,7 +81,7 @@ const App: React.FC = () => {
             <TransitionGroup className="main-content">
                 <CSSTransition
                     key={content}
-                    timeout={200}
+                    timeout={250}
                     classNames="slide"
                 >
                     {renderMainContent()}
