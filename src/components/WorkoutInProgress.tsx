@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import WorkoutSummary from './WorkoutSummary';
 
 import { Exercise } from './Exercise';
 import WorkoutBreak from './WorkoutBreak';
@@ -41,6 +42,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     });
 
     const [isBreak, setIsBreak] = useState(false);
+    const [isComplete, setIsComplete] = useState(false);
 
     useEffect(() => {
         const loadFromLocalStorage = (key: string, defaultValue: any) => {
@@ -161,7 +163,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                     currentWeights: []
                 }));
             } else {
-                completeWorkout();
+                setIsComplete(true);
                 return;
             }
             setWorkoutState(newWorkoutState);
@@ -204,6 +206,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         }
 
         localStorage.removeItem('workoutState');
+        localStorage.removeItem('currentWorkout'); // Add this line to clear the current workout
         onCompleteWorkout();
     };
 
@@ -220,12 +223,17 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
             <TransitionGroup>
                 <CSSTransition
-                    key={isBreak ? 'break' : 'workout'}
+                    key={isComplete ? 'summary' : isBreak ? 'break' : 'workout'}
                     timeout={250}
                     classNames="slide"
                 >
                     <div>
-                        {isBreak ? (
+                        {isComplete ? (
+                            <WorkoutSummary
+                                workoutState={workoutState}
+                                onFinish={completeWorkout}
+                            />
+                        ) : isBreak ? (
                             <WorkoutBreak
                                 duration={60}
                                 onBreakEnd={() => setIsBreak(false)}
@@ -250,16 +258,14 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                                         onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
                                         inputMode="decimal"
                                     />
-                                    <div className="button-row">
-                                        <button className="bad-button"
-                                            onClick={handleSkipExercise}>
-                                            Skip
-                                        </button>
-                                        <button className="normal-button"
-                                            onClick={handleNextExercise}>
-                                            Next
-                                        </button>
-                                    </div>
+                                    <button className="bad-button"
+                                        onClick={handleSkipExercise}>
+                                        Skip
+                                    </button>
+                                    <button className="normal-button"
+                                        onClick={handleNextExercise}>
+                                        Next
+                                    </button>
                                 </div>
                             </div>
                         )}
