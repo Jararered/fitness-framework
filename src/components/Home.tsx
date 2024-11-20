@@ -5,7 +5,7 @@ import CurrentWorkout from './CurrentWorkout';
 
 // Import Interfaces
 import { Exercise } from './Exercise';
-import { WorkoutState } from './WorkoutInProgress';
+import { WorkoutState } from './WorkoutActive';
 
 interface WorkoutOverviewProps {
     onOpenWorkout: () => void;

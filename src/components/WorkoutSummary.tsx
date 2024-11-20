@@ -1,7 +1,7 @@
 import React from 'react';
 import { Exercise } from './Exercise';
 import { SavedWorkout } from './WorkoutCreator';
-import { WorkoutState } from './WorkoutInProgress';
+import { WorkoutState } from './WorkoutActive';
 
 interface WorkoutSummaryProps {
     workoutState: WorkoutState;

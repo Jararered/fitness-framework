@@ -11,7 +11,7 @@ import Workout from './components/WorkoutCreator';
 import GymEquipment from './components/GymEquipment';
 import Profile from './components/Profile';
 import Preferences from './components/Preferences';
-import WorkoutInProgress from './components/WorkoutInProgress';
+import WorkoutInProgress from './components/WorkoutActive';
 
 // Styles
 import './App.css';
