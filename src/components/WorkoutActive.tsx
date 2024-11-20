@@ -59,8 +59,18 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         const maxWeights = loadFromLocalStorage('loggedMaxWeights', {});
         const lastWeights = loadFromLocalStorage('loggedLastWeights', {});
         const savedIsBreak = localStorage.getItem('isBreak');
+
         if (savedIsBreak) {
             setIsBreak(JSON.parse(savedIsBreak));
+
+            const breakStartTime = Number(localStorage.getItem('breakStartTime'));
+            const preferences = loadFromLocalStorage('preferences', {});
+            const normalRest = preferences.normalRest || 60;
+            const elapsed = (Date.now() - breakStartTime) / 1000;
+
+            if (elapsed >= normalRest) {
+                handleBreakEnd();
+            }
         }
 
         if (workoutData) {
@@ -254,7 +264,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                             />
                         ) : isBreak ? (
                             <WorkoutBreak
-                                duration={60}
                                 onBreakEnd={handleBreakEnd}
                                 onSkip={handleBreakEnd}
                             />
