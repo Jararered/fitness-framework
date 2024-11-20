@@ -81,7 +81,7 @@ const Equipment: React.FC = () => {
                                     className={`equipment-item ${selectedEquipment.includes(equipment) ? 'selected' : ''}`}
                                     onClick={() => toggleEquipment(equipment)}
                                 >
-                                    <div className="equipment-icon">{equipmentIcons[equipment]}</div>
+                                    <div>{equipmentIcons[equipment]}</div>
                                     <p className="equipment-name">{equipment}</p>
                                     {selectedEquipment.includes(equipment) && <FaCheck size={24} className="checkmark-icon" />}
                                 </div>

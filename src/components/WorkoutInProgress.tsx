@@ -243,14 +243,15 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                                         value={currentSet.reps}
                                         onChange={(e) => handleRepsChange(e, workoutState.currentSetIndex)}
                                         className="input-field"
+                                        inputMode="numeric"
                                     />
                                     <input
                                         type="number"
-                                        inputMode="numeric"
                                         placeholder={weightTracking.lastWeights[currentExercise.name]?.weight.toString() || "Enter weight"}
                                         value={weightTracking.currentWeights[workoutState.currentSetIndex] || ""}
                                         onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
                                         className="input-field"
+                                        inputMode="decimal"
                                     />
                                     <div className="button-row">
                                         <button className="bad-button" onClick={handleSkipExercise}>

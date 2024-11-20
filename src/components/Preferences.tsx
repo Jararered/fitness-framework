@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-// Import Styles
-import './Preferences.css';
-
 interface PreferencesInterface {
     // User
     user: string;
@@ -124,7 +121,7 @@ const Preferences: React.FC = () => {
                             id="user-weight"
                             value={preferences.weight === 0 ? '' : preferences.weight}
                             onChange={handleWeightChange}
-                            inputMode="numeric"
+                            inputMode="decimal"
                         />
                     </div>
                     <div>
