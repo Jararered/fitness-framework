@@ -41,7 +41,11 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         lastWeights: {}
     });
 
-    const [isBreak, setIsBreak] = useState(false);
+    const [isBreak, setIsBreak] = useState(() => {
+        const savedIsBreak = localStorage.getItem('isBreak');
+        return savedIsBreak ? JSON.parse(savedIsBreak) : false;
+    });
+
     const [isComplete, setIsComplete] = useState(false);
 
     useEffect(() => {
@@ -54,6 +58,10 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         const savedWorkoutState = loadFromLocalStorage('workoutState', {});
         const maxWeights = loadFromLocalStorage('loggedMaxWeights', {});
         const lastWeights = loadFromLocalStorage('loggedLastWeights', {});
+        const savedIsBreak = localStorage.getItem('isBreak');
+        if (savedIsBreak) {
+            setIsBreak(JSON.parse(savedIsBreak));
+        }
 
         if (workoutData) {
             setWorkoutState(prev => ({
@@ -70,6 +78,10 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             lastWeights
         }));
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('isBreak', JSON.stringify(isBreak));
+    }, [isBreak]);
 
     const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>, setIndex: number) => {
         const newWeights = [...weightTracking.currentWeights];
@@ -169,6 +181,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
             setWorkoutState(newWorkoutState);
             localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
             setIsBreak(true);
+            localStorage.setItem('isBreak', JSON.stringify(true));
         }
     };
 
@@ -210,6 +223,12 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         onCompleteWorkout();
     };
 
+    const handleBreakEnd = () => {
+        setIsBreak(false);
+        localStorage.removeItem('isBreak');
+        localStorage.removeItem('breakStartTime');
+    };
+
     if (!workoutState.exercises || workoutState.exercises.length === 0) {
         return <p>No workout found. Please create or load a workout.</p>;
     }
@@ -218,8 +237,8 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     const currentSet = currentExercise.sets[workoutState.currentSetIndex];
 
     return (
-        <div className='workout-in-progress'>
-            <h1>Workout in Progress</h1>
+        <div className='workout-active'>
+            <h1>Workout Active</h1>
 
             <TransitionGroup>
                 <CSSTransition
@@ -236,8 +255,8 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                         ) : isBreak ? (
                             <WorkoutBreak
                                 duration={60}
-                                onBreakEnd={() => setIsBreak(false)}
-                                onSkip={() => setIsBreak(false)}
+                                onBreakEnd={handleBreakEnd}
+                                onSkip={handleBreakEnd}
                             />
                         ) : (
                             <div className='column'>
@@ -258,14 +277,16 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                                         onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
                                         inputMode="decimal"
                                     />
-                                    <button className="bad-button"
-                                        onClick={handleSkipExercise}>
-                                        Skip
-                                    </button>
-                                    <button className="normal-button"
-                                        onClick={handleNextExercise}>
-                                        Next
-                                    </button>
+                                    <div>
+                                        <button className="bad-button"
+                                            onClick={handleSkipExercise}>
+                                            Skip
+                                        </button>
+                                        <button className="normal-button"
+                                            onClick={handleNextExercise}>
+                                            Next
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         )}

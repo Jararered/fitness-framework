@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from 'react';
 
 const WorkoutBreak: React.FC<{ duration: number, onBreakEnd: () => void, onSkip: () => void }> = ({ duration, onBreakEnd, onSkip }) => {
-    const [timeLeft, setTimeLeft] = useState(duration);
+    const [timeLeft, setTimeLeft] = useState<number>(duration);
 
     useEffect(() => {
-        if (timeLeft > 0) {
-            const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-            return () => clearTimeout(timer);
-        } else {
-            onBreakEnd();
+        let breakStartTime = Number(localStorage.getItem('breakStartTime'));
+        if (!breakStartTime) {
+            breakStartTime = Date.now();
+            localStorage.setItem('breakStartTime', breakStartTime.toString());
         }
-    }, [timeLeft, onBreakEnd]);
+        const updateTimeLeft = () => {
+            const elapsed = Math.floor((Date.now() - breakStartTime) / 1000);
+            const remaining = duration - elapsed;
+            if (remaining > 0) {
+                setTimeLeft(remaining);
+            } else {
+                localStorage.removeItem('breakStartTime');
+                onBreakEnd();
+            }
+        };
+        updateTimeLeft();
+        const timer = setInterval(updateTimeLeft, 1000);
+        return () => clearInterval(timer);
+    }, [duration, onBreakEnd]);
+
+    const handleSkip = () => {
+        localStorage.removeItem('breakStartTime');
+        onSkip();
+    };
 
     const radius = 80;
     const cradius = radius + 10;
@@ -47,7 +64,7 @@ const WorkoutBreak: React.FC<{ duration: number, onBreakEnd: () => void, onSkip:
                             <text x={cradius} y={cradius + 10} textAnchor="middle" fontSize={radius / 2}>{timeLeft}</text>
                         </svg>
                     </div>
-                    <button className="bad-button" onClick={onSkip}>
+                    <button className="bad-button" onClick={handleSkip}>
                         Skip Break
                     </button>
                 </div>
