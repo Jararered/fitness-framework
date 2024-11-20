@@ -168,7 +168,8 @@ const WorkoutCreator: React.FC = () => {
             <div className='column'>
                 <div className="card">
                     <h2>Add Exercise to Workout</h2>
-                    <section>
+
+                    <div>
                         <select className="input-field" value={newExercise.name}
                             onChange={handleExerciseChange}>
                             <option value="">Select Exercise</option>
@@ -178,15 +179,15 @@ const WorkoutCreator: React.FC = () => {
                                 </option>
                             ))}
                         </select>
-                    </section>
 
-                    <input className="input-field" type="text"
-                        inputMode="decimal"
-                        name="reps"
-                        placeholder="Reps (decimal separated)"
-                        value={newExercise.sets.map(set => set.reps).join('. ') || ""}
-                        onChange={handleInputChange}
-                    />
+                        <input className="input-field" type="text"
+                            inputMode="decimal"
+                            name="reps"
+                            placeholder="Reps (decimal separated)"
+                            value={newExercise.sets.map(set => set.reps).join('. ') || ""}
+                            onChange={handleInputChange}
+                        />
+                    </div>
 
                     <button className="normal-button" onClick={addExerciseToWorkout}>
                         Add Exercise
@@ -231,17 +232,17 @@ const WorkoutCreator: React.FC = () => {
 
                 <div className="card">
                     <h2>Random Workout</h2>
+                    <select className="input-field"
+                        value={selectedBodyPart}
+                        onChange={(e) => setSelectedBodyPart(e.target.value as BodyPart)}
+                    >
+                        {Object.keys(exerciseCategories).map((bodyPart) => (
+                            <option key={bodyPart} value={bodyPart}>
+                                {bodyPart}
+                            </option>
+                        ))}
+                    </select>
                     <div>
-                        <select className="input-field"
-                            value={selectedBodyPart}
-                            onChange={(e) => setSelectedBodyPart(e.target.value as BodyPart)}
-                        >
-                            {Object.keys(exerciseCategories).map((bodyPart) => (
-                                <option key={bodyPart} value={bodyPart}>
-                                    {bodyPart}
-                                </option>
-                            ))}
-                        </select>
 
                         <button className="normal-button" onClick={generateRandomWorkout}>
                             Generate Random Workout
