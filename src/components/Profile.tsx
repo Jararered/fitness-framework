@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 // Import Interfaces
-import { Exercise } from './Exercise';
+import { Exercise } from "./Exercise";
 
 const WorkoutProfile: React.FC = () => {
     const [bestWeights, setBestWeights] = useState<{ [key: string]: { weight: number, date: string } }>({});
     const [recentWorkouts, setRecentWorkouts] = useState<{ startTime: string, endTime: string, exercises: Exercise[] }[]>([]);
-    const [units, setUnits] = useState<'lbs' | 'kg'>('lbs');
+    const [units, setUnits] = useState<"lbs" | "kg">("lbs");
 
     useEffect(() => {
         // Load the best weights and recent workouts from local storage
-        const bestWeightsData = localStorage.getItem('loggedMaxWeights');
+        const bestWeightsData = localStorage.getItem("loggedMaxWeights");
         if (bestWeightsData) {
             setBestWeights(JSON.parse(bestWeightsData));
         }
 
         // Load preferences
-        const preferences = localStorage.getItem('preferences');
+        const preferences = localStorage.getItem("preferences");
         if (preferences) {
             // Parse the preferences and set the units locally
             const { units: savedUnits } = JSON.parse(preferences);
@@ -24,7 +24,7 @@ const WorkoutProfile: React.FC = () => {
         }
 
         // Load the recent workouts from local storage
-        const loggedWorkouts = localStorage.getItem('loggedWorkouts');
+        const loggedWorkouts = localStorage.getItem("loggedWorkouts");
         if (loggedWorkouts) {
             const workouts = JSON.parse(loggedWorkouts);
             // Show the last 5 workouts
@@ -42,7 +42,7 @@ const WorkoutProfile: React.FC = () => {
 
             <h1>Profile</h1>
 
-            <div className='column'>
+            <div className="vertical">
                 <div className="card">
                     <h2>Recent Workouts</h2>
                     <ul>
@@ -56,7 +56,7 @@ const WorkoutProfile: React.FC = () => {
                                         {workout.exercises.map((exercise, idx) => (
                                             <li key={idx}>
                                                 <strong>{exercise.name}</strong>: {exercise.sets.map((set, setIndex) => (
-                                                    <span key={setIndex}>{set.reps} x {set.weight || 0} lbs{setIndex < exercise.sets.length - 1 ? ', ' : ''}</span>
+                                                    <span key={setIndex}>{set.reps} x {set.weight || 0} lbs{setIndex < exercise.sets.length - 1 ? ", " : ""}</span>
                                                 ))}
                                             </li>
                                         ))}

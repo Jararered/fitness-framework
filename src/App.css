@@ -16,6 +16,20 @@ body {
     background-size: 40px 40px;
 }
 
+div.horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+div.vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 button {
     border: none;
     border-radius: 20px;
@@ -53,9 +67,9 @@ ul {
 }
 
 h1 {
+    margin: 30px;
     font-size: 30px;
     font-weight: bold;
-    margin: 20px;
 }
 
 h2 {

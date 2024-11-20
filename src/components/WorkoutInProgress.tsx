@@ -216,7 +216,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
     return (
         <div className='workout-in-progress'>
-
             <h1>Workout in Progress</h1>
 
             <TransitionGroup>
@@ -238,26 +237,26 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                                     <h2>{currentExercise.name}</h2>
                                     <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.sets.length}</p>
                                     <p>Reps: </p>
-                                    <input
+                                    <input className="input-field"
                                         type="number"
                                         value={currentSet.reps}
                                         onChange={(e) => handleRepsChange(e, workoutState.currentSetIndex)}
-                                        className="input-field"
                                         inputMode="numeric"
                                     />
-                                    <input
+                                    <input className="input-field"
                                         type="number"
                                         placeholder={weightTracking.lastWeights[currentExercise.name]?.weight.toString() || "Enter weight"}
                                         value={weightTracking.currentWeights[workoutState.currentSetIndex] || ""}
                                         onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
-                                        className="input-field"
                                         inputMode="decimal"
                                     />
                                     <div className="button-row">
-                                        <button className="bad-button" onClick={handleSkipExercise}>
+                                        <button className="bad-button"
+                                            onClick={handleSkipExercise}>
                                             Skip
                                         </button>
-                                        <button className="normal-button" onClick={handleNextExercise}>
+                                        <button className="normal-button"
+                                            onClick={handleNextExercise}>
                                             Next
                                         </button>
                                     </div>

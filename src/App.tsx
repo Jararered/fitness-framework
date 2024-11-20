@@ -18,7 +18,6 @@ import './App.css';
 import './styles/ButtonColors.css';
 import './styles/Card.css';
 import './styles/Input.css';
-import './styles/Section.css';
 import './styles/Transitions.css';
 
 const App: React.FC = () => {

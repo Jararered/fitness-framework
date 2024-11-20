@@ -97,18 +97,13 @@ const Preferences: React.FC = () => {
 
     return (
         <div className="preferences">
-
             <h1>Preferences</h1>
-
-            <div className="column">
+            <div className="vertical">
                 <div className="card">
-
                     <h2>User Preferences</h2>
-
                     <div>
                         <label htmlFor="user-name">User Name:</label>
-                        <input className="input-field"
-                            type="text"
+                        <input className="input-field" type="text"
                             id="user-name"
                             value={preferences.user}
                             onChange={(e) => savePreference('user', e.target.value)}
@@ -116,8 +111,7 @@ const Preferences: React.FC = () => {
                     </div>
                     <div>
                         <label htmlFor="user-weight">User Weight:</label>
-                        <input className="input-field"
-                            type="number"
+                        <input className="input-field" type="number"
                             id="user-weight"
                             value={preferences.weight === 0 ? '' : preferences.weight}
                             onChange={handleWeightChange}
@@ -126,8 +120,7 @@ const Preferences: React.FC = () => {
                     </div>
                     <div>
                         <label htmlFor="weight-unit">Preferred Units:</label>
-                        <select className="input-field"
-                            id="weight-unit"
+                        <select className="input-field" id="weight-unit"
                             value={preferences.units}
                             onChange={handleWeightUnitChange}
                         >
@@ -142,12 +135,10 @@ const Preferences: React.FC = () => {
                     {REST_TYPES.map(({ key, label }) => (
                         <div key={key}>
                             <label htmlFor={`${key}-rest`}>{label} (sec):</label>
-                            <input
-                                type="number"
+                            <input className="input-field" type="number"
                                 id={`${key}-rest`}
                                 value={preferences[`${key}Rest` as keyof typeof preferences]}
                                 onChange={(e) => handleRestChange(e, key)}
-                                className="input-field"
                                 inputMode="numeric"
                             />
                         </div>
@@ -156,52 +147,36 @@ const Preferences: React.FC = () => {
             </div>
 
             <h1>Debug</h1>
-
-            <div className="column">
+            <div className="vertical">
                 <div className="card">
-                    <div className="container-section-title">
-                        <h2>Manage Data</h2>
-                    </div>
+                    <h2>Manage Data</h2>
+                    <button className="bad-button"
+                        onClick={() => {
+                            savePreference('user', 'User');
+                            savePreference('weight', '0');
+                            savePreference('units', 'lb');
+                        }}>
+                        Reset User Preferences
+                    </button>
 
-                    <div className="preferences-buttons">
-                        <button
-                            onClick={() => {
-                                savePreference('user', 'User');
-                                savePreference('weight', '0');
-                                savePreference('units', 'lb');
-                            }}
-                            className="bad-button">
-                            Reset User Preferences
-                        </button>
-                    </div>
+                    <button className="bad-button"
+                        onClick={() => {
+                            savePreference('shortRest', 30);
+                            savePreference('normalRest', 60);
+                            savePreference('longRest', 90);
+                        }}>
+                        Reset Timing Preferences
+                    </button>
 
-                    <div className="preferences-buttons">
-                        <button
-                            onClick={() => {
-                                savePreference('shortRest', 30);
-                                savePreference('normalRest', 60);
-                                savePreference('longRest', 90);
-                            }}
-                            className="bad-button">
-                            Reset Timing Preferences
-                        </button>
-                    </div>
+                    <button className="bad-button" onClick={handleClearWorkoutData}>
+                        Clear Workout Data
+                    </button>
 
-                    <div className="preferences-buttons">
-                        <button onClick={handleClearWorkoutData} className="bad-button">
-                            Clear Workout Data
-                        </button>
-                    </div>
-
-                    <div className="preferences-buttons">
-                        <button onClick={handleClearData} className="bad-button">
-                            Clear All Data
-                        </button>
-                    </div>
-
+                    <button className="bad-button" onClick={handleClearData}>
+                        Clear All Data
+                    </button>
                 </div>
             </div>
-
         </div>
     );
 };
