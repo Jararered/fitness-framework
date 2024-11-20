@@ -157,7 +157,7 @@ const Preferences: React.FC = () => {
 
             <h1>Debug</h1>
 
-            <div className="row">
+            <div className="column">
                 <div className="card">
                     <div className="container-section-title">
                         <h2>Manage Data</h2>
