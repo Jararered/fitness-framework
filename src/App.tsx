@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 // Navigation
 import SideBar from './components/navigation/SideBar';
@@ -18,7 +17,6 @@ import './App.css';
 import './styles/ButtonColors.css';
 import './styles/Card.css';
 import './styles/Input.css';
-import './styles/Transitions.css';
 
 const App: React.FC = () => {
     const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);
@@ -69,20 +67,15 @@ const App: React.FC = () => {
                 onToggle={toggleSideBar}
             />
 
+            {
+                <div className="main-content">
+                    {renderMainContent()}
+                </div>
+            }
+
             <DockBar
                 onNavigate={handleNavigate}
             />
-
-            <TransitionGroup className="main-content">
-                <CSSTransition
-                    key={content}
-                    timeout={250}
-                    classNames="slide"
-                >
-                    {renderMainContent()}
-                </CSSTransition>
-            </TransitionGroup>
-
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import WorkoutSummary from './WorkoutSummary';
+import WorkoutFreestyle from './WorkoutFreestyle';
 
 import { Exercise } from './Exercise';
 import WorkoutBreak from './WorkoutBreak';
@@ -19,6 +20,7 @@ export interface WorkoutState {
     currentExerciseIndex: number;
     currentSetIndex: number;
     startTime: string;
+    isFreestyle?: boolean;  // Add this line
 }
 
 interface WeightTracking {
@@ -47,6 +49,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     });
 
     const [isComplete, setIsComplete] = useState(false);
+    const [isFreestyle, setIsFreestyle] = useState(false);
 
     useEffect(() => {
         const loadFromLocalStorage = (key: string, defaultValue: any) => {
@@ -239,6 +242,31 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         localStorage.removeItem('breakStartTime');
     };
 
+    const handleStartFreestyle = () => {
+        if (workoutState.exercises) {
+            const completedExercises = workoutState.exercises.slice(0, workoutState.currentExerciseIndex + 1);
+            setWorkoutState(prev => ({
+                ...prev,
+                exercises: completedExercises,
+            }));
+            localStorage.setItem('workoutState', JSON.stringify({
+                ...workoutState,
+                exercises: completedExercises,
+            }));
+        }
+        setIsFreestyle(true);
+    };
+
+    if (isFreestyle || workoutState.isFreestyle) {
+        return (
+            <WorkoutFreestyle
+                onCompleteWorkout={completeWorkout}
+                existingWorkoutState={workoutState}
+                isNewWorkout={workoutState.exercises?.length === 0}
+            />
+        );
+    }
+
     if (!workoutState.exercises || workoutState.exercises.length === 0) {
         return <p>No workout found. Please create or load a workout.</p>;
     }
@@ -298,6 +326,11 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                                     </div>
                                 </div>
                             </div>
+                        )}
+                        {!isComplete && !isBreak && (
+                            <button className="normal-button" onClick={handleStartFreestyle}>
+                                Start Freestyle Workout
+                            </button>
                         )}
                     </div>
                 </CSSTransition>

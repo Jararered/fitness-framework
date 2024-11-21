@@ -42,6 +42,19 @@ const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
         setWorkoutState(null);
     };
 
+    const startFreestyleWorkout = () => {
+        const emptyWorkout: Exercise[] = [];
+        localStorage.setItem('currentWorkout', JSON.stringify(emptyWorkout));
+        localStorage.setItem('workoutState', JSON.stringify({
+            exercises: emptyWorkout,
+            currentExerciseIndex: 0,
+            currentSetIndex: 0,
+            startTime: new Date().toISOString(),
+            isFreestyle: true
+        }));
+        onOpenWorkout();
+    };
+
     return (
         <div>
             <h1>{userName ? `Welcome, ${userName}` : 'Home'}</h1>
@@ -70,7 +83,14 @@ const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
                             </div>
                         </div>
                     ) : (
-                        <p>No workout selected. Please create or load a workout.</p>
+                        <div>
+                            <p>No workout selected. Please create or load a workout.</p>
+                            <div className='row'>
+                                <button onClick={startFreestyleWorkout} className="normal-button">
+                                    Start Freestyle Workout
+                                </button>
+                            </div>
+                        </div>
                     )}
                 </div>
             </div>
