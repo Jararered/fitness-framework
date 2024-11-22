@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
-import { Exercise } from './Exercise';
-import { exerciseCategories } from './Equipment';
+import { exerciseCategories } from '../interfaces/Equipment';
 import WorkoutSummary from './WorkoutSummary';
 
-interface WorkoutFreestyleProps {
-    onCompleteWorkout: () => void;
-    existingWorkoutState: any;
-    isNewWorkout?: boolean;
-}
+import { Exercise, WorkoutFreestyleProps } from '../interfaces/Workout';
 
 const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
     onCompleteWorkout,

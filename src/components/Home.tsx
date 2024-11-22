@@ -4,12 +4,7 @@ import React, { useEffect, useState } from 'react';
 import CurrentWorkout from './CurrentWorkout';
 
 // Import Interfaces
-import { Exercise } from './Exercise';
-import { Workout } from './WorkoutActive';
-
-interface WorkoutOverviewProps {
-    onOpenWorkout: () => void;
-}
+import { Exercise, Workout, WorkoutOverviewProps } from '../interfaces/Workout';
 
 const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[] | null>(null);

@@ -4,13 +4,8 @@ import React, { useState, useEffect } from 'react';
 import CurrentWorkout from './CurrentWorkout';
 
 // Import Interfaces
-import { Exercise } from './Exercise';
-import { equipmentExercises, exerciseCategories, BodyPart } from './Equipment';
-
-export interface SavedWorkout {
-    name: string;
-    exercises: Exercise[];
-}
+import { Exercise, SavedWorkout } from '../interfaces/Workout';
+import { equipmentExercises, exerciseCategories, BodyPart } from '../interfaces/Equipment';
 
 const WorkoutCreator: React.FC = () => {
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);

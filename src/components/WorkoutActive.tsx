@@ -3,30 +3,8 @@ import React, { useState, useEffect } from 'react';
 import WorkoutSummary from './WorkoutSummary';
 import WorkoutFreestyle from './WorkoutFreestyle';
 import WorkoutBreak from './WorkoutBreak';
-import { Exercise } from './Exercise';
 
-interface WorkoutInProgressProps {
-    onCompleteWorkout: () => void;
-}
-
-interface LastWeight {
-    exercise: string;
-    weight: number;
-}
-
-export interface Workout {
-    exercises: Exercise[] | null;
-    currentExerciseIndex: number;
-    currentSetIndex: number;
-    startTime: string;
-    isFreestyle?: boolean;
-}
-
-interface WeightTracking {
-    currentWeights: number[];
-    maxWeights: { [key: string]: number };
-    lastWeights: { [key: string]: LastWeight };
-}
+import { Exercise, WorkoutInProgressProps, Workout, WeightTracking } from '../interfaces/Workout';
 
 const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout }) => {
     const [workoutState, setWorkoutState] = useState<Workout>({

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 // Import Interfaces
-import { Exercise } from "./Exercise";
+import { Exercise } from "../interfaces/Workout";
 
 const WorkoutProfile: React.FC = () => {
     const [bestWeights, setBestWeights] = useState<{ [key: string]: { weight: number, date: string } }>({});

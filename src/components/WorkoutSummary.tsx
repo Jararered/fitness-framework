@@ -1,12 +1,5 @@
 import React from 'react';
-import { Exercise } from './Exercise';
-import { SavedWorkout } from './WorkoutCreator';
-import { Workout } from './WorkoutActive';
-
-interface WorkoutSummaryProps {
-    workoutState: Workout;
-    onFinish: () => void;
-}
+import { Exercise, SavedWorkout, WorkoutSummaryProps } from '../interfaces/Workout';
 
 const calculateDuration = (startTime: string) => {
     const start = new Date(startTime).getTime();

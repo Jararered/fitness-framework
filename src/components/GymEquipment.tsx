@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
-import { equipment, equipmentIcons, equipmentExercises } from './Equipment';
+import { equipment, equipmentIcons, equipmentExercises } from '../interfaces/Equipment';
 import './GymEquipment.css';
 
 const Equipment: React.FC = () => {
