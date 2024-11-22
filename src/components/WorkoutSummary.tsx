@@ -8,24 +8,32 @@ interface WorkoutSummaryProps {
     onFinish: () => void;
 }
 
-const WorkoutSummary: React.FC<WorkoutSummaryProps> = ({ workoutState, onFinish }) => {
-    const calculateDuration = () => {
-        const start = new Date(workoutState.startTime).getTime();
-        const end = new Date().getTime();
-        const durationInSeconds = Math.round((end - start) / 1000);
-        
-        const hours = Math.floor(durationInSeconds / 3600);
-        const minutes = Math.floor((durationInSeconds % 3600) / 60);
-        const seconds = durationInSeconds % 60;
-        
-        return hours > 0 
-            ? `${hours} hours, ${minutes} minutes, ${seconds} seconds`
-            : `${minutes} minutes, ${seconds} seconds`;
-    };
+const calculateDuration = (startTime: string) => {
+    const start = new Date(startTime).getTime();
+    const end = new Date().getTime();
+    const durationInSeconds = Math.round((end - start) / 1000);
+    
+    const hours = Math.floor(durationInSeconds / 3600);
+    const minutes = Math.floor((durationInSeconds % 3600) / 60);
+    const seconds = durationInSeconds % 60;
+    
+    return hours > 0 
+        ? `${hours} hours, ${minutes} minutes, ${seconds} seconds`
+        : `${minutes} minutes, ${seconds} seconds`;
+};
 
-    const totalSets = workoutState.exercises?.reduce((acc, exercise) => acc + exercise.sets.length, 0) || 0;
-    const totalExercises = workoutState.exercises?.length || 0;
-    const duration = calculateDuration();
+const calculateTotalSets = (exercises: Exercise[]) => {
+    return exercises?.reduce((acc, exercise) => acc + exercise.sets.length, 0) || 0;
+};
+
+const calculateTotalExercises = (exercises: Exercise[]) => {
+    return exercises?.length || 0;
+};
+
+const WorkoutSummary: React.FC<WorkoutSummaryProps> = ({ workoutState, onFinish }) => {
+    const totalSets = calculateTotalSets(workoutState.exercises || []);
+    const totalExercises = calculateTotalExercises(workoutState.exercises || []);
+    const duration = calculateDuration(workoutState.startTime);
 
     const saveWorkout = (exercises: Exercise[]) => {
         const workoutName = prompt("Enter a name for this workout:");

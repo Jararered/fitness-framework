@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 import WorkoutSummary from './WorkoutSummary';
 import WorkoutFreestyle from './WorkoutFreestyle';
-
-import { Exercise } from './Exercise';
 import WorkoutBreak from './WorkoutBreak';
+import { Exercise } from './Exercise';
 
 interface WorkoutInProgressProps {
     onCompleteWorkout: () => void;
@@ -277,65 +276,56 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     return (
         <div className='workout-active'>
             <h1>Workout Active</h1>
-
-            <TransitionGroup>
-                <CSSTransition
-                    key={isComplete ? 'summary' : isBreak ? 'break' : 'workout'}
-                    timeout={250}
-                    classNames="slide"
-                >
-                    <div>
-                        {isComplete ? (
-                            <WorkoutSummary
-                                workoutState={workoutState}
-                                onFinish={completeWorkout}
+            <div>
+                {isComplete ? (
+                    <WorkoutSummary
+                        workoutState={workoutState}
+                        onFinish={completeWorkout}
+                    />
+                ) : isBreak ? (
+                    <WorkoutBreak
+                        onBreakEnd={handleBreakEnd}
+                        onSkip={handleBreakEnd}
+                    />
+                ) : (
+                    <div className='column'>
+                        <div className="card">
+                            <h2>{currentExercise.name}</h2>
+                            <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.sets.length}</p>
+                            <p>Reps: </p>
+                            <input className="input-field"
+                                type="number"
+                                value={currentSet.reps}
+                                onChange={(e) => handleRepsChange(e, workoutState.currentSetIndex)}
+                                inputMode="numeric"
                             />
-                        ) : isBreak ? (
-                            <WorkoutBreak
-                                onBreakEnd={handleBreakEnd}
-                                onSkip={handleBreakEnd}
+                            <input className="input-field"
+                                type="number"
+                                placeholder={weightTracking.lastWeights[currentExercise.name]?.weight.toString() || "Enter weight"}
+                                value={weightTracking.currentWeights[workoutState.currentSetIndex] || ""}
+                                onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
+                                inputMode="decimal"
                             />
-                        ) : (
-                            <div className='column'>
-                                <div className="card">
-                                    <h2>{currentExercise.name}</h2>
-                                    <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.sets.length}</p>
-                                    <p>Reps: </p>
-                                    <input className="input-field"
-                                        type="number"
-                                        value={currentSet.reps}
-                                        onChange={(e) => handleRepsChange(e, workoutState.currentSetIndex)}
-                                        inputMode="numeric"
-                                    />
-                                    <input className="input-field"
-                                        type="number"
-                                        placeholder={weightTracking.lastWeights[currentExercise.name]?.weight.toString() || "Enter weight"}
-                                        value={weightTracking.currentWeights[workoutState.currentSetIndex] || ""}
-                                        onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
-                                        inputMode="decimal"
-                                    />
-                                    <div>
-                                        <button className="bad-button"
-                                            onClick={handleSkipExercise}>
-                                            Skip
-                                        </button>
-                                        <button className="normal-button"
-                                            onClick={handleNextExercise}>
-                                            Next
-                                        </button>
-                                    </div>
-                                </div>
+                            <div>
+                                <button className="bad-button"
+                                    onClick={handleSkipExercise}>
+                                    Skip
+                                </button>
+                                <button className="normal-button"
+                                    onClick={handleNextExercise}>
+                                    Next
+                                </button>
                             </div>
-                        )}
-                        {!isComplete && !isBreak && (
-                            <button className="normal-button" onClick={handleStartFreestyle}>
-                                Start Freestyle Workout
-                            </button>
-                        )}
+                        </div>
                     </div>
-                </CSSTransition>
-            </TransitionGroup>
-        </div>
+                )}
+                {!isComplete && !isBreak && (
+                    <button className="normal-button" onClick={handleStartFreestyle}>
+                        Start Freestyle Workout
+                    </button>
+                )}
+            </div>
+        </div >
     );
 };
 

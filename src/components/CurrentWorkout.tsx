@@ -6,7 +6,6 @@ const CurrentWorkout: React.FC<{ currentWorkout: Exercise[] }> = ({ currentWorko
     return (
         <div>
             <h2>Current Workout</h2>
-
             <ul>
                 {currentWorkout.length === 0 ?
                     (<p>No exercises added yet.</p>
