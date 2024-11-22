@@ -4,20 +4,24 @@ import WorkoutSummary from './WorkoutSummary';
 import WorkoutFreestyle from './WorkoutFreestyle';
 import WorkoutBreak from './WorkoutBreak';
 
-import { Exercise, WorkoutInProgressProps, Workout, WeightTracking } from '../interfaces/Workout';
+import { Exercise, WorkoutInProgressProps, Workout, WeightTracking, WorkoutIndexer } from '../interfaces/Workout';
 
 const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout }) => {
     const [workoutState, setWorkoutState] = useState<Workout>({
         exercises: null,
-        currentExerciseIndex: 0,
-        currentSetIndex: 0,
-        startTime: ''
+        startTime: '',
+        endTime: '',
     });
 
     const [weightTracking, setWeightTracking] = useState<WeightTracking>({
         currentWeights: [],
         maxWeights: {},
         lastWeights: {}
+    });
+
+    const [workoutIndexer, setWorkoutIndexer] = useState<WorkoutIndexer>({
+        currentExerciseIndex: 0,
+        currentSetIndex: 0,
     });
 
     const [isBreak, setIsBreak] = useState(() => {
@@ -86,7 +90,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         if (workoutState.exercises) {
             const newReps = Number(e.target.value);
             const updatedExercises = workoutState.exercises.map((exercise, exerciseIndex) => {
-                if (exerciseIndex === workoutState.currentExerciseIndex) {
+                if (exerciseIndex === workoutIndexer.currentExerciseIndex) {
                     const updatedSets = exercise.sets.map((set, index) => {
                         if (index === setIndex) {
                             return { ...set, reps: newReps };
@@ -144,9 +148,9 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
     const handleNextExercise = () => {
         if (workoutState.exercises) {
-            const currentExercise = workoutState.exercises[workoutState.currentExerciseIndex];
-            const currentSet = currentExercise.sets[workoutState.currentSetIndex];
-            const weight = weightTracking.currentWeights[workoutState.currentSetIndex] ||
+            const currentExercise = workoutState.exercises[workoutIndexer.currentExerciseIndex];
+            const currentSet = currentExercise.sets[workoutIndexer.currentSetIndex];
+            const weight = weightTracking.currentWeights[workoutIndexer.currentSetIndex] ||
                 weightTracking.lastWeights[currentExercise.name]?.weight || 0;
 
             if (weight > 0) {
@@ -154,12 +158,12 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                 currentSet.weight = weight;
             }
 
-            let newWorkoutState = { ...workoutState };
-            if (workoutState.currentSetIndex < currentExercise.sets.length - 1) {
-                newWorkoutState.currentSetIndex += 1;
-            } else if (workoutState.currentExerciseIndex < workoutState.exercises.length - 1) {
-                newWorkoutState.currentExerciseIndex += 1;
-                newWorkoutState.currentSetIndex = 0;
+            let newWorkoutIndexer = { ...workoutIndexer };
+            if (workoutIndexer.currentSetIndex < currentExercise.sets.length - 1) {
+                newWorkoutIndexer.currentSetIndex += 1;
+            } else if (workoutIndexer.currentExerciseIndex < workoutState.exercises.length - 1) {
+                newWorkoutIndexer.currentExerciseIndex += 1;
+                newWorkoutIndexer.currentSetIndex = 0;
                 setWeightTracking(prev => ({
                     ...prev,
                     currentWeights: []
@@ -168,8 +172,8 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                 setIsComplete(true);
                 return;
             }
-            setWorkoutState(newWorkoutState);
-            localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
+            setWorkoutIndexer(newWorkoutIndexer);
+            localStorage.setItem('workoutIndexer', JSON.stringify(newWorkoutIndexer));
             setIsBreak(true);
             localStorage.setItem('isBreak', JSON.stringify(true));
         }
@@ -177,12 +181,12 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
     const handleSkipExercise = () => {
         if (workoutState.exercises) {
-            let newWorkoutState = { ...workoutState };
-            if (workoutState.currentSetIndex < workoutState.exercises[workoutState.currentExerciseIndex].sets.length - 1) {
-                newWorkoutState.currentSetIndex += 1;
-            } else if (workoutState.currentExerciseIndex < workoutState.exercises.length - 1) {
-                newWorkoutState.currentExerciseIndex += 1;
-                newWorkoutState.currentSetIndex = 0;
+            let newWorkoutIndexer = { ...workoutIndexer };
+            if (workoutIndexer.currentSetIndex < workoutState.exercises[workoutIndexer.currentExerciseIndex].sets.length - 1) {
+                newWorkoutIndexer.currentSetIndex += 1;
+            } else if (workoutIndexer.currentExerciseIndex < workoutState.exercises.length - 1) {
+                newWorkoutIndexer.currentExerciseIndex += 1;
+                newWorkoutIndexer.currentSetIndex = 0;
                 setWeightTracking(prev => ({
                     ...prev,
                     currentWeights: []
@@ -191,8 +195,8 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                 completeWorkout();
                 return;
             }
-            setWorkoutState(newWorkoutState);
-            localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
+            setWorkoutIndexer(newWorkoutIndexer);
+            localStorage.setItem('workoutIndexer', JSON.stringify(newWorkoutIndexer));
         }
     };
 
@@ -209,7 +213,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         }
 
         localStorage.removeItem('workoutState');
-        localStorage.removeItem('currentWorkout'); // Add this line to clear the current workout
+        localStorage.removeItem('currentWorkout');
         onCompleteWorkout();
     };
 
@@ -221,7 +225,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
     const handleStartFreestyle = () => {
         if (workoutState.exercises) {
-            const completedExercises = workoutState.exercises.slice(0, workoutState.currentExerciseIndex + 1);
+            const completedExercises = workoutState.exercises.slice(0, workoutIndexer.currentExerciseIndex + 1);
             setWorkoutState(prev => ({
                 ...prev,
                 exercises: completedExercises,
@@ -248,8 +252,8 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         return <p>No workout found. Please create or load a workout.</p>;
     }
 
-    const currentExercise = workoutState.exercises[workoutState.currentExerciseIndex];
-    const currentSet = currentExercise.sets[workoutState.currentSetIndex];
+    const currentExercise = workoutState.exercises[workoutIndexer.currentExerciseIndex];
+    const currentSet = currentExercise.sets[workoutIndexer.currentSetIndex];
 
     return (
         <div className='workout-active'>
@@ -269,19 +273,19 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                     <div className='column'>
                         <div className="card">
                             <h2>{currentExercise.name}</h2>
-                            <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.sets.length}</p>
+                            <p>Set {workoutIndexer.currentSetIndex + 1} of {currentExercise.sets.length}</p>
                             <p>Reps: </p>
                             <input className="input-field"
                                 type="number"
                                 value={currentSet.reps}
-                                onChange={(e) => handleRepsChange(e, workoutState.currentSetIndex)}
+                                onChange={(e) => handleRepsChange(e, workoutIndexer.currentSetIndex)}
                                 inputMode="numeric"
                             />
                             <input className="input-field"
                                 type="number"
                                 placeholder={weightTracking.lastWeights[currentExercise.name]?.weight.toString() || "Enter weight"}
-                                value={weightTracking.currentWeights[workoutState.currentSetIndex] || ""}
-                                onChange={(e) => handleWeightChange(e, workoutState.currentSetIndex)}
+                                value={weightTracking.currentWeights[workoutIndexer.currentSetIndex] || ""}
+                                onChange={(e) => handleWeightChange(e, workoutIndexer.currentSetIndex)}
                                 inputMode="decimal"
                             />
                             <div>

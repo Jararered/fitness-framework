@@ -100,7 +100,7 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
             const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
             const workoutEntry = {
                 startTime: workoutState.startTime,
-                endTime: new Date().toISOString(),
+                endTime: new Date().toISOString(), // Add this line
                 exercises: workoutState.exercises
             };
             loggedWorkouts.push(workoutEntry);

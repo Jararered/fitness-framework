@@ -29,10 +29,14 @@ export interface LastWeight {
 
 export interface Workout {
     exercises: Exercise[] | null;
+    startTime: string;
+    endTime: string;
+    isFreestyle?: boolean;
+}
+
+export interface WorkoutIndexer {
     currentExerciseIndex: number;
     currentSetIndex: number;
-    startTime: string;
-    isFreestyle?: boolean;
 }
 
 export interface WeightTracking {

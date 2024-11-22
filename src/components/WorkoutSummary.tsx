@@ -1,9 +1,9 @@
 import React from 'react';
 import { Exercise, SavedWorkout, WorkoutSummaryProps } from '../interfaces/Workout';
 
-const calculateDuration = (startTime: string) => {
+const calculateDuration = (startTime: string, endTime: string) => {
     const start = new Date(startTime).getTime();
-    const end = new Date().getTime();
+    const end = new Date(endTime).getTime();
     const durationInSeconds = Math.round((end - start) / 1000);
     
     const hours = Math.floor(durationInSeconds / 3600);
@@ -26,7 +26,7 @@ const calculateTotalExercises = (exercises: Exercise[]) => {
 const WorkoutSummary: React.FC<WorkoutSummaryProps> = ({ workoutState, onFinish }) => {
     const totalSets = calculateTotalSets(workoutState.exercises || []);
     const totalExercises = calculateTotalExercises(workoutState.exercises || []);
-    const duration = calculateDuration(workoutState.startTime);
+    const duration = calculateDuration(workoutState.startTime, workoutState.endTime || new Date().toISOString());
 
     const saveWorkout = (exercises: Exercise[]) => {
         const workoutName = prompt("Enter a name for this workout:");
