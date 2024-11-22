@@ -14,12 +14,12 @@ interface LastWeight {
     weight: number;
 }
 
-export interface WorkoutState {
+export interface Workout {
     exercises: Exercise[] | null;
     currentExerciseIndex: number;
     currentSetIndex: number;
     startTime: string;
-    isFreestyle?: boolean;  // Add this line
+    isFreestyle?: boolean;
 }
 
 interface WeightTracking {
@@ -29,7 +29,7 @@ interface WeightTracking {
 }
 
 const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout }) => {
-    const [workoutState, setWorkoutState] = useState<WorkoutState>({
+    const [workoutState, setWorkoutState] = useState<Workout>({
         exercises: null,
         currentExerciseIndex: 0,
         currentSetIndex: 0,

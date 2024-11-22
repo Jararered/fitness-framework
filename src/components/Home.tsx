@@ -5,7 +5,7 @@ import CurrentWorkout from './CurrentWorkout';
 
 // Import Interfaces
 import { Exercise } from './Exercise';
-import { WorkoutState } from './WorkoutActive';
+import { Workout } from './WorkoutActive';
 
 interface WorkoutOverviewProps {
     onOpenWorkout: () => void;
@@ -15,7 +15,7 @@ const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[] | null>(null);
     const [userName, setUserName] = useState<string>('');
     const [hasOngoingWorkout, setHasOngoingWorkout] = useState<boolean>(false);
-    const [, setWorkoutState] = useState<WorkoutState | null>(null);
+    const [, setWorkoutState] = useState<Workout | null>(null);
 
     useEffect(() => {
         const preferences = localStorage.getItem('preferences');

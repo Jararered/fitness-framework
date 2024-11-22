@@ -1,10 +1,10 @@
 import React from 'react';
 import { Exercise } from './Exercise';
 import { SavedWorkout } from './WorkoutCreator';
-import { WorkoutState } from './WorkoutActive';
+import { Workout } from './WorkoutActive';
 
 interface WorkoutSummaryProps {
-    workoutState: WorkoutState;
+    workoutState: Workout;
     onFinish: () => void;
 }
 
