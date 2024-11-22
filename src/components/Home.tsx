@@ -59,40 +59,38 @@ const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
         <div>
             <h1>{userName ? `Welcome, ${userName}` : 'Home'}</h1>
 
-            <div className='column'>
-                <div className="card">
-                    {hasOngoingWorkout ? (
-                        <div>
-                            <h2>Workout in progress...</h2>
-                            <div className='row'>
-                                <button onClick={onOpenWorkout} className="normal-button">
-                                    Resume Workout
-                                </button>
-                                <button onClick={endWorkout} className="bad-button">
-                                    End Workout
-                                </button>
-                            </div>
+            <div className="card">
+                {hasOngoingWorkout ? (
+                    <div>
+                        <h2>Workout in progress...</h2>
+                        <div className='row'>
+                            <button onClick={onOpenWorkout} className="normal-button">
+                                Resume Workout
+                            </button>
+                            <button onClick={endWorkout} className="bad-button">
+                                End Workout
+                            </button>
                         </div>
-                    ) : currentWorkout ? (
-                        <div>
-                            <CurrentWorkout currentWorkout={currentWorkout} />
-                            <div className='row'>
-                                <button onClick={onOpenWorkout} className="normal-button">
-                                    Start Workout
-                                </button>
-                            </div>
+                    </div>
+                ) : currentWorkout && currentWorkout.length > 0 ? (
+                    <div>
+                        <CurrentWorkout currentWorkout={currentWorkout} />
+                        <div className='row'>
+                            <button onClick={onOpenWorkout} className="normal-button">
+                                Start Workout
+                            </button>
                         </div>
-                    ) : (
-                        <div>
-                            <p>No workout selected. Please create or load a workout.</p>
-                            <div className='row'>
-                                <button onClick={startFreestyleWorkout} className="normal-button">
-                                    Start Freestyle Workout
-                                </button>
-                            </div>
+                    </div>
+                ) : (
+                    <div>
+                        <p>No workout selected. Please create or load a workout.</p>
+                        <div className='row'>
+                            <button onClick={startFreestyleWorkout} className="normal-button">
+                                Start Freestyle Workout
+                            </button>
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
             </div>
         </div>
     );

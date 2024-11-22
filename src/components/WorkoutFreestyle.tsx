@@ -17,10 +17,38 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
     const [workoutState, setWorkoutState] = useState(existingWorkoutState);
     const [currentWeight, setCurrentWeight] = useState<number>(0);
     const [currentReps, setCurrentReps] = useState<number>(0);
-    const [isSelectingExercise, setIsSelectingExercise] = useState(isNewWorkout || true);
+    const [isSelectingExercise, setIsSelectingExercise] = useState<boolean>(isNewWorkout || true);
     const [currentExercise, setCurrentExercise] = useState<Exercise | null>(null);
     const [sets, setSets] = useState<Array<{ reps: number, weight: number }>>([]);
     const [isComplete, setIsComplete] = useState(false);
+
+    const addToWorkoutState = (newSets: Array<{ reps: number, weight: number }>) => {
+        if (!currentExercise) return;
+
+        const updatedExercise = {
+            ...currentExercise,
+            sets: newSets
+        };
+
+        const updatedExercises = workoutState.exercises ? [...workoutState.exercises] : [];
+        if (updatedExercises.length > 0 &&
+            updatedExercises[updatedExercises.length - 1].name === currentExercise.name) {
+            updatedExercises[updatedExercises.length - 1] = updatedExercise;
+        } else {
+            updatedExercises.push(updatedExercise);
+        }
+
+        const newWorkoutState = {
+            ...workoutState,
+            exercises: updatedExercises,
+            currentExerciseIndex: updatedExercises.length - 1,
+            currentSetIndex: newSets.length - 1
+        };
+
+        setWorkoutState(newWorkoutState);
+        localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
+        localStorage.setItem('currentWorkout', JSON.stringify(updatedExercises));
+    };
 
     const handleSelectExercise = (exerciseName: string) => {
         setCurrentExercise({
@@ -38,33 +66,7 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
 
         const newSets = [...sets, { reps: currentReps, weight: currentWeight }];
         setSets(newSets);
-
-        // Update the current exercise with new sets
-        const updatedExercise = {
-            ...currentExercise,
-            sets: newSets
-        };
-
-        // Update workout state
-        const updatedExercises = workoutState.exercises ? [...workoutState.exercises] : [];
-        if (updatedExercises.length > 0 &&
-            updatedExercises[updatedExercises.length - 1].name === currentExercise.name) {
-            updatedExercises[updatedExercises.length - 1] = updatedExercise;
-        } else {
-            updatedExercises.push(updatedExercise);
-        }
-
-        // Update both local state and localStorage
-        const newWorkoutState = {
-            ...workoutState,
-            exercises: updatedExercises,
-            currentExerciseIndex: updatedExercises.length - 1,
-            currentSetIndex: newSets.length - 1
-        };
-
-        setWorkoutState(newWorkoutState);
-        localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
-        localStorage.setItem('currentWorkout', JSON.stringify(updatedExercises));
+        addToWorkoutState(newSets);
 
         setCurrentReps(0);
         setCurrentWeight(0);
@@ -83,33 +85,8 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         const updatedSets = addCurrentSetIfValid();
 
         if (currentExercise && updatedSets.length > 0) {
-            const completedExercise = {
-                ...currentExercise,
-                sets: updatedSets
-            };
+            addToWorkoutState(updatedSets);
 
-            // Get the current exercises array or initialize it
-            const currentExercises = workoutState.exercises ? [...workoutState.exercises] : [];
-            if (currentExercises.length > 0 &&
-                currentExercises[currentExercises.length - 1].name === currentExercise.name) {
-                currentExercises[currentExercises.length - 1] = completedExercise;
-            } else {
-                currentExercises.push(completedExercise);
-            }
-
-            // Update both localStorage and parent state
-            const updatedWorkoutState = {
-                ...workoutState,
-                exercises: currentExercises,
-                currentExerciseIndex: currentExercises.length - 1,
-                currentSetIndex: updatedSets.length - 1
-            };
-
-            setWorkoutState(updatedWorkoutState);
-            localStorage.setItem('workoutState', JSON.stringify(updatedWorkoutState));
-            localStorage.setItem('currentWorkout', JSON.stringify(currentExercises));
-
-            // Reset states for next exercise
             setIsSelectingExercise(true);
             setCurrentExercise(null);
             setSets([]);
@@ -138,6 +115,9 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         // Clean up localStorage
         localStorage.removeItem('workoutState');
         localStorage.removeItem('currentWorkout');
+
+        // Set isComplete to true to show the workout summary
+        setIsComplete(true);
     };
 
     if (isComplete) {
