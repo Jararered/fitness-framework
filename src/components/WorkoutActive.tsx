@@ -4,7 +4,8 @@ import WorkoutSummary from './WorkoutSummary';
 import WorkoutFreestyle from './WorkoutFreestyle';
 import WorkoutBreak from './WorkoutBreak';
 
-import { Exercise, WorkoutInProgressProps, Workout, WeightTracking, WorkoutIndexer } from '../interfaces/Workout';
+import { WorkoutInProgressProps, Workout, WeightTracking, WorkoutIndexer } from '../interfaces/Workout';
+import { logWorkout, logWeight } from '../utils/WorkoutUtils';
 
 const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout }) => {
     const [workoutState, setWorkoutState] = useState<Workout>({
@@ -109,44 +110,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         }
     };
 
-    const logWeight = (currentExercise: Exercise, currentSet: any, weight: number) => {
-        const loggedWeights = JSON.parse(localStorage.getItem('loggedWeights') || '[]');
-        const loggedMaxWeights = JSON.parse(localStorage.getItem('loggedMaxWeights') || '{}');
-        const loggedLastWeights = JSON.parse(localStorage.getItem('loggedLastWeights') || '{}');
-
-        loggedWeights.push({
-            date: new Date().toISOString(),
-            exercise: currentExercise.name,
-            reps: currentSet.reps,
-            weight: weight,
-        });
-        localStorage.setItem('loggedWeights', JSON.stringify(loggedWeights));
-
-        if (!loggedMaxWeights[currentExercise.name] || weight > loggedMaxWeights[currentExercise.name].weight) {
-            loggedMaxWeights[currentExercise.name] = {
-                weight: weight,
-                date: new Date().toISOString(),
-            };
-            localStorage.setItem('loggedMaxWeights', JSON.stringify(loggedMaxWeights));
-        }
-
-        loggedLastWeights[currentExercise.name] = {
-            exercise: currentExercise.name,
-            weight: weight
-        };
-        localStorage.setItem('loggedLastWeights', JSON.stringify(loggedLastWeights));
-        setWeightTracking(prev => ({
-            ...prev,
-            lastWeights: {
-                ...prev.lastWeights,
-                [currentExercise.name]: {
-                    exercise: currentExercise.name,
-                    weight: weight
-                }
-            }
-        }));
-    };
-
     const handleNextExercise = () => {
         if (workoutState.exercises) {
             const currentExercise = workoutState.exercises[workoutIndexer.currentExerciseIndex];
@@ -156,6 +119,17 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
             if (weight > 0) {
                 logWeight(currentExercise, currentSet, weight);
+
+                setWeightTracking(prev => ({
+                    ...prev,
+                    lastWeights: {
+                        ...prev.lastWeights,
+                        [currentExercise.name]: {
+                            exercise: currentExercise.name,
+                            weight: weight
+                        }
+                    }
+                }));
                 currentSet.weight = weight;
             }
 
@@ -202,12 +176,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         }
     };
 
-    const logWorkout = (workoutState: Workout) => {
-        const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
-        loggedWorkouts.push(workoutState);
-        localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
-    };
-
     const completeWorkout = () => {
         const completedWorkout = {
             ...workoutState,
@@ -237,6 +205,18 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
 
             if (weight > 0) {
                 logWeight(currentExercise, currentSet, weight);
+
+                setWeightTracking(prev => ({
+                    ...prev,
+                    lastWeights: {
+                        ...prev.lastWeights,
+                        [currentExercise.name]: {
+                            exercise: currentExercise.name,
+                            weight: weight
+                        }
+                    }
+                }));
+
                 currentSet.weight = weight;
             }
 

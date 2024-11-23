@@ -4,6 +4,7 @@ import WorkoutSummary from './WorkoutSummary';
 import ExerciseSelector from './ExerciseSelector';
 
 import { Exercise, WorkoutFreestyleProps, Workout } from '../interfaces/Workout';
+import { logWorkout } from '../utils/WorkoutUtils';
 
 const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
     onCompleteWorkout,
@@ -83,12 +84,6 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         setCurrentExercise(null);
         setSets([]);
         setIsSelectingExercise(true);
-    };
-
-    const logWorkout = (workoutState: Workout) => {
-        const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
-        loggedWorkouts.push(workoutState);
-        localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
     };
 
     const handleFinishWorkout = async () => {
