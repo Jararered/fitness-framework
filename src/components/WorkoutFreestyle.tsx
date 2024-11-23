@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import WorkoutSummary from './WorkoutSummary';
 import ExerciseSelector from './ExerciseSelector';
 
-import { Exercise, WorkoutFreestyleProps } from '../interfaces/Workout';
+import { Exercise, WorkoutFreestyleProps, Set } from '../interfaces/Workout';
 
 const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
     onCompleteWorkout,
@@ -25,7 +25,6 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
             ...currentExercise,
             sets: newSets
         };
-
 
         const updatedExercises = workoutState.exercises ? [...workoutState.exercises] : [];
         if (updatedExercises.length > 0 &&
@@ -59,36 +58,25 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
 
     const handleAddSet = () => {
         if (!currentExercise || currentReps <= 0) return;
-
-        const newSets = [...sets, { reps: currentReps, weight: currentWeight }];
+        
+        // Add the current set to the workout state 
+        const newSet = { reps: currentReps, weight: currentWeight };
+        const newSets = [...sets, newSet];
         setSets(newSets);
         addToWorkoutState(newSets);
-
+        
+        // Reset the state for the next set
         setCurrentReps(0);
         setCurrentWeight(0);
     };
-
-    const addCurrentSetIfValid = () => {
-        if (currentExercise && currentReps > 0) {
-            const newSets = [...sets, { reps: currentReps, weight: currentWeight }];
-            setSets(newSets);
-            return newSets;
-        }
-        return sets;
-    };
-
+    
     const handleNextExercise = () => {
-        const updatedSets = addCurrentSetIfValid();
+        handleAddSet();
 
-        if (currentExercise && updatedSets.length > 0) {
-            addToWorkoutState(updatedSets);
-
-            setIsSelectingExercise(true);
-            setCurrentExercise(null);
-            setSets([]);
-            setCurrentReps(0);
-            setCurrentWeight(0);
-        }
+        // Reset the state for the next exercise
+        setCurrentExercise(null);
+        setSets([]);
+        setIsSelectingExercise(true);
     };
 
     const handleFinishWorkout = () => {
