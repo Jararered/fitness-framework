@@ -7,7 +7,7 @@ interface ExerciseSelectorProps {
     onComplete: () => void;
 }
 
-const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({ onSelectExercise, onComplete }) => {
+const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({ onSelectExercise }) => {
     return (
         <div className="card">
             <h2>Select Exercise</h2>
@@ -25,9 +25,6 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({ onSelectExercise, o
                     ))}
                 </div>
             ))}
-            <button className="bad-button" onClick={onComplete}>
-                End Workout
-            </button>
         </div>
     );
 };
