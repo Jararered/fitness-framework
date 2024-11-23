@@ -14,6 +14,8 @@ body {
     background-color: #f2f2f7;
     background-image: radial-gradient(circle, #d2d2d2 0.0625rem, transparent 0.125rem);
     background-size: 2.5rem 2.5rem;
+    overflow: hidden;
+    height: 100vh;
 }
 
 div.horizontal {
@@ -111,6 +113,8 @@ h2 {
     margin-left: 5rem;
     padding: 0.5rem;
     transition: 200ms;
+    overflow-y: auto;
+    height: 90vh;
 }
 
 @media (max-width: 768px) {

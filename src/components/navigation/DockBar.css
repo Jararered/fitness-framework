@@ -1,7 +1,7 @@
 .dockbar {
     box-sizing: border-box;
-    width: 100%;
-    height: 80px;
+    width: 100vw;
+    height: 10vh;
     padding: 0px 10px;
 
     background-color: #f8f8f8;
