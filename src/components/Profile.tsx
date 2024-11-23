@@ -34,7 +34,8 @@ const WorkoutProfile: React.FC = () => {
 
     const formatDateTime = (dateString: string) => {
         const date = new Date(dateString);
-        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+        // Remove seconds from the time
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString().replace(/:\d+ /, " ")}`;
     };
 
     return (
@@ -74,7 +75,8 @@ const WorkoutProfile: React.FC = () => {
                         ) : (
                             Object.entries(bestWeights).map(([exercise, { weight, date }]) => (
                                 <li key={exercise}>
-                                    <strong>{exercise}</strong>: {weight}{units} on {formatDateTime(date)}
+                                    <strong>{exercise}</strong><br />
+                                    {weight}{units} on {formatDateTime(date)}
                                 </li>
                             ))
                         )}
