@@ -13,7 +13,7 @@
 }
 
 .sidebar.collapsed {
-    width: 60px;
+    width: 4rem;
     transition: transform 200ms;
 }
 
@@ -25,37 +25,26 @@
 }
 
 .sidebar .button {
-    width: 250px;
+    width: 15rem;
     margin-right: 10px;
     margin-bottom: 10px;
 }
 
-.sidebar .button svg {
-    margin-right: 10px;
-}
-
-.sidebar.collapsed .button svg {
-    margin-right: 0px;
-}
-
 .sidebar.collapsed .button {
-    width: 60px;
-    margin-right: 0px;
+    width: 4rem;
 }
 
 .expand-button {
-    width: 60px;
-    height: 60px;
+    width: 4rem;
+    height: 4rem;
     padding: 0px;
     margin: 0 0 10px 0;
 
     background: none;
-    font-size: 30px;
-    line-height: 55px;
-    vertical-align: middle;
+    font-size: 2rem;
     color: #007aff;
     box-shadow: none;
-    border-radius: 20px;
+    border-radius: 1rem;
 }
 
 .expand-button:hover {

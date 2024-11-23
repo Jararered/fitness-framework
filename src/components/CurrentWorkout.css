@@ -1,0 +1,28 @@
+.exercise-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.exercise-content {
+    /* Aligns the content to the right */
+    margin: auto;
+}
+
+.exercise-controls {
+    /* Aligns the controls to the right */
+    margin-left: auto;
+}
+
+.exercise-controls button:disabled {
+    visibility: hidden;
+}
+
+@media (max-width: 768px) {
+
+    .exercise-content,
+    .exercise-controls {
+        margin: 0;
+    }
+}

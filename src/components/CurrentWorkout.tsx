@@ -2,6 +2,8 @@ import React from 'react';
 import { Exercise } from '../interfaces/Workout';
 import { FaArrowUp, FaArrowDown, FaTimes } from 'react-icons/fa';
 
+import './CurrentWorkout.css'
+
 interface CurrentWorkoutProps {
     currentWorkout: Exercise[];
     onMoveExercise?: (index: number, direction: 'up' | 'down') => void;
