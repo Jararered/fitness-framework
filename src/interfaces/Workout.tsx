@@ -22,7 +22,7 @@ export interface WorkoutInProgressProps {
     onCompleteWorkout: () => void;
 }
 
-export interface LastWeight {
+export interface ExerciseWeight {
     exercise: string;
     weight: number;
 }
@@ -42,7 +42,7 @@ export interface WorkoutIndexer {
 export interface WeightTracking {
     currentWeights: number[];
     maxWeights: { [key: string]: number };
-    lastWeights: { [key: string]: LastWeight };
+    lastWeights: { [key: string]: ExerciseWeight };
 }
 
 export interface WorkoutFreestyleProps {
