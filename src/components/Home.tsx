@@ -69,7 +69,10 @@ const Home: React.FC<WorkoutOverviewProps> = ({ onOpenWorkout }) => {
                     </div>
                 ) : currentWorkout && currentWorkout.length > 0 ? (
                     <div>
-                        <CurrentWorkout currentWorkout={currentWorkout} />
+                        <CurrentWorkout 
+                            currentWorkout={currentWorkout} 
+                            showControls={false}
+                        />
                         <div className='row'>
                             <button onClick={onOpenWorkout} className="normal-button">
                                 Start Workout
