@@ -12,17 +12,17 @@
     position: fixed;
     bottom: 0;
 
-    transition: 200ms;
-
     display: flex;
     justify-content: space-around;
     align-items: center;
     z-index: 2000;
+
+    transition: transform 200ms;
 }
 
 @media (min-width: 768px) {
     .dockbar {
         transform: translateY(100%);
-        transition: 200ms;
+        transition: transform 200ms;
     }
 }
