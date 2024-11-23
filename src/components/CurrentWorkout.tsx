@@ -12,7 +12,7 @@ const CurrentWorkout: React.FC<CurrentWorkoutProps> = ({
     currentWorkout,
     onMoveExercise,
     onRemoveExercise,
-    showControls = true
+    showControls = false
 }) => {
     if (currentWorkout.length === 0) {
         return <p>No exercises added yet.</p>;
@@ -20,12 +20,12 @@ const CurrentWorkout: React.FC<CurrentWorkoutProps> = ({
 
     return (
         <div className="current-workout">
-            <h3>Current Workout</h3>
+            <h2>Current Workout</h2>
             {currentWorkout.map((exercise, index) => (
                 <div key={index} className="exercise-item">
 
                     <div className="exercise-content">
-                        <strong>{exercise.name}</strong>
+                        <h3>Exercise {index + 1}: {exercise.name}</h3>
                         <p>Sets: {exercise.sets.map(set => set.reps).join(', ')}</p>
                     </div>
 

@@ -11,6 +11,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         exercises: null,
         startTime: '',
         endTime: '',
+        isFreestyle: false
     });
 
     const [weightTracking, setWeightTracking] = useState<WeightTracking>({
@@ -173,6 +174,7 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                 return;
             }
             setWorkoutIndexer(newWorkoutIndexer);
+            localStorage.setItem('workoutState', JSON.stringify(workoutState));
             localStorage.setItem('workoutIndexer', JSON.stringify(newWorkoutIndexer));
             setIsBreak(true);
             localStorage.setItem('isBreak', JSON.stringify(true));
@@ -201,6 +203,17 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     };
 
     const completeWorkout = () => {
+        // Add end time and save to logged workouts
+        const completedWorkout = {
+            ...workoutState,
+            endTime: new Date().toISOString()
+        };
+        
+        const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
+        loggedWorkouts.push(completedWorkout);
+        localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
+
+        // Cleanup
         localStorage.removeItem('workoutState');
         localStorage.removeItem('currentWorkout');
         localStorage.removeItem('workoutIndexer');
