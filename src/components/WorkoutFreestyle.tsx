@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import WorkoutSummary from './WorkoutSummary';
 import ExerciseSelector from './ExerciseSelector';
+import WorkoutBreak from './WorkoutBreak';
 
 import { Exercise, WorkoutFreestyleProps, Workout } from '../interfaces/Workout';
 import { logWorkout } from '../utils/WorkoutUtils';
@@ -21,6 +22,25 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
 
     const [isSelectingExercise, setIsSelectingExercise] = useState<boolean>(isNewWorkout || true);
     const [isComplete, setIsComplete] = useState(false);
+    const [isBreak, setIsBreak] = useState<boolean>(() => {
+        const savedIsBreak = localStorage.getItem('isBreak');
+        return savedIsBreak ? JSON.parse(savedIsBreak) : false;
+    });
+
+    useEffect(() => {
+        localStorage.setItem('isBreak', JSON.stringify(isBreak));
+
+        if (isBreak) {
+            let breakStartTime = Number(localStorage.getItem('breakStartTime'));
+            if (!breakStartTime) {
+                breakStartTime = Date.now();
+                localStorage.setItem('breakStartTime', breakStartTime.toString());
+            }
+        } else {
+            localStorage.removeItem('breakStartTime');
+            localStorage.removeItem('isBreak');
+        }
+    }, [isBreak]);
 
     const addToWorkoutState = (newSets: Array<{ reps: number, weight: number }>) => {
         if (!currentExercise) return;
@@ -75,6 +95,9 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
 
         // Reset the state for the next set
         resetInputs();
+
+        // Start the break after adding a set
+        setIsBreak(true);
     };
 
     const handleNextExercise = () => {
@@ -84,6 +107,9 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         setCurrentExercise(null);
         setSets([]);
         setIsSelectingExercise(true);
+
+        // Start the break after moving to the next exercise
+        setIsBreak(true);
     };
 
     const handleFinishWorkout = async () => {
@@ -135,12 +161,20 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         setIsComplete(true);
     };
 
+    const handleBreakEnd = () => {
+        setIsBreak(false);
+    };
+
     if (isComplete) {
         return (
             <WorkoutSummary
                 workoutState={workoutState}
                 onFinish={onCompleteWorkout}
             />
+        );
+    } else if (isBreak) {
+        return (
+            <WorkoutBreak onBreakEnd={handleBreakEnd} onSkip={handleBreakEnd} />
         );
     }
 
@@ -184,11 +218,12 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
                         <button className="normal-button" onClick={handleAddSet}>Add Set</button>
                         <button className="normal-button" onClick={handleNextExercise}>Next Exercise</button>
                     </div>
-                    <div>
-                        <button className="bad-button" onClick={handleFinishWorkout}>End Workout</button>
-                    </div>
+
                 </div>
             )}
+            <div>
+                <button className="bad-button" onClick={handleFinishWorkout}>End Workout</button>
+            </div>
         </div>
     );
 };
