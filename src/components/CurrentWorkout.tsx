@@ -1,5 +1,6 @@
 import React from 'react';
 import { Exercise } from '../interfaces/Workout';
+import { FaArrowUp, FaArrowDown, FaTimes } from 'react-icons/fa';
 
 interface CurrentWorkoutProps {
     currentWorkout: Exercise[];
@@ -36,20 +37,20 @@ const CurrentWorkout: React.FC<CurrentWorkoutProps> = ({
                                 onClick={() => onMoveExercise(index, 'up')}
                                 disabled={index === 0}
                             >
-                                ↑
+                                <FaArrowUp />
                             </button>
                             <button
                                 className="normal-button"
                                 onClick={() => onMoveExercise(index, 'down')}
                                 disabled={index === currentWorkout.length - 1}
                             >
-                                ↓
+                                <FaArrowDown />
                             </button>
                             <button
                                 className="bad-button"
                                 onClick={() => onRemoveExercise(index)}
                             >
-                                ✕
+                                <FaTimes />
                             </button>
                         </div>
                     )}

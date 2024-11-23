@@ -32,7 +32,6 @@ div.vertical {
 
 button {
     border: none;
-    border-radius: 20px;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
     color: white;
     cursor: pointer;
@@ -41,6 +40,7 @@ button {
     margin: 1rem;
     outline: none;
     padding: 1rem 2rem;
+    border-radius: 2rem;
     transition: 100ms;
     font-size: 1rem;
 }

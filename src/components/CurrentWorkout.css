@@ -1,6 +1,6 @@
 .exercise-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 10px;
     margin: 5px 0;
@@ -11,12 +11,6 @@
 .exercise-controls {
     display: flex;
     gap: 5px;
-}
-
-.small-button {
-    padding: 5px 10px;
-    font-size: 14px;
-    min-width: 30px;
 }
 
 .exercise-content {

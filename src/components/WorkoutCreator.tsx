@@ -74,13 +74,11 @@ const WorkoutCreator: React.FC = () => {
     };
 
     const saveWorkout = () => {
-        // Check if there are any exercises in the workout
         if (currentWorkout.length === 0) {
             alert("Please add some exercises to save a workout.");
             return;
         }
 
-        // Prompt user for workout name
         const workoutName = prompt("Enter a name for this workout:");
 
         if (workoutName) {
@@ -213,7 +211,7 @@ const WorkoutCreator: React.FC = () => {
                         currentWorkout={currentWorkout}
                         onMoveExercise={moveExercise}
                         onRemoveExercise={removeExercise}
-                        showControls={true}  // You can control this with state if needed
+                        showControls={true}
                     />
 
                     <section>
