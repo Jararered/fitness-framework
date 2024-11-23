@@ -33,21 +33,21 @@ const CurrentWorkout: React.FC<CurrentWorkoutProps> = ({
                     {showControls && onMoveExercise && onRemoveExercise && (
                         <div className="exercise-controls">
                             <button
-                                className="normal-button"
+                                className="normal-button small-button"
                                 onClick={() => onMoveExercise(index, 'up')}
                                 disabled={index === 0}
                             >
                                 <FaArrowUp />
                             </button>
                             <button
-                                className="normal-button"
+                                className="normal-button small-button"
                                 onClick={() => onMoveExercise(index, 'down')}
                                 disabled={index === currentWorkout.length - 1}
                             >
                                 <FaArrowDown />
                             </button>
                             <button
-                                className="bad-button"
+                                className="bad-button small-button"
                                 onClick={() => onRemoveExercise(index)}
                             >
                                 <FaTimes />
