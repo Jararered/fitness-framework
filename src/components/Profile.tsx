@@ -52,7 +52,7 @@ const WorkoutProfile: React.FC = () => {
                         ) : (
                             recentWorkouts.map((workout, index) => (
                                 <li key={index}>
-                                    <strong>Completed On: {formatDateTime(workout.endTime)}</strong>
+                                    <strong>{formatDateTime(workout.endTime)}</strong>
                                     <ul>
                                         {workout.exercises.map((exercise, idx) => (
                                             <li key={idx}>

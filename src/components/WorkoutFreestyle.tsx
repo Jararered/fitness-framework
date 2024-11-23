@@ -165,65 +165,65 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         setIsBreak(false);
     };
 
-    if (isComplete) {
-        return (
-            <WorkoutSummary
-                workoutState={workoutState}
-                onFinish={onCompleteWorkout}
-            />
-        );
-    } else if (isBreak) {
-        return (
-            <WorkoutBreak onBreakEnd={handleBreakEnd} onSkip={handleBreakEnd} />
-        );
-    }
-
     return (
-        <div className='workout-freestyle'>
-            <h1>Freestyle Workout</h1>
-            {isSelectingExercise ? (
-                <ExerciseSelector onSelectExercise={handleSelectExercise} onComplete={handleFinishWorkout} />
+        <div>
+            {isComplete ? (
+                <WorkoutSummary
+                    workoutState={workoutState}
+                    onFinish={onCompleteWorkout}
+                />
+            ) : isBreak ? (
+                <WorkoutBreak onBreakEnd={handleBreakEnd} onSkip={handleBreakEnd} />
             ) : (
-                <div className="card">
-                    <h2>{currentExercise?.name}</h2>
-                    {sets.length > 0 && (
-                        <div>
-                            <h3>Completed Sets:</h3>
-                            {sets.map((set, index) => (
-                                <p key={index}>{set.reps} x {set.weight}lbs</p>
-                            ))}
+                <div className='workout-freestyle'>
+                    <h1>Freestyle Workout</h1>
+
+                    {isSelectingExercise ? (
+                        <ExerciseSelector onSelectExercise={handleSelectExercise} />
+                    ) : (
+                        <div className="card">
+                            <h2>{currentExercise?.name}</h2>
+                            {sets.length > 0 && (
+                                <div>
+                                    <h3>Completed Sets:</h3>
+                                    {sets.map((set, index) => (
+                                        <p key={index}>{set.reps} x {set.weight}lbs</p>
+                                    ))}
+                                </div>
+                            )}
+                            <div>
+                                <label>Reps: </label>
+                                <input
+                                    type="number"
+                                    value={currentReps || ''}
+                                    onChange={(e) => setCurrentReps(Number(e.target.value))}
+                                    className="input-field"
+                                    inputMode="numeric"
+                                />
+                            </div>
+                            <div>
+                                <label>Weight: </label>
+                                <input
+                                    type="number"
+                                    value={currentWeight || ''}
+                                    onChange={(e) => setCurrentWeight(Number(e.target.value))}
+                                    className="input-field"
+                                    inputMode="decimal"
+                                />
+                            </div>
+                            <div>
+                                <button className="normal-button" onClick={handleAddSet}>Add Set</button>
+                                <button className="normal-button" onClick={handleNextExercise}>Next Exercise</button>
+                            </div>
+
                         </div>
                     )}
-                    <div>
-                        <label>Reps: </label>
-                        <input
-                            type="number"
-                            value={currentReps || ''}
-                            onChange={(e) => setCurrentReps(Number(e.target.value))}
-                            className="input-field"
-                            inputMode="numeric"
-                        />
-                    </div>
-                    <div>
-                        <label>Weight: </label>
-                        <input
-                            type="number"
-                            value={currentWeight || ''}
-                            onChange={(e) => setCurrentWeight(Number(e.target.value))}
-                            className="input-field"
-                            inputMode="decimal"
-                        />
-                    </div>
-                    <div>
-                        <button className="normal-button" onClick={handleAddSet}>Add Set</button>
-                        <button className="normal-button" onClick={handleNextExercise}>Next Exercise</button>
-                    </div>
 
+                    <div>
+                        <button className="bad-button" onClick={handleFinishWorkout}>End Workout</button>
+                    </div>
                 </div>
             )}
-            <div>
-                <button className="bad-button" onClick={handleFinishWorkout}>End Workout</button>
-            </div>
         </div>
     );
 };

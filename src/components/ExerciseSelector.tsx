@@ -4,7 +4,6 @@ import { exerciseCategories } from '../interfaces/Equipment';
 
 interface ExerciseSelectorProps {
     onSelectExercise: (exerciseName: string) => void;
-    onComplete: () => void;
 }
 
 const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({ onSelectExercise }) => {
