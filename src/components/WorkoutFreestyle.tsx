@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import WorkoutSummary from './WorkoutSummary';
 import ExerciseSelector from './ExerciseSelector';
 
-import { Exercise, WorkoutFreestyleProps, Set } from '../interfaces/Workout';
+import { Exercise, WorkoutFreestyleProps } from '../interfaces/Workout';
 
 const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
     onCompleteWorkout,
@@ -45,6 +45,11 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
     };
 
+    const resetInputs = () => {
+        setCurrentReps(0);
+        setCurrentWeight(0);
+    }
+
     const handleSelectExercise = (exerciseName: string) => {
         setCurrentExercise({
             name: exerciseName,
@@ -52,8 +57,7 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         });
         setIsSelectingExercise(false);
         setSets([]);
-        setCurrentReps(0);
-        setCurrentWeight(0);
+        resetInputs();
     };
 
     const handleAddSet = () => {
@@ -66,8 +70,7 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         addToWorkoutState(newSets);
         
         // Reset the state for the next set
-        setCurrentReps(0);
-        setCurrentWeight(0);
+        resetInputs();
     };
     
     const handleNextExercise = () => {
@@ -80,9 +83,11 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
     };
 
     const handleFinishWorkout = () => {
+        handleAddSet();
+
         // Log the completed workout
         if (workoutState.exercises) {
-            console.log(workoutState.exercises);
+
             const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
             const workoutEntry = {
                 startTime: workoutState.startTime,
@@ -94,8 +99,8 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         }
 
         // Clean up localStorage
-        localStorage.removeItem('workoutState');
-        localStorage.removeItem('currentWorkout');
+        // localStorage.removeItem('workoutState');
+        // localStorage.removeItem('currentWorkout');
 
         // Set isComplete to true to show the workout summary
         setIsComplete(true);
