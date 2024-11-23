@@ -102,7 +102,7 @@ const Preferences: React.FC = () => {
                 <div className="card">
                     <h2>User Preferences</h2>
                     <div>
-                        <label htmlFor="user-name">User Name:</label>
+                        <label htmlFor="user-name">User Name</label>
                         <input className="input-field" type="text"
                             id="user-name"
                             value={preferences.user}
@@ -110,7 +110,7 @@ const Preferences: React.FC = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="user-weight">User Weight:</label>
+                        <label htmlFor="user-weight">User Weight</label>
                         <input className="input-field" type="number"
                             id="user-weight"
                             value={preferences.weight === 0 ? '' : preferences.weight}
@@ -119,7 +119,7 @@ const Preferences: React.FC = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="weight-unit">Preferred Units:</label>
+                        <label htmlFor="weight-unit">Preferred Units</label>
                         <select className="input-field" id="weight-unit"
                             value={preferences.units}
                             onChange={handleWeightUnitChange}
@@ -134,7 +134,7 @@ const Preferences: React.FC = () => {
                     <h2>Timing Preferences</h2>
                     {REST_TYPES.map(({ key, label }) => (
                         <div key={key}>
-                            <label htmlFor={`${key}-rest`}>{label} (sec):</label>
+                            <label htmlFor={`${key}-rest`}>{label} (sec)</label>
                             <input className="input-field" type="number"
                                 id={`${key}-rest`}
                                 value={preferences[`${key}Rest` as keyof typeof preferences]}
