@@ -157,6 +157,27 @@ const WorkoutCreator: React.FC = () => {
         }
     };
 
+    const moveExercise = (index: number, direction: 'up' | 'down') => {
+        setCurrentWorkout(prevWorkout => {
+            const newWorkout = [...prevWorkout];
+            if (direction === 'up' && index > 0) {
+                [newWorkout[index], newWorkout[index - 1]] = [newWorkout[index - 1], newWorkout[index]];
+            } else if (direction === 'down' && index < newWorkout.length - 1) {
+                [newWorkout[index], newWorkout[index + 1]] = [newWorkout[index + 1], newWorkout[index]];
+            }
+            localStorage.setItem('currentWorkout', JSON.stringify(newWorkout));
+            return newWorkout;
+        });
+    };
+
+    const removeExercise = (index: number) => {
+        setCurrentWorkout(prevWorkout => {
+            const newWorkout = prevWorkout.filter((_, i) => i !== index);
+            localStorage.setItem('currentWorkout', JSON.stringify(newWorkout));
+            return newWorkout;
+        });
+    };
+
     return (
         <div className='workout-creator'>
             <h1>Workout Creator</h1>
@@ -188,7 +209,12 @@ const WorkoutCreator: React.FC = () => {
                         Add Exercise
                     </button>
 
-                    <CurrentWorkout currentWorkout={currentWorkout} />
+                    <CurrentWorkout 
+                        currentWorkout={currentWorkout}
+                        onMoveExercise={moveExercise}
+                        onRemoveExercise={removeExercise}
+                        showControls={true}  // You can control this with state if needed
+                    />
 
                     <section>
                         <button className="normal-button" onClick={saveWorkout}>
