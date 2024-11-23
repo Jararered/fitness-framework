@@ -31,7 +31,6 @@ export interface Workout {
     exercises: Exercise[] | null;
     startTime: string;
     endTime: string;
-    isFreestyle?: boolean;
 }
 
 export interface WorkoutIndexer {
@@ -43,12 +42,6 @@ export interface WeightTracking {
     currentWeights: number[];
     maxWeights: { [key: string]: number };
     lastWeights: { [key: string]: ExerciseWeight };
-}
-
-export interface WorkoutFreestyleProps {
-    onCompleteWorkout: () => void;
-    existingWorkoutState: any;
-    isNewWorkout?: boolean;
 }
 
 export interface WorkoutOverviewProps {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import WorkoutSummary from './WorkoutSummary';
-import WorkoutFreestyle from './WorkoutFreestyle';
 import WorkoutBreak from './WorkoutBreak';
 
 import { WorkoutInProgressProps, Workout, WeightTracking, WorkoutIndexer } from '../interfaces/Workout';
@@ -12,7 +11,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         exercises: null,
         startTime: '',
         endTime: '',
-        isFreestyle: false
     });
 
     const [weightTracking, setWeightTracking] = useState<WeightTracking>({
@@ -32,7 +30,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     });
 
     const [isComplete, setIsComplete] = useState(false);
-    const [isFreestyle, setIsFreestyle] = useState(false);
 
     useEffect(() => {
         const loadFromLocalStorage = (key: string, defaultValue: any) => {
@@ -195,53 +192,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         localStorage.removeItem('breakStartTime');
     };
 
-    const handleStartFreestyle = () => {
-        if (workoutState.exercises) {
-            const completedExercises = workoutState.exercises.slice(0, workoutIndexer.currentExerciseIndex + 1);
-            const currentExercise = completedExercises[workoutIndexer.currentExerciseIndex];
-            const currentSet = currentExercise.sets[workoutIndexer.currentSetIndex];
-            const weight = weightTracking.currentWeights[workoutIndexer.currentSetIndex] ||
-                weightTracking.lastWeights[currentExercise.name]?.weight || 0;
-
-            if (weight > 0) {
-                logWeight(currentExercise, currentSet, weight);
-
-                setWeightTracking(prev => ({
-                    ...prev,
-                    lastWeights: {
-                        ...prev.lastWeights,
-                        [currentExercise.name]: {
-                            exercise: currentExercise.name,
-                            weight: weight
-                        }
-                    }
-                }));
-
-                currentSet.weight = weight;
-            }
-
-            setWorkoutState(prev => ({
-                ...prev,
-                exercises: completedExercises,
-            }));
-            localStorage.setItem('workoutState', JSON.stringify({
-                ...workoutState,
-                exercises: completedExercises,
-            }));
-        }
-        setIsFreestyle(true);
-    };
-
-    if (isFreestyle || workoutState.isFreestyle) {
-        return (
-            <WorkoutFreestyle
-                onCompleteWorkout={completeWorkout}
-                existingWorkoutState={workoutState}
-                isNewWorkout={workoutState.exercises?.length === 0}
-            />
-        );
-    }
-
     if (!workoutState.exercises || workoutState.exercises.length === 0) {
         return <p>No workout found. Please create or load a workout.</p>;
     }
@@ -294,11 +244,6 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
                             </div>
                         </div>
                     </div>
-                )}
-                {!isComplete && !isBreak && (
-                    <button className="normal-button" onClick={handleStartFreestyle}>
-                        Start Freestyle Workout
-                    </button>
                 )}
             </div>
         </div >
