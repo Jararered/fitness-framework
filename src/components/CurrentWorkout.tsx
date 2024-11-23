@@ -1,27 +1,34 @@
 import React from 'react';
 
-import { Exercise } from './Exercise';
+import { Exercise } from '../interfaces/Workout';
 
 const CurrentWorkout: React.FC<{ currentWorkout: Exercise[] }> = ({ currentWorkout }) => {
     return (
-        <div>
+        <div className='current-workout'>
             <h2>Current Workout</h2>
-
             <ul>
-                {currentWorkout.length === 0 ?
-                    (<p>No exercises added yet.</p>
-                    ) : (
-                        currentWorkout.map((exercise, index) => (
-                            <div>
-                                <h4>{exercise.name}</h4>
-                                <li key={index}>
-                                    {exercise.sets.map((set, setIndex) => (
-                                        <span key={setIndex}>{set.reps} reps{setIndex < exercise.sets.length - 1 ? ', ' : ''}</span>
-                                    ))}
-                                </li>
-                            </div>
-                        ))
-                    )}
+                {(() => {
+                    if (currentWorkout.length === 0) {
+                        return <p>No exercises added yet.</p>;
+                    } else {
+                        return currentWorkout.map((exercise, index) => {
+                            return (
+                                <div key={index}>
+                                    <h4>{exercise.name}</h4>
+                                    <li>
+                                        {exercise.sets.map((set, setIndex) => {
+                                            return (
+                                                <span key={setIndex}>
+                                                    {set.reps} reps{setIndex < exercise.sets.length - 1 ? ', ' : ''}
+                                                </span>
+                                            );
+                                        })}
+                                    </li>
+                                </div>
+                            );
+                        });
+                    }
+                })()}
             </ul>
         </div>
     );

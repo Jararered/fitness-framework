@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
-import { equipment, equipmentIcons, equipmentExercises } from './Equipment';
+import { equipment, equipmentIcons, equipmentExercises } from '../interfaces/Equipment';
 import './GymEquipment.css';
 
 const Equipment: React.FC = () => {
@@ -101,8 +101,10 @@ const Equipment: React.FC = () => {
                             <option key={gym.name} value={gym.name}>{gym.name}</option>
                         ))}
                     </select>
-                    <button onClick={() => loadEquipmentList(selectedList)} className="normal-button">Load Gym Equipment</button>
-                    <button onClick={() => deleteEquipmentList(selectedList)} className="bad-button">Delete Gym Equipment</button>
+                    <div>
+                        <button onClick={() => loadEquipmentList(selectedList)} className="normal-button">Load Gym Equipment</button>
+                        <button onClick={() => deleteEquipmentList(selectedList)} className="bad-button">Delete Gym Equipment</button>
+                    </div>
                 </div>
 
                 <h1>Available Exercises</h1>
