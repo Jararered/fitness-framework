@@ -10,20 +10,15 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
     existingWorkoutState,
     isNewWorkout = false
 }) => {
-    const [workoutState, setWorkoutState] = useState<Workout>(() => {
-        // Initialize with proper workout state structure
-        return existingWorkoutState || {
-            exercises: [],
-            startTime: new Date().toISOString(),
-            endTime: '',
-            isFreestyle: true
-        };
-    });
+    const [workoutState, setWorkoutState] = useState<Workout>(existingWorkoutState || {});
+    const [currentExercise, setCurrentExercise] = useState<Exercise | null>(null);
+
+    const [sets, setSets] = useState<Array<{ reps: number, weight: number }>>([]);
+
     const [currentWeight, setCurrentWeight] = useState<number>(0);
     const [currentReps, setCurrentReps] = useState<number>(0);
+
     const [isSelectingExercise, setIsSelectingExercise] = useState<boolean>(isNewWorkout || true);
-    const [currentExercise, setCurrentExercise] = useState<Exercise | null>(null);
-    const [sets, setSets] = useState<Array<{ reps: number, weight: number }>>([]);
     const [isComplete, setIsComplete] = useState(false);
 
     const addToWorkoutState = (newSets: Array<{ reps: number, weight: number }>) => {
@@ -33,7 +28,7 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
 
         setWorkoutState(prevState => {
             const updatedExercises = prevState.exercises ? [...prevState.exercises] : [];
-            
+
             if (updatedExercises.length > 0 &&
                 updatedExercises[updatedExercises.length - 1].name === currentExercise.name) {
                 updatedExercises[updatedExercises.length - 1] = updatedExercise;
@@ -92,19 +87,19 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
 
     const handleFinishWorkout = async () => {
         let finalState: Workout;
-        
+
         // Only try to add the set if we have valid inputs
         if (currentExercise && currentReps > 0 && currentWeight > 0) {
             const newSet = { reps: currentReps, weight: currentWeight };
             const newSets = [...sets, newSet];
             setSets(newSets);
-            
+
             // Wait for state to update
             finalState = await new Promise<Workout>(resolve => {
                 setWorkoutState(prevState => {
                     const updatedExercises = prevState.exercises ? [...prevState.exercises] : [];
                     const updatedExercise = { ...currentExercise, sets: newSets };
-                    
+
                     if (updatedExercises.length > 0 &&
                         updatedExercises[updatedExercises.length - 1].name === currentExercise.name) {
                         updatedExercises[updatedExercises.length - 1] = updatedExercise;
