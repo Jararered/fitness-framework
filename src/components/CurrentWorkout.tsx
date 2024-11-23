@@ -1,35 +1,60 @@
 import React from 'react';
-
 import { Exercise } from '../interfaces/Workout';
 
-const CurrentWorkout: React.FC<{ currentWorkout: Exercise[] }> = ({ currentWorkout }) => {
+interface CurrentWorkoutProps {
+    currentWorkout: Exercise[];
+    onMoveExercise?: (index: number, direction: 'up' | 'down') => void;
+    onRemoveExercise?: (index: number) => void;
+    showControls?: boolean;
+}
+
+const CurrentWorkout: React.FC<CurrentWorkoutProps> = ({
+    currentWorkout,
+    onMoveExercise,
+    onRemoveExercise,
+    showControls = true
+}) => {
+    if (currentWorkout.length === 0) {
+        return <p>No exercises added yet.</p>;
+    }
+
     return (
-        <div className='current-workout'>
-            <h2>Current Workout</h2>
-            <ul>
-                {(() => {
-                    if (currentWorkout.length === 0) {
-                        return <p>No exercises added yet.</p>;
-                    } else {
-                        return currentWorkout.map((exercise, index) => {
-                            return (
-                                <div key={index}>
-                                    <h4>{exercise.name}</h4>
-                                    <li>
-                                        {exercise.sets.map((set, setIndex) => {
-                                            return (
-                                                <span key={setIndex}>
-                                                    {set.reps} reps{setIndex < exercise.sets.length - 1 ? ', ' : ''}
-                                                </span>
-                                            );
-                                        })}
-                                    </li>
-                                </div>
-                            );
-                        });
-                    }
-                })()}
-            </ul>
+        <div className="current-workout">
+            <h3>Current Workout</h3>
+            {currentWorkout.map((exercise, index) => (
+                <div key={index} className="exercise-item">
+
+                    <div className="exercise-content">
+                        <strong>{exercise.name}</strong>
+                        <p>Sets: {exercise.sets.map(set => set.reps).join(', ')}</p>
+                    </div>
+
+                    {showControls && onMoveExercise && onRemoveExercise && (
+                        <div className="exercise-controls">
+                            <button
+                                className="normal-button"
+                                onClick={() => onMoveExercise(index, 'up')}
+                                disabled={index === 0}
+                            >
+                                ↑
+                            </button>
+                            <button
+                                className="normal-button"
+                                onClick={() => onMoveExercise(index, 'down')}
+                                disabled={index === currentWorkout.length - 1}
+                            >
+                                ↓
+                            </button>
+                            <button
+                                className="bad-button"
+                                onClick={() => onRemoveExercise(index)}
+                            >
+                                ✕
+                            </button>
+                        </div>
+                    )}
+                </div>
+            ))}
         </div>
     );
 };
