@@ -71,28 +71,28 @@ const Preferences: React.FC = () => {
     };
 
     const handleClearWorkoutData = () => {
-        const confirmation = window.confirm("Are you sure you want to clear all workout data?");
-        if (confirmation) {
-            localStorage.removeItem('currentWorkout');
-            localStorage.removeItem('loggedWorkouts');
-            localStorage.removeItem('loggedMaxWeights');
-            localStorage.removeItem('loggedLastWeights');
-            localStorage.removeItem('loggedWeights');
+        // const confirmation = window.confirm("Are you sure you want to clear all workout data?");
+        // if (confirmation) {
+        localStorage.removeItem('currentWorkout');
+        localStorage.removeItem('loggedWorkouts');
+        localStorage.removeItem('loggedMaxWeights');
+        localStorage.removeItem('loggedLastWeights');
+        localStorage.removeItem('loggedWeights');
 
-            window.location.reload();
-        }
+        window.location.reload();
+        // }
     };
 
     // Handle clearing all data
     const handleClearData = () => {
-        const firstConfirmation = window.confirm("Are you sure you want to clear all saved data?");
-        if (firstConfirmation) {
-            const secondConfirmation = window.confirm("This action is irreversible. Do you really want to proceed?");
-            if (secondConfirmation) {
-                localStorage.clear();
-                window.location.reload();
-            }
-        }
+        // const firstConfirmation = window.confirm("Are you sure you want to clear all saved data?");
+        // if (firstConfirmation) {
+        // const secondConfirmation = window.confirm("This action is irreversible. Do you really want to proceed?");
+        // if (secondConfirmation) {
+        localStorage.clear();
+        window.location.reload();
+        // }
+        // }
     };
 
     return (

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { exerciseCategories } from '../interfaces/Equipment';
+import React, { useEffect, useState } from 'react';
+
 import WorkoutSummary from './WorkoutSummary';
+import ExerciseSelector from './ExerciseSelector';
 
 import { Exercise, WorkoutFreestyleProps } from '../interfaces/Workout';
 
@@ -25,6 +26,7 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
             sets: newSets
         };
 
+
         const updatedExercises = workoutState.exercises ? [...workoutState.exercises] : [];
         if (updatedExercises.length > 0 &&
             updatedExercises[updatedExercises.length - 1].name === currentExercise.name) {
@@ -42,7 +44,6 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
 
         setWorkoutState(newWorkoutState);
         localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
-        localStorage.setItem('currentWorkout', JSON.stringify(updatedExercises));
     };
 
     const handleSelectExercise = (exerciseName: string) => {
@@ -90,17 +91,14 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         }
     };
 
-    const handleComplete = () => {
-        if (currentExercise && sets.length > 0) {
-            handleNextExercise(); // Save the current exercise before completing
-        }
-
+    const handleFinishWorkout = () => {
         // Log the completed workout
         if (workoutState.exercises) {
+            console.log(workoutState.exercises);
             const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
             const workoutEntry = {
                 startTime: workoutState.startTime,
-                endTime: new Date().toISOString(), // Add this line
+                endTime: new Date().toISOString(),
                 exercises: workoutState.exercises
             };
             loggedWorkouts.push(workoutEntry);
@@ -128,34 +126,15 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         <div className='workout-freestyle'>
             <h1>Freestyle Workout</h1>
             {isSelectingExercise ? (
-                <div className="card">
-                    <h2>Select Exercise</h2>
-                    {Object.entries(exerciseCategories).map(([category, exercises]) => (
-                        <div key={category}>
-                            <h3>{category}</h3>
-                            {exercises.map((exercise) => (
-                                <button
-                                    key={exercise}
-                                    className="normal-button"
-                                    onClick={() => handleSelectExercise(exercise)}
-                                >
-                                    {exercise}
-                                </button>
-                            ))}
-                        </div>
-                    ))}
-                    <button className="bad-button" onClick={handleComplete}>
-                        End Workout
-                    </button>
-                </div>
+                <ExerciseSelector onSelectExercise={handleSelectExercise} onComplete={handleFinishWorkout} />
             ) : (
                 <div className="card">
                     <h2>{currentExercise?.name}</h2>
                     {sets.length > 0 && (
                         <div>
-                            <h3>Sets:</h3>
+                            <h3>Completed Sets:</h3>
                             {sets.map((set, index) => (
-                                <p key={index}>Set {index + 1}: {set.reps} reps @ {set.weight}lbs</p>
+                                <p key={index}>{set.reps} x {set.weight}lbs</p>
                             ))}
                         </div>
                     )}
@@ -182,7 +161,9 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
                     <div>
                         <button className="normal-button" onClick={handleAddSet}>Add Set</button>
                         <button className="normal-button" onClick={handleNextExercise}>Next Exercise</button>
-                        <button className="bad-button" onClick={handleComplete}>End Workout</button>
+                    </div>
+                    <div>
+                        <button className="bad-button" onClick={handleFinishWorkout}>End Workout</button>
                     </div>
                 </div>
             )}

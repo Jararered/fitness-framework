@@ -201,19 +201,9 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     };
 
     const completeWorkout = () => {
-        if (workoutState.exercises) {
-            const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
-            const workoutEntry = {
-                startTime: workoutState.startTime,
-                endTime: new Date().toISOString(),
-                exercises: workoutState.exercises
-            };
-            loggedWorkouts.push(workoutEntry);
-            localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
-        }
-
         localStorage.removeItem('workoutState');
         localStorage.removeItem('currentWorkout');
+        localStorage.removeItem('workoutIndexer');
         onCompleteWorkout();
     };
 
@@ -226,6 +216,16 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
     const handleStartFreestyle = () => {
         if (workoutState.exercises) {
             const completedExercises = workoutState.exercises.slice(0, workoutIndexer.currentExerciseIndex + 1);
+            const currentExercise = completedExercises[workoutIndexer.currentExerciseIndex];
+            const currentSet = currentExercise.sets[workoutIndexer.currentSetIndex];
+            const weight = weightTracking.currentWeights[workoutIndexer.currentSetIndex] ||
+                weightTracking.lastWeights[currentExercise.name]?.weight || 0;
+
+            if (weight > 0) {
+                logWeight(currentExercise, currentSet, weight);
+                currentSet.weight = weight;
+            }
+
             setWorkoutState(prev => ({
                 ...prev,
                 exercises: completedExercises,

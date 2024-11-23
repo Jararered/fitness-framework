@@ -22,7 +22,7 @@ const calculateTotalSets = (exercises: Exercise[]) => {
 const calculateTotalExercises = (exercises: Exercise[]) => {
     return exercises?.length || 0;
 };
-
+ 
 const WorkoutSummary: React.FC<WorkoutSummaryProps> = ({ workoutState, onFinish }) => {
     const totalSets = calculateTotalSets(workoutState.exercises || []);
     const totalExercises = calculateTotalExercises(workoutState.exercises || []);

@@ -11,12 +11,10 @@
     justify-content: center;
     display: flex;
 
-    transition: 0.3s;
+    transition: 200ms;
 }
 
 .button:hover {
     background-color: #e0e0e0;
-    transition: background-color 0.3s;
-
-    transition: 0.3s;
+    transition: 200ms;
 }
