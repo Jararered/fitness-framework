@@ -202,17 +202,18 @@ const WorkoutInProgress: React.FC<WorkoutInProgressProps> = ({ onCompleteWorkout
         }
     };
 
+    const logWorkout = (workoutState: Workout) => {
+        const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
+        loggedWorkouts.push(workoutState);
+        localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
+    };
+
     const completeWorkout = () => {
-        // Add end time and save to logged workouts
         const completedWorkout = {
             ...workoutState,
             endTime: new Date().toISOString()
         };
-        
-        const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
-        loggedWorkouts.push(completedWorkout);
-        localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
-
+        logWorkout(completedWorkout);
         // Cleanup
         localStorage.removeItem('workoutState');
         localStorage.removeItem('currentWorkout');

@@ -85,6 +85,12 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         setIsSelectingExercise(true);
     };
 
+    const logWorkout = (workoutState: Workout) => {
+        const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
+        loggedWorkouts.push(workoutState);
+        localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
+    };
+
     const handleFinishWorkout = async () => {
         let finalState: Workout;
 
@@ -125,10 +131,7 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
             };
         }
 
-        // Now log the workout with the final state
-        const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
-        loggedWorkouts.push(finalState);
-        localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
+        logWorkout(finalState);
 
         // Clean up localStorage
         localStorage.removeItem('workoutState');
