@@ -3,14 +3,22 @@ import React, { useState } from 'react';
 import WorkoutSummary from './WorkoutSummary';
 import ExerciseSelector from './ExerciseSelector';
 
-import { Exercise, WorkoutFreestyleProps } from '../interfaces/Workout';
+import { Exercise, WorkoutFreestyleProps, Workout } from '../interfaces/Workout';
 
 const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
     onCompleteWorkout,
     existingWorkoutState,
     isNewWorkout = false
 }) => {
-    const [workoutState, setWorkoutState] = useState(existingWorkoutState);
+    const [workoutState, setWorkoutState] = useState<Workout>(() => {
+        // Initialize with proper workout state structure
+        return existingWorkoutState || {
+            exercises: [],
+            startTime: new Date().toISOString(),
+            endTime: '',
+            isFreestyle: true
+        };
+    });
     const [currentWeight, setCurrentWeight] = useState<number>(0);
     const [currentReps, setCurrentReps] = useState<number>(0);
     const [isSelectingExercise, setIsSelectingExercise] = useState<boolean>(isNewWorkout || true);
@@ -21,28 +29,28 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
     const addToWorkoutState = (newSets: Array<{ reps: number, weight: number }>) => {
         if (!currentExercise) return;
 
-        const updatedExercise = {
-            ...currentExercise,
-            sets: newSets
-        };
+        const updatedExercise = { ...currentExercise, sets: newSets };
 
-        const updatedExercises = workoutState.exercises ? [...workoutState.exercises] : [];
-        if (updatedExercises.length > 0 &&
-            updatedExercises[updatedExercises.length - 1].name === currentExercise.name) {
-            updatedExercises[updatedExercises.length - 1] = updatedExercise;
-        } else {
-            updatedExercises.push(updatedExercise);
-        }
+        setWorkoutState(prevState => {
+            const updatedExercises = prevState.exercises ? [...prevState.exercises] : [];
+            
+            if (updatedExercises.length > 0 &&
+                updatedExercises[updatedExercises.length - 1].name === currentExercise.name) {
+                updatedExercises[updatedExercises.length - 1] = updatedExercise;
+            } else {
+                updatedExercises.push(updatedExercise);
+            }
 
-        const newWorkoutState = {
-            ...workoutState,
-            exercises: updatedExercises,
-            currentExerciseIndex: updatedExercises.length - 1,
-            currentSetIndex: newSets.length - 1
-        };
+            const newState = {
+                ...prevState,
+                exercises: updatedExercises,
+                currentExerciseIndex: updatedExercises.length - 1,
+                currentSetIndex: newSets.length - 1
+            };
 
-        setWorkoutState(newWorkoutState);
-        localStorage.setItem('workoutState', JSON.stringify(newWorkoutState));
+            localStorage.setItem('workoutState', JSON.stringify(newState));
+            return newState;
+        });
     };
 
     const resetInputs = () => {
@@ -61,18 +69,18 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
     };
 
     const handleAddSet = () => {
-        if (!currentExercise || currentReps <= 0) return;
-        
+        if (!currentExercise || currentReps <= 0 || currentWeight <= 0) return;
+
         // Add the current set to the workout state 
         const newSet = { reps: currentReps, weight: currentWeight };
         const newSets = [...sets, newSet];
         setSets(newSets);
         addToWorkoutState(newSets);
-        
+
         // Reset the state for the next set
         resetInputs();
     };
-    
+
     const handleNextExercise = () => {
         handleAddSet();
 
@@ -82,27 +90,55 @@ const WorkoutFreestyle: React.FC<WorkoutFreestyleProps> = ({
         setIsSelectingExercise(true);
     };
 
-    const handleFinishWorkout = () => {
-        handleAddSet();
+    const handleFinishWorkout = async () => {
+        let finalState: Workout;
+        
+        // Only try to add the set if we have valid inputs
+        if (currentExercise && currentReps > 0 && currentWeight > 0) {
+            const newSet = { reps: currentReps, weight: currentWeight };
+            const newSets = [...sets, newSet];
+            setSets(newSets);
+            
+            // Wait for state to update
+            finalState = await new Promise<Workout>(resolve => {
+                setWorkoutState(prevState => {
+                    const updatedExercises = prevState.exercises ? [...prevState.exercises] : [];
+                    const updatedExercise = { ...currentExercise, sets: newSets };
+                    
+                    if (updatedExercises.length > 0 &&
+                        updatedExercises[updatedExercises.length - 1].name === currentExercise.name) {
+                        updatedExercises[updatedExercises.length - 1] = updatedExercise;
+                    } else {
+                        updatedExercises.push(updatedExercise);
+                    }
 
-        // Log the completed workout
-        if (workoutState.exercises) {
+                    const newState = {
+                        ...prevState,
+                        exercises: updatedExercises,
+                        endTime: new Date().toISOString()
+                    };
 
-            const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
-            const workoutEntry = {
-                startTime: workoutState.startTime,
-                endTime: new Date().toISOString(),
-                exercises: workoutState.exercises
+                    localStorage.setItem('workoutState', JSON.stringify(newState));
+                    resolve(newState);
+                    return newState;
+                });
+            });
+        } else {
+            finalState = {
+                ...workoutState,
+                endTime: new Date().toISOString()
             };
-            loggedWorkouts.push(workoutEntry);
-            localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
         }
 
-        // Clean up localStorage
-        // localStorage.removeItem('workoutState');
-        // localStorage.removeItem('currentWorkout');
+        // Now log the workout with the final state
+        const loggedWorkouts = JSON.parse(localStorage.getItem('loggedWorkouts') || '[]');
+        loggedWorkouts.push(finalState);
+        localStorage.setItem('loggedWorkouts', JSON.stringify(loggedWorkouts));
 
-        // Set isComplete to true to show the workout summary
+        // Clean up localStorage
+        localStorage.removeItem('workoutState');
+        localStorage.removeItem('currentWorkout');
+
         setIsComplete(true);
     };
 
