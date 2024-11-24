@@ -12,6 +12,7 @@ export const equipment = [
     "Lat Pulldown Machine",
     "Leg Curl Machine",
     "Leg Extension Machine",
+    "Leg Press Machine",
     "Smith Machine + Bench",
 ];
 
@@ -27,6 +28,7 @@ export const equipmentIcons: { [key: string]: JSX.Element } = {
     "Lat Pulldown Machine": <FaDumbbell size={48} />,
     "Leg Curl Machine": <FaDumbbell size={48} />,
     "Leg Extension Machine": <FaDumbbell size={48} />,
+    "Leg Press Machine": <FaDumbbell size={48} />,
     "Smith Machine + Bench": <FaDumbbell size={48} />,
     "Smith Machine": <FaDumbbell size={48} />,
 };
@@ -77,7 +79,8 @@ export const equipmentExercises: { [key: string]: string[] } = {
         "Dumbbell Bicep Curl",
         "Dumbbell Hammer Curl",
         "Dumbbell Tricep Extension",
-        "Dumbbell Skull Crushers"
+        "Dumbbell Skull Crushers",
+        "Dumbbell Lunges",
     ],
     "EZ Bar": [
         "EZ Bar Curl",
@@ -100,6 +103,9 @@ export const equipmentExercises: { [key: string]: string[] } = {
     "Leg Extension Machine": [
         "Leg Extension",
         "Leg Extension + Isometric Hold"
+    ],
+    "Leg Press Machine": [
+        "Leg Press",
     ],
     "Smith Machine + Bench": [
         "Smith Machine Bench Press",
@@ -134,9 +140,11 @@ export const exerciseCategories: Record<BodyPart, string[]> = {
         "Leg Extension + Isometric Hold",
         "Leg Curl",
         "Leg Curl + Isometric Hold",
+        "Leg Press",
         "Barbell Deadlift",
         "Barbell Sumo Deadlift",
         "Barbell Romanian Deadlift",
+        "Dumbbell Lunges"
     ],
     Biceps: [
         "Dumbbell Bicep Curl",
