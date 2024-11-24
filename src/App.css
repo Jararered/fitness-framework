@@ -12,8 +12,9 @@ body {
 
     color: #333;
     background-color: #f2f2f7;
-    background-image: radial-gradient(circle, #d2d2d2 0.0625rem, transparent 0.125rem);
+    background-image: radial-gradient(circle, #d2d2d2 0.0625rem, transparent 0.1rem);
     background-size: 2.5rem 2.5rem;
+
     overflow: hidden;
     height: 100%;
     padding-top: env(safe-area-inset-top);
@@ -79,7 +80,8 @@ button:active {
 }
 
 
-select, input {
+select,
+input {
     appearance: auto;
     height: 2.5rem;
 
