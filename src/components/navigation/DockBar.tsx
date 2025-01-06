@@ -20,7 +20,7 @@ const DockBar: React.FC<DockBarProps> = ({ onNavigate }) => {
     return (
         <div className="dockbar">
             <HomeButton onClick={() => handleNavigate('home')} isCollapsed={true} />
-            <WorkoutButton onClick={() => handleNavigate('workout-creator')} isCollapsed={true} />
+            <WorkoutButton onClick={() => handleNavigate('workout')} isCollapsed={true} />
             <GymButton onClick={() => handleNavigate('equipment')} isCollapsed={true} />
             <ProfileButton onClick={() => handleNavigate('profile')} isCollapsed={true} />
             <SettingsButton onClick={() => handleNavigate('settings')} isCollapsed={true} />

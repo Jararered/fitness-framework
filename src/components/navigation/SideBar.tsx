@@ -29,7 +29,7 @@ const SideBar: React.FC<SideBarProps> = ({ onNavigate, isCollapsed, onToggle }) 
             </button>
 
             <HomeButton onClick={() => handleNavigate('home')} isCollapsed={isCollapsed} />
-            <WorkoutButton onClick={() => handleNavigate('workout-creator')} isCollapsed={isCollapsed} />
+            <WorkoutButton onClick={() => handleNavigate('workout')} isCollapsed={isCollapsed} />
             <GymButton onClick={() => handleNavigate('equipment')} isCollapsed={isCollapsed} />
             <ProfileButton onClick={() => handleNavigate('profile')} isCollapsed={isCollapsed} />
             <SettingsButton onClick={() => handleNavigate('settings')} isCollapsed={isCollapsed} />
