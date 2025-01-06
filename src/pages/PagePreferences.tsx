@@ -7,7 +7,7 @@ const PagePreferences: React.FC = () => {
     return (
         <div className="page-preferences">
 
-            <h2>Preferences</h2>
+            <h1>Preferences</h1>
 
             <div className="card">
                 <UserPreferences />
