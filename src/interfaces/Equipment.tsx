@@ -1,55 +1,56 @@
 import { FaDumbbell } from 'react-icons/fa';
 
-// Equipment Type
-export type EquipmentType =
-    "Barbell + Bench" |
-    "Barbell + Squat Rack" |
-    "Barbell" |
-    "Chest Press Machine" |
-    "Dumbells + Bench" |
-    "Dumbells" |
-    "EZ Bar" |
-    "Smith Machine" |
-    "Lat Pulldown Machine" |
-    "Leg Curl Machine" |
-    "Leg Extension Machine" |
-    "Leg Press Machine" |
-    "Smith Machine + Bench";
+export const EquipmentNames =
+{
+    Barbell: "Barbell",
+    BarbellBench: "Barbell + Bench",
+    BarbellSquatRack: "Barbell + Squat Rack",
+    ChestPressMachine: "Chest Press Machine",
+    Dumbells: "Dumbells",
+    EzBar: "EZ Bar",
+    LatPulldownMachine: "Lat Pulldown Machine",
+    LegCurlMachine: "Leg Curl Machine",
+    LegExtensionMachine: "Leg Extension Machine",
+    LegPressMachine: "Leg Press Machine",
+    SmithMachine: "Smith Machine",
+    SmithMachineBench: "Smith Machine + Bench",
+};
 
 // Equipment Interface
 export interface EquipmentInterface {
-    name: EquipmentType;
+    name: string;
     enabled: boolean;
 }
 
 export type EquipmentList = EquipmentInterface[];
 
 export const DefaultEquipment: EquipmentList = [
-    { name: "Barbell + Squat Rack", enabled: true },
-    { name: "Smith Machine + Bench", enabled: true },
-    { name: "Leg Extension Machine", enabled: true },
-    { name: "Leg Curl Machine", enabled: true },
-    { name: "Leg Press Machine", enabled: true },
-    { name: "Barbell", enabled: true },
-    { name: "Dumbells", enabled: true },
-    { name: "EZ Bar", enabled: true },
-    { name: "Barbell + Bench", enabled: true },
-    { name: "Chest Press Machine", enabled: true },
-    { name: "Lat Pulldown Machine", enabled: true },
-    { name: "Smith Machine", enabled: true }
+    { name: EquipmentNames.BarbellSquatRack, enabled: true },
+    { name: EquipmentNames.SmithMachineBench, enabled: true },
+    { name: EquipmentNames.LegExtensionMachine, enabled: true },
+    { name: EquipmentNames.LegCurlMachine, enabled: true },
+    { name: EquipmentNames.LegPressMachine, enabled: true },
+    { name: EquipmentNames.Barbell, enabled: true },
+    { name: EquipmentNames.Dumbells, enabled: true },
+    { name: EquipmentNames.EzBar, enabled: true },
+    { name: EquipmentNames.BarbellBench, enabled: true },
+    { name: EquipmentNames.ChestPressMachine, enabled: true },
+    { name: EquipmentNames.LatPulldownMachine, enabled: true },
+    { name: EquipmentNames.SmithMachine, enabled: true }
 ];
 
 export const EquipmentIcons: { [key: string]: JSX.Element } = {
-    "Barbell + Squat Rack": <FaDumbbell size={48} />,
-    "Smith Machine + Bench": <FaDumbbell size={48} />,
-    "Leg Extension Machine": <FaDumbbell size={48} />,
-    "Leg Curl Machine": <FaDumbbell size={48} />,
-    "Leg Press Machine": <FaDumbbell size={48} />,
-    "Barbell": <FaDumbbell size={48} />,
-    "Dumbells": <FaDumbbell size={48} />,
-    "EZ Bar": <FaDumbbell size={48} />,
-    "Barbell + Bench": <FaDumbbell size={48} />,
-    "Chest Press Machine": <FaDumbbell size={48} />,
-    "Lat Pulldown Machine": <FaDumbbell size={48} />,
-    "Smith Machine": <FaDumbbell size={48} />
+    BarbellSquatRack: <FaDumbbell size={48} />,
+    SmithMachineBench: <FaDumbbell size={48} />,
+    LegExtensionMachine: <FaDumbbell size={48} />,
+    LegCurlMachine: <FaDumbbell size={48} />,
+    LegPressMachine: <FaDumbbell size={48} />,
+    Barbell: <FaDumbbell size={48} />,
+    Dumbells: <FaDumbbell size={48} />,
+    EzBar: <FaDumbbell size={48} />,
+    BarbellBench: <FaDumbbell size={48} />,
+    ChestPressMachine: <FaDumbbell size={48} />,
+    LatPulldownMachine: <FaDumbbell size={48} />,
+    SmithMachine: <FaDumbbell size={48} />
 };
+
