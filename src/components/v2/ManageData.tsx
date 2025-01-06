@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
-
 const ManageData = () => {
 
     const handleClearUserPreferences = () => {
         localStorage.removeItem('user-preferences');
-        // window.location.reload();
+        window.location.reload();
     }
 
     const handleClearTimingPreferences = () => {
         localStorage.removeItem('timing-preferences');
-        // window.location.reload();
+        window.location.reload();
     }
 
     const handleClearAllData = () => {
         localStorage.clear();
-        // window.location.reload();
+        window.location.reload();
     }
 
     return (
@@ -32,10 +30,6 @@ const ManageData = () => {
                     Reset Timing Preferences
                 </button>
             </div>
-
-            {/* <button className="bad-button" onClick={handleClearWorkoutData}>
-                Clear Workout Data
-                </button> */}
 
             <div>
                 <button className="bad-button" onClick={handleClearAllData}>

@@ -5,7 +5,7 @@ import CurrentWorkout from './CurrentWorkout';
 
 // Import Interfaces
 import { Exercise, SavedWorkout } from '../interfaces/Workout';
-import { equipmentExercises, exerciseCategories, BodyPart } from '../interfaces/Equipment';
+import { equipmentExercises, exerciseCategories, ExerciseType } from '../interfaces/Equipment';
 
 const WorkoutCreator: React.FC = () => {
     const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);
@@ -13,7 +13,7 @@ const WorkoutCreator: React.FC = () => {
     const [savedWorkouts, setSavedWorkouts] = useState<SavedWorkout[]>([]);
     const [selectedWorkout, setSelectedWorkout] = useState<string>("");
     const [availableExercises, setAvailableExercises] = useState<string[]>([]);
-    const [selectedBodyPart, setSelectedBodyPart] = useState<BodyPart>('Chest');
+    const [selectedBodyPart, setSelectedBodyPart] = useState<ExerciseType>('Chest');
 
     useEffect(() => {
         const selectedEquipment = localStorage.getItem('selectedEquipment');
@@ -253,7 +253,7 @@ const WorkoutCreator: React.FC = () => {
                     <h2>Random Workout</h2>
                     <select className="input-field"
                         value={selectedBodyPart}
-                        onChange={(e) => setSelectedBodyPart(e.target.value as BodyPart)}
+                        onChange={(e) => setSelectedBodyPart(e.target.value as ExerciseType)}
                     >
                         {Object.keys(exerciseCategories).map((bodyPart) => (
                             <option key={bodyPart} value={bodyPart}>

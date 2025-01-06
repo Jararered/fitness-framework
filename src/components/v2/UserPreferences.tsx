@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 interface UserPreferencesInterface {
     // User
-    user: string;
+    name: string;
     weight: number;
     units: string;
 }
 
 const UserPreferences = () => {
     // Load preferences from local storage or use default values
-    const [preferences, setPreferences] = useState<UserPreferencesInterface>({
-        user: '',
+    const [preferencesState, setPreferencesState] = useState<UserPreferencesInterface>({
+        name: '',
         weight: 0,
         units: 'lb',
     });
@@ -19,21 +19,21 @@ const UserPreferences = () => {
         // Load preferences from local storage
         const userPreferences = localStorage.getItem('user-preferences');
         if (userPreferences) {
-            setPreferences(JSON.parse(userPreferences));
+            setPreferencesState(JSON.parse(userPreferences));
         }
     }, []);
 
     // Save preferences to local storage
     const savePreference = <T,>(key: keyof UserPreferencesInterface, value: T) => {
-        setPreferences((prev) => ({ ...prev, [key]: value }));
-        const updatedPreferences = { ...preferences, [key]: value };
+        setPreferencesState((prev) => ({ ...prev, [key]: value }));
+        const updatedPreferences = { ...preferencesState, [key]: value };
         localStorage.setItem('user-preferences', JSON.stringify(updatedPreferences));
     };
 
     // Handles changes in the user name
     const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newUser = e.target.value;
-        savePreference('user', newUser);
+        savePreference('name', newUser);
     };
 
     // Handle changes in the weight
@@ -53,17 +53,17 @@ const UserPreferences = () => {
             <h2>User Preferences</h2>
             <div>
                 <label>User:</label>
-                <input type="text" value={preferences.user} onChange={handleUserChange} />
+                <input type="text" value={preferencesState.name} onChange={handleUserChange} />
             </div>
 
             <div>
                 <label>Weight:</label>
-                <input type="number" value={preferences.weight} onChange={handleWeightChange} />
+                <input type="number" value={preferencesState.weight} onChange={handleWeightChange} />
             </div>
 
             <div>
                 <label>Units:</label>
-                <select value={preferences.units} onChange={handleUnitsChange}>
+                <select value={preferencesState.units} onChange={handleUnitsChange}>
                     <option value="lb">lb</option>
                     <option value="kg">kg</option>
                 </select>
