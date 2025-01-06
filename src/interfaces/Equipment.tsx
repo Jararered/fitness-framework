@@ -16,7 +16,7 @@ export const equipment = [
     "Smith Machine + Bench",
 ];
 
-// Equipment icons lsit (key is equipment name, value is icon)
+// Equipment icons list (key is equipment name, value is icon)
 export const equipmentIcons: { [key: string]: JSX.Element } = {
     "Barbell + Bench": <FaDumbbell size={48} />,
     "Barbell + Squat Rack": <FaDumbbell size={48} />,
