@@ -1,49 +1,62 @@
-export interface Set {
-    reps: number;
-    weight?: number;
+export interface ExerciseEntry {
+    name: string; // Ex: "Barbell Squat"
+    reps: number[]; // Ex: [10, 10, 10]
 }
 
-export interface Exercise {
-    name: string;
-    sets: Set[];
+export type ExerciseList = ExerciseEntry[];
+
+export interface Circuit {
+    name: string; // Ex: Machine that the circuit is on
+    exercises: ExerciseList; // Ex: [{name: "Barbell Squat", reps: [10, 10, 10]}, {name: "Smith Machine Bench Press", reps: [10, 10, 10]}]
 }
 
-export interface SavedWorkout {
-    name: string;
-    exercises: Exercise[];
-}
+export type CircuitList = Circuit[];
 
-export interface WorkoutSummaryProps {
-    workoutState: Workout;
-    onFinish: () => void;
-}
-
-export interface WorkoutInProgressProps {
-    onCompleteWorkout: () => void;
-}
-
-export interface ExerciseWeight {
-    exercise: string;
-    weight: number;
-}
-
-export interface Workout {
-    exercises: Exercise[] | null;
-    startTime: string;
-    endTime: string;
+export interface DateDetails {
+    start: Date;
+    end: Date;
 }
 
 export interface WorkoutIndexer {
-    currentExerciseIndex: number;
-    currentSetIndex: number;
+    circuitIndex: number;
+    exerciseIndex: number;
 }
 
-export interface WeightTracking {
-    currentWeights: number[];
-    maxWeights: { [key: string]: number };
-    lastWeights: { [key: string]: ExerciseWeight };
+export type WorkoutState = "started" | "paused" | "completed";
+
+
+export interface Workout {
+    name: string; // Ex: "Leg Day"
+    circuits: CircuitList;
+
+    state?: WorkoutState;
+    indexer?: WorkoutIndexer;
+    date?: DateDetails;
 }
 
-export interface WorkoutOverviewProps {
-    onOpenWorkout: () => void;
-}
+export const DefaultWorkout : Workout = {
+    name: "Default Workout",
+    circuits: []
+};
+
+// Example Workouts
+export const LegsExampleWorkout: Workout = {
+    name: "Leg Day",
+    circuits: [
+        {
+            name: "Smith Machine Circuit",
+            exercises: [
+                { name: "Smith Machine Squat", reps: [10, 10, 10] },
+                { name: "Smith Machine Front Squat", reps: [10, 10, 10] },
+
+            ]
+        },
+        {
+            name: "Leg Extension Circuit",
+            exercises: [
+                { name: "Leg Extension", reps: [10, 10, 10] },
+                { name: "Leg Curl", reps: [10, 10, 10] }
+            ]
+        }
+    ]
+};
