@@ -7,6 +7,12 @@ interface UserPreferencesInterface {
     units: string;
 }
 
+const DefaultUserPreferences: UserPreferencesInterface = {
+    name: '',
+    weight: 0,
+    units: 'lb',
+};
+
 const UserPreferences = () => {
     // Load preferences from local storage or use default values
     const [preferencesState, setPreferencesState] = useState<UserPreferencesInterface>({
@@ -21,31 +27,34 @@ const UserPreferences = () => {
         if (userPreferences) {
             setPreferencesState(JSON.parse(userPreferences));
         }
+        else {
+            setPreferencesState(DefaultUserPreferences);
+            localStorage.setItem('user-preferences', JSON.stringify(DefaultUserPreferences));
+        }
     }, []);
 
     // Save preferences to local storage
-    const savePreference = <T,>(key: keyof UserPreferencesInterface, value: T) => {
-        setPreferencesState((prev) => ({ ...prev, [key]: value }));
-        const updatedPreferences = { ...preferencesState, [key]: value };
-        localStorage.setItem('user-preferences', JSON.stringify(updatedPreferences));
-    };
+    const savePreferences = (preferences: UserPreferencesInterface) => {
+        setPreferencesState(preferences);
+        localStorage.setItem('user-preferences', JSON.stringify(preferences));
+    }
 
     // Handles changes in the user name
     const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newUser = e.target.value;
-        savePreference('name', newUser);
+        savePreferences({ ...preferencesState, name: newUser });
     };
 
     // Handle changes in the weight
     const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newWeight = Number(e.target.value);
-        savePreference('weight', newWeight);
+        savePreferences({ ...preferencesState, weight: newWeight });
     };
 
     // Handle changes in the weight unit
     const handleUnitsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newUnits = e.target.value;
-        savePreference('units', newUnits);
+        savePreferences({ ...preferencesState, units: newUnits });
     };
 
     return (

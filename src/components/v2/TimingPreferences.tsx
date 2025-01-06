@@ -7,9 +7,15 @@ interface TimingPreferencesInterface {
     longRest: number;
 }
 
+const DefaultTimingPreferences: TimingPreferencesInterface = {
+    shortRest: 30,
+    normalRest: 60,
+    longRest: 90,
+};
+
 const TimingPreferences: React.FC = () => {
     // Load preferences from local storage or use default values
-    const [preferences, setPreferences] = useState<TimingPreferencesInterface>({
+    const [preferencesState, setPreferencesState] = useState<TimingPreferencesInterface>({
         shortRest: 30,
         normalRest: 60,
         longRest: 90,
@@ -19,15 +25,25 @@ const TimingPreferences: React.FC = () => {
         // Load preferences from local storage
         const preferences = localStorage.getItem('timing-preferences');
         if (preferences) {
-            setPreferences(JSON.parse(preferences));
+            setPreferencesState(JSON.parse(preferences));
+        }
+        else
+        {
+            setPreferencesState(DefaultTimingPreferences);
+            savePreferences(DefaultTimingPreferences);
         }
     }, []);
+
+    // Save preferences to local storage
+    const savePreferences = (preferences: TimingPreferencesInterface) => {
+        localStorage.setItem('timing-preferences', JSON.stringify(preferences));
+    };
 
     // Handle changes in the rest times
     const handleRestChange = (e: React.ChangeEvent<HTMLInputElement>, restType: string) => {
         const newRestValue = Number(e.target.value);
-        setPreferences((prev) => ({ ...prev, [restType]: newRestValue }));
-        const updatedPreferences = { ...preferences, [restType]: newRestValue };
+        setPreferencesState((prev) => ({ ...prev, [restType]: newRestValue }));
+        const updatedPreferences = { ...preferencesState, [restType]: newRestValue };
         localStorage.setItem('timing-preferences', JSON.stringify(updatedPreferences));
     };
 
@@ -38,7 +54,7 @@ const TimingPreferences: React.FC = () => {
                 <label>Short Rest:</label>
                 <input
                     type="number"
-                    value={preferences.shortRest}
+                    value={preferencesState.shortRest}
                     onChange={(e) => handleRestChange(e, 'shortRest')}
                 />
             </div>
@@ -47,7 +63,7 @@ const TimingPreferences: React.FC = () => {
                 <label>Normal Rest:</label>
                 <input
                     type="number"
-                    value={preferences.normalRest}
+                    value={preferencesState.normalRest}
                     onChange={(e) => handleRestChange(e, 'normalRest')}
                 />
             </div>
@@ -56,7 +72,7 @@ const TimingPreferences: React.FC = () => {
                 <label>Long Rest:</label>
                 <input
                     type="number"
-                    value={preferences.longRest}
+                    value={preferencesState.longRest}
                     onChange={(e) => handleRestChange(e, 'longRest')}
                 />
             </div>
