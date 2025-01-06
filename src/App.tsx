@@ -6,12 +6,12 @@ import DockBar from './components/navigation/DockBar';
 
 // Components
 import Profile from './components/Profile';
-import WorkoutInProgress from './components/WorkoutActive';
 
 // Pages (new)
 import PageHome from './pages/PageHome';
 import PageGym from './pages/PageGym';
 import PagePreferences from './pages/PagePreferences';
+import PageWorkout from './pages/PageWorkout';
 
 // Styles
 import './App.css';
@@ -25,10 +25,6 @@ const App: React.FC = () => {
 
     const toggleSideBar = () => {
         setSideBarCollapsed((prev) => !prev);
-    };
-
-    const handleWorkoutComplete = () => {
-        setContent('home');
     };
 
     const handleNavigate = (newContent: string) => {
@@ -51,8 +47,8 @@ const App: React.FC = () => {
             case 'settings':
                 return <PagePreferences />;
 
-            case 'workout-in-progress':
-                return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
+            case 'workout':
+                return <PageWorkout />;
 
             default:
                 return <PageHome />;
