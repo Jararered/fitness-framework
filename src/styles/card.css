@@ -5,6 +5,7 @@
     border-radius: 1rem;
     padding: 1rem;
     margin: 1rem;
+    min-width: 400px;
 }
 
 .flexible-container {
