@@ -17,6 +17,6 @@ const PageGym = () => {
 
         </div>
     );
-}
+};
 
 export default PageGym;

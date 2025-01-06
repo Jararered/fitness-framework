@@ -6,6 +6,6 @@ const PageHome = () => {
             <UserGreeting />
         </div>
     );
-}
+};
 
 export default PageHome;
