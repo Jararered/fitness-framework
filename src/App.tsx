@@ -9,8 +9,10 @@ import Home from './components/Home';
 import Workout from './components/WorkoutCreator';
 import GymEquipment from './components/GymEquipment';
 import Profile from './components/Profile';
-import Preferences from './components/Preferences';
 import WorkoutInProgress from './components/WorkoutActive';
+
+// Pages (new)
+import PagePreferences from './pages/PagePreferences';
 
 // Styles
 import './App.css';
@@ -47,7 +49,7 @@ const App: React.FC = () => {
             case 'profile':
                 return <Profile />;
             case 'settings':
-                return <Preferences />;
+                return <PagePreferences />;
 
             case 'workout-in-progress':
                 return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
