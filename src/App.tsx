@@ -5,13 +5,12 @@ import SideBar from './components/navigation/SideBar';
 import DockBar from './components/navigation/DockBar';
 
 // Components
-import Home from './components/Home';
-import Workout from './components/WorkoutCreator';
-import GymEquipment from './components/GymEquipment';
 import Profile from './components/Profile';
 import WorkoutInProgress from './components/WorkoutActive';
 
 // Pages (new)
+import PageHome from './pages/PageHome';
+import PageGym from './pages/PageGym';
 import PagePreferences from './pages/PagePreferences';
 
 // Styles
@@ -41,13 +40,14 @@ const App: React.FC = () => {
         switch (content) {
 
             case 'home':
-                return <Home onOpenWorkout={() => setContent('workout-in-progress')} />;
-            case 'workout-creator':
-                return <Workout />;
-            case 'gym-equipment':
-                return <GymEquipment />;
+                return <PageHome />;
+
+            case 'equipment':
+                return <PageGym />;
+
             case 'profile':
                 return <Profile />;
+
             case 'settings':
                 return <PagePreferences />;
 
@@ -55,7 +55,7 @@ const App: React.FC = () => {
                 return <WorkoutInProgress onCompleteWorkout={handleWorkoutComplete} />;
 
             default:
-                return <Home onOpenWorkout={() => setContent('workout-in-progress')} />;
+                return <PageHome />;
         }
     };
 
