@@ -13,3 +13,42 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+/* Styles for individual equipment items */
+.small-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    width: 100px;
+    height: 150px;
+    margin: 10px;
+    padding: 5px;
+    padding-top: 10px;
+
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+
+    transition: 200ms;
+}
+
+/* Styles for enabled equipment items */
+.small-card.enabled {
+    background-color: #d0f0c0;
+    border-color: #a3d9a5;
+    translate: 2px 2px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+
+    transition: 200ms;
+}
+
+/* Styles for the equipment name text */
+.small-card-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}

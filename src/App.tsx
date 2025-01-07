@@ -17,6 +17,7 @@ import PageWorkout from './pages/PageWorkout';
 import './App.css';
 import './styles/colors.css';
 import './styles/card.css';
+import './styles/icon.css';
 
 const App: React.FC = () => {
     const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);
