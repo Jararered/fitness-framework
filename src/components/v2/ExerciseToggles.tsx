@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { ExerciseList, DefaultExercises } from "../../interfaces/Exercises";
-import { DefaultEquipment } from "../../interfaces/Equipment";
+import { DefaultEquipment, EquipmentList } from "../../interfaces/Equipment";
 import { FaCheck, FaDumbbell } from "react-icons/fa";
 
 const ExerciseToggles = () => {
-    const [, setEquipmentState] = useState(DefaultEquipment);
-    const [exerciseState, setExerciseState] = useState(DefaultExercises);
+    const [, setEquipmentState] = useState<EquipmentList>(DefaultEquipment);
+    const [exerciseState, setExerciseState] = useState<ExerciseList>(DefaultExercises);
 
     // Load from local storage or use default values
     useEffect(() => {
@@ -26,7 +26,7 @@ const ExerciseToggles = () => {
             setEquipmentState(DefaultEquipment);
         }
 
-    }, []);
+    });
 
     // Save to local storage
     const saveExercisesLocal = (exercises: ExerciseList) => {

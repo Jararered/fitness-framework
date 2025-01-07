@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { Workout, DefaultWorkout, ExerciseEntry, LegsExampleWorkout } from "../../interfaces/Workout";
+import { Workout, ExerciseEntry, LegsExampleWorkout } from "../../interfaces/Workout";
 import { Circuit } from "../../interfaces/Workout";
 
 const WorkoutPreview: React.FC = () => {
-    const [workoutState, setWorkoutState] = useState(LegsExampleWorkout);
+    const [workoutState, setWorkoutState] = useState<Workout>(LegsExampleWorkout);
 
     // Load from local storage
     useEffect(() => {
@@ -23,6 +23,7 @@ const WorkoutPreview: React.FC = () => {
         localStorage.setItem('workout', JSON.stringify(workout));
     }
 
+    // TODO: Add this to some sort of utilities file
     const formatCommas = (reps: number[]) => {
         return reps.join(', ');
     }
@@ -37,7 +38,7 @@ const WorkoutPreview: React.FC = () => {
 
                     <h3>Circuit {circuitIndex + 1}</h3>
 
-                    {circuit.exercises.map((exercise: ExerciseEntry, exerciseIndex: number) => (
+                    {circuit.map((exercise: ExerciseEntry, exerciseIndex: number) => (
                         <div key={exerciseIndex}>
                             <p>{exercise.name}</p>
                             <p>{formatCommas(exercise.reps)} reps</p>
@@ -45,8 +46,7 @@ const WorkoutPreview: React.FC = () => {
                     ))}
 
                 </div>
-            ))
-            }
+            ))}
         </div >
     );
 };
