@@ -24,11 +24,15 @@ const WorkoutPreview: React.FC = () => {
     }
 
     return (
+
         <div className="workout-preview">
+
             <h2>Workout Preview</h2>
+
             {workoutState.circuits.map((circuit: Circuit, circuitIndex: number) => (
                 <CircuitPreview key={circuitIndex} circuit={circuit} circuitIndex={circuitIndex} formatCommas={FormatSets} />
             ))}
+
         </div>
     );
 };
