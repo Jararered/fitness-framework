@@ -1,30 +1,24 @@
 import { useEffect, useState, useCallback } from "react";
+import { FaCheck } from "react-icons/fa";
 
 import { DefaultEquipment, Equipment, GetIconForEquipment } from "../../interfaces/Equipment"
 import { DefaultExercises, Exercise } from "../../interfaces/Exercise";
-import { FaCheck } from "react-icons/fa";
 
 const EquipmentToggles: React.FC = () => {
-    const [equipmentState, setEquipmentState] = useState<Equipment[]>(DefaultEquipment);
-    const [, setExerciseState] = useState<Exercise[]>(DefaultExercises);
+    const localEquipment = localStorage.getItem("equipment");
+    const [equipmentState, setEquipmentState] = useState<Equipment[]>(
+        localEquipment ? JSON.parse(localEquipment) : DefaultEquipment
+    );
+
+    const localExercises = localStorage.getItem("exercises");
+    const [exerciseState, setExerciseState] = useState<Exercise[]>(
+        localExercises ? JSON.parse(localExercises) : DefaultExercises
+    );
 
     // Load equipment state from local storage or use default values
     useEffect(() => {
-        const equipment = localStorage.getItem("equipment");
-        if (equipment) {
-            setEquipmentState(JSON.parse(equipment));
-        } else {
-            setEquipmentState(DefaultEquipment);
-            saveEquipmentLocal(DefaultEquipment);
-        }
-
-        const exercises = localStorage.getItem("exercises");
-        if (exercises) {
-            setExerciseState(JSON.parse(exercises));
-        } else {
-            setExerciseState(DefaultExercises);
-        }
-    }, []);
+        localStorage.setItem("equipment", JSON.stringify(equipmentState));
+    }, [equipmentState]);
 
     // Save equipment state to local storage
     const saveEquipmentLocal = useCallback((equipment: Equipment[]) => {
@@ -34,16 +28,17 @@ const EquipmentToggles: React.FC = () => {
     // Handle toggling equipment
     const handleEquipmentToggle = useCallback((name: string) => {
         setEquipmentState(prev => {
+            if (!prev) return prev;
             const updatedEquipment = prev.map(equipment => {
                 if (equipment.name === name) {
-                    return { ...equipment, enabled: !equipment.config.enabled };
+                    return equipment.config ? { ...equipment, config: { ...equipment.config, enabled: !equipment.config.enabled } } : equipment;
                 }
                 return equipment;
             });
             saveEquipmentLocal(updatedEquipment);
             return updatedEquipment;
         });
-    }, [saveEquipmentLocal]);
+    } , [saveEquipmentLocal]);
 
     const handleResetEquipment = useCallback(() => {
         setEquipmentState(DefaultEquipment);
@@ -55,7 +50,7 @@ const EquipmentToggles: React.FC = () => {
             <h2>Equipment Toggles</h2>
 
             <div className="flexible-container">
-                {equipmentState.map(equipment => (
+                {equipmentState?.map(equipment => (
                     <div
                         className={`small-card ${equipment.config.enabled ? "enabled" : ""}`}
                         key={equipment.name}
