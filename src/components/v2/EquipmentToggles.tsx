@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
-import { DefaultEquipment, EquipmentList, EquipmentIcons } from "../../interfaces/Equipment"
+import { DefaultEquipment, EquipmentList, GetIconForEquipment } from "../../interfaces/Equipment"
 import { DefaultExercises, ExerciseList } from "../../interfaces/Exercises";
 import { FaCheck } from 'react-icons/fa';
 
-import "./SmallCard.css";
-
-
-const EquipmentToggles = () => {
+const EquipmentToggles: React.FC = () => {
     const [equipmentState, setEquipmentState] = useState<EquipmentList>(DefaultEquipment);
     const [, setExerciseState] = useState<ExerciseList>(DefaultExercises);
 
@@ -30,12 +27,12 @@ const EquipmentToggles = () => {
     }, []);
 
     // Save equipment state to local storage
-    const saveEquipmentLocal = (equipment: EquipmentList) => {
+    const saveEquipmentLocal = useCallback((equipment: EquipmentList) => {
         localStorage.setItem('equipment', JSON.stringify(equipment));
-    }
+    }, []);
 
     // Handle toggling equipment
-    const handleEquipmentToggle = (name: string) => {
+    const handleEquipmentToggle = useCallback((name: string) => {
         setEquipmentState(prev => {
             const updatedEquipment = prev.map(equipment => {
                 if (equipment.name === name) {
@@ -46,12 +43,12 @@ const EquipmentToggles = () => {
             saveEquipmentLocal(updatedEquipment);
             return updatedEquipment;
         });
-    }
+    }, [saveEquipmentLocal]);
 
-    const handleResetEquipment = () => {
+    const handleResetEquipment = useCallback(() => {
         setEquipmentState(DefaultEquipment);
         saveEquipmentLocal(DefaultEquipment);
-    }
+    }, [saveEquipmentLocal]);
 
     return (
         <div className="equipment-toggles">
@@ -64,7 +61,7 @@ const EquipmentToggles = () => {
                         key={equipment.name}
                         onClick={() => handleEquipmentToggle(equipment.name)}
                     >
-                        <div className="equipment-icon">{EquipmentIcons[equipment.name]}</div>
+                        <div className="equipment-icon">{GetIconForEquipment(equipment.name)}</div>
                         <div className="small-card-name">{equipment.name}</div>
                         <div className="checkmark-icon">{equipment.enabled && <FaCheck size={24} />}</div>
 

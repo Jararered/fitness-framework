@@ -31,7 +31,7 @@ export interface Workout {
     date?: DateDetails;
 }
 
-export const EmptyWorkout : Workout = {
+export const EmptyWorkout: Workout = {
     name: "",
     circuits: []
 };

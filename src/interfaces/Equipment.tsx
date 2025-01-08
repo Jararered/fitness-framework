@@ -40,17 +40,21 @@ export const DefaultEquipment: EquipmentList = [
 ];
 
 export const EquipmentIcons: { [key: string]: JSX.Element } = {
-    BarbellSquatRack: <FaDumbbell size={48} />,
-    SmithMachineBench: <FaDumbbell size={48} />,
-    LegExtensionMachine: <FaDumbbell size={48} />,
-    LegCurlMachine: <FaDumbbell size={48} />,
-    LegPressMachine: <FaDumbbell size={48} />,
     Barbell: <FaDumbbell size={48} />,
+    BarbellBench: <FaDumbbell size={48} />,
+    BarbellSquatRack: <FaDumbbell size={48} />,
+    ChestPressMachine: <FaDumbbell size={48} />,
     Dumbells: <FaDumbbell size={48} />,
     EzBar: <FaDumbbell size={48} />,
-    BarbellBench: <FaDumbbell size={48} />,
-    ChestPressMachine: <FaDumbbell size={48} />,
     LatPulldownMachine: <FaDumbbell size={48} />,
-    SmithMachine: <FaDumbbell size={48} />
+    LegCurlMachine: <FaDumbbell size={48} />,
+    LegExtensionMachine: <FaDumbbell size={48} />,
+    LegPressMachine: <FaDumbbell size={48} />,
+    SmithMachine: <FaDumbbell size={48} />,
+    SmithMachineBench: <FaDumbbell size={48} />
 };
 
+export const GetIconForEquipment = (equipment: string) => {
+    const key = Object.keys(EquipmentNames).find(key => EquipmentNames[key as keyof typeof EquipmentNames] === equipment);
+    return key ? EquipmentIcons[key] : null;
+}

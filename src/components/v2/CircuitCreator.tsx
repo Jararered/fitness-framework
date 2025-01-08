@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { ExerciseList } from "../../interfaces/Exercises";
 import { EquipmentList } from "../../interfaces/Equipment";
-import { Circuit, Workout } from "../../interfaces/Workout";
+import { Circuit, ExerciseEntry, Workout } from "../../interfaces/Workout";
 
 const CircuitCreator: React.FC = () => {
     const [exerciseState, setExerciseState] = useState<ExerciseList>();
@@ -37,21 +37,37 @@ const CircuitCreator: React.FC = () => {
             <h2>Circuit Creator</h2>
 
             <div>
-                <input type="text" placeholder="Circuit Name" onChange={(e) => setCircuitNameState(e.target.value)} />
-            </div>
-
-            <div>
                 <select id="exercise" onChange={(e) => setSelectedExerciseState(e.target.value)}>
                     {avaliableExercises()?.map((exercise, index) => (
                         <option key={index} value={exercise.name}>{exercise.name}</option>
                     ))}
                 </select>
 
-                <button className="normal-button">
+                <button
+                    className="normal-button"
+                    onClick={() => {
+                        const exercise = exerciseState?.find(exercise => exercise.name === selectedExerciseState);
+                        if (exercise) {
+                            const exerciseEntry: ExerciseEntry = {
+                                exercise: exercise,
+                                reps: []
+                            };
+
+                            setCircuitState({
+                                name: circuitNameState,
+                                exercises: [exerciseEntry]
+                            });
+                        }
+                    }}
+                >
                     Add Exercise
                 </button>
+
+                {/*Input for the amount of reps*/}
+                <input type="text" placeholder="Reps" />
+
             </div>
-        </div>
+        </div >
     );
 }
 
