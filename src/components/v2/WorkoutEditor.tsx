@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Workout, LegsExampleWorkout, EmptyWorkout, Circuit } from "../../interfaces/Workout";
+import { FormatSets } from "../utils/Formatting";
 
 const WorkoutEditor = () => {
     const [workoutState, setWorkoutState] = useState<Workout>(EmptyWorkout);
@@ -19,11 +20,6 @@ const WorkoutEditor = () => {
     // Save to local storage
     const saveWorkoutLocal = (workout: Workout) => {
         localStorage.setItem("workout", JSON.stringify(workout));
-    }
-
-    // TODO: Add this to some sort of utilities file
-    const formatCommas = (reps: number[]) => {
-        return reps.join(', ')
     }
 
     const handleDeleteCircuit = (circuitIndex: number) => {
@@ -86,7 +82,7 @@ const WorkoutEditor = () => {
                     {circuit.map((exerciseList, exerciseIndex) => (
                         <div key={exerciseIndex}>
                             <p>{exerciseList.name}</p>
-                            <p>{exerciseList.plan?.sets ? formatCommas(exerciseList.plan.sets) : ""} reps</p>
+                            <p>{exerciseList.plan?.sets ? FormatSets(exerciseList.plan.sets) : ""} reps</p>
 
                             <button className="normal-button"
                                 onClick={() => handleMoveExercise(circuitIndex, exerciseIndex, -1)}>
