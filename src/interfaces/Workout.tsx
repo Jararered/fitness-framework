@@ -1,34 +1,29 @@
-import { ExerciseNames } from "./Exercises";
+import { Exercise } from "./Exercise";
 
-// ExerciseEntry is a single exercise with a name and a list of reps
-export interface ExerciseEntry {
-    name: string; // Ex: "Barbell Squat"
-    reps: number[]; // Ex: [10, 10, 10]
-}
+export type Circuit = Exercise[];
 
-// Circuit is a list of exercises
-export type Circuit = ExerciseEntry[]; // Ex: [ExerciseEntry, ExerciseEntry]
-
-export type WorkoutState = "started" | "paused" | "completed";
+export type WorkoutState =
+    "started" |
+    "paused" |
+    "completed";
 
 export interface WorkoutIndexer {
     circuitIndex: number;
     exerciseIndex: number;
 }
 
-export interface DateDetails {
+export interface WorkoutTime {
     start: Date;
     end: Date;
 }
 
 export interface Workout {
-    name: string; // Ex: "Leg Day", set by user
-    circuits: Circuit[]; // Ex: [[ExerciseEntry, ExerciseEntry], [ExerciseEntry, ExerciseEntry]]
+    name: string;
+    circuits: Circuit[];
 
-    // Fields for tracking workout state when a user starts a workout
     state?: WorkoutState;
     indexer?: WorkoutIndexer;
-    date?: DateDetails;
+    time?: WorkoutTime;
 }
 
 export const EmptyWorkout: Workout = {
@@ -36,36 +31,36 @@ export const EmptyWorkout: Workout = {
     circuits: []
 };
 
-// Example Workouts
+
 export const LegsExampleWorkout: Workout = {
     name: "Leg Day",
     circuits: [
         [
             {
-                name: ExerciseNames.BarbellSquat,
-                reps: [10, 10, 10]
+                name: "Barbell Squat",
+                plan: { sets: [10, 10, 10] }
             },
             {
-                name: ExerciseNames.LegPress,
-                reps: [10, 10, 10]
+                name: "Leg Press",
+                plan: { sets: [10, 10, 10] }
             },
             {
-                name: ExerciseNames.LegCurl,
-                reps: [10, 10, 10]
+                name: "Leg Curl",
+                plan: { sets: [10, 10, 10] }
             },
             {
-                name: ExerciseNames.LegExtension,
-                reps: [10, 10, 10]
+                name: "Leg Extension",
+                plan: { sets: [10, 10, 10] }
             }
         ],
         [
             {
-                name: ExerciseNames.LegCurlIsometricHold,
-                reps: [10, 10, 10]
+                name: "Leg Curl + Isometric Hold",
+                plan: { sets: [10, 10, 10] }
             },
             {
-                name: ExerciseNames.LegExtensionIsometricHold,
-                reps: [10, 10, 10]
+                name: "Leg Extension + Isometric Hold",
+                plan: { sets: [10, 10, 10] }
             }
         ]
     ]

@@ -1,6 +1,6 @@
 import { EquipmentName } from "./Equipment";
 
-export type ExerciseName = 
+export type ExerciseName =
     "Barbell Bench Press" |
     "Barbell Bent-Over Row" |
     "Barbell Curl" |
@@ -51,7 +51,7 @@ export type ExerciseName =
     "Smith Machine Shoulder Press" |
     "Smith Machine Shrugs" |
     "Smith Machine Squat"
-;
+    ;
 
 // Exercise Type
 export type ExerciseCategory =
@@ -68,20 +68,28 @@ export interface ExerciseInfo {
 }
 
 export interface ExerciseConfig {
-
     enabled: boolean;
 }
 
+export type Reps = number;
+export type Sets = Reps[];
+
+export interface ExercisePlan {
+    sets: Sets;
+}
+
 export interface ExerciseActive {
-    reps: number[];
-    weight: number;
+    sets?: Sets;
+    weight?: number;
 }
 
 export interface Exercise {
     name: ExerciseName; // Name of the exercise
-    info: ExerciseInfo; // Preset data about the exercise
 
-    config: ExerciseConfig; // User configuration for the exercise
+    info?: ExerciseInfo; // Preset data about the exercise
+    config?: ExerciseConfig; // User configuration for the exercise
+
+    plan?: ExercisePlan; // Only while setting up a workout
     active?: ExerciseActive; // Only used during a workout
 }
 

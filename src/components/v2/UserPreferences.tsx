@@ -1,42 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+
+type Units = "lb" | "kg";
 
 interface UserPreferencesInterface {
     // User
     name: string;
     weight: number;
-    units: string;
+    units: Units;
 }
 
 const DefaultUserPreferences: UserPreferencesInterface = {
-    name: '',
+    name: "",
     weight: 0,
-    units: 'lb',
+    units: "lb",
 };
 
 const UserPreferences = () => {
     // Load preferences from local storage or use default values
     const [preferencesState, setPreferencesState] = useState<UserPreferencesInterface>({
-        name: '',
+        name: "",
         weight: 0,
-        units: 'lb',
+        units: "lb",
     });
 
     useEffect(() => {
         // Load preferences from local storage
-        const userPreferences = localStorage.getItem('user-preferences');
+        const userPreferences = localStorage.getItem("user-preferences");
         if (userPreferences) {
             setPreferencesState(JSON.parse(userPreferences));
         }
         else {
             setPreferencesState(DefaultUserPreferences);
-            localStorage.setItem('user-preferences', JSON.stringify(DefaultUserPreferences));
+            localStorage.setItem("user-preferences", JSON.stringify(DefaultUserPreferences));
         }
     }, []);
 
     // Save preferences to local storage
     const savePreferences = (preferences: UserPreferencesInterface) => {
         setPreferencesState(preferences);
-        localStorage.setItem('user-preferences', JSON.stringify(preferences));
+        localStorage.setItem("user-preferences", JSON.stringify(preferences));
     }
 
     // Handles changes in the user name
@@ -53,7 +55,7 @@ const UserPreferences = () => {
 
     // Handle changes in the weight unit
     const handleUnitsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newUnits = e.target.value;
+        const newUnits = e.target.value as Units;
         savePreferences({ ...preferencesState, units: newUnits });
     };
 

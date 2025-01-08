@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Workout, LegsExampleWorkout, EmptyWorkout, Circuit, ExerciseEntry } from "../../interfaces/Workout";
+import { Workout, LegsExampleWorkout, EmptyWorkout, Circuit } from "../../interfaces/Workout";
 
 const WorkoutEditor = () => {
     const [workoutState, setWorkoutState] = useState<Workout>(EmptyWorkout);
@@ -86,7 +86,7 @@ const WorkoutEditor = () => {
                     {circuit.map((exerciseList, exerciseIndex) => (
                         <div key={exerciseIndex}>
                             <p>{exerciseList.name}</p>
-                            <p>{formatCommas(exerciseList.reps)} reps</p>
+                            <p>{exerciseList.plan?.sets ? formatCommas(exerciseList.plan.sets) : ""} reps</p>
 
                             <button className="normal-button"
                                 onClick={() => handleMoveExercise(circuitIndex, exerciseIndex, -1)}>

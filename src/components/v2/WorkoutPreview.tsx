@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-
-import { Workout, ExerciseEntry, LegsExampleWorkout } from "../../interfaces/Workout";
-import { Circuit } from "../../interfaces/Workout";
+import { Workout, Circuit, LegsExampleWorkout } from "../../interfaces/Workout";
+import { FormatSets } from "../utils/Formatting";
+import CircuitPreview from "./CircuitPreview";
 
 const WorkoutPreview: React.FC = () => {
     const [workoutState, setWorkoutState] = useState<Workout>(LegsExampleWorkout);
@@ -23,31 +23,13 @@ const WorkoutPreview: React.FC = () => {
         localStorage.setItem('workout', JSON.stringify(workout));
     }
 
-    // TODO: Add this to some sort of utilities file
-    const formatCommas = (reps: number[]) => {
-        return reps.join(', ');
-    }
-
     return (
         <div className="workout-preview">
-
             <h2>Workout Preview</h2>
-
             {workoutState.circuits.map((circuit: Circuit, circuitIndex: number) => (
-                <div key={circuitIndex}>
-
-                    <h3>Circuit {circuitIndex + 1}</h3>
-
-                    {circuit.map((exercise: ExerciseEntry, exerciseIndex: number) => (
-                        <div key={exerciseIndex}>
-                            <p>{exercise.name}</p>
-                            <p>{formatCommas(exercise.reps)} reps</p>
-                        </div>
-                    ))}
-
-                </div>
+                <CircuitPreview key={circuitIndex} circuit={circuit} circuitIndex={circuitIndex} formatCommas={FormatSets} />
             ))}
-        </div >
+        </div>
     );
 };
 

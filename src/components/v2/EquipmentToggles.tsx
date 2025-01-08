@@ -1,12 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 
-import { DefaultEquipment, EquipmentList, GetIconForEquipment } from "../../interfaces/Equipment"
-import { DefaultExercises, ExerciseList } from "../../interfaces/Exercises";
+import { DefaultEquipment, Equipment, GetIconForEquipment } from "../../interfaces/Equipment"
+import { DefaultExercises, Exercise } from "../../interfaces/Exercise";
 import { FaCheck } from 'react-icons/fa';
 
 const EquipmentToggles: React.FC = () => {
-    const [equipmentState, setEquipmentState] = useState<EquipmentList>(DefaultEquipment);
-    const [, setExerciseState] = useState<ExerciseList>(DefaultExercises);
+    const [equipmentState, setEquipmentState] = useState<Equipment[]>(DefaultEquipment);
+    const [, setExerciseState] = useState<Exercise[]>(DefaultExercises);
 
     // Load equipment state from local storage or use default values
     useEffect(() => {
@@ -27,7 +27,7 @@ const EquipmentToggles: React.FC = () => {
     }, []);
 
     // Save equipment state to local storage
-    const saveEquipmentLocal = useCallback((equipment: EquipmentList) => {
+    const saveEquipmentLocal = useCallback((equipment: Equipment[]) => {
         localStorage.setItem('equipment', JSON.stringify(equipment));
     }, []);
 
@@ -36,7 +36,7 @@ const EquipmentToggles: React.FC = () => {
         setEquipmentState(prev => {
             const updatedEquipment = prev.map(equipment => {
                 if (equipment.name === name) {
-                    return { ...equipment, enabled: !equipment.enabled };
+                    return { ...equipment, enabled: !equipment.config.enabled };
                 }
                 return equipment;
             });
@@ -57,13 +57,13 @@ const EquipmentToggles: React.FC = () => {
             <div className="flexible-container">
                 {equipmentState.map(equipment => (
                     <div
-                        className={`small-card ${equipment.enabled ? 'enabled' : ''}`}
+                        className={`small-card ${equipment.config.enabled ? 'enabled' : ''}`}
                         key={equipment.name}
                         onClick={() => handleEquipmentToggle(equipment.name)}
                     >
                         <div className="equipment-icon">{GetIconForEquipment(equipment.name)}</div>
                         <div className="small-card-name">{equipment.name}</div>
-                        <div className="checkmark-icon">{equipment.enabled && <FaCheck size={24} />}</div>
+                        <div className="checkmark-icon">{equipment.config.enabled && <FaCheck size={24} />}</div>
 
                     </div>
                 ))}

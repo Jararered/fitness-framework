@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-
-import { ExerciseList, DefaultExercises } from "../../interfaces/Exercises";
-import { DefaultEquipment, EquipmentList } from "../../interfaces/Equipment";
 import { FaCheck, FaDumbbell } from "react-icons/fa";
 
+import { Exercise, DefaultExercises } from "../../interfaces/Exercise";
+import { Equipment, DefaultEquipment } from "../../interfaces/Equipment";
+
 const ExerciseToggles = () => {
-    const [, setEquipmentState] = useState<EquipmentList>(DefaultEquipment);
-    const [exerciseState, setExerciseState] = useState<ExerciseList>(DefaultExercises);
+    const [, setEquipmentState] = useState<Equipment[]>();
+    const [exerciseState, setExerciseState] = useState<Exercise[]>();
 
     // Load from local storage or use default values
     useEffect(() => {
@@ -29,16 +29,17 @@ const ExerciseToggles = () => {
     });
 
     // Save to local storage
-    const saveExercisesLocal = (exercises: ExerciseList) => {
+    const saveExercisesLocal = (exercises: Exercise[]) => {
         localStorage.setItem('exercises', JSON.stringify(exercises));
     }
 
     // Handle toggling exercises
     const handleExerciseToggle = (name: string) => {
         setExerciseState(prev => {
+            if (!prev) return prev;
             const updatedExercises = prev.map(exercise => {
                 if (exercise.name === name) {
-                    return { ...exercise, enabled: !exercise.enabled };
+                    return exercise.config ? { ...exercise, enabled: !exercise.config.enabled } : exercise;
                 }
                 return exercise;
             });
@@ -58,15 +59,16 @@ const ExerciseToggles = () => {
             <h2>Exercise Toggles</h2>
 
             <div className="flexible-container">
-                {exerciseState.map(exercise => (
+                {
+                    exerciseState && exerciseState.map(exercise => (
                     <div
-                        className={`small-card ${exercise.enabled ? 'enabled' : ''}`}
+                        className={`small-card ${exercise.config && exercise.config.enabled ? 'enabled' : ''}`}
                         onClick={() => handleExerciseToggle(exercise.name)}
                         key={exercise.name}
                     >
                         <div className="equipment-icon">{<FaDumbbell size={48} />}</div>
                         <div className="small-card-name">{exercise.name}</div>
-                        <div className="checkmark-icon">{exercise.enabled && <FaCheck size={24} />} </div>
+                        <div className="checkmark-icon">{exercise.config && exercise.config.enabled && <FaCheck size={24} />} </div>
                     </div>
                 ))}
             </div>
