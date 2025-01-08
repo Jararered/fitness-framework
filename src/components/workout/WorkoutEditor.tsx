@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import { Workout, LegsExampleWorkout, EmptyWorkout, Circuit } from "../../interfaces/Workout";
 import { FormatSets } from "../utils/Formatting";
 
-const WorkoutEditor = () => {
+const WorkoutEditor: React.FC = () => {
     const [workoutState, setWorkoutState] = useState<Workout>(EmptyWorkout);
 
     // Load from local storage
