@@ -59,6 +59,13 @@ const WorkoutEditor = () => {
 
     const handleMoveExercise = (circuitIndex: number, exerciseIndex: number, direction: number) => {
         const newWorkout = { ...workoutState };
+
+        // Ensure the exercise is not the first in the circuit if moving up
+        if (direction === -1 && exerciseIndex === 0) return;
+
+        // Ensure the exercise is not the last in the circuit if moving down
+        if (direction === 1 && exerciseIndex === newWorkout.circuits[circuitIndex].length - 1) return;
+
         const exercise = newWorkout.circuits[circuitIndex][exerciseIndex];
         newWorkout.circuits[circuitIndex].splice(exerciseIndex, 1);
         newWorkout.circuits[circuitIndex].splice(exerciseIndex + direction, 0, exercise);
@@ -81,11 +88,13 @@ const WorkoutEditor = () => {
                             <p>{exerciseList.name}</p>
                             <p>{formatCommas(exerciseList.reps)} reps</p>
 
-                            <button className="normal-button">
+                            <button className="normal-button"
+                                onClick={() => handleMoveExercise(circuitIndex, exerciseIndex, -1)}>
                                 ⬆
                             </button>
 
-                            <button className="normal-button">
+                            <button className="normal-button"
+                                onClick={() => handleMoveExercise(circuitIndex, exerciseIndex, 1)}>
                                 ⬇
                             </button>
 

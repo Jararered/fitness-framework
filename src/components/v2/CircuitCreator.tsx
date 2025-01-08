@@ -26,7 +26,7 @@ const CircuitCreator: React.FC = () => {
         }
     }, []);
 
-    const avaliableExercises = () => {
+    const getAvaliableExercises = () => {
         // Filter out exercises that are not enabled, while also checking if the equipment is enabled
         return exerciseState?.filter(exercise => exercise.enabled && equipmentState?.find(equipment => equipment.name === exercise.equipment)?.enabled);
     }
@@ -38,7 +38,7 @@ const CircuitCreator: React.FC = () => {
 
             <div>
                 <select id="exercise" onChange={(e) => setSelectedExerciseState(e.target.value)}>
-                    {avaliableExercises()?.map((exercise, index) => (
+                    {getAvaliableExercises()?.map((exercise, index) => (
                         <option key={index} value={exercise.name}>{exercise.name}</option>
                     ))}
                 </select>
@@ -47,24 +47,35 @@ const CircuitCreator: React.FC = () => {
                     className="normal-button"
                     onClick={() => {
                         const exercise = exerciseState?.find(exercise => exercise.name === selectedExerciseState);
+
                         if (exercise) {
-                            const exerciseEntry: ExerciseEntry = {
-                                exercise: exercise,
+                            const newExercise: ExerciseEntry = {
+                                name: exercise.name,
                                 reps: []
                             };
 
-                            setCircuitState({
-                                name: circuitNameState,
-                                exercises: [exerciseEntry]
-                            });
+                            if (circuitState) {
+                                setCircuitState([...circuitState, newExercise]);
+                            } else {
+                                setCircuitState([newExercise]);
+                            }
                         }
                     }}
                 >
                     Add Exercise
                 </button>
 
-                {/*Input for the amount of reps*/}
-                <input type="text" placeholder="Reps" />
+                <input type="text" placeholder="Reps"
+                    onChange={(e) => {
+                        const reps = e.target.value;
+                        const exercise = circuitState?.[circuitState.length - 1];
+
+                        if (exercise) {
+                            exercise.reps.push(parseInt(reps));
+                            setCircuitState([...circuitState]);
+                        }
+                    }}
+                />
 
             </div>
         </div >
