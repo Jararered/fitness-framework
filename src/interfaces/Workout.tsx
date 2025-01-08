@@ -57,6 +57,16 @@ export const LegsExampleWorkout: Workout = {
                 name: ExerciseNames.LegExtension,
                 reps: [10, 10, 10]
             }
+        ],
+        [
+            {
+                name: ExerciseNames.LegCurlIsometricHold,
+                reps: [10, 10, 10]
+            },
+            {
+                name: ExerciseNames.LegExtensionIsometricHold,
+                reps: [10, 10, 10]
+            }
         ]
     ]
 };
