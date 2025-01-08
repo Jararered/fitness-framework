@@ -1,4 +1,4 @@
-import { FaDumbbell } from 'react-icons/fa';
+import { FaDumbbell } from "react-icons/fa";
 
 export type EquipmentName =
     "Barbell" |

@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import HomeButton from './buttons/HomeButton';
-import WorkoutButton from './buttons/WorkoutButton';
-import GymButton from './buttons/GymButton';
-import ProfileButton from './buttons/ProfileButton';
-import SettingsButton from './buttons/SettingsButton';
+import HomeButton from "./buttons/HomeButton";
+import WorkoutButton from "./buttons/WorkoutButton";
+import GymButton from "./buttons/GymButton";
+import ProfileButton from "./buttons/ProfileButton";
+import SettingsButton from "./buttons/SettingsButton";
 
-import './DockBar.css';
+import "./DockBar.css";
 
 interface DockBarProps {
     onNavigate: (view: string) => void;
@@ -19,11 +19,11 @@ const DockBar: React.FC<DockBarProps> = ({ onNavigate }) => {
 
     return (
         <div className="dockbar">
-            <HomeButton onClick={() => handleNavigate('home')} isCollapsed={true} />
-            <WorkoutButton onClick={() => handleNavigate('workout')} isCollapsed={true} />
-            <GymButton onClick={() => handleNavigate('equipment')} isCollapsed={true} />
-            <ProfileButton onClick={() => handleNavigate('profile')} isCollapsed={true} />
-            <SettingsButton onClick={() => handleNavigate('settings')} isCollapsed={true} />
+            <HomeButton onClick={() => handleNavigate("home")} isCollapsed={true} />
+            <WorkoutButton onClick={() => handleNavigate("workout")} isCollapsed={true} />
+            <GymButton onClick={() => handleNavigate("gym")} isCollapsed={true} />
+            <ProfileButton onClick={() => handleNavigate("profile")} isCollapsed={true} />
+            <SettingsButton onClick={() => handleNavigate("settings")} isCollapsed={true} />
         </div>
     );
 };

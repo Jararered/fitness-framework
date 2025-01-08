@@ -1,6 +1,6 @@
-import React from 'react';
-import { IconType } from 'react-icons';
-import './Button.css';
+import React from "react";
+import { IconType } from "react-icons";
+import "./Button.css";
 
 interface IconButtonProps {
     onClick: () => void;

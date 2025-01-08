@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 interface TimingSettingsInterface {
     // Rest times in seconds
@@ -23,7 +23,7 @@ const TimingSettings: React.FC = () => {
 
     useEffect(() => {
         // Load settings from local storage
-        const preferences = localStorage.getItem('timing-settings');
+        const preferences = localStorage.getItem("timing-settings");
         if (preferences) {
             setSettingsState(JSON.parse(preferences));
         }
@@ -36,7 +36,7 @@ const TimingSettings: React.FC = () => {
 
     // Save settings to local storage
     const saveSettings = (settings: TimingSettingsInterface) => {
-        localStorage.setItem('timing-settings', JSON.stringify(settings));
+        localStorage.setItem("timing-settings", JSON.stringify(settings));
     };
 
     // Handle changes in the rest times
@@ -44,7 +44,7 @@ const TimingSettings: React.FC = () => {
         const newRestValue = Number(e.target.value);
         setSettingsState((prev) => ({ ...prev, [restType]: newRestValue }));
         const updatedSettings = { ...SettingsState, [restType]: newRestValue };
-        localStorage.setItem('timing-settings', JSON.stringify(updatedSettings));
+        localStorage.setItem("timing-settings", JSON.stringify(updatedSettings));
     };
 
     return (
@@ -55,7 +55,7 @@ const TimingSettings: React.FC = () => {
                 <input
                     type="number"
                     value={SettingsState.shortRest}
-                    onChange={(e) => handleRestChange(e, 'shortRest')}
+                    onChange={(e) => handleRestChange(e, "shortRest")}
                 />
             </div>
 
@@ -64,7 +64,7 @@ const TimingSettings: React.FC = () => {
                 <input
                     type="number"
                     value={SettingsState.normalRest}
-                    onChange={(e) => handleRestChange(e, 'normalRest')}
+                    onChange={(e) => handleRestChange(e, "normalRest")}
                 />
             </div>
 
@@ -73,7 +73,7 @@ const TimingSettings: React.FC = () => {
                 <input
                     type="number"
                     value={SettingsState.longRest}
-                    onChange={(e) => handleRestChange(e, 'longRest')}
+                    onChange={(e) => handleRestChange(e, "longRest")}
                 />
             </div>
         </div >

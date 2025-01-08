@@ -8,7 +8,7 @@ const WorkoutPreview: React.FC = () => {
 
     // Load from local storage
     useEffect(() => {
-        const workout = localStorage.getItem('workout');
+        const workout = localStorage.getItem("workout");
         if (workout) {
             setWorkoutState(JSON.parse(workout));
         }
@@ -20,7 +20,7 @@ const WorkoutPreview: React.FC = () => {
 
     // Save to local storage
     const saveWorkoutLocal = (workout: Workout) => {
-        localStorage.setItem('workout', JSON.stringify(workout));
+        localStorage.setItem("workout", JSON.stringify(workout));
     }
 
     return (

@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // Navigation
-import SideBar from './components/navigation/SideBar';
-import DockBar from './components/navigation/DockBar';
+import SideBar from "./components/navigation/SideBar";
+import DockBar from "./components/navigation/DockBar";
 
 // Pages
-import PageHome from './pages/PageHome';
-import PageWorkout from './pages/PageWorkout';
-import PageGym from './pages/PageGym';
-import PageProfile from './pages/PageProfile';
-import PagePreferences from './pages/PagePreferences';
+import PageHome from "./pages/PageHome";
+import PageWorkout from "./pages/PageWorkout";
+import PageGym from "./pages/PageGym";
+import PageProfile from "./pages/PageProfile";
+import PagePreferences from "./pages/PagePreferences";
 
 // Styles
-import './App.css';
-import './styles/colors.css';
-import './styles/card.css';
-import './styles/icon.css';
+import "./App.css";
+import "./styles/colors.css";
+import "./styles/card.css";
+import "./styles/icon.css";
 
 const App: React.FC = () => {
     const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);
-    const [content, setContent] = useState('home');
-    const [, setPrevContent] = useState('');
+    const [content, setContent] = useState("home");
+    const [, setPrevContent] = useState("");
 
     const toggleSideBar = () => {
         setSideBarCollapsed((prev) => !prev);
@@ -34,19 +34,19 @@ const App: React.FC = () => {
     const renderMainContent = () => {
         switch (content) {
 
-            case 'home':
+            case "home":
                 return <PageHome />;
 
-            case 'equipment':
-                return <PageGym />;
-
-            case 'workout':
+            case "workout":
                 return <PageWorkout />;
 
-            case 'profile':
+            case "gym":
+                return <PageGym />;
+
+            case "profile":
                 return <PageProfile />;
 
-            case 'settings':
+            case "settings":
                 return <PagePreferences />;
 
             default:

@@ -1,12 +1,12 @@
 const ManageData = () => {
 
     const handleClearUserSettings = () => {
-        localStorage.removeItem('user-settings');
+        localStorage.removeItem("user-settings");
         window.location.reload();
     }
 
     const handleClearTimingSettings = () => {
-        localStorage.removeItem('timing-settings');
+        localStorage.removeItem("timing-settings");
         window.location.reload();
     }
 

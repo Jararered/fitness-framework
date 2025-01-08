@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import HomeButton from './buttons/HomeButton';
-import WorkoutButton from './buttons/WorkoutButton';
-import GymButton from './buttons/GymButton';
-import ProfileButton from './buttons/ProfileButton';
-import SettingsButton from './buttons/SettingsButton';
+import HomeButton from "./buttons/HomeButton";
+import WorkoutButton from "./buttons/WorkoutButton";
+import GymButton from "./buttons/GymButton";
+import ProfileButton from "./buttons/ProfileButton";
+import SettingsButton from "./buttons/SettingsButton";
 
-import './SideBar.css';
+import "./SideBar.css";
 
 interface SideBarProps {
     onNavigate: (view: string) => void;
@@ -23,16 +23,16 @@ const SideBar: React.FC<SideBarProps> = ({ onNavigate, isCollapsed, onToggle }) 
     };
 
     return (
-        <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+        <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
             <button className="expand-button" onClick={onToggle}>
-                {isCollapsed ? '☰' : '✕'}
+                {isCollapsed ? "☰" : "✕"}
             </button>
 
-            <HomeButton onClick={() => handleNavigate('home')} isCollapsed={isCollapsed} />
-            <WorkoutButton onClick={() => handleNavigate('workout')} isCollapsed={isCollapsed} />
-            <GymButton onClick={() => handleNavigate('equipment')} isCollapsed={isCollapsed} />
-            <ProfileButton onClick={() => handleNavigate('profile')} isCollapsed={isCollapsed} />
-            <SettingsButton onClick={() => handleNavigate('settings')} isCollapsed={isCollapsed} />
+            <HomeButton onClick={() => handleNavigate("home")} isCollapsed={isCollapsed} />
+            <WorkoutButton onClick={() => handleNavigate("workout")} isCollapsed={isCollapsed} />
+            <GymButton onClick={() => handleNavigate("gym")} isCollapsed={isCollapsed} />
+            <ProfileButton onClick={() => handleNavigate("profile")} isCollapsed={isCollapsed} />
+            <SettingsButton onClick={() => handleNavigate("settings")} isCollapsed={isCollapsed} />
         </div>
     );
 };

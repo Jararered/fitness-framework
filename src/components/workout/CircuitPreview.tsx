@@ -9,7 +9,7 @@ const CircuitPreview: React.FC<{ circuit: Circuit, circuitIndex: number, formatC
         {circuit.map((exercise: Exercise, exerciseIndex: number) => (
             <div className="circuit-preview-exercise" key={exerciseIndex}>
                 <h4>{exercise.name}</h4>
-                <p>{exercise.plan?.sets ? FormatSets(exercise.plan.sets) : 'No reps available'}</p>
+                <p>{exercise.plan?.sets ? FormatSets(exercise.plan.sets) : "No reps available"}</p>
             </div>
         ))}
 

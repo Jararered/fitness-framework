@@ -10,7 +10,7 @@ const ExerciseToggles = () => {
 
     // Load from local storage or use default values
     useEffect(() => {
-        const exercises = localStorage.getItem('exercises');
+        const exercises = localStorage.getItem("exercises");
         if (exercises) {
             setExerciseState(JSON.parse(exercises));
         } else {
@@ -18,7 +18,7 @@ const ExerciseToggles = () => {
             saveExercisesLocal(DefaultExercises);
         }
 
-        const equipment = localStorage.getItem('equipment');
+        const equipment = localStorage.getItem("equipment");
         if (equipment) {
             setEquipmentState(JSON.parse(equipment));
         }
@@ -30,7 +30,7 @@ const ExerciseToggles = () => {
 
     // Save to local storage
     const saveExercisesLocal = (exercises: Exercise[]) => {
-        localStorage.setItem('exercises', JSON.stringify(exercises));
+        localStorage.setItem("exercises", JSON.stringify(exercises));
     }
 
     // Handle toggling exercises
@@ -62,7 +62,7 @@ const ExerciseToggles = () => {
                 {
                     exerciseState && exerciseState.map(exercise => (
                     <div
-                        className={`small-card ${exercise.config && exercise.config.enabled ? 'enabled' : ''}`}
+                        className={`small-card ${exercise.config && exercise.config.enabled ? "enabled" : ""}`}
                         onClick={() => handleExerciseToggle(exercise.name)}
                         key={exercise.name}
                     >

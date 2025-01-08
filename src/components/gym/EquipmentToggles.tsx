@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 
 import { DefaultEquipment, Equipment, GetIconForEquipment } from "../../interfaces/Equipment"
 import { DefaultExercises, Exercise } from "../../interfaces/Exercise";
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck } from "react-icons/fa";
 
 const EquipmentToggles: React.FC = () => {
     const [equipmentState, setEquipmentState] = useState<Equipment[]>(DefaultEquipment);
@@ -10,7 +10,7 @@ const EquipmentToggles: React.FC = () => {
 
     // Load equipment state from local storage or use default values
     useEffect(() => {
-        const equipment = localStorage.getItem('equipment');
+        const equipment = localStorage.getItem("equipment");
         if (equipment) {
             setEquipmentState(JSON.parse(equipment));
         } else {
@@ -18,7 +18,7 @@ const EquipmentToggles: React.FC = () => {
             saveEquipmentLocal(DefaultEquipment);
         }
 
-        const exercises = localStorage.getItem('exercises');
+        const exercises = localStorage.getItem("exercises");
         if (exercises) {
             setExerciseState(JSON.parse(exercises));
         } else {
@@ -28,7 +28,7 @@ const EquipmentToggles: React.FC = () => {
 
     // Save equipment state to local storage
     const saveEquipmentLocal = useCallback((equipment: Equipment[]) => {
-        localStorage.setItem('equipment', JSON.stringify(equipment));
+        localStorage.setItem("equipment", JSON.stringify(equipment));
     }, []);
 
     // Handle toggling equipment
@@ -57,7 +57,7 @@ const EquipmentToggles: React.FC = () => {
             <div className="flexible-container">
                 {equipmentState.map(equipment => (
                     <div
-                        className={`small-card ${equipment.config.enabled ? 'enabled' : ''}`}
+                        className={`small-card ${equipment.config.enabled ? "enabled" : ""}`}
                         key={equipment.name}
                         onClick={() => handleEquipmentToggle(equipment.name)}
                     >
