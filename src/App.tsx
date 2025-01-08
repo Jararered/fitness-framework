@@ -4,14 +4,12 @@ import React, { useState } from 'react';
 import SideBar from './components/navigation/SideBar';
 import DockBar from './components/navigation/DockBar';
 
-// Components
-import Profile from './components/Profile';
-
-// Pages (new)
+// Pages
 import PageHome from './pages/PageHome';
-import PageGym from './pages/PageGym';
-import PagePreferences from './pages/PagePreferences';
 import PageWorkout from './pages/PageWorkout';
+import PageGym from './pages/PageGym';
+import PageProfile from './pages/PageProfile';
+import PagePreferences from './pages/PagePreferences';
 
 // Styles
 import './App.css';
@@ -42,14 +40,14 @@ const App: React.FC = () => {
             case 'equipment':
                 return <PageGym />;
 
+            case 'workout':
+                return <PageWorkout />;
+
             case 'profile':
-                return <Profile />;
+                return <PageProfile />;
 
             case 'settings':
                 return <PagePreferences />;
-
-            case 'workout':
-                return <PageWorkout />;
 
             default:
                 return <PageHome />;

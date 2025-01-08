@@ -1,5 +1,5 @@
-import UserGreeting from '../components/v2/UserGreeting';
-import WorkoutPreview from '../components/v2/WorkoutPreview';
+import UserGreeting from '../components/home/UserGreeting';
+import WorkoutPreview from '../components/home/WorkoutPreview';
 
 const PageHome = () => {
     return (

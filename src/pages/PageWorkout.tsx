@@ -1,6 +1,6 @@
-import WorkoutPreview from "../components/v2/WorkoutPreview";
-import WorkoutEditor from "../components/v2/WorkoutEditor";
-import CircuitCreator from "../components/v2/CircuitCreator";
+import WorkoutPreview from "../components/home/WorkoutPreview";
+import WorkoutEditor from "../components/workout/WorkoutEditor";
+import CircuitEditor from "../components/workout/CircuitEditor";
 
 const PageWorkout: React.FC = () => {
     return (
@@ -17,7 +17,7 @@ const PageWorkout: React.FC = () => {
             </div>
 
             <div className="card">
-                <CircuitCreator />
+                <CircuitEditor />
             </div>
 
         </div>

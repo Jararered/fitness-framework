@@ -1,12 +1,12 @@
 const ManageData = () => {
 
-    const handleClearUserPreferences = () => {
-        localStorage.removeItem('user-preferences');
+    const handleClearUserSettings = () => {
+        localStorage.removeItem('user-settings');
         window.location.reload();
     }
 
-    const handleClearTimingPreferences = () => {
-        localStorage.removeItem('timing-preferences');
+    const handleClearTimingSettings = () => {
+        localStorage.removeItem('timing-settings');
         window.location.reload();
     }
 
@@ -20,14 +20,14 @@ const ManageData = () => {
             <h2>Manage Data</h2>
 
             <div>
-                <button className="bad-button" onClick={handleClearUserPreferences}>
-                    Reset User Preferences
+                <button className="bad-button" onClick={handleClearUserSettings}>
+                    Reset User Settings
                 </button>
             </div>
 
             <div>
-                <button className="bad-button" onClick={handleClearTimingPreferences}>
-                    Reset Timing Preferences
+                <button className="bad-button" onClick={handleClearTimingSettings}>
+                    Reset Timing Settings
                 </button>
             </div>
 

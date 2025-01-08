@@ -1,6 +1,6 @@
-import TimingPreferences from '../components/v2/TimingPreferences';
-import UserPreferences from '../components/v2/UserPreferences';
-import ManageData from '../components/v2/ManageData';
+import TimingSettings from '../components/settings/TimingSettings';
+import UserSettings from '../components/settings/UserSettings';
+import ManageData from '../components/settings/ManageData';
 
 const PagePreferences: React.FC = () => {
 
@@ -10,11 +10,11 @@ const PagePreferences: React.FC = () => {
             <h1>Preferences</h1>
 
             <div className="card">
-                <UserPreferences />
+                <UserSettings />
             </div>
 
             <div className="card">
-                <TimingPreferences />
+                <TimingSettings />
             </div>
 
             <div className="card">

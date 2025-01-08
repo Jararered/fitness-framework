@@ -1,5 +1,5 @@
-import EquipmentToggles from "../components/v2/EquipmentToggles";
-import ExerciseToggles from "../components/v2/ExerciseToggles";
+import EquipmentToggles from "../components/gym/EquipmentToggles";
+import ExerciseToggles from "../components/gym/ExerciseToggles";
 
 const PageGym = () => {
     return (

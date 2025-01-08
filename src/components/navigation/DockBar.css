@@ -1,14 +1,12 @@
 .dockbar {
     box-sizing: border-box;
     width: 100vw;
-    /* height: 10vh; */
     padding: 10px 10px;
 
     background-color: #f8f8f8;
     color: #333;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 
-    /* Positioning */
     position: fixed;
     bottom: env(safe-area-inset-bottom, 0px);
     padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 20px);

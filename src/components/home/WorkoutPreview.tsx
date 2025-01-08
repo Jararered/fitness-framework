@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Workout, Circuit, LegsExampleWorkout } from "../../interfaces/Workout";
 import { FormatSets } from "../utils/Formatting";
-import CircuitPreview from "./CircuitPreview";
+import CircuitPreview from "../workout/CircuitPreview";
 
 const WorkoutPreview: React.FC = () => {
     const [workoutState, setWorkoutState] = useState<Workout>(LegsExampleWorkout);
