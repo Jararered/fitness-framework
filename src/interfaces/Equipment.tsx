@@ -1,60 +1,61 @@
 import { FaDumbbell } from 'react-icons/fa';
 
-export const EquipmentNames =
-{
-    Barbell: "Barbell",
-    BarbellBench: "Barbell + Bench",
-    BarbellSquatRack: "Barbell + Squat Rack",
-    ChestPressMachine: "Chest Press Machine",
-    Dumbells: "Dumbells",
-    EzBar: "EZ Bar",
-    LatPulldownMachine: "Lat Pulldown Machine",
-    LegCurlMachine: "Leg Curl Machine",
-    LegExtensionMachine: "Leg Extension Machine",
-    LegPressMachine: "Leg Press Machine",
-    SmithMachine: "Smith Machine",
-    SmithMachineBench: "Smith Machine + Bench",
+export type EquipmentName =
+    "Barbell" |
+    "Barbell + Bench" |
+    "Barbell + Squat Rack" |
+    "Chest Press Machine" |
+    "Dumbells" |
+    "EZ Bar" |
+    "EZ Bar + Bench" |
+    "Lat Pulldown Machine" |
+    "Leg Curl Machine" |
+    "Leg Extension Machine" |
+    "Leg Press Machine" |
+    "Smith Machine" |
+    "Smith Machine + Bench";
+
+export type EquipmentConfig = {
+    enabled: boolean;
 };
 
-// Equipment Interface
-export interface EquipmentInterface {
-    name: string;
-    enabled: boolean;
+export interface Equipment {
+    name: EquipmentName;
+    config: EquipmentConfig;
 }
 
-export type EquipmentList = EquipmentInterface[];
-
-export const DefaultEquipment: EquipmentList = [
-    { name: EquipmentNames.BarbellSquatRack, enabled: true },
-    { name: EquipmentNames.SmithMachineBench, enabled: true },
-    { name: EquipmentNames.LegExtensionMachine, enabled: true },
-    { name: EquipmentNames.LegCurlMachine, enabled: true },
-    { name: EquipmentNames.LegPressMachine, enabled: true },
-    { name: EquipmentNames.Barbell, enabled: true },
-    { name: EquipmentNames.Dumbells, enabled: true },
-    { name: EquipmentNames.EzBar, enabled: true },
-    { name: EquipmentNames.BarbellBench, enabled: true },
-    { name: EquipmentNames.ChestPressMachine, enabled: true },
-    { name: EquipmentNames.LatPulldownMachine, enabled: true },
-    { name: EquipmentNames.SmithMachine, enabled: true }
-];
-
-export const EquipmentIcons: { [key: string]: JSX.Element } = {
-    Barbell: <FaDumbbell size={48} />,
-    BarbellBench: <FaDumbbell size={48} />,
-    BarbellSquatRack: <FaDumbbell size={48} />,
-    ChestPressMachine: <FaDumbbell size={48} />,
-    Dumbells: <FaDumbbell size={48} />,
-    EzBar: <FaDumbbell size={48} />,
-    LatPulldownMachine: <FaDumbbell size={48} />,
-    LegCurlMachine: <FaDumbbell size={48} />,
-    LegExtensionMachine: <FaDumbbell size={48} />,
-    LegPressMachine: <FaDumbbell size={48} />,
-    SmithMachine: <FaDumbbell size={48} />,
-    SmithMachineBench: <FaDumbbell size={48} />
+export const EquipmentIcons: { [K in EquipmentName]: JSX.Element } = {
+    "Barbell": <FaDumbbell size={48} />,
+    "Barbell + Bench": <FaDumbbell size={48} />,
+    "Barbell + Squat Rack": <FaDumbbell size={48} />,
+    "Chest Press Machine": <FaDumbbell size={48} />,
+    "Dumbells": <FaDumbbell size={48} />,
+    "EZ Bar": <FaDumbbell size={48} />,
+    "EZ Bar + Bench": <FaDumbbell size={48} />,
+    "Lat Pulldown Machine": <FaDumbbell size={48} />,
+    "Leg Curl Machine": <FaDumbbell size={48} />,
+    "Leg Extension Machine": <FaDumbbell size={48} />,
+    "Leg Press Machine": <FaDumbbell size={48} />,
+    "Smith Machine": <FaDumbbell size={48} />,
+    "Smith Machine + Bench": <FaDumbbell size={48} />
 };
 
-export const GetIconForEquipment = (equipment: string) => {
-    const key = Object.keys(EquipmentNames).find(key => EquipmentNames[key as keyof typeof EquipmentNames] === equipment);
-    return key ? EquipmentIcons[key] : null;
+export const DefaultEquipment: Equipment[] = [
+    { name: "Barbell", config: { enabled: true } },
+    { name: "Barbell + Bench", config: { enabled: true } },
+    { name: "Barbell + Squat Rack", config: { enabled: true } },
+    { name: "Chest Press Machine", config: { enabled: true } },
+    { name: "Dumbells", config: { enabled: true } },
+    { name: "EZ Bar", config: { enabled: true } },
+    { name: "EZ Bar + Bench", config: { enabled: true } },
+    { name: "Lat Pulldown Machine", config: { enabled: true } },
+    { name: "Leg Curl Machine", config: { enabled: true } },
+    { name: "Leg Extension Machine", config: { enabled: true } },
+    { name: "Leg Press Machine", config: { enabled: true } },
+    { name: "Smith Machine", config: { enabled: true } },
+    { name: "Smith Machine + Bench", config: { enabled: true } }
+];
+
+export const GetIconForEquipment = (equipment: EquipmentName) => {
+    return EquipmentIcons[equipment];
 }
