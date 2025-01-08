@@ -16,7 +16,7 @@ const DefaultUserSettings: UserSettingsInterface = {
 };
 
 const UserSettings = () => {
-    // Load preferences from local storage or use default values
+    // Load settings from local storage or use default values
     const [settingsState, setSettingsState] = useState<UserSettingsInterface>({
         name: "",
         weight: 0,
@@ -24,10 +24,10 @@ const UserSettings = () => {
     });
 
     useEffect(() => {
-        // Load preferences from local storage
-        const userPreferences = localStorage.getItem("user-settings");
-        if (userPreferences) {
-            setSettingsState(JSON.parse(userPreferences));
+        // Load settings from local storage
+        const userSettings = localStorage.getItem("user-settings");
+        if (userSettings) {
+            setSettingsState(JSON.parse(userSettings));
         }
         else {
             setSettingsState(DefaultUserSettings);
@@ -35,10 +35,10 @@ const UserSettings = () => {
         }
     }, []);
 
-    // Save preferences to local storage
-    const saveSettings = (preferences: UserSettingsInterface) => {
-        setSettingsState(preferences);
-        localStorage.setItem("user-settings", JSON.stringify(preferences));
+    // Save settings to local storage
+    const saveSettings = (settings: UserSettingsInterface) => {
+        setSettingsState(settings);
+        localStorage.setItem("user-settings", JSON.stringify(settings));
     }
 
     // Handles changes in the user name
