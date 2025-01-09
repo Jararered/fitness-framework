@@ -31,7 +31,6 @@ export const EmptyWorkout: Workout = {
     circuits: []
 };
 
-
 export const LegsExampleWorkout: Workout = {
     name: "Leg Day",
     circuits: [
