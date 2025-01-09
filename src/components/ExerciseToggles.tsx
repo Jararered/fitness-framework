@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { FaCheck, FaDumbbell } from "react-icons/fa";
 
-import { Exercise, DefaultExercises } from "../../interfaces/Exercise";
-import LocalStorage, { Keys } from "../../interfaces/Storage";
+import { Exercise, DefaultExercises } from "../interfaces/Exercise";
+import LocalStorage, { Keys } from "../interfaces/Storage";
 
 const ExerciseToggles = () => {
     const [exercises, setExercises] = LocalStorage<Exercise[]>(Keys.Exercises, DefaultExercises);

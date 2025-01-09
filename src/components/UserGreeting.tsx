@@ -1,5 +1,5 @@
-import LocalStorage, { Keys } from "../../interfaces/Storage";
-import UserSettings, { DefaultUserSettings } from "../settings/UserSettings";
+import LocalStorage, { Keys } from "../interfaces/Storage";
+import UserSettings, { DefaultUserSettings } from "./UserSettings";
 
 const UserGreeting = () => {
     const [userSettings] = LocalStorage<UserSettings>(Keys.UserSettings, DefaultUserSettings);

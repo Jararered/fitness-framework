@@ -1,4 +1,4 @@
-import { Keys } from "../../interfaces/Storage";
+import { Keys } from "../interfaces/Storage";
 
 const ManageData = () => {
 

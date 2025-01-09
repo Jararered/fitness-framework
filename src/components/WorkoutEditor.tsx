@@ -1,6 +1,6 @@
-import { Workout, LegsExampleWorkout, Circuit } from "../../interfaces/Workout";
-import { FormatSets } from "../utils/Formatting";
-import LocalStorage, { Keys } from "../../interfaces/Storage";
+import { Workout, LegsExampleWorkout, Circuit } from "../interfaces/Workout";
+import { FormatSets } from "./utils/Formatting";
+import LocalStorage, { Keys } from "../interfaces/Storage";
 
 const WorkoutEditor = () => {
     const [workout, setWorkout] = LocalStorage<Workout>(Keys.Workout, LegsExampleWorkout);

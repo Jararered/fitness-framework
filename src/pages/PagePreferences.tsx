@@ -1,6 +1,6 @@
-import TimingSettings from "../components/settings/TimingSettings";
-import UserSettings from "../components/settings/UserSettings";
-import ManageData from "../components/settings/ManageData";
+import TimingSettings from "../components/TimingSettings";
+import UserSettings from "../components/UserSettings";
+import ManageData from "../components/ManageData";
 
 const PagePreferences: React.FC = () => {
 

@@ -1,5 +1,5 @@
-import WorkoutEditor from "../components/workout/WorkoutEditor";
-import CircuitEditor from "../components/workout/CircuitEditor";
+import WorkoutEditor from "../components/WorkoutEditor";
+import CircuitEditor from "../components/CircuitEditor";
 
 const PageWorkout: React.FC = () => {
     return (

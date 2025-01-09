@@ -1,5 +1,5 @@
-import { Exercise, Sets } from "../../interfaces/Exercise";
-import { Circuit } from "../../interfaces/Workout";
+import { Exercise, Sets } from "../interfaces/Exercise";
+import { Circuit } from "../interfaces/Workout";
 
 const CircuitPreview: React.FC<{ circuit: Circuit, circuitIndex: number, formatCommas: (sets: Sets) => string }> = ({ circuit, circuitIndex, formatCommas: FormatSets }) => (
     <div className="circuit-preview">

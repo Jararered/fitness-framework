@@ -1,4 +1,4 @@
-import LocalStorage, { Keys } from "../../interfaces/Storage";
+import LocalStorage, { Keys } from "../interfaces/Storage";
 
 interface TimingSettingsInterface {
     shortRest: number;

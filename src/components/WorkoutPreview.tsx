@@ -1,7 +1,7 @@
-import { Workout, Circuit, LegsExampleWorkout } from "../../interfaces/Workout";
-import { FormatSets } from "../utils/Formatting";
-import CircuitPreview from "../workout/CircuitPreview";
-import LocalStorage, { Keys } from "../../interfaces/Storage";
+import { Workout, Circuit, LegsExampleWorkout } from "../interfaces/Workout";
+import { FormatSets } from "./utils/Formatting";
+import CircuitPreview from "./CircuitPreview";
+import LocalStorage, { Keys } from "../interfaces/Storage";
 
 const WorkoutPreview: React.FC = () => {
     const [workout] = LocalStorage<Workout>(Keys.Workout, LegsExampleWorkout);
