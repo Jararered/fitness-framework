@@ -9,7 +9,7 @@ const ExerciseToggles = () => {
 
     // Handle toggling exercises
     const handleExerciseToggle = useCallback((name: string) => {
-        const newExerciseState = exercises.map(exercise => {
+        const newExercise = exercises.map(exercise => {
             if (exercise.name === name) {
                 if (exercise.config) {
                     exercise.config.enabled = !exercise.config.enabled;
@@ -17,7 +17,7 @@ const ExerciseToggles = () => {
             }
             return exercise;
         });
-        setExercises(newExerciseState);
+        setExercises(newExercise);
     }, [exercises]);
 
     return (

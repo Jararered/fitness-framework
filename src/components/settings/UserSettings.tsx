@@ -15,25 +15,27 @@ export const DefaultUserSettings: UserSettings = {
 };
 
 const UserSettings = () => {
-    const [settingsState, setSettingsState] = LocalStorage<UserSettings>(Keys.UserSettings, DefaultUserSettings);
+    const [settings, setSettings] = LocalStorage<UserSettings>(Keys.UserSettings, DefaultUserSettings);
 
     return (
         <div className="user-settings">
+
             <h2>User Settings</h2>
+
             <div>
                 <label>User:</label>
-                <input type="text" value={settingsState.name} onChange={(e) => setSettingsState({ ...settingsState, name: e.target.value })}
+                <input type="text" value={settings.name} onChange={(e) => setSettings({ ...settings, name: e.target.value })}
                 />
             </div>
 
             <div>
                 <label>Weight:</label>
-                <input type="number" value={settingsState.weight} onChange={(e) => setSettingsState({ ...settingsState, weight: parseFloat(e.target.value) })} />
+                <input type="number" value={settings.weight} onChange={(e) => setSettings({ ...settings, weight: parseFloat(e.target.value) })} />
             </div>
 
             <div>
                 <label>Units:</label>
-                <select value={settingsState.units} onChange={(e) => setSettingsState({ ...settingsState, units: e.target.value as Units })}>
+                <select value={settings.units} onChange={(e) => setSettings({ ...settings, units: e.target.value as Units })}>
                     <option value="lb">lb</option>
                     <option value="kg">kg</option>
                 </select>
