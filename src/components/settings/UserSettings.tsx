@@ -1,4 +1,4 @@
-import useLocalStorage, { Keys } from "../../interfaces/Storage";
+import LocalStorage, { Keys } from "../../interfaces/Storage";
 
 type Units = "lb" | "kg";
 
@@ -15,7 +15,7 @@ export const DefaultUserSettings: UserSettings = {
 };
 
 const UserSettings = () => {
-    const [settingsState, setSettingsState] = useLocalStorage<UserSettings>(Keys.UserSettings, DefaultUserSettings);
+    const [settingsState, setSettingsState] = LocalStorage<UserSettings>(Keys.UserSettings, DefaultUserSettings);
 
     return (
         <div className="user-settings">

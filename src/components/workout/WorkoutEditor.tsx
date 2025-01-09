@@ -1,9 +1,9 @@
 import { Workout, LegsExampleWorkout, Circuit } from "../../interfaces/Workout";
 import { FormatSets } from "../utils/Formatting";
-import useLocalStorage, { Keys } from "../../interfaces/Storage";
+import LocalStorage, { Keys } from "../../interfaces/Storage";
 
 const WorkoutEditor = () => {
-    const [workout, setWorkout] = useLocalStorage<Workout>(Keys.Workout, LegsExampleWorkout);
+    const [workout, setWorkout] = LocalStorage<Workout>(Keys.Workout, LegsExampleWorkout);
 
     const handleDeleteExercise = (circuitIndex: number, exerciseIndex: number) => {
         const newWorkout = { ...workout };

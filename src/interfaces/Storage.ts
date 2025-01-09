@@ -8,7 +8,7 @@ export const Keys = {
     Workout: "workout",
 }
 
-function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+function LocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
     const [storedValue, setStoredValue] = useState<T>(() => {
         const item = localStorage.getItem(key);
         return item ? JSON.parse(item) : initialValue;
@@ -21,4 +21,4 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => voi
     return [storedValue, setStoredValue];
 }
 
-export default useLocalStorage;
+export default LocalStorage;

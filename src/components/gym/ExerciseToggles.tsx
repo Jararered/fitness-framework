@@ -2,10 +2,10 @@ import { useCallback } from "react";
 import { FaCheck, FaDumbbell } from "react-icons/fa";
 
 import { Exercise, DefaultExercises } from "../../interfaces/Exercise";
-import useLocalStorage, { Keys } from "../../interfaces/Storage";
+import LocalStorage, { Keys } from "../../interfaces/Storage";
 
 const ExerciseToggles = () => {
-    const [exercises, setExercises] = useLocalStorage<Exercise[]>(Keys.Exercises, DefaultExercises);
+    const [exercises, setExercises] = LocalStorage<Exercise[]>(Keys.Exercises, DefaultExercises);
 
     // Handle toggling exercises
     const handleExerciseToggle = useCallback((name: string) => {

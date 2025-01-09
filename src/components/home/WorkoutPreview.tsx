@@ -1,10 +1,10 @@
 import { Workout, Circuit, LegsExampleWorkout } from "../../interfaces/Workout";
 import { FormatSets } from "../utils/Formatting";
 import CircuitPreview from "../workout/CircuitPreview";
-import useLocalStorage, { Keys } from "../../interfaces/Storage";
+import LocalStorage, { Keys } from "../../interfaces/Storage";
 
 const WorkoutPreview: React.FC = () => {
-    const [workoutState] = useLocalStorage<Workout>(Keys.Workout, LegsExampleWorkout);
+    const [workoutState] = LocalStorage<Workout>(Keys.Workout, LegsExampleWorkout);
 
     return (
         <div className="workout-preview">

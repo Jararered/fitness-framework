@@ -1,4 +1,4 @@
-import useLocalStorage, { Keys } from "../../interfaces/Storage";
+import LocalStorage, { Keys } from "../../interfaces/Storage";
 
 interface TimingSettingsInterface {
     shortRest: number;
@@ -13,7 +13,7 @@ const DefaultTimingSettings: TimingSettingsInterface = {
 };
 
 const TimingSettings: React.FC = () => {
-    const [settings, setSettings] = useLocalStorage<TimingSettingsInterface>(Keys.TimingSettings, DefaultTimingSettings);
+    const [settings, setSettings] = LocalStorage<TimingSettingsInterface>(Keys.TimingSettings, DefaultTimingSettings);
 
     return (
         <div className="timing-settings">
