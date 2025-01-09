@@ -1,27 +1,19 @@
 import { useEffect, useState } from "react";
+
 import { Workout, Circuit, LegsExampleWorkout } from "../../interfaces/Workout";
 import { FormatSets } from "../utils/Formatting";
 import CircuitPreview from "../workout/CircuitPreview";
+import { Keys } from "../../interfaces/Storage";
 
 const WorkoutPreview: React.FC = () => {
-    const [workoutState, setWorkoutState] = useState<Workout>(LegsExampleWorkout);
+    const workoutLocal = localStorage.getItem(Keys.Workout);
+    const [workoutState] = useState<Workout>(
+        workoutLocal ? JSON.parse(workoutLocal) : LegsExampleWorkout
+    );
 
-    // Load from local storage
     useEffect(() => {
-        const workout = localStorage.getItem("workout");
-        if (workout) {
-            setWorkoutState(JSON.parse(workout));
-        }
-        else {
-            setWorkoutState(LegsExampleWorkout);
-            saveWorkoutLocal(LegsExampleWorkout);
-        }
-    }, []);
-
-    // Save to local storage
-    const saveWorkoutLocal = (workout: Workout) => {
-        localStorage.setItem("workout", JSON.stringify(workout));
-    }
+        localStorage.setItem(Keys.Workout, JSON.stringify(workoutState));
+    }, [workoutState]);
 
     return (
 

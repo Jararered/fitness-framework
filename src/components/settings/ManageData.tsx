@@ -1,12 +1,14 @@
+import { Keys } from "../../interfaces/Storage";
+
 const ManageData = () => {
 
     const handleClearUserSettings = () => {
-        localStorage.removeItem("user-settings");
+        localStorage.removeItem(Keys.UserSettings);
         window.location.reload();
     }
 
     const handleClearTimingSettings = () => {
-        localStorage.removeItem("timing-settings");
+        localStorage.removeItem(Keys.TimingSettings);
         window.location.reload();
     }
 

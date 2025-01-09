@@ -1,57 +1,45 @@
 import { useEffect, useState } from "react";
 
-import { Workout, LegsExampleWorkout, EmptyWorkout, Circuit } from "../../interfaces/Workout";
+import { Workout, LegsExampleWorkout, Circuit } from "../../interfaces/Workout";
 import { FormatSets } from "../utils/Formatting";
 
 const WorkoutEditor = () => {
-    const [workoutState, setWorkoutState] = useState<Workout>(EmptyWorkout);
+    const workoutLocal = localStorage.getItem("workout");
+    const [workoutState, setWorkoutState] = useState<Workout>(
+        workoutLocal ? JSON.parse(workoutLocal) : LegsExampleWorkout
+    );
 
     // Load from local storage
     useEffect(() => {
-        const workout = localStorage.getItem("workout");
-        if (workout) {
-            setWorkoutState(JSON.parse(workout));
-        }
-        else {
-            setWorkoutState(LegsExampleWorkout);
-            saveWorkoutLocal(LegsExampleWorkout);
-        }
-    }, []);
+        localStorage.setItem("workout", JSON.stringify(workoutState));
+    }, [workoutState]);
 
-    // Save to local storage
-    const saveWorkoutLocal = (workout: Workout) => {
-        localStorage.setItem("workout", JSON.stringify(workout));
+    const handleDeleteExercise = (circuitIndex: number, exerciseIndex: number) => {
+        const newWorkout = { ...workoutState };
+        newWorkout.circuits[circuitIndex].splice(exerciseIndex, 1);
+        setWorkoutState(newWorkout);
     }
 
     const handleDeleteCircuit = (circuitIndex: number) => {
         const newWorkout = { ...workoutState };
         newWorkout.circuits.splice(circuitIndex, 1);
-
         setWorkoutState(newWorkout);
-        saveWorkoutLocal(newWorkout);
     }
 
     const handleMoveCircuit = (circuitIndex: number, direction: number) => {
         const newWorkout = { ...workoutState };
+
+        // Ensure the circuit is not the first if moving up
+        if (direction === -1 && circuitIndex === 0) return;
+
+        // Ensure the circuit is not the last if moving down
+        if (direction === 1 && circuitIndex === newWorkout.circuits.length - 1) return;
+
         const circuit = newWorkout.circuits[circuitIndex];
         newWorkout.circuits.splice(circuitIndex, 1);
         newWorkout.circuits.splice(circuitIndex + direction, 0, circuit);
 
         setWorkoutState(newWorkout);
-        saveWorkoutLocal(newWorkout);
-    }
-
-    const handleDeleteExercise = (circuitIndex: number, exerciseIndex: number) => {
-        const newWorkout = { ...workoutState };
-        newWorkout.circuits[circuitIndex].splice(exerciseIndex, 1);
-
-        // Check if the circuit is empty
-        if (newWorkout.circuits[circuitIndex].length === 0) {
-            newWorkout.circuits.splice(circuitIndex, 1);
-        }
-
-        setWorkoutState(newWorkout);
-        saveWorkoutLocal(newWorkout);
     }
 
     const handleMoveExercise = (circuitIndex: number, exerciseIndex: number, direction: number) => {
@@ -68,7 +56,6 @@ const WorkoutEditor = () => {
         newWorkout.circuits[circuitIndex].splice(exerciseIndex + direction, 0, exercise);
 
         setWorkoutState(newWorkout);
-        saveWorkoutLocal(newWorkout);
     }
 
     return (
@@ -118,8 +105,7 @@ const WorkoutEditor = () => {
                     </button>
                 </div>
 
-            ))
-            }
+            ))}
         </div >
     );
 };

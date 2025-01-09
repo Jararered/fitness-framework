@@ -2,15 +2,17 @@ import { useEffect, useState, useCallback } from "react";
 import { FaCheck } from "react-icons/fa";
 
 import { DefaultEquipment, Equipment, GetIconForEquipment } from "../../interfaces/Equipment"
+import { Keys } from "../../interfaces/Storage";
 
 const EquipmentToggles: React.FC = () => {
-    const localEquipment = localStorage.getItem("equipment");
+
+    const localEquipment = localStorage.getItem(Keys.Equipment);
     const [equipmentState, setEquipmentState] = useState<Equipment[]>(
         localEquipment ? JSON.parse(localEquipment) : DefaultEquipment
     );
 
     useEffect(() => {
-        localStorage.setItem("equipment", JSON.stringify(equipmentState));
+        localStorage.setItem(Keys.Equipment, JSON.stringify(equipmentState));
     }, [equipmentState]);
 
     const handleEquipmentToggle = useCallback((name: string) => {
@@ -25,7 +27,7 @@ const EquipmentToggles: React.FC = () => {
 
     return (
         <div className="equipment-toggles">
-            
+
             <h2>Equipment Toggles</h2>
 
             <div className="flexible-container">

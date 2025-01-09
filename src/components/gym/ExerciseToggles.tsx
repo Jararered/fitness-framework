@@ -2,15 +2,17 @@ import { useCallback, useEffect, useState } from "react";
 import { FaCheck, FaDumbbell } from "react-icons/fa";
 
 import { Exercise, DefaultExercises } from "../../interfaces/Exercise";
+import { Keys } from "../../interfaces/Storage";
 
 const ExerciseToggles = () => {
-    const localExercises = localStorage.getItem("exercises");
+
+    const localExercises = localStorage.getItem(Keys.Exercises);
     const [exerciseState, setExerciseState] = useState<Exercise[]>(
         localExercises ? JSON.parse(localExercises) : DefaultExercises
     );
 
     useEffect(() => {
-        localStorage.setItem("exercises", JSON.stringify(exerciseState));
+        localStorage.setItem(Keys.Exercises, JSON.stringify(exerciseState));
     }, [exerciseState]);
 
     // Handle toggling exercises
@@ -38,9 +40,9 @@ const ExerciseToggles = () => {
                         onClick={() => handleExerciseToggle(exercise.name)}
                         key={exercise.name}
                     >
-                        <div className="equipment-icon">{<FaDumbbell size={48}/>}</div>
+                        <div className="equipment-icon">{<FaDumbbell size={48} />}</div>
                         <div className="small-card-name">{exercise.name}</div>
-                        <div className="checkmark-icon">{exercise.config && exercise.config.enabled && <FaCheck size={24}/>} </div>
+                        <div className="checkmark-icon">{exercise.config && exercise.config.enabled && <FaCheck size={24} />} </div>
                     </div>
                 ))}
             </div>
