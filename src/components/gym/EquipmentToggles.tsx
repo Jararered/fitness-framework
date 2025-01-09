@@ -1,29 +1,21 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback } from "react";
 import { FaCheck } from "react-icons/fa";
 
 import { DefaultEquipment, Equipment, GetIconForEquipment } from "../../interfaces/Equipment"
-import { Keys } from "../../interfaces/Storage";
+import LocalStorage, { Keys } from "../../interfaces/Storage";
 
 const EquipmentToggles: React.FC = () => {
-
-    const localEquipment = localStorage.getItem(Keys.Equipment);
-    const [equipmentState, setEquipmentState] = useState<Equipment[]>(
-        localEquipment ? JSON.parse(localEquipment) : DefaultEquipment
-    );
-
-    useEffect(() => {
-        localStorage.setItem(Keys.Equipment, JSON.stringify(equipmentState));
-    }, [equipmentState]);
+    const [equipment, setEquipment] = LocalStorage<Equipment[]>(Keys.Equipment, DefaultEquipment);
 
     const handleEquipmentToggle = useCallback((name: string) => {
-        const newEquipmentState = equipmentState.map(equipment => {
+        const newEquipment = equipment.map(equipment => {
             if (equipment.name === name) {
                 equipment.config.enabled = !equipment.config.enabled;
             }
             return equipment;
         });
-        setEquipmentState(newEquipmentState);
-    }, [equipmentState]);
+        setEquipment(newEquipment);
+    }, [equipment]);
 
     return (
         <div className="equipment-toggles">
@@ -31,7 +23,7 @@ const EquipmentToggles: React.FC = () => {
             <h2>Equipment Toggles</h2>
 
             <div className="flexible-container">
-                {equipmentState?.map(equipment => (
+                {equipment?.map(equipment => (
                     <div className={`small-card ${equipment.config.enabled ? "enabled" : ""}`}
                         key={equipment.name}
                         onClick={() => handleEquipmentToggle(equipment.name)}
@@ -44,7 +36,7 @@ const EquipmentToggles: React.FC = () => {
                 ))}
             </div>
 
-            <button className="bad-button" onClick={() => setEquipmentState(DefaultEquipment)}>
+            <button className="bad-button" onClick={() => setEquipment(DefaultEquipment)}>
                 Reset Equipment
             </button>
 

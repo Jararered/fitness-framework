@@ -1,30 +1,21 @@
-import { useState, useEffect } from "react";
-
-import { Keys } from "../../interfaces/Storage";
+import useLocalStorage, { Keys } from "../../interfaces/Storage";
 
 type Units = "lb" | "kg";
 
-interface UserSettingsInterface {
+interface UserSettings {
     name: string;
     weight: number;
     units: Units;
 }
 
-const DefaultUserSettings: UserSettingsInterface = {
+export const DefaultUserSettings: UserSettings = {
     name: "",
     weight: 0,
     units: "lb",
 };
 
 const UserSettings = () => {
-    const settingsLocal = localStorage.getItem(Keys.UserSettings);
-    const [settingsState, setSettingsState] = useState<UserSettingsInterface>(
-        settingsLocal ? JSON.parse(settingsLocal) : DefaultUserSettings
-    );
-
-    useEffect(() => {
-        localStorage.setItem(Keys.UserSettings, JSON.stringify(settingsState));
-    }, [settingsState]);
+    const [settingsState, setSettingsState] = useLocalStorage<UserSettings>(Keys.UserSettings, DefaultUserSettings);
 
     return (
         <div className="user-settings">

@@ -1,33 +1,24 @@
-import { useEffect, useState } from "react";
-
 import { Workout, LegsExampleWorkout, Circuit } from "../../interfaces/Workout";
 import { FormatSets } from "../utils/Formatting";
+import useLocalStorage, { Keys } from "../../interfaces/Storage";
 
 const WorkoutEditor = () => {
-    const workoutLocal = localStorage.getItem("workout");
-    const [workoutState, setWorkoutState] = useState<Workout>(
-        workoutLocal ? JSON.parse(workoutLocal) : LegsExampleWorkout
-    );
-
-    // Load from local storage
-    useEffect(() => {
-        localStorage.setItem("workout", JSON.stringify(workoutState));
-    }, [workoutState]);
+    const [workout, setWorkout] = useLocalStorage<Workout>(Keys.Workout, LegsExampleWorkout);
 
     const handleDeleteExercise = (circuitIndex: number, exerciseIndex: number) => {
-        const newWorkout = { ...workoutState };
+        const newWorkout = { ...workout };
         newWorkout.circuits[circuitIndex].splice(exerciseIndex, 1);
-        setWorkoutState(newWorkout);
+        setWorkout(newWorkout);
     }
 
     const handleDeleteCircuit = (circuitIndex: number) => {
-        const newWorkout = { ...workoutState };
+        const newWorkout = { ...workout };
         newWorkout.circuits.splice(circuitIndex, 1);
-        setWorkoutState(newWorkout);
+        setWorkout(newWorkout);
     }
 
     const handleMoveCircuit = (circuitIndex: number, direction: number) => {
-        const newWorkout = { ...workoutState };
+        const newWorkout = { ...workout };
 
         // Ensure the circuit is not the first if moving up
         if (direction === -1 && circuitIndex === 0) return;
@@ -39,11 +30,11 @@ const WorkoutEditor = () => {
         newWorkout.circuits.splice(circuitIndex, 1);
         newWorkout.circuits.splice(circuitIndex + direction, 0, circuit);
 
-        setWorkoutState(newWorkout);
+        setWorkout(newWorkout);
     }
 
     const handleMoveExercise = (circuitIndex: number, exerciseIndex: number, direction: number) => {
-        const newWorkout = { ...workoutState };
+        const newWorkout = { ...workout };
 
         // Ensure the exercise is not the first in the circuit if moving up
         if (direction === -1 && exerciseIndex === 0) return;
@@ -55,7 +46,7 @@ const WorkoutEditor = () => {
         newWorkout.circuits[circuitIndex].splice(exerciseIndex, 1);
         newWorkout.circuits[circuitIndex].splice(exerciseIndex + direction, 0, exercise);
 
-        setWorkoutState(newWorkout);
+        setWorkout(newWorkout);
     }
 
     return (
@@ -63,7 +54,7 @@ const WorkoutEditor = () => {
 
             <h2>Workout Editor</h2>
 
-            {workoutState.circuits.map((circuit: Circuit, circuitIndex: number) => (
+            {workout.circuits.map((circuit: Circuit, circuitIndex: number) => (
                 <div key={circuitIndex}>
                     <h3>Circuit {circuitIndex + 1}</h3>
 

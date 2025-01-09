@@ -1,19 +1,11 @@
-import { useState, useEffect } from "react";
-
-import { Keys } from "../../interfaces/Storage";
+import useLocalStorage, { Keys } from "../../interfaces/Storage";
+import UserSettings, { DefaultUserSettings } from "../settings/UserSettings";
 
 const UserGreeting = () => {
-    const localName = localStorage.getItem(Keys.UserSettings);
-    const [nameState] = useState<string>(
-        localName ? JSON.parse(localName).name : ""
-    );
-
-    useEffect(() => {
-        localStorage.setItem(Keys.UserSettings, JSON.stringify({ name: nameState }));
-    }, [nameState]);
+    const [userSettings] = useLocalStorage<UserSettings>(Keys.UserSettings, DefaultUserSettings);
 
     return (
-        <h1>{nameState ? "Welcome, " + nameState : "Home"}</h1>
+        <h1>{userSettings.name ? "Welcome, " + userSettings.name : "Home"}</h1>
     );
 }
 

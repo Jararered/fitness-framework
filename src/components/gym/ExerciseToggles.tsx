@@ -1,23 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { FaCheck, FaDumbbell } from "react-icons/fa";
 
 import { Exercise, DefaultExercises } from "../../interfaces/Exercise";
-import { Keys } from "../../interfaces/Storage";
+import useLocalStorage, { Keys } from "../../interfaces/Storage";
 
 const ExerciseToggles = () => {
-
-    const localExercises = localStorage.getItem(Keys.Exercises);
-    const [exerciseState, setExerciseState] = useState<Exercise[]>(
-        localExercises ? JSON.parse(localExercises) : DefaultExercises
-    );
-
-    useEffect(() => {
-        localStorage.setItem(Keys.Exercises, JSON.stringify(exerciseState));
-    }, [exerciseState]);
+    const [exercises, setExercises] = useLocalStorage<Exercise[]>(Keys.Exercises, DefaultExercises);
 
     // Handle toggling exercises
     const handleExerciseToggle = useCallback((name: string) => {
-        const newExerciseState = exerciseState.map(exercise => {
+        const newExerciseState = exercises.map(exercise => {
             if (exercise.name === name) {
                 if (exercise.config) {
                     exercise.config.enabled = !exercise.config.enabled;
@@ -25,8 +17,8 @@ const ExerciseToggles = () => {
             }
             return exercise;
         });
-        setExerciseState(newExerciseState);
-    }, [exerciseState]);
+        setExercises(newExerciseState);
+    }, [exercises]);
 
     return (
         <div className="exercise-toggles">
@@ -34,7 +26,7 @@ const ExerciseToggles = () => {
             <h2>Exercise Toggles</h2>
 
             <div className="flexible-container">
-                {exerciseState && exerciseState.map(exercise => (
+                {exercises && exercises.map(exercise => (
                     <div
                         className={`small-card ${exercise.config && exercise.config.enabled ? "enabled" : ""}`}
                         onClick={() => handleExerciseToggle(exercise.name)}
@@ -49,7 +41,7 @@ const ExerciseToggles = () => {
 
             <button
                 className="bad-button"
-                onClick={() => setExerciseState(DefaultExercises)}>
+                onClick={() => setExercises(DefaultExercises)}>
                 Reset Exercises
             </button>
 
