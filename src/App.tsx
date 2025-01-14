@@ -20,14 +20,12 @@ import "./styles/icon.css";
 const App: React.FC = () => {
     const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);
     const [content, setContent] = useState("home");
-    const [, setPrevContent] = useState("");
 
     const toggleSideBar = () => {
         setSideBarCollapsed((prev) => !prev);
     };
 
     const handleNavigate = (newContent: string) => {
-        setPrevContent(content);
         setContent(newContent);
     };
 
