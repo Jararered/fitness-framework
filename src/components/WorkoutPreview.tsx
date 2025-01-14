@@ -1,5 +1,5 @@
 import { Workout, Circuit, LegsExampleWorkout } from "../interfaces/Workout";
-import { FormatSets } from "./utils/Formatting";
+import { FormatSets } from "../utils/Formatting";
 import CircuitPreview from "./CircuitPreview";
 import LocalStorage, { Keys } from "../interfaces/Storage";
 
