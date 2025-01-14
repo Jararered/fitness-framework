@@ -33,3 +33,8 @@ button:hover.good {
 button:active.good {
     background-color: #30a14e;
 }
+
+button.circle {
+    padding: 1rem 1rem;
+    margin: 0.5rem;
+}
