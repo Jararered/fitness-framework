@@ -16,14 +16,10 @@
     width: 15rem;
 }
 
-.sidebar .button {
-    width: 4rem;
+.sidebar.expanded .icon-button {
+    width: 15rem;
     margin-right: 10px;
     margin-bottom: 10px;
-}
-
-.sidebar.expanded .button {
-    width: 15rem;
 }
 
 @media (max-width: 768px) {

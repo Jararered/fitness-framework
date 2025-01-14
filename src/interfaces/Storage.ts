@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
 export const Keys = {
-    UserSettings: "user-settings",
-    TimingSettings: "timing-settings",
-    Exercises: "exercises",
     Equipment: "equipment",
+    Exercises: "exercises",
+    TimingSettings: "timing-settings",
+    UserSettings: "user-settings",
     Workout: "workout",
 }
 

@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 
-import HomeButton from "./buttons/HomeButton";
-import WorkoutButton from "./buttons/WorkoutButton";
-import GymButton from "./buttons/GymButton";
-import ProfileButton from "./buttons/ProfileButton";
-import SettingsButton from "./buttons/SettingsButton";
+import { FaMapPin } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
+import { FaDumbbell } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { FaCog } from "react-icons/fa";
+
+import IconButton from "./IconButton";
+import "./IconButton.css";
 
 import "./SideBar.css";
 
 interface SideBarProps {
-    onNavigate: (view: string) => void;
+    setContent: (view: string) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ onNavigate }) => {
+const SideBar: React.FC<SideBarProps> = ({ setContent }) => {
 
     const [expanded, setExpanded] = useState(false);
 
@@ -20,7 +23,7 @@ const SideBar: React.FC<SideBarProps> = ({ onNavigate }) => {
         if (view === "") {
             setExpanded(!expanded);
         } else {
-            onNavigate(view);
+            setContent(view);
             setExpanded(false);
         }
     };
@@ -31,11 +34,26 @@ const SideBar: React.FC<SideBarProps> = ({ onNavigate }) => {
                 {expanded ? "✕" : "☰"}
             </button>
 
-            <HomeButton onClick={() => handleNavigate("home")} isCollapsed={!expanded} />
-            <WorkoutButton onClick={() => handleNavigate("workout")} isCollapsed={!expanded} />
-            <GymButton onClick={() => handleNavigate("gym")} isCollapsed={!expanded} />
-            <ProfileButton onClick={() => handleNavigate("profile")} isCollapsed={!expanded} />
-            <SettingsButton onClick={() => handleNavigate("settings")} isCollapsed={!expanded} />
+            <div className="icon-button" onClick={() => handleNavigate("home")}>
+                <IconButton icon={FaHome} />
+                <h2>{expanded && "Home"}</h2>
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("workout")}>
+                <IconButton icon={FaDumbbell} />
+                <h2>{expanded && "Workout"}</h2>
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("gym")}>
+                <IconButton icon={FaMapPin} />
+                <h2>{expanded && "Gym"}</h2>
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("profile")}>
+                <IconButton icon={FaUser} />
+                <h2>{expanded && "Profile"}</h2>
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("settings")}>
+                <IconButton icon={FaCog} />
+                <h2>{expanded && "Settings"}</h2>
+            </div>
         </div>
     );
 };

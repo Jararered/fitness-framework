@@ -46,7 +46,7 @@ const App: React.FC = () => {
     return (
         <div className="App">
 
-            <SideBar onNavigate={setPage} />
+            <SideBar setContent={setPage} />
 
             {
                 <div className="main-content">
@@ -54,7 +54,7 @@ const App: React.FC = () => {
                 </div>
             }
 
-            <DockBar onNavigate={setPage} />
+            <DockBar setContent={setPage} />
         </div>
     );
 };

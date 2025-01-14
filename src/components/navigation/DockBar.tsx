@@ -1,29 +1,40 @@
 import React from "react";
 
-import HomeButton from "./buttons/HomeButton";
-import WorkoutButton from "./buttons/WorkoutButton";
-import GymButton from "./buttons/GymButton";
-import ProfileButton from "./buttons/ProfileButton";
-import SettingsButton from "./buttons/SettingsButton";
+import { FaHome } from "react-icons/fa";
+import { FaDumbbell } from "react-icons/fa";
+import { FaMapPin } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { FaCog } from "react-icons/fa";
 
 import "./DockBar.css";
+import IconButton from "./IconButton";
 
 interface DockBarProps {
-    onNavigate: (view: string) => void;
+    setContent: (view: string) => void;
 }
 
-const DockBar: React.FC<DockBarProps> = ({ onNavigate }) => {
+const DockBar: React.FC<DockBarProps> = ({ setContent: setContent }) => {
     const handleNavigate = (view: string) => {
-        onNavigate(view);
+        setContent(view);
     };
 
     return (
         <div className="dockbar">
-            <HomeButton onClick={() => handleNavigate("home")} isCollapsed={true} />
-            <WorkoutButton onClick={() => handleNavigate("workout")} isCollapsed={true} />
-            <GymButton onClick={() => handleNavigate("gym")} isCollapsed={true} />
-            <ProfileButton onClick={() => handleNavigate("profile")} isCollapsed={true} />
-            <SettingsButton onClick={() => handleNavigate("settings")} isCollapsed={true} />
+            <div className="icon-button" onClick={() => handleNavigate("home")}>
+                <IconButton icon={FaHome} />
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("workout")}>
+                <IconButton icon={FaDumbbell} />
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("gym")}>
+                <IconButton icon={FaMapPin} />
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("profile")}>
+                <IconButton icon={FaUser} />
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("settings")}>
+                <IconButton icon={FaCog} />
+            </div>
         </div>
     );
 };

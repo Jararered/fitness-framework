@@ -1,4 +1,4 @@
-.button {
+.icon-button {
     width: 4rem;
     height: 4rem;
     font-size: 1.25rem;
@@ -11,6 +11,10 @@
     display: flex;
 }
 
-.button:hover {
+.icon-button:hover {
     background-color: #e0e0e0;
+}
+
+.icon-button h2 {
+    margin: 0;
 }
