@@ -100,8 +100,6 @@ h2 {
 
 .main-content {
     margin-left: 5rem;
-    padding: 0.5rem;
-    transition: 200ms;
     overflow-y: auto;
     height: 100vh;
 }
@@ -110,6 +108,5 @@ h2 {
     .main-content {
         height: 90vh;
         margin-left: 0;
-        transition: 200ms;
     }
 }

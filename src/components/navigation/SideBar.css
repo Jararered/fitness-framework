@@ -12,14 +12,20 @@
     position: fixed;
 }
 
+.sidebar .icon-button {
+    margin-bottom: 10px;
+}
+
 .sidebar.expanded {
     width: 15rem;
 }
 
 .sidebar.expanded .icon-button {
     width: 15rem;
-    margin-right: 10px;
-    margin-bottom: 10px;
+}
+
+.sidebar.expanded h2 {
+    margin-left: 10px;
 }
 
 @media (max-width: 768px) {
