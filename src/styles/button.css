@@ -1,35 +1,35 @@
-.normal-button {
+button {
     background-color: #007aff;
 }
 
-.normal-button:hover {
+button:hover {
     background-color: #005bb5;
 }
 
-.normal-button:active {
+button:active {
     background-color: #004a94;
 }
 
-.bad-button {
+button.bad {
     background-color: #888888;
 }
 
-.bad-button:hover {
+button:hover.bad {
     background-color: #cc2e23;
 }
 
-.bad-button:active {
+button:active.bad {
     background-color: #a4261d;
 }
 
-.confirm-button {
+button.good {
     background-color: #4cd964;
 }
 
-.confirm-button:hover {
+button:hover.good {
     background-color: #34c759;
 }
 
-.confirm-button:active {
+button:active.good {
     background-color: #30a14e;
 }

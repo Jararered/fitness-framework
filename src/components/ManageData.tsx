@@ -22,19 +22,19 @@ const ManageData = () => {
             <h2>Manage Data</h2>
 
             <div>
-                <button className="bad-button" onClick={handleClearUserSettings}>
+                <button className="bad" onClick={handleClearUserSettings}>
                     Reset User Settings
                 </button>
             </div>
 
             <div>
-                <button className="bad-button" onClick={handleClearTimingSettings}>
+                <button className="bad" onClick={handleClearTimingSettings}>
                     Reset Timing Settings
                 </button>
             </div>
 
             <div>
-                <button className="bad-button" onClick={handleClearAllData}>
+                <button className="bad" onClick={handleClearAllData}>
                     Clear All Data
                 </button>
             </div>

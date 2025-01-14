@@ -22,7 +22,7 @@ const EquipmentToggles: React.FC = () => {
 
             <h2>Equipment Toggles</h2>
 
-            <div className="flexible-container">
+            <div className="flex">
                 {equipment?.map(equipment => (
                     <div className={`small-card ${equipment.config.enabled ? "enabled" : ""}`}
                         key={equipment.name}
@@ -31,12 +31,11 @@ const EquipmentToggles: React.FC = () => {
                         <div className="equipment-icon">{GetIconForEquipment(equipment.name)}</div>
                         <div className="small-card-name">{equipment.name}</div>
                         <div className="checkmark-icon">{equipment.config.enabled && <FaCheck size={24} />}</div>
-
                     </div>
                 ))}
             </div>
 
-            <button className="bad-button" onClick={() => setEquipment(DefaultEquipment)}>
+            <button className="bad" onClick={() => setEquipment(DefaultEquipment)}>
                 Reset Equipment
             </button>
 

@@ -25,7 +25,7 @@ const ExerciseToggles = () => {
 
             <h2>Exercise Toggles</h2>
 
-            <div className="flexible-container">
+            <div className="flex">
                 {exercises && exercises.map(exercise => (
                     <div
                         className={`small-card ${exercise.config && exercise.config.enabled ? "enabled" : ""}`}
@@ -40,7 +40,7 @@ const ExerciseToggles = () => {
             </div>
 
             <button
-                className="bad-button"
+                className="bad"
                 onClick={() => setExercises(DefaultExercises)}>
                 Reset Exercises
             </button>

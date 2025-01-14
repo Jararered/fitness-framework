@@ -13,7 +13,7 @@ import PagePreferences from "./pages/PagePreferences";
 
 // Styles
 import "./App.css";
-import "./styles/colors.css";
+import "./styles/button.css";
 import "./styles/card.css";
 import "./styles/icon.css";
 
