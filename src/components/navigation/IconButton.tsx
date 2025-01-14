@@ -7,7 +7,7 @@ export interface IconButtonProps {
 
 const IconButton: React.FC<IconButtonProps> = ({ icon: Icon }) => {
     return (
-        <div className="button">
+        <div className="icon-button">
             <Icon size={24} />
         </div>
     );
