@@ -7,7 +7,6 @@ import { FaUser } from "react-icons/fa";
 import { FaCog } from "react-icons/fa";
 
 import "./DockBar.css";
-import IconButton from "./IconButton";
 
 interface DockBarProps {
     setContent: (view: string) => void;
@@ -21,19 +20,19 @@ const DockBar: React.FC<DockBarProps> = ({ setContent: setContent }) => {
     return (
         <div className="dockbar">
             <div className="icon-button" onClick={() => handleNavigate("home")}>
-                <IconButton icon={FaHome} />
+                <FaHome size={24} />
             </div>
             <div className="icon-button" onClick={() => handleNavigate("workout")}>
-                <IconButton icon={FaDumbbell} />
+                <FaDumbbell size={24} />
             </div>
             <div className="icon-button" onClick={() => handleNavigate("gym")}>
-                <IconButton icon={FaMapPin} />
+                <FaMapPin size={24} />
             </div>
             <div className="icon-button" onClick={() => handleNavigate("profile")}>
-                <IconButton icon={FaUser} />
+                <FaUser size={24} />
             </div>
             <div className="icon-button" onClick={() => handleNavigate("settings")}>
-                <IconButton icon={FaCog} />
+                <FaCog size={24} />
             </div>
         </div>
     );

@@ -6,10 +6,8 @@ import { FaDumbbell } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { FaCog } from "react-icons/fa";
 
-import IconButton from "./IconButton";
-import "./IconButton.css";
-
 import "./SideBar.css";
+import "./IconButton.css";
 
 interface SideBarProps {
     setContent: (view: string) => void;
@@ -35,23 +33,23 @@ const SideBar: React.FC<SideBarProps> = ({ setContent }) => {
             </button>
 
             <div className="icon-button" onClick={() => handleNavigate("home")}>
-                <IconButton icon={FaHome} />
+                <FaHome size={24}/>
                 <h2>{expanded && "Home"}</h2>
             </div>
             <div className="icon-button" onClick={() => handleNavigate("workout")}>
-                <IconButton icon={FaDumbbell} />
+                <FaDumbbell size={24}/>
                 <h2>{expanded && "Workout"}</h2>
             </div>
             <div className="icon-button" onClick={() => handleNavigate("gym")}>
-                <IconButton icon={FaMapPin} />
+                <FaMapPin size={24} />
                 <h2>{expanded && "Gym"}</h2>
             </div>
             <div className="icon-button" onClick={() => handleNavigate("profile")}>
-                <IconButton icon={FaUser} />
+                <FaUser size={24} />
                 <h2>{expanded && "Profile"}</h2>
             </div>
             <div className="icon-button" onClick={() => handleNavigate("settings")}>
-                <IconButton icon={FaCog} />
+                <FaCog size={24} />
                 <h2>{expanded && "Settings"}</h2>
             </div>
         </div>
