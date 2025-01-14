@@ -1,10 +1,10 @@
 import React from "react";
 import { FaHome } from "react-icons/fa";
-import IconButton from "./IconButton";
-import { ClickableButtonProps } from "./ButtonProps";
+
+import IconButton, { IconButtonProps } from "./IconButton";
 import "./Button.css";
 
-const HomeButton: React.FC<ClickableButtonProps> = (props) => {
+const HomeButton: React.FC<IconButtonProps> = (props) => {
     return <IconButton {...props} icon={FaHome} label="Home" />;
 };
 

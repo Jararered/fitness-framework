@@ -3,7 +3,9 @@
     height: 4rem;
     font-size: 1.25rem;
     border-radius: 1.25rem;
+    
     cursor: pointer;
+
     align-items: center;
     justify-content: center;
     display: flex;

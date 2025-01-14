@@ -1,10 +1,10 @@
 import React from "react";
 import { FaDumbbell } from "react-icons/fa";
-import IconButton from "./IconButton";
-import { ClickableButtonProps } from "./ButtonProps";
+
+import IconButton, { IconButtonProps } from "./IconButton";
 import "./Button.css";
 
-const WorkoutButton: React.FC<ClickableButtonProps> = (props) => (
+const WorkoutButton: React.FC<IconButtonProps> = (props) => (
     <IconButton {...props} icon={FaDumbbell} label="Workout" />
 );
 

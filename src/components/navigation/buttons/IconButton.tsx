@@ -1,8 +1,9 @@
 import React from "react";
 import { IconType } from "react-icons";
+
 import "./Button.css";
 
-interface IconButtonProps {
+export interface IconButtonProps {
     onClick: () => void;
     isCollapsed: boolean;
     icon: IconType;

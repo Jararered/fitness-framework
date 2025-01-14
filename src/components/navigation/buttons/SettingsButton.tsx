@@ -1,10 +1,10 @@
 import React from "react";
 import { FaCog } from "react-icons/fa";
-import IconButton from "./IconButton";
-import { ClickableButtonProps } from "./ButtonProps";
+
+import IconButton, { IconButtonProps } from "./IconButton";
 import "./Button.css";
 
-const SettingsButton: React.FC<ClickableButtonProps> = (props) => {
+const SettingsButton: React.FC<IconButtonProps> = (props) => {
     return <IconButton {...props} icon={FaCog} label="Settings" />;
 };
 
