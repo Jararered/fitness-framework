@@ -57,12 +57,28 @@ const WorkoutEditor = () => {
 
             {workout.circuits.map((circuit: Circuit, circuitIndex: number) => (
                 <div key={circuitIndex}>
-                    <h3>Circuit {circuitIndex + 1}</h3>
+                    <div className="flex">
+                        <h3>Circuit {circuitIndex + 1}</h3>
+
+                        <button onClick={() => handleMoveCircuit(circuitIndex, -1)}>
+                            ⬆
+                        </button>
+
+                        <button
+                            onClick={() => handleMoveCircuit(circuitIndex, 1)}>
+                            ⬇
+                        </button>
+
+                        <button className="bad"
+                            onClick={() => handleDeleteCircuit(circuitIndex)}>
+                            X
+                        </button>
+                    </div>
 
                     {circuit.map((exerciseList, exerciseIndex) => (
                         <div className="flex" key={exerciseIndex}>
                             <div>
-                                <p>{exerciseList.name}</p>
+                                <h4>{exerciseList.name}</h4>
                                 <p>{exerciseList.plan?.sets ? FormatSets(exerciseList.plan.sets) : ""} reps</p>
                             </div>
 
@@ -82,19 +98,7 @@ const WorkoutEditor = () => {
                         </div>
                     ))}
 
-                    <button onClick={() => handleMoveCircuit(circuitIndex, -1)}>
-                        ⬆
-                    </button>
 
-                    <button
-                        onClick={() => handleMoveCircuit(circuitIndex, 1)}>
-                        ⬇
-                    </button>
-
-                    <button className="bad"
-                        onClick={() => handleDeleteCircuit(circuitIndex)}>
-                        X
-                    </button>
                 </div>
 
             ))}
