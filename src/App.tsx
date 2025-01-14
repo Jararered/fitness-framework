@@ -18,14 +18,10 @@ import "./styles/card.css";
 import "./styles/icon.css";
 
 const App: React.FC = () => {
-    const [content, setContent] = useState("home");
-
-    const handleNavigate = (newContent: string) => {
-        setContent(newContent);
-    };
-
+    const [page, setPage] = useState<string>("home");
+    
     const renderMainContent = () => {
-        switch (content) {
+        switch (page) {
 
             case "home":
                 return <PageHome />;
@@ -50,7 +46,7 @@ const App: React.FC = () => {
     return (
         <div className="App">
 
-            <SideBar onNavigate={handleNavigate} />
+            <SideBar onNavigate={setPage} />
 
             {
                 <div className="main-content">
@@ -58,7 +54,7 @@ const App: React.FC = () => {
                 </div>
             }
 
-            <DockBar onNavigate={handleNavigate} />
+            <DockBar onNavigate={setPage} />
         </div>
     );
 };
