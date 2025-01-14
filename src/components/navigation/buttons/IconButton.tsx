@@ -12,7 +12,8 @@ interface IconButtonProps {
 const IconButton: React.FC<IconButtonProps> = ({ onClick, isCollapsed, icon: Icon, label }) => {
     return (
         <div className="button" onClick={onClick}>
-            {isCollapsed ? <Icon size={24} /> : <> <Icon size={24} /> {label} </>}
+            <Icon size={24} />
+            {!isCollapsed && label}
         </div>
     );
 };
