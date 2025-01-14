@@ -14,7 +14,6 @@ interface SideBarProps {
 }
 
 const SideBar: React.FC<SideBarProps> = ({ setContent }) => {
-
     const [expanded, setExpanded] = useState(false);
 
     const handleNavigate = (view: string) => {

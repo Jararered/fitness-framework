@@ -19,7 +19,7 @@ import "./styles/icon.css";
 
 const App: React.FC = () => {
     const [page, setPage] = useState<string>("home");
-    
+
     const renderMainContent = () => {
         switch (page) {
 
@@ -45,14 +45,11 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-
             <SideBar setContent={setPage} />
 
-            {
-                <div className="main-content">
-                    {renderMainContent()}
-                </div>
-            }
+            <div className="main-content">
+                {renderMainContent()}
+            </div>
 
             <DockBar setContent={setPage} />
         </div>
