@@ -60,16 +60,16 @@ const WorkoutEditor = () => {
                     <div className="flex">
                         <h3>Circuit {circuitIndex + 1}</h3>
 
-                        <button onClick={() => handleMoveCircuit(circuitIndex, -1)}>
+                        <button className="circle" onClick={() => handleMoveCircuit(circuitIndex, -1)}>
                             ⬆
                         </button>
 
-                        <button
+                        <button className="circle"
                             onClick={() => handleMoveCircuit(circuitIndex, 1)}>
                             ⬇
                         </button>
 
-                        <button className="bad"
+                        <button className="circle bad"
                             onClick={() => handleDeleteCircuit(circuitIndex)}>
                             X
                         </button>
@@ -77,21 +77,21 @@ const WorkoutEditor = () => {
 
                     {circuit.map((exerciseList, exerciseIndex) => (
                         <div className="flex" key={exerciseIndex}>
-                            <div>
+                            <div className="flex">
                                 <h4>{exerciseList.name}</h4>
                                 <p>{exerciseList.plan?.sets ? FormatSets(exerciseList.plan.sets) : ""} reps</p>
                             </div>
 
                             <div>
-                                <button onClick={() => handleMoveExercise(circuitIndex, exerciseIndex, -1)}>
+                                <button className="circle" onClick={() => handleMoveExercise(circuitIndex, exerciseIndex, -1)}>
                                     ⬆
                                 </button>
 
-                                <button onClick={() => handleMoveExercise(circuitIndex, exerciseIndex, 1)}>
+                                <button className="circle" onClick={() => handleMoveExercise(circuitIndex, exerciseIndex, 1)}>
                                     ⬇
                                 </button>
 
-                                <button className="bad" onClick={() => handleDeleteExercise(circuitIndex, exerciseIndex)}>
+                                <button className="bad circle" onClick={() => handleDeleteExercise(circuitIndex, exerciseIndex)}>
                                     X
                                 </button>
                             </div>
