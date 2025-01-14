@@ -1,19 +1,42 @@
-import { Exercise, Sets } from "../interfaces/Exercise";
-import { Circuit } from "../interfaces/Workout";
+import React from 'react';
 
-const CircuitPreview: React.FC<{ circuit: Circuit, circuitIndex: number, formatCommas: (sets: Sets) => string }> = ({ circuit, circuitIndex, formatCommas: FormatSets }) => (
-    <div className="circuit-preview">
+import { Circuit } from '../interfaces/Workout';
 
-        <h3>Circuit {circuitIndex + 1}</h3>
+interface CircuitPreviewProps {
+    number: number;
+    circuit: Circuit;
+}
 
-        {circuit.map((exercise: Exercise, exerciseIndex: number) => (
-            <div className="circuit-preview-exercise" key={exerciseIndex}>
-                <h4>{exercise.name}</h4>
-                <p>{exercise.plan?.sets ? FormatSets(exercise.plan.sets) : "No reps available"}</p>
-            </div>
-        ))}
-
-    </div>
-);
+const CircuitPreview: React.FC<CircuitPreviewProps> = ({ number, circuit }) => {
+    return (
+        <div>
+            <h2>Circuit {number}</h2>
+            <ul>
+                {circuit.map((exercise, index) => (
+                    <li key={index}>
+                        <strong>{exercise.name}</strong>
+                        {exercise.info && (
+                            <div>
+                                <p>Equipment: {exercise.info.equipment}</p>
+                                <p>Category: {exercise.info.category}</p>
+                            </div>
+                        )}
+                        {exercise.plan && (
+                            <div>
+                                <p>Plan: {exercise.plan.sets.join(', ')} sets</p>
+                            </div>
+                        )}
+                        {exercise.active && (
+                            <div>
+                                <p>Active: {exercise.active.sets?.join(', ')} sets, Weight: {exercise.active.weight} kg</p>
+                            </div>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
 
 export default CircuitPreview;
+
