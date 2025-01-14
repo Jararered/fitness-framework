@@ -18,12 +18,7 @@ import "./styles/card.css";
 import "./styles/icon.css";
 
 const App: React.FC = () => {
-    const [isSideBarCollapsed, setSideBarCollapsed] = useState(true);
     const [content, setContent] = useState("home");
-
-    const toggleSideBar = () => {
-        setSideBarCollapsed((prev) => !prev);
-    };
 
     const handleNavigate = (newContent: string) => {
         setContent(newContent);
@@ -55,11 +50,7 @@ const App: React.FC = () => {
     return (
         <div className="App">
 
-            <SideBar
-                onNavigate={handleNavigate}
-                isCollapsed={isSideBarCollapsed}
-                onToggle={toggleSideBar}
-            />
+            <SideBar onNavigate={handleNavigate} />
 
             {
                 <div className="main-content">
@@ -67,9 +58,7 @@ const App: React.FC = () => {
                 </div>
             }
 
-            <DockBar
-                onNavigate={handleNavigate}
-            />
+            <DockBar onNavigate={handleNavigate} />
         </div>
     );
 };

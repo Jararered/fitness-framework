@@ -7,11 +7,8 @@
     align-items: center;
     justify-content: center;
     display: flex;
-
-    transition: 200ms;
 }
 
 .button:hover {
     background-color: #e0e0e0;
-    transition: 200ms;
 }

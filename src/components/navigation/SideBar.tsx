@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import HomeButton from "./buttons/HomeButton";
 import WorkoutButton from "./buttons/WorkoutButton";
@@ -10,29 +10,32 @@ import "./SideBar.css";
 
 interface SideBarProps {
     onNavigate: (view: string) => void;
-    isCollapsed: boolean;
-    onToggle: () => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ onNavigate, isCollapsed, onToggle }) => {
+const SideBar: React.FC<SideBarProps> = ({ onNavigate }) => {
+
+    const [expanded, setExpanded] = useState(false);
+
     const handleNavigate = (view: string) => {
-        onNavigate(view);
-        if (!isCollapsed) {
-            onToggle();
+        if (view === "") {
+            setExpanded(!expanded);
+        } else {
+            onNavigate(view);
+            setExpanded(false);
         }
     };
 
     return (
-        <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
-            <button className="expand-button" onClick={onToggle}>
-                {isCollapsed ? "☰" : "✕"}
+        <div className={`sidebar ${expanded ? "expanded" : ""}`}>
+            <button className="expand-button" onClick={() => handleNavigate("")}>
+                {expanded ? "✕" : "☰"}
             </button>
 
-            <HomeButton onClick={() => handleNavigate("home")} isCollapsed={isCollapsed} />
-            <WorkoutButton onClick={() => handleNavigate("workout")} isCollapsed={isCollapsed} />
-            <GymButton onClick={() => handleNavigate("gym")} isCollapsed={isCollapsed} />
-            <ProfileButton onClick={() => handleNavigate("profile")} isCollapsed={isCollapsed} />
-            <SettingsButton onClick={() => handleNavigate("settings")} isCollapsed={isCollapsed} />
+            <HomeButton onClick={() => handleNavigate("home")} isCollapsed={!expanded} />
+            <WorkoutButton onClick={() => handleNavigate("workout")} isCollapsed={!expanded} />
+            <GymButton onClick={() => handleNavigate("gym")} isCollapsed={!expanded} />
+            <ProfileButton onClick={() => handleNavigate("profile")} isCollapsed={!expanded} />
+            <SettingsButton onClick={() => handleNavigate("settings")} isCollapsed={!expanded} />
         </div>
     );
 };
