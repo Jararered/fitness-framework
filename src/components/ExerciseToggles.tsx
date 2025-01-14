@@ -1,7 +1,8 @@
 import { useCallback } from "react";
 import { FaCheck, FaDumbbell } from "react-icons/fa";
 
-import { Exercise, DefaultExercises } from "../interfaces/Exercise";
+import { Exercise } from "../interfaces/Exercise";
+import { DefaultExercises } from "../interfaces/Defaults";
 import LocalStorage, { Keys } from "../interfaces/Storage";
 
 const ExerciseToggles = () => {

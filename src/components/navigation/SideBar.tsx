@@ -32,11 +32,11 @@ const SideBar: React.FC<SideBarProps> = ({ setContent }) => {
             </button>
 
             <div className="icon-button" onClick={() => handleNavigate("home")}>
-                <FaHome size={24}/>
+                <FaHome size={24} />
                 <h2>{expanded && "Home"}</h2>
             </div>
             <div className="icon-button" onClick={() => handleNavigate("workout")}>
-                <FaDumbbell size={24}/>
+                <FaDumbbell size={24} />
                 <h2>{expanded && "Workout"}</h2>
             </div>
             <div className="icon-button" onClick={() => handleNavigate("gym")}>
