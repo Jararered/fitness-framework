@@ -21,19 +21,15 @@ const ManageData = () => {
         <div className="manage-data">
             <h2>Manage Data</h2>
 
-            <div>
+            <div className="flex">
                 <button className="bad" onClick={handleClearUserSettings}>
                     Reset User Settings
                 </button>
-            </div>
 
-            <div>
                 <button className="bad" onClick={handleClearTimingSettings}>
                     Reset Timing Settings
                 </button>
-            </div>
 
-            <div>
                 <button className="bad" onClick={handleClearAllData}>
                     Clear All Data
                 </button>
