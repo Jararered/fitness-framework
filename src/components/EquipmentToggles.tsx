@@ -1,8 +1,9 @@
 import { useCallback } from "react";
 import { FaCheck } from "react-icons/fa";
 
-import { DefaultEquipment, Equipment, GetIconForEquipment } from "../interfaces/Equipment"
+import { Equipment, GetIconForEquipment } from "../interfaces/Equipment"
 import LocalStorage, { Keys } from "../interfaces/Storage";
+import { DefaultEquipment } from "../interfaces/Defaults";
 
 const EquipmentToggles: React.FC = () => {
     const [equipment, setEquipment] = LocalStorage<Equipment[]>(Keys.Equipment, DefaultEquipment);
