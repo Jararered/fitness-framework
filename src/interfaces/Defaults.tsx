@@ -26,6 +26,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -36,6 +43,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -46,6 +60,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -56,6 +77,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -66,6 +94,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -76,6 +111,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -86,6 +128,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -96,6 +145,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -106,6 +162,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -116,6 +179,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -126,6 +196,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -136,6 +213,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -146,6 +230,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -156,6 +247,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -166,6 +264,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -176,6 +281,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -186,6 +298,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -196,6 +315,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -206,6 +332,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -216,6 +349,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -226,6 +366,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -236,6 +383,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -246,6 +400,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -256,6 +417,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -266,6 +434,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -276,6 +451,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -286,6 +468,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -296,6 +485,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -306,6 +502,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -316,6 +519,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -326,6 +536,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -336,6 +553,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -346,6 +570,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -356,6 +587,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -366,6 +604,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -376,6 +621,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -386,6 +638,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -396,6 +655,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -406,6 +672,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -416,6 +689,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -426,6 +706,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -436,6 +723,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -446,6 +740,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -456,6 +757,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -466,6 +774,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -476,6 +791,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -486,6 +808,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -496,6 +825,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -506,6 +842,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
     {
@@ -516,6 +859,13 @@ export const DefaultExercises: Exercise[] = [
         },
         config: {
             enabled: true
+        },
+        plan: {
+            sets: []
+        },
+        active: {
+            sets: [],
+            weight: 0
         }
     },
 ];

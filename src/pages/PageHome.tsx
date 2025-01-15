@@ -18,7 +18,7 @@ const PageHome = () => {
                     </button>
 
                     <button className="bad">
-                        Delete Workout
+                        Clear Workout
                     </button>
                 </div>
             </div>
