@@ -1,4 +1,4 @@
-import { EquipmentName } from "./Equipment";
+import { EquipmentName, Equipment } from "./Equipment";
 
 export type ExerciseName =
     "Barbell Bench Press" |
@@ -145,3 +145,10 @@ export interface Exercise {
     plan?: ExercisePlan; // Only while setting up a workout
     active?: ExerciseActive; // Only used during a workout
 }
+
+export const GetAvaliableExercises = (exercises: Exercise[], equipment: Equipment[]): ExerciseName[] => {
+    const enabledEquipment = equipment.filter(e => e.config.enabled).map(e => e.name);
+    return exercises
+        .filter(exercise => exercise.config?.enabled && exercise.info?.equipment && enabledEquipment.includes(exercise.info.equipment))
+        .map(exercise => exercise.name);
+};
