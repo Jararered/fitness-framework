@@ -1,9 +1,12 @@
-import { Workout } from "../interfaces/Workout";
-import { LegsExampleWorkout } from "../interfaces/Examples";
+import { NullWorkout, Workout } from "../interfaces/Workout";
 import LocalStorage, { Keys } from "../interfaces/Storage";
 
-const WorkoutPreview: React.FC = () => {
-    const [workout] = LocalStorage<Workout>(Keys.Workout, LegsExampleWorkout);
+const PreviewWorkout: React.FC = () => {
+    const [workout] = LocalStorage<Workout>(Keys.Workout, NullWorkout);
+
+    const handleDisplaySets = (sets: number[]) => {
+        return sets.join(", ");
+    };
 
     return (
         <div className="workout-preview">
@@ -21,7 +24,7 @@ const WorkoutPreview: React.FC = () => {
                         {circuit.map((exercise, exerciseIndex) => (
                             <div className="flex" key={exerciseIndex}>
                                 <b>{exercise.name}</b>
-                                <p>{exercise.plan?.sets.join(', ')} sets</p>
+                                <p>{exercise.sets.join(", ")} reps</p>
                             </div>
                         ))}
 
@@ -32,4 +35,4 @@ const WorkoutPreview: React.FC = () => {
     );
 };
 
-export default WorkoutPreview;
+export default PreviewWorkout;

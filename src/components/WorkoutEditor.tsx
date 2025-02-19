@@ -77,9 +77,9 @@ const WorkoutEditor = () => {
 
                     {circuit.map((exerciseList, exerciseIndex) => (
                         <div className="flex" key={exerciseIndex}>
-                            <div className="flex">
+                            <div className="vertical">
                                 <h4>{exerciseList.name}</h4>
-                                <p>{exerciseList.plan?.sets ? FormatSets(exerciseList.plan.sets) : ""} reps</p>
+                                <p>{exerciseList.sets ? FormatSets(exerciseList.sets) : ""} reps</p>
                             </div>
 
                             <div>

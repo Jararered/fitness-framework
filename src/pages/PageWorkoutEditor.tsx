@@ -1,7 +1,7 @@
 import WorkoutEditor from "../components/WorkoutEditor";
-import CircuitEditor from "../components/CircuitEditor";
+import CircuitCreator from "../components/CircuitCreator";
 
-const PageWorkout: React.FC = () => {
+const PageWorkoutEditor: React.FC = () => {
     return (
         <div className="page-workout">
 
@@ -12,11 +12,11 @@ const PageWorkout: React.FC = () => {
             </div>
 
             <div className="card">
-                <CircuitEditor />
+                <CircuitCreator />
             </div>
 
         </div>
     );
 };
 
-export default PageWorkout;
+export default PageWorkoutEditor;

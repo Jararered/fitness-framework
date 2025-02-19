@@ -5,7 +5,7 @@ export type Circuit = Exercise[];
 export type WorkoutState =
     "preview" |
     "started" |
-    "paused" |
+    "break" |
     "completed";
 
 export interface WorkoutIndexer {
@@ -21,13 +21,13 @@ export interface WorkoutTime {
 export interface Workout {
     name: string;
     circuits: Circuit[];
+    time: WorkoutTime;
 
     state: WorkoutState;
     indexer: WorkoutIndexer;
-    time: WorkoutTime;
 }
 
-export const EmptyWorkout: Workout = {
+export const NullWorkout: Workout = {
     name: "",
     circuits: [],
     state: "preview",

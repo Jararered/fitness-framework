@@ -6,7 +6,7 @@ export const LegsExampleWorkout: Workout = {
         [
             {
                 name: "Barbell Squat",
-                plan: { sets: [10, 10, 10] },
+                sets: [10, 10, 10],
                 info: {
                     equipment: "Barbell + Squat Rack",
                     category: "Legs"
@@ -21,7 +21,7 @@ export const LegsExampleWorkout: Workout = {
             },
             {
                 name: "Leg Press",
-                plan: { sets: [10, 10, 10] },
+                sets: [10, 10, 10],
                 info: {
                     equipment: "Leg Press Machine",
                     category: "Legs"
@@ -36,7 +36,7 @@ export const LegsExampleWorkout: Workout = {
             },
             {
                 name: "Leg Curl",
-                plan: { sets: [10, 10, 10] },
+                sets: [10, 10, 10],
                 info: {
                     equipment: "Leg Curl Machine",
                     category: "Legs"
@@ -51,7 +51,7 @@ export const LegsExampleWorkout: Workout = {
             },
             {
                 name: "Leg Extension",
-                plan: { sets: [10, 10, 10] },
+                sets: [10, 10, 10],
                 info: {
                     equipment: "Leg Extension Machine",
                     category: "Legs"
@@ -68,7 +68,7 @@ export const LegsExampleWorkout: Workout = {
         [
             {
                 name: "Leg Curl + Isometric Hold",
-                plan: { sets: [10, 10, 10] },
+                sets: [10, 10, 10],
                 info: {
                     equipment: "Leg Curl Machine",
                     category: "Legs"
@@ -83,7 +83,7 @@ export const LegsExampleWorkout: Workout = {
             },
             {
                 name: "Leg Extension + Isometric Hold",
-                plan: { sets: [10, 10, 10] },
+                sets: [10, 10, 10],
                 info: {
                     equipment: "Leg Extension Machine",
                     category: "Legs"

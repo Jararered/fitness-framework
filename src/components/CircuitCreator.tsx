@@ -4,14 +4,14 @@ import { DefaultExercises, DefaultEquipment } from "../interfaces/Defaults";
 
 import LocalStorage, { Keys } from "../interfaces/Storage";
 
-const CircuitEditor: React.FC = () => {
+const CircuitCreator: React.FC = () => {
     const [exercises] = LocalStorage<Exercise[]>(Keys.Exercises, DefaultExercises);
     const [equipment] = LocalStorage<Equipment[]>(Keys.Equipment, DefaultEquipment);
 
     return (
-        <div className="circuit-editor">
+        <div className="circuit-creator">
 
-            <h2>Circuit Editor</h2>
+            <h2>Circuit Creator</h2>
 
             <div className="flex">
 
@@ -51,5 +51,5 @@ const CircuitEditor: React.FC = () => {
     );
 };
 
-export default CircuitEditor;
+export default CircuitCreator;
 

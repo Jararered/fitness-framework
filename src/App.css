@@ -8,19 +8,12 @@
 body {
     margin: 0;
     padding: 0;
-    margin-bottom: 5rem;
+    overflow: hidden;
 
     color: #333;
     background-color: #f2f2f7;
     background-image: radial-gradient(circle, #d2d2d2 0.0625rem, transparent 0.1rem);
     background-size: 2.5rem 2.5rem;
-
-    overflow: hidden;
-    height: 100%;
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
 }
 
 p {
@@ -104,13 +97,23 @@ h2 {
 
 .main-content {
     margin-left: 5rem;
-    overflow-y: auto;
     height: 100vh;
 }
 
+
+.bottom-padding {
+    height: 0;
+}
+
+
 @media (max-width: 768px) {
     .main-content {
-        height: 90vh;
         margin-left: 0;
+        padding-bottom: 10rem;
+        overflow-y: auto;
+    }
+    .bottom-padding {
+        height: 5rem;
     }
 }
+

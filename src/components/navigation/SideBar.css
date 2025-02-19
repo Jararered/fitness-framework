@@ -4,12 +4,14 @@
 
     padding: 10px 10px;
 
-    background-color: #f8f8f8;
+    background-color: #ffffff;
     color: #333;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 
     z-index: 2000;
     position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .sidebar .icon-button {
@@ -44,10 +46,10 @@
     font-size: 2rem;
     color: #007aff;
     box-shadow: none;
-    border-radius: 1rem;
+    border-radius: 2rem;
 }
 
 .expand-button:hover {
-    background: #62aeff;
+    background: #007aff;
     color: #ffffff;
 }

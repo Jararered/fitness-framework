@@ -127,23 +127,13 @@ export interface ExerciseConfig {
 export type Reps = number;
 export type Sets = Reps[];
 
-export interface ExercisePlan {
-    sets: Sets;
-}
-
-export interface ExerciseActive {
-    sets: Sets;
-    weight: number;
-}
-
 export interface Exercise {
     name: ExerciseName; // Name of the exercise
 
     info: ExerciseInfo; // Preset data about the exercise
     config: ExerciseConfig; // User configuration for the exercise
 
-    plan: ExercisePlan; // Only while setting up a workout
-    active: ExerciseActive; // Only used during a workout
+    sets: Sets; // Only while setting up a workout
 }
 
 export const GetAvaliableExercises = (exercises: Exercise[], equipment: Equipment[]): ExerciseName[] => {

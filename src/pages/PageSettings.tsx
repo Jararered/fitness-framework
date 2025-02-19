@@ -1,13 +1,14 @@
 import UserSettings from "../components/UserSettings";
 import TimingSettings from "../components/TimingSettings";
 import ManageData from "../components/ManageData";
+import DebugSettings from "../components/DebugSettings";
 
-const PagePreferences: React.FC = () => {
+const PageSettings: React.FC = () => {
 
     return (
-        <div className="page-preferences">
+        <div className="page-settings">
 
-            <h1>Preferences</h1>
+            <h1>Settings</h1>
 
             <div className="card">
                 <UserSettings />
@@ -21,8 +22,12 @@ const PagePreferences: React.FC = () => {
                 <ManageData />
             </div>
 
+            <div className="card">
+                <DebugSettings />
+            </div>
+
         </div>
     );
 };
 
-export default PagePreferences;
+export default PageSettings;
