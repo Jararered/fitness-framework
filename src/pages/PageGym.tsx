@@ -1,5 +1,5 @@
 import EquipmentToggles from "../components/EquipmentToggles";
-import ExerciseToggles from "../components/ExerciseToggles";
+// import ExerciseToggles from "../components/ExerciseToggles";
 
 const PageGym = () => {
     return (
@@ -11,9 +11,9 @@ const PageGym = () => {
                 <EquipmentToggles />
             </div>
 
-            <div className="card">
+            {/* <div className="card">
                 <ExerciseToggles />
-            </div>
+            </div> */}
 
         </div>
     );

@@ -18,11 +18,15 @@ const PageHome = ({ setPage }: SetPageProps) => {
         newWorkout.indexer.circuitIndex = 0;
         newWorkout.indexer.exerciseIndex = 0;
 
-        // Set the start time
-        newWorkout.time.start = new Date();
+        // Set the start time as ISO string for consistent serialization
+        newWorkout.time.start = new Date().toISOString();
 
         setWorkout(newWorkout);
         setTimeout(() => setPage("circuit-preview"), 0);
+    };
+
+    const handleClearWorkout = () => {
+        setWorkout(NullWorkout);
     };
 
     return (
@@ -34,7 +38,7 @@ const PageHome = ({ setPage }: SetPageProps) => {
                     <button onClick={handleStartWorkout}>
                         Start Workout
                     </button>
-                    <button className="bad">
+                    <button className="bad" onClick={handleClearWorkout}>
                         Clear Workout
                     </button>
                 </div>

@@ -98,13 +98,20 @@ h2 {
 .main-content {
     margin-left: 5rem;
     height: 100vh;
+    overflow-y: auto;
+    padding-bottom: 2rem; /* Add padding to prevent content from being cut off */
 }
-
 
 .bottom-padding {
     height: 0;
 }
 
+.scroll-container {
+    max-height: calc(100vh - 20rem); /* Account for header and buttons */
+    overflow-y: auto;
+    margin: 1rem 0;
+    padding-right: 1rem; /* Add space for scroll bar */
+}
 
 @media (max-width: 768px) {
     .main-content {
@@ -114,6 +121,13 @@ h2 {
     }
     .bottom-padding {
         height: 5rem;
+    }
+    .scroll-container {
+        max-height: calc(100vh - 25rem); /* Adjust for mobile spacing */
+    }
+
+    .page-workout-complete {
+        padding-bottom: 5rem; /* Add extra padding for mobile */
     }
 }
 
