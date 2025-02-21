@@ -15,11 +15,11 @@ const PreviewCircuit: React.FC<CircuitPreviewProps> = ({ circuitIndex: index, ci
                 {circuit.map((exercise, index) => (
                     <li key={index}>
 
-                        <h3>{exercise.name}</h3>
+                        <h3>{exercise.plan.name}</h3>
 
-                        {exercise.sets && (
+                        {exercise.plan.sets && (
                             <div>
-                                <p>Sets: {exercise.sets.join(", ")} reps</p>
+                                <p>Sets: {exercise.plan.sets.join(", ")} reps</p>
                             </div>
                         )}
 

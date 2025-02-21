@@ -1,6 +1,6 @@
-import { Workout } from "./Workout";
+import { WorkoutPlan } from "./Workout";
 
-export const LegsExampleWorkout: Workout = {
+export const LegDayPlan: WorkoutPlan = {
     name: "Leg Day",
     circuits: [
         [
@@ -79,14 +79,5 @@ export const LegsExampleWorkout: Workout = {
 
             }
         ]
-    ],
-    state: "preview",
-    indexer: {
-        circuitIndex: 0,
-        exerciseIndex: 0
-    },
-    time: {
-        start: new Date(),
-        end: new Date()
-    }
+    ]
 };

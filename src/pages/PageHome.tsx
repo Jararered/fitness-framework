@@ -1,12 +1,12 @@
 import UserGreeting from "../components/UserGreeting";
 import PreviewWorkout from "../components/PreviewWorkout";
 import LocalStorage, { Keys } from "../interfaces/Storage";
-import { NullWorkout, Workout } from "../interfaces/Workout";
+import { NewWorkoutActive, WorkoutActive } from "../interfaces/Workout";
 import { WorkoutState } from "../interfaces/Workout";
 import { SetPageProps } from "../App";
 
 const PageHome = ({ setPage }: SetPageProps) => {
-    const [workout, setWorkout] = LocalStorage<Workout>(Keys.Workout, NullWorkout);
+    const [workout, setWorkout] = LocalStorage<WorkoutActive>(Keys.Workout, NewWorkoutActive);
 
     const handleStartWorkout = () => {
         const newWorkout = { ...workout };
@@ -26,7 +26,7 @@ const PageHome = ({ setPage }: SetPageProps) => {
     };
 
     const handleClearWorkout = () => {
-        setWorkout(NullWorkout);
+        setWorkout(NewWorkoutActive);
     };
 
     return (

@@ -1,22 +1,34 @@
 import LocalStorage, { Keys } from "../interfaces/Storage";
 
-import { Workout } from "../interfaces/Workout";
-import { LegsExampleWorkout } from "../interfaces/Examples";
+import { NewWorkoutActive, WorkoutActive, WorkoutPlan } from "../interfaces/Workout";
+import { LegDayPlan } from "../interfaces/Examples";
 
 const DebugSettings = () => {
-    const [workout, setWorkout] = LocalStorage<Workout>(Keys.Workout, LegsExampleWorkout);
+    const [workout, setWorkout] = LocalStorage<WorkoutActive>(Keys.Workout, NewWorkoutActive);
 
-    const handleLoadExampleWorkout = () => {
-        setWorkout(LegsExampleWorkout);
+    const handleLoadWorkout = (workoutPlan: WorkoutPlan) => {
+        const newWorkoutActive: WorkoutActive = {
+            plan: workoutPlan,
+            time: {
+                start: new Date(),
+                end: new Date(),
+            },
+            state: "preview",
+            indexer: {
+                circuitIndex: 0,
+                exerciseIndex: 0,
+            },
+        };
+
+        setWorkout(newWorkoutActive);
     }
 
     return (
         <div className="debug-settings">
-
             <h2>Debug Settings</h2>
-
-            <button onClick={handleLoadExampleWorkout}>Load Example Workout</button>
-
+            <button onClick={() => handleLoadWorkout(LegDayPlan)}>
+                Load Leg Day Workout
+            </button>
         </div>
     );
 }

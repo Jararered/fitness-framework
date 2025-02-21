@@ -18,25 +18,36 @@ export interface WorkoutTime {
     end: Date;
 }
 
-export interface Workout {
+export interface WorkoutPlan {
     name: string;
     circuits: Circuit[];
-    time: WorkoutTime;
+}
 
+export interface WorkoutLog {
+    workout: WorkoutPlan;
+    time: WorkoutTime;
+}
+
+export interface WorkoutActive
+{
+    plan: WorkoutPlan;
+    time: WorkoutTime;
     state: WorkoutState;
     indexer: WorkoutIndexer;
 }
 
-export const NullWorkout: Workout = {
-    name: "",
-    circuits: [],
-    state: "preview",
-    indexer: {
-        circuitIndex: 0,
-        exerciseIndex: 0
+export const NewWorkoutActive: WorkoutActive = {
+    plan: {
+        name: "",
+        circuits: []
     },
     time: {
         start: new Date(),
         end: new Date()
+    },
+    state: "preview",
+    indexer: {
+        circuitIndex: 0,
+        exerciseIndex: 0
     }
 };

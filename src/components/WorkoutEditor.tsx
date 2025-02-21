@@ -1,10 +1,10 @@
-import { Workout, Circuit } from "../interfaces/Workout";
-import { LegsExampleWorkout } from "../interfaces/Examples";
+import { WorkoutPlan, Circuit } from "../interfaces/Workout";
+import { LegDayPlan } from "../interfaces/Examples";
 import { FormatSets } from "../utils/Formatting";
 import LocalStorage, { Keys } from "../interfaces/Storage";
 
 const WorkoutEditor = () => {
-    const [workout, setWorkout] = LocalStorage<Workout>(Keys.Workout, LegsExampleWorkout);
+    const [workout, setWorkout] = LocalStorage<WorkoutPlan>(Keys.Workout, LegDayPlan);
 
     const handleDeleteExercise = (circuitIndex: number, exerciseIndex: number) => {
         const newWorkout = { ...workout };
@@ -55,7 +55,7 @@ const WorkoutEditor = () => {
 
             <h2>Workout Editor</h2>
 
-            {workout.circuits.map((circuit: Circuit, circuitIndex: number) => (
+            {workout.circuits?.map((circuit: Circuit, circuitIndex: number) => (
                 <div key={circuitIndex}>
                     <div className="flex">
                         <h3>Circuit {circuitIndex + 1}</h3>
@@ -97,10 +97,7 @@ const WorkoutEditor = () => {
                             </div>
                         </div>
                     ))}
-
-
                 </div>
-
             ))}
         </div >
     );

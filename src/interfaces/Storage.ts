@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 
 export const Keys = {
-    Equipment: "equipment",
-    Exercises: "exercises",
-    TimingSettings: "timing-settings",
-    UserSettings: "user-settings",
-    Workout: "workout",
+    Equipment: "equipment", // All Equipment toggles
+    Exercises: "exercises", // All exercises and their equipment requirements
+    TimingSettings: "timing-settings", // Rest times
+    UserSettings: "user-settings", // User name, weight, units
+    Workout: "workout", // Active loaded workout
+    WorkoutPlan: "workout-plan", // Active workout plan
+    WorkoutLog: "workout-log", // Completed workouts
+    SavedWorkouts: "saved-workouts", // Saved workouts
+    SavedGyms: "saved-gyms", // Saved gyms
+    Theme: "theme", // Dark or Light theme
 }
 
 function LocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {

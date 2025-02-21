@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-// Navigation
-import SideBar from "./components/navigation/SideBar";
-import DockBar from "./components/navigation/DockBar";
+import { DockBar, SideBar } from "./components/Navigation";
 
 // Pages
 import PageHome from "./pages/PageHome";

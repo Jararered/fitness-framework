@@ -132,16 +132,20 @@ export interface ActiveSet {
     weight: number;
 }
 
+export interface ExercisePlan {
+    name: ExerciseName;
+    sets: Sets;
+}
+
 export interface Exercise {
-    name: ExerciseName; // Name of the exercise
+    plan: ExercisePlan; // User configuration for the exercise
     info: ExerciseInfo; // Preset data about the exercise
     config: ExerciseConfig; // User configuration for the exercise
-    sets: Sets; // Planned sets/reps
 }
 
 export const GetAvaliableExercises = (exercises: Exercise[], equipment: Equipment[]): ExerciseName[] => {
     const enabledEquipment = equipment.filter(e => e.config.enabled).map(e => e.name);
     return exercises
         .filter(exercise => exercise.config?.enabled && exercise.info?.equipment && enabledEquipment.includes(exercise.info.equipment))
-        .map(exercise => exercise.name);
+        .map(exercise => exercise.plan.name);
 };
