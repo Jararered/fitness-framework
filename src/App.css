@@ -109,15 +109,13 @@ h2 {
     padding-right: 1rem; /* Add space for scroll bar */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 50rem) {
     .main-content {
         margin-left: 0;
         padding-bottom: 10rem;
         overflow-y: auto;
     }
-    .bottom-padding {
-        height: 5rem;
-    }
+
     .scroll-container {
         max-height: calc(100vh - 25rem); /* Adjust for mobile spacing */
     }
