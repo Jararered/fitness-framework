@@ -11,13 +11,6 @@ import PageGym from "./pages/PageGym";
 import PageProfile from "./pages/PageProfile";
 import PageSettings from "./pages/PageSettings";
 
-import PageCircuitBreak from "./pages/active/PageCircuitBreak";
-import PageCircuitPreview from "./pages/active/PageCircuitPreview";
-import PageExercise from "./pages/active/PageExercise";
-import PageExerciseBreak from "./pages/active/PageExerciseBreak";
-import PageWorkoutComplete from "./pages/active/PageWorkoutComplete";
-
-
 // Styles
 import "./App.css";
 import "./styles/button.css";
@@ -46,18 +39,6 @@ const App: React.FC = () => {
             case "settings":
                 return <PageSettings />;
 
-
-            case "circuit-break":
-                return <PageCircuitBreak setPage={setPage} />;
-            case "circuit-preview":
-                return <PageCircuitPreview setPage={setPage} />;
-            case "exercise-break":
-                return <PageExerciseBreak setPage={setPage} />;
-            case "workout-complete":
-                return <PageWorkoutComplete setPage={setPage} />;
-            case "exercise":
-                return <PageExercise setPage={setPage} />;
-
             default:
                 return <PageHome setPage={setPage} />;
         }
@@ -69,9 +50,6 @@ const App: React.FC = () => {
 
             <div className="main-content">
                 {renderMainContent()}
-            </div>
-
-            <div className="bottom-padding">
             </div>
 
             <DockBar setContent={setPage} />

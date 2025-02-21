@@ -102,10 +102,6 @@ h2 {
     padding-bottom: 2rem; /* Add padding to prevent content from being cut off */
 }
 
-.bottom-padding {
-    height: 0;
-}
-
 .scroll-container {
     max-height: calc(100vh - 20rem); /* Account for header and buttons */
     overflow-y: auto;

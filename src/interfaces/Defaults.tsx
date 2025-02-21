@@ -27,11 +27,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Bent-Over Row",
@@ -42,11 +38,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Curl",
@@ -57,11 +49,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Deadlift",
@@ -72,11 +60,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Decline Bench Press",
@@ -87,11 +71,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Front Squat",
@@ -102,11 +82,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Incline Bench Press",
@@ -117,11 +93,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Lunge",
@@ -132,11 +104,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Overhead Press",
@@ -147,11 +115,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Romanian Deadlift",
@@ -162,11 +126,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Squat",
@@ -177,11 +137,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Barbell Sumo Deadlift",
@@ -192,11 +148,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Bent-Over Row",
@@ -207,11 +159,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Bicep Curl",
@@ -222,11 +170,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Front Raise",
@@ -237,11 +181,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Hammer Curl",
@@ -252,11 +192,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Lateral Raise",
@@ -267,11 +203,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Lunges",
@@ -282,11 +214,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Shoulder Press",
@@ -297,11 +225,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Shrugs",
@@ -312,11 +236,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Single-Arm Row",
@@ -327,11 +247,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Skull Crushers",
@@ -342,11 +258,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Tricep Extension",
@@ -357,11 +269,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Dumbbell Upright Row",
@@ -372,11 +280,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "EZ Bar Close-Grip Curl",
@@ -387,11 +291,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "EZ Bar Curl",
@@ -402,11 +302,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "EZ Bar Skull Crusher",
@@ -417,11 +313,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "EZ Bar Wide-Grip Curl",
@@ -432,11 +324,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Lat Pulldown",
@@ -447,11 +335,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Lat Pulldown Behind-the-Head",
@@ -462,11 +346,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Lat Pulldown Narrow-Grip",
@@ -477,11 +357,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Lat Pulldown Reverse-Grip",
@@ -492,11 +368,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Lat Pulldown Single-Arm",
@@ -507,11 +379,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Lat Pulldown Wide-Grip",
@@ -522,11 +390,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Leg Curl",
@@ -537,11 +401,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Leg Curl + Isometric Hold",
@@ -552,11 +412,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Leg Extension",
@@ -567,11 +423,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Leg Extension + Isometric Hold",
@@ -582,11 +434,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Leg Press",
@@ -597,11 +445,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Machine Chest Press",
@@ -612,11 +456,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Machine Incline Chest Press",
@@ -627,11 +467,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Machine Shoulder Press",
@@ -642,11 +478,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Smith Machine Bench Press",
@@ -657,11 +489,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Smith Machine Bent-Over Row",
@@ -672,11 +500,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Smith Machine Close-Grip Bench Press",
@@ -687,11 +511,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Smith Machine Incline Bench Press",
@@ -702,11 +522,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Smith Machine Lunges",
@@ -717,11 +533,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Smith Machine Shoulder Press",
@@ -732,11 +544,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Smith Machine Shrugs",
@@ -747,11 +555,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
     {
         name: "Smith Machine Squat",
@@ -762,11 +566,7 @@ export const DefaultExercises: Exercise[] = [
         config: {
             enabled: true
         },
-        sets: [],
-        active: {
-            sets: [],
-            currentSet: 0
-        }
+        sets: []
     },
 ];
 

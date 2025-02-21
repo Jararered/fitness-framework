@@ -137,10 +137,6 @@ export interface Exercise {
     info: ExerciseInfo; // Preset data about the exercise
     config: ExerciseConfig; // User configuration for the exercise
     sets: Sets; // Planned sets/reps
-    active: {
-        sets: ActiveSet[];
-        currentSet: number;
-    };
 }
 
 export const GetAvaliableExercises = (exercises: Exercise[], equipment: Equipment[]): ExerciseName[] => {

@@ -19,7 +19,7 @@ const PageHome = ({ setPage }: SetPageProps) => {
         newWorkout.indexer.exerciseIndex = 0;
 
         // Set the start time as ISO string for consistent serialization
-        newWorkout.time.start = new Date().toISOString();
+        newWorkout.time.start = new Date();
 
         setWorkout(newWorkout);
         setTimeout(() => setPage("circuit-preview"), 0);

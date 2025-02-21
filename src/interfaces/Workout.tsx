@@ -14,8 +14,8 @@ export interface WorkoutIndexer {
 }
 
 export interface WorkoutTime {
-    start: string; // ISO date string
-    end: string;   // ISO date string
+    start: Date;
+    end: Date;
 }
 
 export interface Workout {
@@ -36,7 +36,7 @@ export const NullWorkout: Workout = {
         exerciseIndex: 0
     },
     time: {
-        start: new Date().toISOString(),
-        end: new Date().toISOString()
+        start: new Date(),
+        end: new Date()
     }
 };

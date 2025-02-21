@@ -13,11 +13,8 @@ export const LegsExampleWorkout: Workout = {
                 },
                 config: {
                     enabled: true
-                },
-                active: {
-                    sets: [0, 0, 0],
-                    weight: 0
                 }
+
             },
             {
                 name: "Leg Press",
@@ -28,11 +25,8 @@ export const LegsExampleWorkout: Workout = {
                 },
                 config: {
                     enabled: true
-                },
-                active: {
-                    sets: [0, 0, 0],
-                    weight: 0
                 }
+
             },
             {
                 name: "Leg Curl",
@@ -43,11 +37,8 @@ export const LegsExampleWorkout: Workout = {
                 },
                 config: {
                     enabled: true
-                },
-                active: {
-                    sets: [0, 0, 0],
-                    weight: 0
                 }
+
             },
             {
                 name: "Leg Extension",
@@ -58,11 +49,8 @@ export const LegsExampleWorkout: Workout = {
                 },
                 config: {
                     enabled: true
-                },
-                active: {
-                    sets: [0, 0, 0],
-                    weight: 0
                 }
+
             }
         ],
         [
@@ -75,11 +63,8 @@ export const LegsExampleWorkout: Workout = {
                 },
                 config: {
                     enabled: true
-                },
-                active: {
-                    sets: [0, 0, 0],
-                    weight: 0
                 }
+
             },
             {
                 name: "Leg Extension + Isometric Hold",
@@ -90,11 +75,8 @@ export const LegsExampleWorkout: Workout = {
                 },
                 config: {
                     enabled: true
-                },
-                active: {
-                    sets: [0, 0, 0],
-                    weight: 0
                 }
+
             }
         ]
     ],

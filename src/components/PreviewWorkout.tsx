@@ -4,10 +4,6 @@ import LocalStorage, { Keys } from "../interfaces/Storage";
 const PreviewWorkout: React.FC = () => {
     const [workout] = LocalStorage<Workout>(Keys.Workout, NullWorkout);
 
-    const handleDisplaySets = (sets: number[]) => {
-        return sets.join(", ");
-    };
-
     return (
         <div className="workout-preview">
 
