@@ -25,19 +25,19 @@ export interface Equipment {
 }
 
 export const EquipmentIcons: { [K in EquipmentName]: JSX.Element } = {
-    "Barbell": <FaDumbbell size={48} />,
-    "Barbell + Bench": <FaDumbbell size={48} />,
-    "Barbell + Squat Rack": <FaDumbbell size={48} />,
-    "Chest Press Machine": <FaDumbbell size={48} />,
-    "Dumbells": <FaDumbbell size={48} />,
-    "EZ Bar": <FaDumbbell size={48} />,
-    "EZ Bar + Bench": <FaDumbbell size={48} />,
-    "Lat Pulldown Machine": <FaDumbbell size={48} />,
-    "Leg Curl Machine": <FaDumbbell size={48} />,
-    "Leg Extension Machine": <FaDumbbell size={48} />,
-    "Leg Press Machine": <FaDumbbell size={48} />,
-    "Smith Machine": <FaDumbbell size={48} />,
-    "Smith Machine + Bench": <FaDumbbell size={48} />
+    "Barbell": <FaDumbbell size={40} />,
+    "Barbell + Bench": <FaDumbbell size={40} />,
+    "Barbell + Squat Rack": <FaDumbbell size={40} />,
+    "Chest Press Machine": <FaDumbbell size={40} />,
+    "Dumbells": <FaDumbbell size={40} />,
+    "EZ Bar": <FaDumbbell size={40} />,
+    "EZ Bar + Bench": <FaDumbbell size={40} />,
+    "Lat Pulldown Machine": <FaDumbbell size={40} />,
+    "Leg Curl Machine": <FaDumbbell size={40} />,
+    "Leg Extension Machine": <FaDumbbell size={40} />,
+    "Leg Press Machine": <FaDumbbell size={40} />,
+    "Smith Machine": <FaDumbbell size={40} />,
+    "Smith Machine + Bench": <FaDumbbell size={40} />
 };
 
 export const GetIconForEquipment = (equipment: EquipmentName) => {

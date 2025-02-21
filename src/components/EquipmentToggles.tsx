@@ -5,6 +5,20 @@ import { Equipment, GetIconForEquipment } from "../interfaces/Equipment"
 import LocalStorage, { Keys } from "../interfaces/Storage";
 import { DefaultEquipment } from "../interfaces/Defaults";
 
+import "./EquipmentToggle.css"
+
+const EquipmentToggle = ({ equipment, handleEquipmentToggle }: { equipment: Equipment, handleEquipmentToggle: (name: string) => void }) => {
+    return (
+        <div className={`equipment-toggle ${equipment.config.enabled ? "enabled" : ""}`}
+            onClick={() => handleEquipmentToggle(equipment.name)}
+        >
+            <div className="icon">{GetIconForEquipment(equipment.name)}</div>
+            <div className="name">{equipment.name}</div>
+            <div className="check">{equipment.config.enabled && <FaCheck size={18} />}</div>
+        </div>
+    );
+}
+
 const EquipmentToggles: React.FC = () => {
     const [equipment, setEquipment] = LocalStorage<Equipment[]>(Keys.Equipment, DefaultEquipment);
 
@@ -24,15 +38,8 @@ const EquipmentToggles: React.FC = () => {
             <h2>Equipment Toggles</h2>
 
             <div className="flex">
-                {equipment?.map(equipment => (
-                    <div className={`small-card ${equipment.config.enabled ? "enabled" : ""}`}
-                        key={equipment.name}
-                        onClick={() => handleEquipmentToggle(equipment.name)}
-                    >
-                        <div className="equipment-icon">{GetIconForEquipment(equipment.name)}</div>
-                        <div className="small-card-name">{equipment.name}</div>
-                        <div className="checkmark-icon">{equipment.config.enabled && <FaCheck size={24} />}</div>
-                    </div>
+                {equipment.map((equipment, index) => (
+                    <EquipmentToggle key={index} equipment={equipment} handleEquipmentToggle={handleEquipmentToggle} />
                 ))}
             </div>
 

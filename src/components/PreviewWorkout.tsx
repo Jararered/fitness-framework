@@ -9,7 +9,9 @@ const PreviewWorkout: React.FC = () => {
 
             <h2>Workout Preview</h2>
 
-            {workout.plan.circuits.length === 0 ? (
+            {!workout.plan ? (
+                <p>No workout plan loaded.</p>
+            ) : workout.plan.circuits.length === 0 ? (
                 <p>No circuits in workout, add some in the editor.</p>
             ) : (
                 workout.plan.circuits.map((circuit, circuitIndex) => (

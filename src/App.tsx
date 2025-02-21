@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { DockBar, SideBar } from "./components/Navigation";
+import { DockBar } from "./components/Navigation";
 
 // Pages
 import PageHome from "./pages/PageHome";
@@ -13,7 +13,6 @@ import PageSettings from "./pages/PageSettings";
 import "./App.css";
 import "./styles/button.css";
 import "./styles/card.css";
-import "./styles/icon.css";
 
 
 export type SetPageProps = {
@@ -44,8 +43,6 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            <SideBar setContent={setPage} />
-
             <div className="main-content">
                 {renderMainContent()}
             </div>

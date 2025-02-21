@@ -9,24 +9,11 @@ const PageHome = ({ setPage }: SetPageProps) => {
     const [workout, setWorkout] = LocalStorage<WorkoutActive>(Keys.Workout, NewWorkoutActive);
 
     const handleStartWorkout = () => {
-        const newWorkout = { ...workout };
 
-        // Set the workout state to started
-        newWorkout.state = "started" as WorkoutState;
-
-        // Reset the indexer
-        newWorkout.indexer.circuitIndex = 0;
-        newWorkout.indexer.exerciseIndex = 0;
-
-        // Set the start time as ISO string for consistent serialization
-        newWorkout.time.start = new Date();
-
-        setWorkout(newWorkout);
-        setTimeout(() => setPage("circuit-preview"), 0);
     };
 
     const handleClearWorkout = () => {
-        setWorkout(NewWorkoutActive);
+
     };
 
     return (
