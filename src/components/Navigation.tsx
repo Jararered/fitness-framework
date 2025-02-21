@@ -1,19 +1,42 @@
 import React, { useState } from "react";
 
-import { FaMapPin } from "react-icons/fa";
-import { FaHome } from "react-icons/fa";
-import { FaDumbbell } from "react-icons/fa";
-import { FaUser } from "react-icons/fa";
-import { FaCog } from "react-icons/fa";
+import { FaHome, FaDumbbell, FaMapPin, FaUser, FaCog } from "react-icons/fa";
 
-import "./SideBar.css";
-import "./IconButton.css";
+import "./Navigation.css";
 
-interface SideBarProps {
+interface NavigateProps {
     setContent: (view: string) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ setContent }) => {
+const DockBar: React.FC<NavigateProps> = ({ setContent: setContent }) => {
+    const handleNavigate = (view: string) => {
+        setContent(view);
+    };
+
+    return (
+        <div className="dockbar">
+            <div className="icon-button" onClick={() => handleNavigate("home")}>
+                <FaHome size={24} />
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("workout")}>
+                <FaDumbbell size={24} />
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("gym")}>
+                <FaMapPin size={24} />
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("profile")}>
+                <FaUser size={24} />
+            </div>
+            <div className="icon-button" onClick={() => handleNavigate("settings")}>
+                <FaCog size={24} />
+            </div>
+        </div>
+    );
+};
+
+
+
+const SideBar: React.FC<NavigateProps> = ({ setContent }) => {
     const [expanded, setExpanded] = useState(false);
 
     const handleNavigate = (view: string) => {
@@ -55,4 +78,4 @@ const SideBar: React.FC<SideBarProps> = ({ setContent }) => {
     );
 };
 
-export default SideBar;
+export { SideBar, DockBar };
