@@ -67,15 +67,3 @@ h2 {
     font-weight: bold;
     margin: 0.5rem;
 }
-
-.main-content {
-    height: 100vh;
-    /* overflow-y: auto; */
-    
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-
-    margin-bottom: 6rem;
-}

@@ -1,0 +1,309 @@
+[
+    {
+        "name": "Barbell Bench Press",
+        "equipment": [
+            "Barbell",
+            "Flat Bench"
+        ]
+    },
+    {
+        "name": "Barbell Bent-Over Row",
+        "equipment": [
+            "Barbell"
+        ]
+    },
+    {
+        "name": "Barbell Curl",
+        "equipment": [
+            "Barbell"
+        ]
+    },
+    {
+        "name": "Barbell Deadlift",
+        "equipment": [
+            "Barbell"
+        ]
+    },
+    {
+        "name": "Barbell Decline Bench Press",
+        "equipment": [
+            "Barbell",
+            "Flat Bench"
+        ]
+    },
+    {
+        "name": "Barbell Front Squat",
+        "equipment": [
+            "Barbell"
+        ]
+    },
+    {
+        "name": "Barbell Incline Bench Press",
+        "equipment": [
+            "Barbell",
+            "Flat Bench"
+        ]
+    },
+    {
+        "name": "Barbell Lunge",
+        "equipment": [
+            "Barbell"
+        ]
+    },
+    {
+        "name": "Barbell Overhead Press",
+        "equipment": [
+            "Barbell"
+        ]
+    },
+    {
+        "name": "Barbell Romanian Deadlift",
+        "equipment": [
+            "Barbell"
+        ]
+    },
+    {
+        "name": "Barbell Squat",
+        "equipment": [
+            "Barbell"
+        ]
+    },
+    {
+        "name": "Barbell Sumo Deadlift",
+        "equipment": [
+            "Barbell"
+        ]
+    },
+    {
+        "name": "Dumbbell Bent-Over Row",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Bicep Curl",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Front Raise",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Hammer Curl",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Lateral Raise",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Lunges",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Shoulder Press",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Shrugs",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Single-Arm Row",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Skull Crushers",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Tricep Extension",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "Dumbbell Upright Row",
+        "equipment": [
+            "Dumbells"
+        ]
+    },
+    {
+        "name": "EZ Bar Close-Grip Curl",
+        "equipment": [
+            "EZ Bar"
+        ]
+    },
+    {
+        "name": "EZ Bar Curl",
+        "equipment": [
+            "EZ Bar"
+        ]
+    },
+    {
+        "name": "EZ Bar Skull Crusher",
+        "equipment": [
+            "EZ Bar",
+            "Flat Bench"
+        ]
+    },
+    {
+        "name": "EZ Bar Wide-Grip Curl",
+        "equipment": [
+            "EZ Bar"
+        ]
+    },
+    {
+        "name": "Lat Pulldown",
+        "equipment": [
+            "Lat Pulldown Machine"
+        ]
+    },
+    {
+        "name": "Lat Pulldown Behind-the-Head",
+        "equipment": [
+            "Lat Pulldown Machine"
+        ]
+    },
+    {
+        "name": "Lat Pulldown Narrow-Grip",
+        "equipment": [
+            "Lat Pulldown Machine"
+        ]
+    },
+    {
+        "name": "Lat Pulldown Reverse-Grip",
+        "equipment": [
+            "Lat Pulldown Machine"
+        ]
+    },
+    {
+        "name": "Lat Pulldown Single-Arm",
+        "equipment": [
+            "Lat Pulldown Machine"
+        ]
+    },
+    {
+        "name": "Lat Pulldown Wide-Grip",
+        "equipment": [
+            "Lat Pulldown Machine"
+        ]
+    },
+    {
+        "name": "Leg Curl",
+        "equipment": [
+            "Leg Curl Machine"
+        ]
+    },
+    {
+        "name": "Leg Curl + Isometric Hold",
+        "equipment": [
+            "Leg Curl Machine"
+        ]
+    },
+    {
+        "name": "Leg Extension",
+        "equipment": [
+            "Leg Extension Machine"
+        ]
+    },
+    {
+        "name": "Leg Extension + Isometric Hold",
+        "equipment": [
+            "Leg Extension Machine"
+        ]
+    },
+    {
+        "name": "Leg Press",
+        "equipment": [
+            "Leg Press Machine"
+        ]
+    },
+    {
+        "name": "Machine Chest Press",
+        "equipment": [
+            "Chest Press Machine"
+        ]
+    },
+    {
+        "name": "Machine Incline Chest Press",
+        "equipment": [
+            "Chest Press Machine"
+        ]
+    },
+    {
+        "name": "Machine Shoulder Press",
+        "equipment": [
+            "Lat Pulldown Machine"
+        ]
+    },
+    {
+        "name": "Smith Machine Bench Press",
+        "equipment": [
+            "Smith Machine",
+            "Flat Bench"
+        ]
+    },
+    {
+        "name": "Smith Machine Bent-Over Row",
+        "equipment": [
+            "Smith Machine"
+        ]
+    },
+    {
+        "name": "Smith Machine Close-Grip Bench Press",
+        "equipment": [
+            "Smith Machine",
+            "Flat Bench"
+        ]
+    },
+    {
+        "name": "Smith Machine Incline Bench Press",
+        "equipment": [
+            "Smith Machine",
+            "Incline Bench"
+        ]
+    },
+    {
+        "name": "Smith Machine Lunges",
+        "equipment": [
+            "Smith Machine"
+        ]
+    },
+    {
+        "name": "Smith Machine Shoulder Press",
+        "equipment": [
+            "Smith Machine"
+        ]
+    },
+    {
+        "name": "Smith Machine Shrugs",
+        "equipment": [
+            "Smith Machine"
+        ]
+    },
+    {
+        "name": "Smith Machine Squat",
+        "equipment": [
+            "Smith Machine"
+        ]
+    }
+]
