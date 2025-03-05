@@ -6,7 +6,7 @@ interface Settings {
     name: string;
     weight: number;
     height: number;
-    unit: "lb" | "kg";
+    unit: "imperial" | "metric";
     darkMode: boolean;
 }
 
@@ -29,14 +29,19 @@ interface WorkoutContextType {
     equipment: string[];
     categories: string[];
     difficulties: string[];
+
     workoutPlans: WorkoutPlan[];
     setWorkoutPlans: React.Dispatch<React.SetStateAction<WorkoutPlan[]>>;
+
     workoutLogs: WorkoutLog[];
     setWorkoutLogs: React.Dispatch<React.SetStateAction<WorkoutLog[]>>;
+
     settings: Settings;
     setSettings: React.Dispatch<React.SetStateAction<Settings>>;
+
     equipmentConfigs: EquipmentConfig[];
     setEquipmentConfigs: React.Dispatch<React.SetStateAction<EquipmentConfig[]>>;
+
     workoutState: WorkoutState;
     setWorkoutState: React.Dispatch<React.SetStateAction<WorkoutState>>;
 }
@@ -84,7 +89,7 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
         const saved = localStorage.getItem("settings");
         return saved
             ? JSON.parse(saved)
-            : { name: "", weight: 0, height: 0, unit: "kg", darkMode: false };
+            : { name: "", weight: 0, height: 0, unit: "metric", darkMode: false };
     });
     const [equipmentConfigs, setEquipmentConfigs] = useState<EquipmentConfig[]>(() => {
         const saved = localStorage.getItem("equipmentConfigs");

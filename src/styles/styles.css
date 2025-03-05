@@ -25,18 +25,24 @@ body {
     color: var(--text-color);
 }
 
-h1,
-h2 {
-    color: var(--text-color);
+p {
+    margin: 0.5rem;
+}
+
+h1 {
     font-size: 2rem;
     margin: 2rem;
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 1.5rem;
+    margin: 1.5rem;
 }
 
-
+h3 {
+    font-size: 1.25rem;
+    margin: 1.25rem;
+}
 
 button {
     display: inline-block;
@@ -49,7 +55,7 @@ button {
     border: none;
     border-radius: 2rem;
     cursor: pointer;
-    margin: 5px auto;
+    margin: 1rem;
     transition: all 100ms;
 }
 
@@ -63,6 +69,13 @@ button:active {
     transform: translate(2px, 2px);
 }
 
+button .adjust {
+    width: 0.5rem;
+    height: 0.5rem;
+    padding: 0.5rem;
+    margin: 0;
+}
+
 label {
     display: block;
     margin: 10px 0 5px;
@@ -71,17 +84,26 @@ label {
 
 input,
 select {
-    display: block;
-    padding: 8px;
-    font-size: 16px;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto 10px;
+    color: var(--text-color);
     background-color: var(--input-background);
     border: 1px solid var(--input-border);
-    border-radius: 5px;
-    color: var(--text-color);
+    display: block;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 2rem;
     text-align: center;
+    margin: 0.25rem;
+}
+
+button .caution {
+    color: var(--caution-color);
+}
+
+span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .card {

@@ -1,8 +1,7 @@
 @import "../styles/variables.css";
 
 .dockbar {
-    /* background-color: var(--card-background); */
-    background-color: #000000;
+    background-color: var(--card-background);
     box-shadow: var(--card-shadow);
 
     border-radius: 2rem;
@@ -16,20 +15,26 @@
     z-index: 1000;
 }
 
-.icon-button svg {
-    color: var(--text-color);
-    margin: auto;
-}
-
 .icon-button {
     border-radius: 1.5rem;
     cursor: pointer;
     display: flex;
     height: 4rem;
     width: 4rem;
+    transition: all 200ms;
 }
 
 .icon-button:hover {
     color: var(--button-background);
     background-color: var(--toggle-hover);
+}
+
+.icon-button svg {
+    color: var(--text-color);
+    margin: auto;
+    transition: all 200ms;
+}
+
+.icon-button:hover svg {
+    color: var(--button-background);
 }

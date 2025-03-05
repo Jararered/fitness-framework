@@ -14,7 +14,7 @@ const ExercisePage: React.FC = () => {
     const isLastSet = workoutState.currentSetIndex === currentExercise.reps.length - 1;
     const isLastExercise = workoutState.currentExerciseIndex === workoutState.currentPlan.exercises.length - 1;
 
-    const next = () => {
+    const handleNext = () => {
         // Update repsCompleted and weightsUsed
         const updatedReps = [...workoutState.repsCompleted];
         const updatedWeights = [...workoutState.weightsUsed];
@@ -75,11 +75,11 @@ const ExercisePage: React.FC = () => {
                 <input
                     type="number"
                     min="0"
-                    step="0.5"
+                    step="2.5"
                     value={weightInput}
                     onChange={(e) => setWeightInput(Math.max(0, Number(e.target.value)))}
                 />
-                <button onClick={next}>Next</button>
+                <button onClick={handleNext}>Next</button>
             </div>
         </div>
     );

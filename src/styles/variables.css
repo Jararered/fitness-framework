@@ -8,6 +8,8 @@
     --card-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     --button-background: #007bff;
     --button-hover: #0056b3;
+    --caution-color: #dc3545;
+    --caution-hover: #bd2130;
     --input-background: #fff;
     --input-border: #ccc;
     --toggle-background: #e0e0e0;
@@ -22,6 +24,8 @@
     --card-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
     --button-background: #1e90ff;
     --button-hover: #4682b4;
+    --caution-color: #ff6347;
+    --caution-hover: #ff4500;
     --input-background: #333;
     --input-border: #555;
     --toggle-background: #404040;

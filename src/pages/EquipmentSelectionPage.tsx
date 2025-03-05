@@ -17,7 +17,7 @@ const EquipmentSelectionPage: React.FC = () => {
         [setSelectedEquipment]
     );
 
-    const saveConfig = () => {
+    const handleSaveEquipment = () => {
         if (configName && selectedEquipment.length > 0) {
             setEquipmentConfigs([...equipmentConfigs, { name: configName, equipment: selectedEquipment }]);
             setConfigName("");
@@ -25,7 +25,7 @@ const EquipmentSelectionPage: React.FC = () => {
         }
     };
 
-    const loadConfig = (config: { name: string; equipment: string[] }) => {
+    const handleLoadEquipment = (config: { name: string; equipment: string[] }) => {
         setSelectedEquipment(config.equipment);
     };
 
@@ -47,21 +47,25 @@ const EquipmentSelectionPage: React.FC = () => {
             </div>
             <div className="card">
                 <h2>Save Configuration</h2>
-                <input
-                    type="text"
-                    value={configName}
-                    onChange={(e) => setConfigName(e.target.value)}
-                    placeholder="Configuration Name"
-                />
-                <button onClick={saveConfig}>Save</button>
+                <span>
+                    <input
+                        type="text"
+                        value={configName}
+                        onChange={(e) => setConfigName(e.target.value)}
+                        placeholder="Configuration Name"
+                    />
+                    <button onClick={handleSaveEquipment}>Save</button>
+                </span>
             </div>
             <div className="card">
                 <h2>Load Configuration</h2>
-                {equipmentConfigs.map((config) => (
-                    <button key={config.name} onClick={() => loadConfig(config)}>
-                        {config.name}
-                    </button>
-                ))}
+                <span>
+                    {equipmentConfigs.map((config) => (
+                        <button key={config.name} onClick={() => handleLoadEquipment(config)}>
+                            {config.name}
+                        </button>
+                    ))}
+                </span>
             </div>
         </div>
     );

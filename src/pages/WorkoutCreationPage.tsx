@@ -14,19 +14,19 @@ const WorkoutCreationPage: React.FC = () => {
     ]);
     const navigate = useNavigate();
 
-    const updateReps = (exerciseIndex: number, repIndex: number, value: number) => {
+    const handleUpdateReps = (exerciseIndex: number, repIndex: number, value: number) => {
         const newPlan = [...plan];
         newPlan[exerciseIndex].reps[repIndex] = Math.max(1, value);
         setPlan(newPlan);
     };
 
-    const addSet = (exerciseIndex: number) => {
+    const handleIncreaseSets = (exerciseIndex: number) => {
         const newPlan = [...plan];
         newPlan[exerciseIndex].reps.push(10);
         setPlan(newPlan);
     };
 
-    const removeSet = (exerciseIndex: number) => {
+    const handleDecreaseSets = (exerciseIndex: number) => {
         const newPlan = [...plan];
         if (newPlan[exerciseIndex].reps.length > 1) {
             newPlan[exerciseIndex].reps.pop();
@@ -34,11 +34,17 @@ const WorkoutCreationPage: React.FC = () => {
         }
     };
 
-    const addExercise = () => {
+    const handleAddExercise = () => {
         setPlan([...plan, { exercise: "", reps: [10, 10, 10] }]);
     };
 
-    const saveWorkout = () => {
+    const handleRemoveExercise = () => {
+        if (plan.length > 1) {
+            setPlan(plan.slice(0, plan.length - 1));
+        }
+    }
+
+    const handleSaveWorkout = () => {
         const validPlan = plan
             .filter((p) => p.exercise && p.reps.every((r) => r > 0))
             .map((p) => ({ exercise: p.exercise, reps: p.reps }));
@@ -60,9 +66,10 @@ const WorkoutCreationPage: React.FC = () => {
         <div className="workout-creation-page">
             <h1>Create Workout</h1>
             <div className="card">
-                <h1>Create Workout</h1>
+                <h2>Create Workout</h2>
                 {plan.map((p, exerciseIndex) => (
-                    <div key={exerciseIndex} className="card">
+                    <div key={exerciseIndex} >
+                        <h2>Exercise {exerciseIndex + 1}</h2>
                         <select
                             value={p.exercise}
                             onChange={(e) => {
@@ -78,26 +85,30 @@ const WorkoutCreationPage: React.FC = () => {
                                 </option>
                             ))}
                         </select>
-                        <h2>Sets</h2>
+                        <span>
+                            <button className="adjust" onClick={() => handleDecreaseSets(exerciseIndex)}>-</button>
+                            <h2>Sets</h2>
+                            <button className="adjust" onClick={() => handleIncreaseSets(exerciseIndex)}>+</button>
+                        </span>
                         {p.reps.map((rep, repIndex) => (
-                            <div key={repIndex}>
+                            <span key={repIndex}>
                                 <label>Set {repIndex + 1}</label>
                                 <input
                                     type="number"
                                     value={rep}
-                                    onChange={(e) => updateReps(exerciseIndex, repIndex, Number(e.target.value))}
+                                    onChange={(e) => handleUpdateReps(exerciseIndex, repIndex, Number(e.target.value))}
                                     min="1"
+                                    step="1"
                                 />
-                            </div>
+                            </span>
                         ))}
-                        <div>
-                            <button className="set-adjust" onClick={() => removeSet(exerciseIndex)}>-</button>
-                            <button className="set-adjust" onClick={() => addSet(exerciseIndex)}>+</button>
-                        </div>
                     </div>
                 ))}
-                <button onClick={addExercise}>Add Exercise</button>
-                <button onClick={saveWorkout}>Save Workout</button>
+                <span>
+                    <button onClick={handleAddExercise}>Add Exercise</button>
+                    <button className="caution" onClick={handleRemoveExercise}>Remove Exercise</button>
+                </span>
+                <button onClick={handleSaveWorkout}>Save Workout</button>
             </div>
         </div>
     );

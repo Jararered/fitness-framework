@@ -6,7 +6,7 @@ const HomePage: React.FC = () => {
     const { settings, workoutState, setWorkoutState } = useWorkout();
     const navigate = useNavigate();
 
-    const startWorkout = () => {
+    const handleStartWorkout = () => {
         if (workoutState.currentPlan) {
             setWorkoutState({ ...workoutState, isStarted: true });
             navigate("/preview");
@@ -20,14 +20,12 @@ const HomePage: React.FC = () => {
                 {workoutState.currentPlan ? (
                     <>
                         <h2>Current Workout</h2>
-                        <ul>
-                            {workoutState.currentPlan.exercises.map((ex) => (
-                                <li key={ex.exercise}>
-                                    {ex.exercise} - {ex.reps.join(", ")} reps
-                                </li>
-                            ))}
-                        </ul>
-                        <button onClick={startWorkout}>
+                        {workoutState.currentPlan.exercises.map((ex) => (
+                            <p key={ex.exercise}>
+                                {ex.exercise} - {ex.reps.join(", ")} reps
+                            </p>
+                        ))}
+                        <button onClick={handleStartWorkout}>
                             {workoutState.isStarted ? "Resume Workout" : "Start Workout"}
                         </button>
                     </>
