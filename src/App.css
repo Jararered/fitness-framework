@@ -1,69 +1,63 @@
-* {
-    user-select: none;
-    text-align: center;
-    list-style-type: none;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-
-    color: #333;
-    background-color: #f2f2f7;
-    background-image: radial-gradient(circle, #d2d2d2 0.0625rem, transparent 0.1rem);
-    background-size: 2.5rem 2.5rem;
-}
-
-p {
-    margin: 0.25rem 0.5rem;
-}
-
-div.horizontal {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-div.vertical {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-select,
-input {
-    appearance: auto;
-    height: 2.5rem;
-
-    box-sizing: border-box;
-
-    background-color: #ffffff;
-    color: #333333;
-    border: 1px solid #e0e0e0;
-
-    margin: 0.5rem;
-    border-radius: 2rem;
-    font-size: 1rem;
-}
-
-ul {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-
-    padding: 0;
+.App {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
 }
 
 h1 {
-    margin: 2rem;
-    font-size: 2rem;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
     font-weight: bold;
 }
 
-h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0.5rem;
+select,
+input,
+button {
+    display: block;
+    margin: 5px 0;
+    padding: 8px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .App {
+        padding: 10px;
+    }
+
+    select,
+    input,
+    button {
+        max-width: 100%;
+    }
 }

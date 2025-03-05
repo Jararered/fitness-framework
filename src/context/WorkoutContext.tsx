@@ -1,0 +1,123 @@
+import { createContext, useState, useContext, ReactNode, useEffect } from "react";
+import exerciseData from "../data/exercises.json";
+import { Exercise, WorkoutPlan, WorkoutLog } from "../types";
+
+interface Settings {
+    name: string;
+    weight: number;
+    height: number;
+    unit: "lb" | "kg";
+    darkMode: boolean;
+}
+
+interface EquipmentConfig {
+    name: string;
+    equipment: string[];
+}
+
+interface WorkoutState {
+    currentPlan: WorkoutPlan | null;
+    isStarted: boolean;
+    currentExerciseIndex: number;
+    currentSetIndex: number;
+}
+
+interface WorkoutContextType {
+    exercises: Exercise[];
+    equipment: string[];
+    categories: string[];
+    difficulties: string[];
+    workoutPlans: WorkoutPlan[];
+    setWorkoutPlans: React.Dispatch<React.SetStateAction<WorkoutPlan[]>>;
+    workoutLogs: WorkoutLog[];
+    setWorkoutLogs: React.Dispatch<React.SetStateAction<WorkoutLog[]>>;
+    settings: Settings;
+    setSettings: React.Dispatch<React.SetStateAction<Settings>>;
+    equipmentConfigs: EquipmentConfig[];
+    setEquipmentConfigs: React.Dispatch<React.SetStateAction<EquipmentConfig[]>>;
+    workoutState: WorkoutState;
+    setWorkoutState: React.Dispatch<React.SetStateAction<WorkoutState>>;
+}
+
+const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
+
+export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
+    const [exercises] = useState<Exercise[]>(exerciseData);
+
+    const [equipment] = useState<string[]>(() => {
+        const allEquipment = exercises.flatMap((ex) => ex.equipment);
+        return [...new Set(allEquipment)].sort();
+    });
+    const [categories] = useState<string[]>(() => {
+        const allCategories = exercises.flatMap((ex) => ex.category);
+        return [...new Set(allCategories)].sort();
+    });
+    const [difficulties] = useState<string[]>(() => {
+        const allDifficulties = exercises.map((ex) => ex.difficulty);
+        return [...new Set(allDifficulties)].sort();
+    });
+
+    const [workoutPlans, setWorkoutPlans] = useState<WorkoutPlan[]>(() => {
+        const saved = localStorage.getItem("workoutPlans");
+        return saved ? JSON.parse(saved) : [];
+    });
+    const [workoutLogs, setWorkoutLogs] = useState<WorkoutLog[]>(() => {
+        const saved = localStorage.getItem("workoutLogs");
+        return saved ? JSON.parse(saved) : [];
+    });
+    const [settings, setSettings] = useState<Settings>(() => {
+        const saved = localStorage.getItem("settings");
+        return saved
+            ? JSON.parse(saved)
+            : { name: "", weight: 0, height: 0, unit: "kg", darkMode: false };
+    });
+    const [equipmentConfigs, setEquipmentConfigs] = useState<EquipmentConfig[]>(() => {
+        const saved = localStorage.getItem("equipmentConfigs");
+        return saved ? JSON.parse(saved) : [];
+    });
+    const [workoutState, setWorkoutState] = useState<WorkoutState>(() => {
+        const saved = localStorage.getItem("workoutState");
+        return saved
+            ? JSON.parse(saved)
+            : { currentPlan: null, isStarted: false, currentExerciseIndex: 0, currentSetIndex: 0 };
+    });
+
+    useEffect(() => {
+        localStorage.setItem("workoutPlans", JSON.stringify(workoutPlans));
+        localStorage.setItem("workoutLogs", JSON.stringify(workoutLogs));
+        localStorage.setItem("settings", JSON.stringify(settings));
+        localStorage.setItem("equipmentConfigs", JSON.stringify(equipmentConfigs));
+        localStorage.setItem("workoutState", JSON.stringify(workoutState));
+    }, [workoutPlans, workoutLogs, settings, equipmentConfigs, workoutState]);
+
+    return (
+        <WorkoutContext.Provider
+            value={{
+                exercises,
+                equipment,
+                categories,
+                difficulties,
+                workoutPlans,
+                setWorkoutPlans,
+                workoutLogs,
+                setWorkoutLogs,
+                settings,
+                setSettings,
+                equipmentConfigs,
+                setEquipmentConfigs,
+                workoutState,
+                setWorkoutState,
+            }}
+        >
+            {children}
+        </WorkoutContext.Provider>
+    );
+};
+
+export const useWorkout = () => {
+    const context = useContext(WorkoutContext);
+    if (!context) {
+        throw new Error("useWorkout must be used within a WorkoutProvider");
+    }
+    return context;
+};

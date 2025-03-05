@@ -1,10 +1,16 @@
-import { createRoot } from "react-dom/client"
-import { StrictMode } from "react"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.tsx";
+import { WorkoutProvider } from "./context/WorkoutContext.tsx";
+import "./styles.css";
 
-import App from "./App.tsx"
-
-createRoot(document.getElementById("root")!).render(
-    <StrictMode>
-        <App />
-    </StrictMode>
-)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+    <React.StrictMode>
+        <WorkoutProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </WorkoutProvider>
+    </React.StrictMode>
+);

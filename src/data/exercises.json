@@ -1,309 +1,739 @@
 [
     {
-        "name": "Barbell Bench Press",
+        "exercise": "Barbell Bench Press",
         "equipment": [
             "Barbell",
             "Flat Bench"
-        ]
+        ],
+        "category": [
+            "Chest"
+        ],
+        "muscles": [
+            "Pectoralis Major",
+            "Triceps",
+            "Anterior Deltoids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Barbell Bent-Over Row",
+        "exercise": "Barbell Bent-Over Row",
         "equipment": [
             "Barbell"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Latissimus Dorsi",
+            "Rhomboids",
+            "Trapezius",
+            "Biceps"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Barbell Curl",
+        "exercise": "Barbell Curl",
         "equipment": [
             "Barbell"
-        ]
+        ],
+        "category": [
+            "Biceps"
+        ],
+        "muscles": [
+            "Biceps Brachii",
+            "Brachialis"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Barbell Deadlift",
+        "exercise": "Barbell Deadlift",
         "equipment": [
             "Barbell"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Erector Spinae",
+            "Gluteus Maximus",
+            "Hamstrings",
+            "Quadriceps",
+            "Trapezius"
+        ],
+        "difficulty": "advanced"
     },
     {
-        "name": "Barbell Decline Bench Press",
+        "exercise": "Barbell Decline Bench Press",
         "equipment": [
             "Barbell",
             "Flat Bench"
-        ]
+        ],
+        "category": [
+            "Chest"
+        ],
+        "muscles": [
+            "Lower Pectoralis Major",
+            "Triceps",
+            "Anterior Deltoids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Barbell Front Squat",
+        "exercise": "Barbell Front Squat",
         "equipment": [
             "Barbell"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Quadriceps",
+            "Gluteus Maximus",
+            "Core"
+        ],
+        "difficulty": "advanced"
     },
     {
-        "name": "Barbell Incline Bench Press",
+        "exercise": "Barbell Incline Bench Press",
         "equipment": [
             "Barbell",
             "Flat Bench"
-        ]
+        ],
+        "category": [
+            "Chest"
+        ],
+        "muscles": [
+            "Upper Pectoralis Major",
+            "Triceps",
+            "Anterior Deltoids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Barbell Lunge",
+        "exercise": "Barbell Lunge",
         "equipment": [
             "Barbell"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Quadriceps",
+            "Gluteus Maximus",
+            "Hamstrings"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Barbell Overhead Press",
+        "exercise": "Barbell Overhead Press",
         "equipment": [
             "Barbell"
-        ]
+        ],
+        "category": [
+            "Shoulders"
+        ],
+        "muscles": [
+            "Deltoids",
+            "Triceps",
+            "Upper Trapezius"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Barbell Romanian Deadlift",
+        "exercise": "Barbell Romanian Deadlift",
         "equipment": [
             "Barbell"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Hamstrings",
+            "Gluteus Maximus",
+            "Erector Spinae"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Barbell Squat",
+        "exercise": "Barbell Squat",
         "equipment": [
             "Barbell"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Quadriceps",
+            "Gluteus Maximus",
+            "Hamstrings",
+            "Core"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Barbell Sumo Deadlift",
+        "exercise": "Barbell Sumo Deadlift",
         "equipment": [
             "Barbell"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Quadriceps",
+            "Gluteus Maximus",
+            "Adductors",
+            "Erector Spinae"
+        ],
+        "difficulty": "advanced"
     },
     {
-        "name": "Dumbbell Bent-Over Row",
+        "exercise": "Dumbbell Bent-Over Row",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Latissimus Dorsi",
+            "Rhomboids",
+            "Trapezius",
+            "Biceps"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Dumbbell Bicep Curl",
+        "exercise": "Dumbbell Bicep Curl",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Biceps"
+        ],
+        "muscles": [
+            "Biceps Brachii",
+            "Brachialis"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Dumbbell Front Raise",
+        "exercise": "Dumbbell Front Raise",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Shoulders"
+        ],
+        "muscles": [
+            "Anterior Deltoids"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Dumbbell Hammer Curl",
+        "exercise": "Dumbbell Hammer Curl",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Biceps"
+        ],
+        "muscles": [
+            "Biceps Brachii",
+            "Brachialis",
+            "Brachioradialis"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Dumbbell Lateral Raise",
+        "exercise": "Dumbbell Lateral Raise",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Shoulders"
+        ],
+        "muscles": [
+            "Lateral Deltoids"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Dumbbell Lunges",
+        "exercise": "Dumbbell Lunges",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Quadriceps",
+            "Gluteus Maximus",
+            "Hamstrings"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Dumbbell Shoulder Press",
+        "exercise": "Dumbbell Shoulder Press",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Shoulders"
+        ],
+        "muscles": [
+            "Deltoids",
+            "Triceps",
+            "Upper Trapezius"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Dumbbell Shrugs",
+        "exercise": "Dumbbell Shrugs",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Traps"
+        ],
+        "muscles": [
+            "Upper Trapezius"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Dumbbell Single-Arm Row",
+        "exercise": "Dumbbell Single-Arm Row",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Latissimus Dorsi",
+            "Rhomboids",
+            "Trapezius",
+            "Biceps"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Dumbbell Skull Crushers",
+        "exercise": "Dumbbell Skull Crushers",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Triceps"
+        ],
+        "muscles": [
+            "Triceps"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Dumbbell Tricep Extension",
+        "exercise": "Dumbbell Tricep Extension",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Triceps"
+        ],
+        "muscles": [
+            "Triceps"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Dumbbell Upright Row",
+        "exercise": "Dumbbell Upright Row",
         "equipment": [
             "Dumbells"
-        ]
+        ],
+        "category": [
+            "Shoulders"
+        ],
+        "muscles": [
+            "Lateral Deltoids",
+            "Upper Trapezius",
+            "Biceps"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "EZ Bar Close-Grip Curl",
+        "exercise": "EZ Bar Close-Grip Curl",
         "equipment": [
             "EZ Bar"
-        ]
+        ],
+        "category": [
+            "Biceps"
+        ],
+        "muscles": [
+            "Biceps Brachii",
+            "Brachialis"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "EZ Bar Curl",
+        "exercise": "EZ Bar Curl",
         "equipment": [
             "EZ Bar"
-        ]
+        ],
+        "category": [
+            "Biceps"
+        ],
+        "muscles": [
+            "Biceps Brachii",
+            "Brachialis"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "EZ Bar Skull Crusher",
+        "exercise": "EZ Bar Skull Crusher",
         "equipment": [
             "EZ Bar",
             "Flat Bench"
-        ]
+        ],
+        "category": [
+            "Triceps"
+        ],
+        "muscles": [
+            "Triceps"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "EZ Bar Wide-Grip Curl",
+        "exercise": "EZ Bar Wide-Grip Curl",
         "equipment": [
             "EZ Bar"
-        ]
+        ],
+        "category": [
+            "Biceps"
+        ],
+        "muscles": [
+            "Biceps Brachii",
+            "Brachialis"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Lat Pulldown",
+        "exercise": "Lat Pulldown",
         "equipment": [
             "Lat Pulldown Machine"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Latissimus Dorsi",
+            "Biceps",
+            "Rhomboids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Lat Pulldown Behind-the-Head",
+        "exercise": "Lat Pulldown Behind-the-Head",
         "equipment": [
             "Lat Pulldown Machine"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Latissimus Dorsi",
+            "Biceps",
+            "Rear Deltoids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Lat Pulldown Narrow-Grip",
+        "exercise": "Lat Pulldown Narrow-Grip",
         "equipment": [
             "Lat Pulldown Machine"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Latissimus Dorsi",
+            "Biceps",
+            "Rhomboids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Lat Pulldown Reverse-Grip",
+        "exercise": "Lat Pulldown Reverse-Grip",
         "equipment": [
             "Lat Pulldown Machine"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Latissimus Dorsi",
+            "Biceps",
+            "Lower Trapezius"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Lat Pulldown Single-Arm",
+        "exercise": "Lat Pulldown Single-Arm",
         "equipment": [
             "Lat Pulldown Machine"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Latissimus Dorsi",
+            "Biceps",
+            "Rhomboids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Lat Pulldown Wide-Grip",
+        "exercise": "Lat Pulldown Wide-Grip",
         "equipment": [
             "Lat Pulldown Machine"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Latissimus Dorsi",
+            "Rear Deltoids",
+            "Biceps"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Leg Curl",
+        "exercise": "Leg Curl",
         "equipment": [
             "Leg Curl Machine"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Hamstrings"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Leg Curl + Isometric Hold",
+        "exercise": "Leg Curl + Isometric Hold",
         "equipment": [
             "Leg Curl Machine"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Hamstrings"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Leg Extension",
+        "exercise": "Leg Extension",
         "equipment": [
             "Leg Extension Machine"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Quadriceps"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Leg Extension + Isometric Hold",
+        "exercise": "Leg Extension + Isometric Hold",
         "equipment": [
             "Leg Extension Machine"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Quadriceps"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Leg Press",
+        "exercise": "Leg Press",
         "equipment": [
             "Leg Press Machine"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Quadriceps",
+            "Gluteus Maximus",
+            "Hamstrings"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Machine Chest Press",
+        "exercise": "Machine Chest Press",
         "equipment": [
             "Chest Press Machine"
-        ]
+        ],
+        "category": [
+            "Chest"
+        ],
+        "muscles": [
+            "Pectoralis Major",
+            "Triceps",
+            "Anterior Deltoids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Machine Incline Chest Press",
+        "exercise": "Machine Incline Chest Press",
         "equipment": [
             "Chest Press Machine"
-        ]
+        ],
+        "category": [
+            "Chest"
+        ],
+        "muscles": [
+            "Upper Pectoralis Major",
+            "Triceps",
+            "Anterior Deltoids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Machine Shoulder Press",
+        "exercise": "Machine Shoulder Press",
         "equipment": [
             "Lat Pulldown Machine"
-        ]
+        ],
+        "category": [
+            "Shoulders"
+        ],
+        "muscles": [
+            "Deltoids",
+            "Triceps",
+            "Upper Trapezius"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Smith Machine Bench Press",
+        "exercise": "Smith Machine Bench Press",
         "equipment": [
             "Smith Machine",
             "Flat Bench"
-        ]
+        ],
+        "category": [
+            "Chest"
+        ],
+        "muscles": [
+            "Pectoralis Major",
+            "Triceps",
+            "Anterior Deltoids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Smith Machine Bent-Over Row",
+        "exercise": "Smith Machine Bent-Over Row",
         "equipment": [
             "Smith Machine"
-        ]
+        ],
+        "category": [
+            "Back"
+        ],
+        "muscles": [
+            "Latissimus Dorsi",
+            "Rhomboids",
+            "Trapezius",
+            "Biceps"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Smith Machine Close-Grip Bench Press",
+        "exercise": "Smith Machine Close-Grip Bench Press",
         "equipment": [
             "Smith Machine",
             "Flat Bench"
-        ]
+        ],
+        "category": [
+            "Chest"
+        ],
+        "muscles": [
+            "Pectoralis Major",
+            "Triceps"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Smith Machine Incline Bench Press",
+        "exercise": "Smith Machine Incline Bench Press",
         "equipment": [
             "Smith Machine",
             "Incline Bench"
-        ]
+        ],
+        "category": [
+            "Chest"
+        ],
+        "muscles": [
+            "Upper Pectoralis Major",
+            "Triceps",
+            "Anterior Deltoids"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Smith Machine Lunges",
+        "exercise": "Smith Machine Lunges",
         "equipment": [
             "Smith Machine"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Quadriceps",
+            "Gluteus Maximus",
+            "Hamstrings"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Smith Machine Shoulder Press",
+        "exercise": "Smith Machine Shoulder Press",
         "equipment": [
             "Smith Machine"
-        ]
+        ],
+        "category": [
+            "Shoulders"
+        ],
+        "muscles": [
+            "Deltoids",
+            "Triceps",
+            "Upper Trapezius"
+        ],
+        "difficulty": "intermediate"
     },
     {
-        "name": "Smith Machine Shrugs",
+        "exercise": "Smith Machine Shrugs",
         "equipment": [
             "Smith Machine"
-        ]
+        ],
+        "category": [
+            "Traps"
+        ],
+        "muscles": [
+            "Upper Trapezius"
+        ],
+        "difficulty": "easy"
     },
     {
-        "name": "Smith Machine Squat",
+        "exercise": "Smith Machine Squat",
         "equipment": [
             "Smith Machine"
-        ]
+        ],
+        "category": [
+            "Legs"
+        ],
+        "muscles": [
+            "Quadriceps",
+            "Gluteus Maximus",
+            "Hamstrings"
+        ],
+        "difficulty": "intermediate"
     }
 ]
