@@ -11,7 +11,7 @@ const ExercisePreviewPage: React.FC = () => {
     const currentExercise = workoutState.currentPlan.exercises[workoutState.currentExerciseIndex];
 
     return (
-        <div>
+        <div className="exercise-preview-page">
             <div className="card">
                 <h1>Exercise Preview</h1>
                 <p>{currentExercise.exercise}</p>

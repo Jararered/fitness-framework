@@ -14,10 +14,8 @@ const HomePage: React.FC = () => {
     };
 
     return (
-        <div>
-            <div className="card">
-                <h1>{settings.name ? `Welcome, ${settings.name}!` : "Welcome!"}</h1>
-            </div>
+        <div className="home-page">
+            <h1>{settings.name ? `Welcome, ${settings.name}!` : "Welcome!"}</h1>
             <div className="card">
                 {workoutState.currentPlan ? (
                     <>

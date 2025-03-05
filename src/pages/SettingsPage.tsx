@@ -9,9 +9,9 @@ const SettingsPage: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className="settings-page">
+            <h1>Settings</h1>
             <div className="card">
-                <h1>Settings</h1>
                 <label>Name</label>
                 <input
                     type="text"

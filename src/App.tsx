@@ -1,4 +1,7 @@
 import { Routes, Route } from "react-router-dom";
+import { useWorkout } from "./context/WorkoutContext.tsx";
+
+import DockBar from "./components/DockBar.tsx";
 
 import HomePage from "./pages/HomePage.tsx";
 import EquipmentSelectionPage from "./pages/EquipmentSelectionPage.tsx";
@@ -10,8 +13,10 @@ import ExercisePage from "./pages/ExercisePage.tsx";
 import WorkoutCompletePage from "./pages/WorkoutCompletePage.tsx";
 
 function App() {
+    const { settings } = useWorkout();
+
     return (
-        <div className="App">
+        <div className={`App ${settings.darkMode ? "dark-mode" : ""}`}>
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/equipment" element={<EquipmentSelectionPage />} />
@@ -22,6 +27,7 @@ function App() {
                 <Route path="/exercise" element={<ExercisePage />} />
                 <Route path="/complete" element={<WorkoutCompletePage />} />
             </Routes>
+            <DockBar />
         </div>
     );
 }

@@ -8,38 +8,45 @@ const WorkoutCompletePage: React.FC = () => {
 
     useEffect(() => {
         if (workoutState.currentPlan) {
-            const exerciseLogs = workoutState.currentPlan.exercises.map((ex) => ({
+            const exerciseLogs = workoutState.currentPlan.exercises.map((ex, index) => ({
                 exercise: ex.exercise,
-                reps: ex.reps,
-                weight: ex.reps.map(() => 0), // Placeholder weights
-                startTime: new Date(),
+                reps: workoutState.repsCompleted[index] || ex.reps.map(() => 0), // Fallback to 0 if not completed
+                weight: workoutState.weightsUsed[index] || ex.reps.map(() => 0), // Fallback to 0 if not completed
+                startTime: new Date(), // Simplified; could track actual start time
                 endTime: new Date(),
             }));
             const totalReps = exerciseLogs.reduce((sum, log) => sum + log.reps.reduce((a, b) => a + b, 0), 0);
-            const totalWeight = 0; // Update if weights are tracked
+            const totalWeight = exerciseLogs.reduce((sum, log) => sum + log.weight.reduce((a, b) => a + b, 0), 0);
+
             setWorkoutLogs([
                 ...workoutLogs,
                 {
                     workoutId: Date.now(),
                     exercises: exerciseLogs,
-                    startTime: new Date(),
+                    startTime: new Date(), // Simplified; could track actual start
                     endTime: new Date(),
                     totalWeight,
                     totalReps,
                 },
             ]);
-            setWorkoutState({ currentPlan: null, isStarted: false, currentExerciseIndex: 0, currentSetIndex: 0 });
+            setWorkoutState({
+                currentPlan: null,
+                isStarted: false,
+                currentExerciseIndex: 0,
+                currentSetIndex: 0,
+                repsCompleted: [],
+                weightsUsed: [],
+            });
         }
     }, [workoutState, setWorkoutState, workoutLogs, setWorkoutLogs]);
 
     return (
-        <div>
+        <div className="workout-complete-page">
             <div className="card">
                 <h1>Congratulations!</h1>
                 <p>You completed your workout!</p>
-                {/* Placeholder stats */}
-                <p>Total Reps: {workoutState.currentPlan?.exercises.reduce((sum, ex) => sum + ex.reps.reduce((a, b) => a + b, 0), 0) || 0}</p>
-                <p>Total Weight: 0 {settings.unit}</p>
+                <p>Total Reps: {workoutState.repsCompleted.flat().reduce((sum, val) => sum + val, 0) || 0}</p>
+                <p>Total Weight: {workoutState.weightsUsed.flat().reduce((sum, val) => sum + val, 0) || 0} {settings.unit}</p>
                 <button onClick={() => navigate("/")}>Back to Home</button>
             </div>
         </div>

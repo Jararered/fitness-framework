@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
+import EquipmentToggle from "../components/EquipmentToggle.tsx";
+import "./EquipmentSelectionPage.css";
 
 const EquipmentSelectionPage: React.FC = () => {
     const { equipment, equipmentConfigs, setEquipmentConfigs } = useWorkout();
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
     const [configName, setConfigName] = useState<string>("");
 
-    const toggleEquipment = (eq: string) => {
-        setSelectedEquipment((prev) =>
-            prev.includes(eq) ? prev.filter((item) => item !== eq) : [...prev, eq]
-        );
-    };
+    const handleEquipmentToggle = useCallback(
+        (name: string) => {
+            setSelectedEquipment((prev) =>
+                prev.includes(name) ? prev.filter((item) => item !== name) : [...prev, name]
+            );
+        },
+        [setSelectedEquipment]
+    );
 
     const saveConfig = () => {
         if (configName && selectedEquipment.length > 0) {
@@ -25,18 +30,18 @@ const EquipmentSelectionPage: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className="equipment-selection-page">
+            <h1>Equipment</h1>
             <div className="card">
-                <h1>Equipment Selection</h1>
-                <div>
+                <h2>Equipment Selection</h2>
+                <div className="equipment-toggles">
                     {equipment.map((eq) => (
-                        <button
+                        <EquipmentToggle
                             key={eq}
-                            className={`toggle-button ${selectedEquipment.includes(eq) ? "active" : ""}`}
-                            onClick={() => toggleEquipment(eq)}
-                        >
-                            {eq}
-                        </button>
+                            equipment={eq}
+                            enabled={selectedEquipment.includes(eq)}
+                            handleEquipmentToggle={handleEquipmentToggle}
+                        />
                     ))}
                 </div>
             </div>

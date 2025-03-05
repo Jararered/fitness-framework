@@ -20,6 +20,8 @@ interface WorkoutState {
     isStarted: boolean;
     currentExerciseIndex: number;
     currentSetIndex: number;
+    repsCompleted: number[][];
+    weightsUsed: number[][];
 }
 
 interface WorkoutContextType {
@@ -63,7 +65,20 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     });
     const [workoutLogs, setWorkoutLogs] = useState<WorkoutLog[]>(() => {
         const saved = localStorage.getItem("workoutLogs");
-        return saved ? JSON.parse(saved) : [];
+        if (saved) {
+            const parsedLogs = JSON.parse(saved);
+            return parsedLogs.map((log: WorkoutLog) => ({
+                ...log,
+                startTime: new Date(log.startTime), // Convert string to Date
+                endTime: new Date(log.endTime),     // Convert string to Date
+                exercises: log.exercises.map((ex: any) => ({
+                    ...ex,
+                    startTime: new Date(ex.startTime), // Convert nested startTime
+                    endTime: new Date(ex.endTime),     // Convert nested endTime
+                })),
+            }));
+        }
+        return [];
     });
     const [settings, setSettings] = useState<Settings>(() => {
         const saved = localStorage.getItem("settings");
@@ -79,7 +94,14 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
         const saved = localStorage.getItem("workoutState");
         return saved
             ? JSON.parse(saved)
-            : { currentPlan: null, isStarted: false, currentExerciseIndex: 0, currentSetIndex: 0 };
+            : {
+                currentPlan: null,
+                isStarted: false,
+                currentExerciseIndex: 0,
+                currentSetIndex: 0,
+                repsCompleted: [],
+                weightsUsed: [],
+            };
     });
 
     useEffect(() => {

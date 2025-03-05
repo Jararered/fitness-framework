@@ -18,9 +18,10 @@ const ProfilePage: React.FC = () => {
     const logsToShow = expanded ? workoutLogs.slice(0, 20) : workoutLogs.slice(0, 5);
 
     return (
-        <div>
+        <div className="profile-page">
+            <h1>Profile</h1>
             <div className="card">
-                <h1>{settings.name || "User"}</h1>
+                <h2>{settings.name || "User"}</h2>
             </div>
             <div className="card">
                 <h2>Statistics</h2>
@@ -34,7 +35,10 @@ const ProfilePage: React.FC = () => {
                 <ul>
                     {logsToShow.map((log) => (
                         <li key={log.workoutId}>
-                            Workout ID: {log.workoutId} - {log.startTime.toLocaleDateString()}
+                            Workout ID: {log.workoutId} -{" "}
+                            {log.startTime instanceof Date && !isNaN(log.startTime.getTime())
+                                ? log.startTime.toLocaleDateString()
+                                : "Invalid Date"}
                         </li>
                     ))}
                 </ul>
