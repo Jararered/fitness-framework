@@ -1,12 +1,22 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import EquipmentToggle from "../components/EquipmentToggle.tsx";
 import "./EquipmentSelectionPage.css";
 
 const EquipmentSelectionPage: React.FC = () => {
-    const { equipment, equipmentConfigs, setEquipmentConfigs } = useWorkout();
+    const { equipment, equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useWorkout();
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
     const [configName, setConfigName] = useState<string>("");
+
+    // Load the last used equipment config on mount
+    useEffect(() => {
+        if (equipmentLast && equipmentConfigs.length > 0) {
+            const lastConfig = equipmentConfigs.find((config) => config.name === equipmentLast);
+            if (lastConfig) {
+                setSelectedEquipment(lastConfig.equipment);
+            }
+        }
+    }, [equipmentConfigs, equipmentLast]);
 
     const handleEquipmentToggle = useCallback(
         (name: string) => {
@@ -20,13 +30,15 @@ const EquipmentSelectionPage: React.FC = () => {
     const handleSaveEquipment = () => {
         if (configName && selectedEquipment.length > 0) {
             setEquipmentConfigs([...equipmentConfigs, { name: configName, equipment: selectedEquipment }]);
+            setEquipmentLast(configName); // Set equipmentLast to the newly saved config name
             setConfigName("");
-            setSelectedEquipment([]);
+            // Keep selectedEquipment as-is for continuity
         }
     };
 
     const handleLoadEquipment = (config: { name: string; equipment: string[] }) => {
         setSelectedEquipment(config.equipment);
+        setEquipmentLast(config.name); // Update equipmentLast when loading a config
     };
 
     return (

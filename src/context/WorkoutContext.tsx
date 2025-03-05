@@ -29,19 +29,16 @@ interface WorkoutContextType {
     equipment: string[];
     categories: string[];
     difficulties: string[];
-
     workoutPlans: WorkoutPlan[];
     setWorkoutPlans: React.Dispatch<React.SetStateAction<WorkoutPlan[]>>;
-
     workoutLogs: WorkoutLog[];
     setWorkoutLogs: React.Dispatch<React.SetStateAction<WorkoutLog[]>>;
-
     settings: Settings;
     setSettings: React.Dispatch<React.SetStateAction<Settings>>;
-
     equipmentConfigs: EquipmentConfig[];
     setEquipmentConfigs: React.Dispatch<React.SetStateAction<EquipmentConfig[]>>;
-
+    equipmentLast: string;
+    setEquipmentLast: React.Dispatch<React.SetStateAction<string>>;
     workoutState: WorkoutState;
     setWorkoutState: React.Dispatch<React.SetStateAction<WorkoutState>>;
 }
@@ -74,12 +71,12 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
             const parsedLogs = JSON.parse(saved);
             return parsedLogs.map((log: WorkoutLog) => ({
                 ...log,
-                startTime: new Date(log.startTime), // Convert string to Date
-                endTime: new Date(log.endTime),     // Convert string to Date
+                startTime: new Date(log.startTime),
+                endTime: new Date(log.endTime),
                 exercises: log.exercises.map((ex: any) => ({
                     ...ex,
-                    startTime: new Date(ex.startTime), // Convert nested startTime
-                    endTime: new Date(ex.endTime),     // Convert nested endTime
+                    startTime: new Date(ex.startTime),
+                    endTime: new Date(ex.endTime),
                 })),
             }));
         }
@@ -94,6 +91,10 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     const [equipmentConfigs, setEquipmentConfigs] = useState<EquipmentConfig[]>(() => {
         const saved = localStorage.getItem("equipmentConfigs");
         return saved ? JSON.parse(saved) : [];
+    });
+    const [equipmentLast, setEquipmentLast] = useState<string>(() => {
+        const saved = localStorage.getItem("equipmentLast");
+        return saved ? JSON.parse(saved) : "";
     });
     const [workoutState, setWorkoutState] = useState<WorkoutState>(() => {
         const saved = localStorage.getItem("workoutState");
@@ -114,8 +115,9 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem("workoutLogs", JSON.stringify(workoutLogs));
         localStorage.setItem("settings", JSON.stringify(settings));
         localStorage.setItem("equipmentConfigs", JSON.stringify(equipmentConfigs));
+        localStorage.setItem("equipmentLast", JSON.stringify(equipmentLast));
         localStorage.setItem("workoutState", JSON.stringify(workoutState));
-    }, [workoutPlans, workoutLogs, settings, equipmentConfigs, workoutState]);
+    }, [workoutPlans, workoutLogs, settings, equipmentConfigs, equipmentLast, workoutState]);
 
     return (
         <WorkoutContext.Provider
@@ -132,6 +134,8 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
                 setSettings,
                 equipmentConfigs,
                 setEquipmentConfigs,
+                equipmentLast,
+                setEquipmentLast,
                 workoutState,
                 setWorkoutState,
             }}
