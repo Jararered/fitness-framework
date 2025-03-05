@@ -1,0 +1,36 @@
+.pill-toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: var(--pill-background);
+    border-radius: 15px;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 5px auto;
+    transition: all 200ms;
+}
+
+.pill-toggle:hover {
+    background-color: var(--pill-hover);
+}
+
+.pill-toggle.active {
+    background-color: var(--pill-active);
+}
+
+.pill-toggle .pill-circle {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 22px;
+    height: 22px;
+    background-color: white;
+    border-radius: 50%;
+    transition: all 200ms;
+}
+
+.pill-toggle.active .pill-circle {
+    transform: translateX(30px);
+}

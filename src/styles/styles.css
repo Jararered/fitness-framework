@@ -1,4 +1,5 @@
 @import "variables.css";
+@import "pill-toggle.css";
 
 * {
     user-select: none;
@@ -9,6 +10,8 @@
 
 body {
     margin: 0;
+    color: var(--text-color);
+    background-color: var(--background-color);
 }
 
 .dark-mode body {
@@ -17,12 +20,10 @@ body {
 
 .App {
     max-width: 1200px;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    padding-bottom: 7rem;
 }
 
 p {
@@ -119,20 +120,6 @@ span {
     max-width: 40rem;
     border: 1px solid var(--card-border);
     text-align: center;
-}
-
-.toggle-button {
-    background-color: var(--toggle-background);
-    color: var(--text-color);
-}
-
-.toggle-button.active {
-    background-color: var(--button-background);
-    color: white;
-}
-
-.toggle-button:hover {
-    background-color: var(--toggle-hover);
 }
 
 @media (max-width: 768px) {

@@ -14,6 +14,9 @@
     --input-border: #ccc;
     --toggle-background: #e0e0e0;
     --toggle-hover: #d0d0d0;
+    --pill-background: #e0e0e0;
+    --pill-hover: #d0d0d0;
+    --pill-active: #4caf50;
 }
 
 .dark-mode {
@@ -30,4 +33,7 @@
     --input-border: #555;
     --toggle-background: #404040;
     --toggle-hover: #505050;
+    --pill-background: #404040;
+    --pill-hover: #505050;
+    --pill-active: #66bb6a;
 }

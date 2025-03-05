@@ -1,5 +1,6 @@
 import React from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
+import "../styles/pill-toggle.css"
 
 const SettingsPage: React.FC = () => {
     const { settings, setSettings } = useWorkout();
@@ -74,10 +75,10 @@ const SettingsPage: React.FC = () => {
                 </select>
                 <label>Dark Mode</label>
                 <button
-                    className={`toggle-button ${settings.darkMode ? "active" : ""}`}
+                    className={`pill-toggle ${settings.darkMode ? "active" : ""}`}
                     onClick={() => handleUpdateSetting("darkMode", !settings.darkMode)}
                 >
-                    {settings.darkMode ? "On" : "Off"}
+                    <span className="pill-circle"></span>
                 </button>
             </div>
         </div>
