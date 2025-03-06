@@ -12,7 +12,7 @@ import ExercisePreviewPage from "./pages/ExercisePreviewPage.tsx";
 import ExercisePage from "./pages/ExercisePage.tsx";
 import WorkoutCompletePage from "./pages/WorkoutCompletePage.tsx";
 
-import "./App.css";
+import "./styles/components/App.css";
 
 function App() {
     const { settings } = useWorkout();

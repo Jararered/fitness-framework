@@ -1,9 +1,11 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
+import React from "react";
+import { WorkoutProvider } from "./context/WorkoutContext.tsx";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
-import { WorkoutProvider } from "./context/WorkoutContext.tsx";
-import "./styles/styles.css"
+
+import "./styles/global.css";
+import "./styles/utilities.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>

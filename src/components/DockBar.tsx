@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaHome, FaDumbbell, FaMapPin, FaUser, FaCog } from "react-icons/fa";
-import "./DockBar.css";
+
+import "../styles/components/DockBar.css";
 
 const DockBar: React.FC = () => {
     const navigate = useNavigate();

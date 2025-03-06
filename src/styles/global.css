@@ -1,10 +1,5 @@
 @import "variables.css";
 
-/* color: var(--text-color); */
-/* background-color: var(--background-color); */
-/* background-image: radial-gradient(circle, var(--card-border) 0.0625rem, transparent 0.1rem); */
-/* background-size: 2.5rem 2.5rem; */
-
 * {
     user-select: none;
     text-align: center;

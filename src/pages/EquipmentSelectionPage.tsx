@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import EquipmentToggle from "../components/EquipmentToggle.tsx";
-import "./EquipmentSelectionPage.css";
+
+import "../styles/pages/EquipmentSelectionPage.css";
 
 const EquipmentSelectionPage: React.FC = () => {
     const { equipment, equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useWorkout();

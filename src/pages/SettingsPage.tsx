@@ -1,6 +1,7 @@
 import React from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
-import "../styles/pill-toggle.css"
+
+import "../styles/components/PillToggle.css";
 
 const SettingsPage: React.FC = () => {
     const { settings, setSettings } = useWorkout();

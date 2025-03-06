@@ -1,6 +1,7 @@
 import React from "react";
 import { FaCheck, FaDumbbell } from "react-icons/fa";
-import "./EquipmentToggle.css";
+
+import "../styles/components/EquipmentToggle.css"
 
 interface EquipmentToggleProps {
     equipment: string;
