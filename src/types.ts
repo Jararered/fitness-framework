@@ -16,6 +16,7 @@ export interface ExercisePlan {
 }
 
 export interface WorkoutPlan {
+    name?: string;
     exercises: ExercisePlan[];
 }
 

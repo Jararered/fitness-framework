@@ -79,11 +79,15 @@ select {
     font-size: 1rem;
     border-radius: 2rem;
     text-align: center;
-    margin: 0.25rem;
+    margin: 0.25rem auto;
 }
 
 button .caution {
     color: var(--caution-color);
+}
+
+div {
+    align-items: center;
 }
 
 span {

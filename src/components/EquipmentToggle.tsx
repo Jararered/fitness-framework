@@ -15,9 +15,7 @@ const EquipmentToggle: React.FC<EquipmentToggleProps> = ({ equipment, enabled, h
             className={`equipment-toggle ${enabled ? "enabled" : ""}`}
             onClick={() => handleEquipmentToggle(equipment)}
         >
-            <div className="icon">
-                <FaDumbbell size={48} />
-            </div>
+            <div className="icon"> {<FaDumbbell size={48} />} </div>
             <div className="name">{equipment}</div>
             <div className="check">{enabled && <FaCheck size={18} />}</div>
         </div>
