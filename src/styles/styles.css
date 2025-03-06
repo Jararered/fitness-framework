@@ -1,29 +1,21 @@
 @import "variables.css";
-@import "pill-toggle.css";
+
+/* color: var(--text-color); */
+/* background-color: var(--background-color); */
+/* background-image: radial-gradient(circle, var(--card-border) 0.0625rem, transparent 0.1rem); */
+/* background-size: 2.5rem 2.5rem; */
 
 * {
     user-select: none;
     text-align: center;
     list-style-type: none;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    transition: all 200ms;
 }
 
 body {
     margin: 0;
-    color: var(--text-color);
-    background-color: var(--background-color);
-}
-
-.dark-mode body {
-    background-image: radial-gradient(circle, #404040 0.0625rem, transparent 0.1rem);
-}
-
-.App {
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 7rem;
+    padding: 0;
 }
 
 p {
@@ -57,7 +49,6 @@ button {
     border-radius: 2rem;
     cursor: pointer;
     margin: 1rem;
-    transition: all 100ms;
 }
 
 button:hover {
@@ -107,34 +98,11 @@ span {
     gap: 0.5rem;
 }
 
-.card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--card-background);
-    box-shadow: var(--card-shadow);
-    border-radius: 2rem;
-    padding: 1rem;
-    margin: 2rem auto;
-    min-width: 20rem;
-    max-width: 40rem;
-    border: 1px solid var(--card-border);
-    text-align: center;
-}
-
 @media (max-width: 768px) {
-    .App {
-        padding: 10px 10px 80px;
-    }
 
     input,
     select,
     button {
         max-width: 100%;
-    }
-
-    .card {
-        margin: 1rem auto;
-        min-width: 0;
     }
 }
