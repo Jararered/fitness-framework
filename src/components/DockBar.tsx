@@ -3,47 +3,26 @@ import { useNavigate } from "react-router-dom";
 import { FaHome, FaDumbbell, FaMapPin, FaUser, FaCog } from "react-icons/fa";
 
 import "../styles/components/DockBar.css";
+import "../styles/components/IconButton.css";
 
 const DockBar: React.FC = () => {
     const navigate = useNavigate();
 
-    const handleNavigate = (view: string) => {
-        switch (view) {
-            case "home":
-                navigate("/");
-                break;
-            case "workout":
-                navigate("/create");
-                break;
-            case "gym":
-                navigate("/equipment");
-                break;
-            case "profile":
-                navigate("/profile");
-                break;
-            case "settings":
-                navigate("/settings");
-                break;
-            default:
-                navigate("/");
-        }
-    };
-
     return (
         <div className="dockbar">
-            <div className="icon-button" onClick={() => handleNavigate("home")}>
+            <div className="icon-button" onClick={() => navigate("/")}>
                 <FaHome size={24} />
             </div>
-            <div className="icon-button" onClick={() => handleNavigate("gym")}>
+            <div className="icon-button" onClick={() => navigate("/equipment")}>
                 <FaMapPin size={24} />
             </div>
-            <div className="icon-button" onClick={() => handleNavigate("workout")}>
+            <div className="icon-button" onClick={() => navigate("/create")}>
                 <FaDumbbell size={24} />
             </div>
-            <div className="icon-button" onClick={() => handleNavigate("profile")}>
+            <div className="icon-button" onClick={() => navigate("/profile")}>
                 <FaUser size={24} />
             </div>
-            <div className="icon-button" onClick={() => handleNavigate("settings")}>
+            <div className="icon-button" onClick={() => navigate("/settings")}>
                 <FaCog size={24} />
             </div>
         </div>
