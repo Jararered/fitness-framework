@@ -22,13 +22,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
     border-radius: 2rem;
     padding: 1rem;
     margin: 2rem;
     min-width: 20rem;
-    max-width: 40rem;
+    max-width: 50rem;
     border: 1px solid var(--card-border);
     text-align: center;
 }
