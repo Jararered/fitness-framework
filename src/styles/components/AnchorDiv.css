@@ -1,0 +1,24 @@
+.three-space-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.center-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
