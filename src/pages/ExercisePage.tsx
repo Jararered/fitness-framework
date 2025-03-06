@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +7,24 @@ const ExercisePage: React.FC = () => {
     const navigate = useNavigate();
     const [repsInput, setRepsInput] = useState<number>(0);
     const [weightInput, setWeightInput] = useState<number>(0);
+    const [breakTime, setBreakTime] = useState<number>(60); // 60 seconds break timer
+    const timerRef = useRef<number | null>(null); // Use number for browser timer ID
+
+    // Start or reset the timer
+    const startTimer = () => {
+        if (timerRef.current !== null) clearInterval(timerRef.current); // Clear existing timer
+        setBreakTime(60); // Reset to 60 seconds
+        timerRef.current = setInterval(() => {
+            setBreakTime((prev) => (prev > 0 ? prev - 1 : 0));
+        }, 1000);
+    };
+
+    useEffect(() => {
+        startTimer(); // Start timer on mount
+        return () => {
+            if (timerRef.current !== null) clearInterval(timerRef.current); // Cleanup on unmount
+        };
+    }, []); // Empty dependency array for mount only
 
     if (!workoutState.currentPlan) return <div>No workout loaded</div>;
 
@@ -14,8 +32,15 @@ const ExercisePage: React.FC = () => {
     const isLastSet = workoutState.currentSetIndex === currentExercise.reps.length - 1;
     const isLastExercise = workoutState.currentExerciseIndex === workoutState.currentPlan.exercises.length - 1;
 
+    // Calculate cumulative stats
+    const totalRepsCompleted = workoutState.repsCompleted
+        .flat()
+        .reduce((sum, val) => sum + (val || 0), 0);
+    const totalWeightLifted = workoutState.weightsUsed
+        .flat()
+        .reduce((sum, val) => sum + (val || 0), 0);
+
     const handleNext = () => {
-        // Update repsCompleted and weightsUsed
         const updatedReps = [...workoutState.repsCompleted];
         const updatedWeights = [...workoutState.weightsUsed];
 
@@ -32,7 +57,6 @@ const ExercisePage: React.FC = () => {
             weightsUsed: updatedWeights,
         });
 
-        // Navigate to next set or exercise
         if (isLastSet && isLastExercise) {
             navigate("/complete");
         } else if (isLastSet) {
@@ -51,9 +75,9 @@ const ExercisePage: React.FC = () => {
                 repsCompleted: updatedReps,
                 weightsUsed: updatedWeights,
             });
+            startTimer(); // Reset and start timer on "Next" within exercise
         }
 
-        // Reset inputs for next set
         setRepsInput(0);
         setWeightInput(0);
     };
@@ -62,6 +86,7 @@ const ExercisePage: React.FC = () => {
         <div className="exercise-page">
             <div className="card">
                 <h1>{currentExercise.exercise}</h1>
+                {breakTime > 0 && <p>Break: {breakTime}s</p>}
                 <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.reps.length}</p>
                 <p>Planned Reps: {currentExercise.reps[workoutState.currentSetIndex]}</p>
                 <label>Reps Completed</label>
@@ -80,6 +105,11 @@ const ExercisePage: React.FC = () => {
                     onChange={(e) => setWeightInput(Math.max(0, Number(e.target.value)))}
                 />
                 <button onClick={handleNext}>Next</button>
+            </div>
+            <div className="card">
+                <h2>Workout Statistics</h2>
+                <p>Total Reps Completed: {totalRepsCompleted}</p>
+                <p>Total Weight Lifted: {totalWeightLifted} {settings.unit}</p>
             </div>
         </div>
     );

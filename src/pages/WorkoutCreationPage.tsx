@@ -12,13 +12,14 @@ const WorkoutCreationPage: React.FC = () => {
         exercises,
         workoutPlans,
         setWorkoutPlans,
+        workoutState,
         setWorkoutState,
         equipmentConfigs,
         equipmentLast,
     } = useWorkout();
     const [plan, setPlan] = useState<ExercisePlanDraft[]>([{ exercise: "", reps: [10, 10, 10] }]);
     const [workoutName, setWorkoutName] = useState<string>("");
-    const [loadedWorkout, setLoadedWorkout] = useState<string | null>(null); // Track loaded workout name
+    const [loadedWorkout, setLoadedWorkout] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const selectedEquipment =
@@ -52,13 +53,13 @@ const WorkoutCreationPage: React.FC = () => {
 
     const handleAddExercise = () => {
         setPlan([...plan, { exercise: "", reps: [10, 10, 10] }]);
-        setLoadedWorkout(null); // Clear loaded workout when editing
+        setLoadedWorkout(null);
     };
 
     const handleRemoveExercise = () => {
         if (plan.length > 1) {
             setPlan(plan.slice(0, plan.length - 1));
-            setLoadedWorkout(null); // Clear loaded workout when editing
+            setLoadedWorkout(null);
         }
     };
 
@@ -71,25 +72,44 @@ const WorkoutCreationPage: React.FC = () => {
             setWorkoutPlans([...workoutPlans, newWorkout]);
             if (startWorkout) {
                 setWorkoutState({
-                    currentPlan: { exercises: validPlan },
-                    isStarted: true, // Start the workout
+                    currentPlan: newWorkout,
+                    isStarted: true,
                     currentExerciseIndex: 0,
                     currentSetIndex: 0,
                     repsCompleted: [],
                     weightsUsed: [],
                 });
-                navigate("/exercise"); // Navigate to exercise page
+                navigate("/exercise");
             } else {
-                setWorkoutName(""); // Reset name after saving
-                setLoadedWorkout(newWorkout.name); // Set as loaded for preview
+                setWorkoutName("");
+                setLoadedWorkout(newWorkout.name);
+                setWorkoutState((prevState) => ({
+                    ...prevState,
+                    currentPlan: newWorkout,
+                    isStarted: false,
+                    currentExerciseIndex: 0,
+                    currentSetIndex: 0,
+                    repsCompleted: [],
+                    weightsUsed: [],
+                }));
             }
         }
     };
 
     const handleLoadWorkout = (workout: { name?: string; exercises: { exercise: string; reps: number[] }[] }) => {
-        setPlan(workout.exercises.map((ex) => ({ exercise: ex.exercise, reps: [...ex.reps] })));
+        const newPlan = workout.exercises.map((ex) => ({ exercise: ex.exercise, reps: [...ex.reps] }));
+        setPlan(newPlan);
         setWorkoutName(workout.name || "");
         setLoadedWorkout(workout.name || `Workout ${workoutPlans.indexOf(workout) + 1}`);
+        setWorkoutState((prevState) => ({
+            ...prevState,
+            currentPlan: { name: workout.name, exercises: newPlan },
+            isStarted: false,
+            currentExerciseIndex: 0,
+            currentSetIndex: 0,
+            repsCompleted: [],
+            weightsUsed: [],
+        }));
     };
 
     const handleStartWorkout = () => {
@@ -98,7 +118,7 @@ const WorkoutCreationPage: React.FC = () => {
             .map((p) => ({ exercise: p.exercise, reps: p.reps }));
         if (validPlan.length > 0) {
             setWorkoutState({
-                currentPlan: { exercises: validPlan },
+                currentPlan: { name: workoutName || loadedWorkout || "Unnamed", exercises: validPlan },
                 isStarted: true,
                 currentExerciseIndex: 0,
                 currentSetIndex: 0,
@@ -132,7 +152,6 @@ const WorkoutCreationPage: React.FC = () => {
                                 </option>
                             ))}
                         </select>
-
                         <span>
                             <button className="adjust" onClick={() => handleDecreaseSets(exerciseIndex)}>
                                 -
@@ -189,20 +208,18 @@ const WorkoutCreationPage: React.FC = () => {
             </div>
             <div className="card">
                 <h2>Workout Preview</h2>
-                {plan.some((p) => p.exercise) ? (
+                {workoutState.currentPlan && workoutState.currentPlan.exercises.length > 0 ? (
                     <>
-                        <p>{loadedWorkout || workoutName || "Unnamed Workout"}</p>
-                        {plan.map((p, index) => (
-                            p.exercise && (
-                                <p key={index}>
-                                    {p.exercise}: {p.reps.join(", ")} reps
-                                </p>
-                            )
+                        <p>{workoutState.currentPlan.name || workoutName || "Unnamed Workout"}</p>
+                        {workoutState.currentPlan.exercises.map((exercise, index) => (
+                            <p key={index}>
+                                {exercise.exercise}: {exercise.reps.join(", ")} reps
+                            </p>
                         ))}
                         <button onClick={handleStartWorkout}>Start Workout</button>
                     </>
                 ) : (
-                    <p>No workout loaded or created yet.</p>
+                    <p>No workout loaded into current plan yet.</p>
                 )}
             </div>
         </div>
