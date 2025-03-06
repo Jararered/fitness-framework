@@ -6,16 +6,11 @@ interface ThreeSpaceDivProps {
     left?: ReactNode;
     center?: ReactNode;
     right?: ReactNode;
-    className?: string;
 }
 
-/**
- * ThreeSpaceDiv - A component that arranges content in three sections:
- * left-aligned, center-aligned, and right-aligned
- */
-const ThreeSpaceDiv: React.FC<ThreeSpaceDivProps> = ({ left, center, right, className = '' }) => {
+const ThreeSpaceDiv: React.FC<ThreeSpaceDivProps> = ({ left, center, right }) => {
     return (
-        <div className={`three-space-container ${className}`}>
+        <div className={"three-space-container"}>
             <div className="left-section">
                 {left}
             </div>
