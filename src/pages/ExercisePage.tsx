@@ -1,17 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useNavigate } from "react-router-dom";
+import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
 
 const ExercisePage: React.FC = () => {
     const { workoutState, setWorkoutState, settings } = useWorkout();
     const navigate = useNavigate();
     const [repsInput, setRepsInput] = useState<number>(0);
     const [weightInput, setWeightInput] = useState<number>(0);
-    const [breakTime, setBreakTime] = useState<number>(60); // 60 seconds break timer
-    const timerRef = useRef<number | null>(null); // Use number for browser timer ID
+    const [breakTime, setBreakTime] = useState<number>(0);
+    const timerRef = useRef<number | null>(null);
 
     // Start or reset the timer
-    const startTimer = () => {
+    const handleStartTimer = () => {
         if (timerRef.current !== null) clearInterval(timerRef.current); // Clear existing timer
         setBreakTime(60); // Reset to 60 seconds
         timerRef.current = setInterval(() => {
@@ -19,26 +20,27 @@ const ExercisePage: React.FC = () => {
         }, 1000);
     };
 
-    useEffect(() => {
-        startTimer(); // Start timer on mount
-        return () => {
-            if (timerRef.current !== null) clearInterval(timerRef.current); // Cleanup on unmount
-        };
-    }, []); // Empty dependency array for mount only
-
     if (!workoutState.currentPlan) return <div>No workout loaded</div>;
 
     const currentExercise = workoutState.currentPlan.exercises[workoutState.currentExerciseIndex];
     const isLastSet = workoutState.currentSetIndex === currentExercise.reps.length - 1;
     const isLastExercise = workoutState.currentExerciseIndex === workoutState.currentPlan.exercises.length - 1;
 
-    // Calculate cumulative stats
-    const totalRepsCompleted = workoutState.repsCompleted
-        .flat()
-        .reduce((sum, val) => sum + (val || 0), 0);
-    const totalWeightLifted = workoutState.weightsUsed
-        .flat()
-        .reduce((sum, val) => sum + (val || 0), 0);
+    React.useEffect(() => {
+        if (repsInput === 0) {
+            setRepsInput(currentExercise.reps[workoutState.currentSetIndex]);
+        }
+    }, [currentExercise.reps, workoutState.currentSetIndex, repsInput]);
+
+    const handleWeightUnit = () => {
+        let weightUnit: string = "";
+        if (settings.unit === "metric") {
+            weightUnit = "kg";
+        } else if (settings.unit === "imperial") {
+            weightUnit = "lbs";
+        }
+        return weightUnit;
+    };
 
     const handleNext = () => {
         const updatedReps = [...workoutState.repsCompleted];
@@ -49,7 +51,7 @@ const ExercisePage: React.FC = () => {
             updatedWeights[workoutState.currentExerciseIndex] = [];
         }
         updatedReps[workoutState.currentExerciseIndex][workoutState.currentSetIndex] = repsInput;
-        updatedWeights[workoutState.currentExerciseIndex][workoutState.currentSetIndex] = weightInput;
+        updatedWeights[workoutState.currentExerciseIndex][workoutState.currentSetIndex] = weightInput * repsInput;
 
         setWorkoutState({
             ...workoutState,
@@ -75,7 +77,7 @@ const ExercisePage: React.FC = () => {
                 repsCompleted: updatedReps,
                 weightsUsed: updatedWeights,
             });
-            startTimer(); // Reset and start timer on "Next" within exercise
+            handleStartTimer(); // Reset and start timer on "Next" within exercise
         }
 
         setRepsInput(0);
@@ -88,31 +90,38 @@ const ExercisePage: React.FC = () => {
                 <h1>{currentExercise.exercise}</h1>
                 {breakTime > 0 && <p>Break: {breakTime}s</p>}
                 <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.reps.length}</p>
-                <p>Planned Reps: {currentExercise.reps[workoutState.currentSetIndex]}</p>
-                <label>Reps Completed</label>
-                <input
-                    type="number"
-                    min="0"
-                    value={repsInput}
-                    onChange={(e) => setRepsInput(Math.max(0, Number(e.target.value)))}
-                />
-                <label>Weight Used ({settings.unit})</label>
-                <input
-                    type="number"
-                    min="0"
-                    step="2.5"
-                    value={weightInput}
-                    onChange={(e) => setWeightInput(Math.max(0, Number(e.target.value)))}
-                />
+                <p>Goal: {currentExercise.reps[workoutState.currentSetIndex]} reps</p>
+                <span>
+                    <div>
+                        <label>Reps</label>
+                        <input
+                            type="number"
+                            min="0"
+                            value={repsInput}
+                            onChange={(e) => setRepsInput(Math.max(0, Number(e.target.value)))}
+                        />
+                    </div>
+                    <div>
+                        <label>Weight ({handleWeightUnit()})</label>
+                        <input
+                            type="number"
+                            min="0"
+                            step="2.5"
+                            value={weightInput}
+                            onChange={(e) => setWeightInput(Math.max(0, Number(e.target.value)))}
+                        />
+                    </div>
+                </span>
                 <button onClick={handleNext}>Next</button>
             </div>
-            <div className="card">
-                <h2>Workout Statistics</h2>
-                <p>Total Reps Completed: {totalRepsCompleted}</p>
-                <p>Total Weight Lifted: {totalWeightLifted} {settings.unit}</p>
-            </div>
+            <WorkoutStatistics
+                repsCompleted={workoutState.repsCompleted}
+                weightsUsed={workoutState.weightsUsed}
+                units={handleWeightUnit()}
+            />
         </div>
     );
 };
+
 
 export default ExercisePage;

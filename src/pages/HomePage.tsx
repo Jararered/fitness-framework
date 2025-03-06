@@ -54,13 +54,8 @@ const HomePage: React.FC = () => {
                             )}
                         </span>
                     </>
-                ) : workoutPlans.length > 0 ? (
-                    <>
-                        <p>Latest Plan: {workoutPlans[workoutPlans.length - 1].name || "Unnamed"}</p>
-                        <button onClick={handleStartWorkout}>Start Workout</button>
-                    </>
                 ) : (
-                    <p>No workouts created yet. Go to /create to make one!</p>
+                    <p>No workout loaded yet.</p>
                 )}
             </div>
         </div>

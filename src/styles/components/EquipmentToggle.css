@@ -33,11 +33,6 @@
     border-color: #5a905a;
 }
 
-.equipment-toggle .icon {
-    top: inherit;
-    margin-top: 10px;
-}
-
 .equipment-toggle .name {
     font-size: 14px;
     font-weight: bold;

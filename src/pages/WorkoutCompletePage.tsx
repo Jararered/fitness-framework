@@ -1,13 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useNavigate } from "react-router-dom";
+import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
 
 const WorkoutCompletePage: React.FC = () => {
     const { workoutState, setWorkoutState, workoutLogs, setWorkoutLogs, settings } = useWorkout();
     const navigate = useNavigate();
+    const [stats, setStats] = useState<{
+        repsCompleted: number[][];
+        weightsUsed: number[][];
+    } | null>(null);
 
     useEffect(() => {
         if (workoutState.currentPlan) {
+            // Store the statistics data before resetting the state
+            setStats({
+                repsCompleted: [...workoutState.repsCompleted],
+                weightsUsed: [...workoutState.weightsUsed]
+            });
+
             const exerciseLogs = workoutState.currentPlan.exercises.map((ex, index) => ({
                 exercise: ex.exercise,
                 reps: workoutState.repsCompleted[index] || ex.reps.map(() => 0),
@@ -21,7 +32,6 @@ const WorkoutCompletePage: React.FC = () => {
             const totalWeight = workoutState.weightsUsed
                 .flat()
                 .reduce((sum, val) => sum + (val || 0), 0);
-
             setWorkoutLogs([
                 ...workoutLogs,
                 {
@@ -33,6 +43,8 @@ const WorkoutCompletePage: React.FC = () => {
                     totalReps,
                 },
             ]);
+
+            // Reset workout state after storing the statistics
             setWorkoutState({
                 currentPlan: null,
                 isStarted: false,
@@ -42,24 +54,31 @@ const WorkoutCompletePage: React.FC = () => {
                 weightsUsed: [],
             });
         }
-    }, [workoutState, setWorkoutState, workoutLogs, setWorkoutLogs]);
+    }, []);  // Only run once on component mount
 
-    const totalReps = workoutState.repsCompleted
-        .flat()
-        .reduce((sum, val) => sum + (val || 0), 0);
-    const totalWeight = workoutState.weightsUsed
-        .flat()
-        .reduce((sum, val) => sum + (val || 0), 0);
+    const handleWeightUnit = () => {
+        let weightUnit: string = "";
+        if (settings.unit === "metric") {
+            weightUnit = "kg";
+        } else if (settings.unit === "imperial") {
+            weightUnit = "lbs";
+        }
+        return weightUnit;
+    };
 
     return (
         <div className="workout-complete-page">
             <div className="card">
                 <h1>Congratulations!</h1>
-                <p>You completed your workout!</p>
-                <p>Total Reps: {totalReps}</p>
-                <p>Total Weight: {totalWeight} {settings.unit}</p>
                 <button onClick={() => navigate("/")}>Back to Home</button>
             </div>
+            {stats && (
+                <WorkoutStatistics
+                    repsCompleted={stats.repsCompleted}
+                    weightsUsed={stats.weightsUsed}
+                    units={handleWeightUnit()}
+                />
+            )}
         </div>
     );
 };
