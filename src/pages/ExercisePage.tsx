@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useNavigate } from "react-router-dom";
 import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
+import ThreeSpaceDiv from "../components/ThreeSpaceDiv.tsx";
 
 const ExercisePage: React.FC = () => {
     const { workoutState, setWorkoutState, settings } = useWorkout();
@@ -25,6 +26,8 @@ const ExercisePage: React.FC = () => {
     const currentExercise = workoutState.currentPlan.exercises[workoutState.currentExerciseIndex];
     const isLastSet = workoutState.currentSetIndex === currentExercise.reps.length - 1;
     const isLastExercise = workoutState.currentExerciseIndex === workoutState.currentPlan.exercises.length - 1;
+    const isFirstSet = workoutState.currentSetIndex === 0;
+    const isFirstExercise = workoutState.currentExerciseIndex === 0;
 
     React.useEffect(() => {
         if (repsInput === 0) {
@@ -50,6 +53,7 @@ const ExercisePage: React.FC = () => {
             updatedReps[workoutState.currentExerciseIndex] = [];
             updatedWeights[workoutState.currentExerciseIndex] = [];
         }
+
         updatedReps[workoutState.currentExerciseIndex][workoutState.currentSetIndex] = repsInput;
         updatedWeights[workoutState.currentExerciseIndex][workoutState.currentSetIndex] = weightInput * repsInput;
 
@@ -60,8 +64,10 @@ const ExercisePage: React.FC = () => {
         });
 
         if (isLastSet && isLastExercise) {
+            // Last set of last exercise
             navigate("/complete");
         } else if (isLastSet) {
+            // Last set of an exercise
             setWorkoutState({
                 ...workoutState,
                 currentExerciseIndex: workoutState.currentExerciseIndex + 1,
@@ -71,6 +77,7 @@ const ExercisePage: React.FC = () => {
             });
             navigate("/preview");
         } else {
+            // Next set of an exercise
             setWorkoutState({
                 ...workoutState,
                 currentSetIndex: workoutState.currentSetIndex + 1,
@@ -82,6 +89,42 @@ const ExercisePage: React.FC = () => {
 
         setRepsInput(0);
         setWeightInput(0);
+    };
+
+    const handleBack = () => {
+        if (isFirstSet && isFirstExercise) {
+            navigate("/preview");
+        } else if (isFirstSet && workoutState.currentPlan) {
+            setWorkoutState({
+                ...workoutState,
+                currentExerciseIndex: workoutState.currentExerciseIndex - 1,
+                currentSetIndex: workoutState.currentPlan.exercises[workoutState.currentExerciseIndex - 1].reps.length - 1,
+            });
+        } else {
+            setWorkoutState({
+                ...workoutState,
+                currentSetIndex: workoutState.currentSetIndex - 1,
+            });
+        }
+    };
+
+    const handleSkip = () => {
+        if (isLastSet && isLastExercise) {
+            navigate("/complete");
+        } else if (isLastSet) {
+            setWorkoutState({
+                ...workoutState,
+                currentExerciseIndex: workoutState.currentExerciseIndex + 1,
+                currentSetIndex: 0,
+            });
+            navigate("/preview");
+        } else {
+            setWorkoutState({
+                ...workoutState,
+                currentSetIndex: workoutState.currentSetIndex + 1,
+            });
+            handleStartTimer(); // Reset and start timer on "Skip" within exercise
+        }
     };
 
     return (
@@ -112,7 +155,23 @@ const ExercisePage: React.FC = () => {
                         />
                     </div>
                 </span>
-                <button onClick={handleNext}>Next</button>
+                <ThreeSpaceDiv
+                    left={
+                        <button onClick={handleBack} className="secondary">
+                            Back
+                        </button>
+                    }
+                    center={
+                        <button onClick={handleNext} className="primary">
+                            {isLastSet && isLastExercise ? "Complete" : "Next"}
+                        </button>
+                    }
+                    right={
+                        <button onClick={handleSkip} className="secondary">
+                            Skip
+                        </button>
+                    }
+                />
             </div>
             <WorkoutStatistics
                 repsCompleted={workoutState.repsCompleted}
