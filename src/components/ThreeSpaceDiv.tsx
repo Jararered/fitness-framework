@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import "../styles/components/AnchorDiv.css";
+import "../styles/components/ThreeSpaceDiv.css";
 
 interface ThreeSpaceDivProps {
     left?: ReactNode;
@@ -13,7 +13,7 @@ interface ThreeSpaceDivProps {
  * ThreeSpaceDiv - A component that arranges content in three sections:
  * left-aligned, center-aligned, and right-aligned
  */
-const ThreeSpaceDiv: React.FC<ThreeSpaceDivProps> = ({ left, center, right, className = '', }) => {
+const ThreeSpaceDiv: React.FC<ThreeSpaceDivProps> = ({ left, center, right, className = '' }) => {
     return (
         <div className={`three-space-container ${className}`}>
             <div className="left-section">

@@ -1,4 +1,5 @@
 .three-space-container {
+    position: relative;
     display: flex;
     width: 100%;
     align-items: center;
@@ -9,16 +10,23 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    z-index: 1;
 }
 
 .center-section {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 0;
+    width: auto;
 }
 
 .right-section {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    z-index: 1;
 }
