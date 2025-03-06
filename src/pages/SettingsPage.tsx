@@ -1,13 +1,17 @@
 import React from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
+import ToastContainer from "../components/ToastContainer.tsx";
 
 import "../styles/components/PillToggle.css";
+import { useToast } from "../context/ToastContext.tsx";
 
 const SettingsPage: React.FC = () => {
     const { settings, setSettings } = useWorkout();
+    const { addToast } = useToast();
 
     const handleUpdateSetting = (key: keyof typeof settings, value: any) => {
         setSettings({ ...settings, [key]: value });
+        addToast(`Updated ${key}`, "success");
     };
 
     return (
@@ -81,6 +85,11 @@ const SettingsPage: React.FC = () => {
                 >
                     <span className="pill-circle"></span>
                 </button>
+            </div>
+            <div className="card">
+                <h2>Debug</h2>
+                <p>Test Toast</p>
+                <ToastContainer />
             </div>
         </div>
     );

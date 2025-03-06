@@ -735,5 +735,18 @@
             "Hamstrings"
         ],
         "difficulty": "intermediate"
+    },
+    {
+        "exercise": "Rope Pulldown",
+        "equipment": [
+            "Cable Machine"
+        ],
+        "category": [
+            "Triceps"
+        ],
+        "muscles": [
+            "Triceps"
+        ],
+        "difficulty": "easy"
     }
 ]

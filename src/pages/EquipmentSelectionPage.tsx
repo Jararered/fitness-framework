@@ -7,7 +7,7 @@ import "../styles/pages/EquipmentSelectionPage.css";
 const EquipmentSelectionPage: React.FC = () => {
     const { equipment, equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useWorkout();
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
-    const [configName, setConfigName] = useState<string>("");
+    const [equipmentNameInput, setEquipmentNameInput] = useState<string>("");
 
     useEffect(() => {
         if (equipmentLast && equipmentConfigs.length > 0) {
@@ -28,16 +28,36 @@ const EquipmentSelectionPage: React.FC = () => {
     );
 
     const handleSaveEquipment = () => {
-        if (configName && selectedEquipment.length > 0) {
-            setEquipmentConfigs([...equipmentConfigs, { name: configName, equipment: selectedEquipment }]);
-            setEquipmentLast(configName);
-            setConfigName("");
+        // Check if name already exists in configs, if so, overwrite
+        const exists = equipmentConfigs.some((config) => config.name === equipmentNameInput);
+        if (equipmentNameInput && selectedEquipment.length > 0) {
+            if (exists) {
+                handleOverwriteEquipment();
+            } else {
+                setEquipmentConfigs([...equipmentConfigs, { name: equipmentNameInput, equipment: selectedEquipment }]);
+                setEquipmentLast(equipmentNameInput);
+            }
         }
     };
 
     const handleLoadEquipment = (config: { name: string; equipment: string[] }) => {
+        setEquipmentNameInput(config.name);
         setSelectedEquipment(config.equipment);
         setEquipmentLast(config.name);
+    };
+
+    const handleOverwriteEquipment = () => {
+        if (equipmentNameInput && selectedEquipment.length > 0) {
+            setEquipmentConfigs([
+                ...equipmentConfigs.filter((config) => config.name !== equipmentNameInput),
+                { name: equipmentNameInput, equipment: selectedEquipment },
+            ]);
+            setEquipmentLast(equipmentNameInput);
+        }
+    };
+
+    const handleDeleteSavedEquipment = (name: string) => {
+        setEquipmentConfigs(equipmentConfigs.filter((config) => config.name !== name));
     };
 
     return (
@@ -46,11 +66,11 @@ const EquipmentSelectionPage: React.FC = () => {
             <div className="card">
                 <h2>Equipment Selection</h2>
                 <div className="equipment-toggles">
-                    {equipment.map((eq) => (
+                    {equipment.map((equipment) => (
                         <EquipmentToggle
-                            key={eq}
-                            equipment={eq}
-                            enabled={selectedEquipment.includes(eq)}
+                            key={equipment}
+                            equipment={equipment}
+                            enabled={selectedEquipment.includes(equipment)}
                             handleEquipmentToggle={handleEquipmentToggle}
                         />
                     ))}
@@ -61,11 +81,12 @@ const EquipmentSelectionPage: React.FC = () => {
                 <span>
                     <input
                         type="text"
-                        value={configName}
-                        onChange={(e) => setConfigName(e.target.value)}
+                        value={equipmentNameInput}
+                        onChange={(e) => setEquipmentNameInput(e.target.value)}
                         placeholder="Configuration Name"
                     />
                     <button onClick={handleSaveEquipment}>Save</button>
+                    <button onClick={() => handleDeleteSavedEquipment(equipmentNameInput)}>Delete</button>
                 </span>
             </div>
             <div className="card">
