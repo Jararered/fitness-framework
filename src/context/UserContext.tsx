@@ -31,12 +31,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
             ? JSON.parse(saved)
             : { name: "", weight: 0, height: 0, unit: "metric", darkMode: false };
     });
-    
+
     const [equipmentConfigs, setEquipmentConfigs] = useState<EquipmentConfig[]>(() => {
         const saved = localStorage.getItem("equipmentConfigs");
         return saved ? JSON.parse(saved) : [];
     });
-    
+
     const [equipmentLast, setEquipmentLast] = useState<string>(() => {
         const saved = localStorage.getItem("equipmentLast");
         return saved ? JSON.parse(saved) : "";

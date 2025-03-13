@@ -27,7 +27,7 @@ const DetailedWorkoutStats: React.FC = () => {
 
     // Create a map of exercise names to their details for quick lookup
     const exerciseMap = new Map<string, Exercise>(
-        exercises.map((ex) => [ex.exercise, ex])
+        exercises.map((ex) => [ex.exercise_name, ex])
     );
 
     // Calculate stats for the last 30 days
@@ -64,7 +64,7 @@ const DetailedWorkoutStats: React.FC = () => {
                 muscleStats[muscle].workoutCount += 1;
             });
 
-            exerciseDetails.category.forEach((category) => {
+            exerciseDetails.muscle_group.forEach((category) => {
                 if (!categoryStats[category]) {
                     categoryStats[category] = { totalReps: 0, totalWeight: 0, workoutCount: 0 };
                 }

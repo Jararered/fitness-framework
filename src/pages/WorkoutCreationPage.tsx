@@ -21,7 +21,7 @@ const WorkoutCreationPage: React.FC = () => {
             : [];
 
     const availableExercises = exercises.filter((exercise) =>
-        exercise.equipment.every((eq) => selectedEquipment.includes(eq))
+        exercise.required_equipment.every((eq) => selectedEquipment.includes(eq))
     );
 
     const handleUpdateReps = (exerciseIndex: number, repIndex: number, value: number) => {
@@ -140,8 +140,8 @@ const WorkoutCreationPage: React.FC = () => {
                         >
                             <option value="">Select Exercise</option>
                             {availableExercises.map((ex) => (
-                                <option key={ex.exercise} value={ex.exercise}>
-                                    {ex.exercise}
+                                <option key={ex.exercise_name} value={ex.exercise_name}>
+                                    {ex.exercise_name}
                                 </option>
                             ))}
                         </select>

@@ -1,11 +1,11 @@
 [
     {
-        "exercise": "Barbell Bench Press",
-        "equipment": [
+        "exercise_name": "Barbell Bench Press",
+        "required_equipment": [
             "Barbell",
             "Flat Bench"
         ],
-        "category": [
+        "muscle_group": [
             "Chest"
         ],
         "muscles": [
@@ -16,11 +16,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Barbell Bent-Over Row",
-        "equipment": [
+        "exercise_name": "Barbell Bent-Over Row",
+        "required_equipment": [
             "Barbell"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -32,11 +32,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Barbell Curl",
-        "equipment": [
+        "exercise_name": "Barbell Curl",
+        "required_equipment": [
             "Barbell"
         ],
-        "category": [
+        "muscle_group": [
             "Biceps"
         ],
         "muscles": [
@@ -46,11 +46,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Barbell Deadlift",
-        "equipment": [
+        "exercise_name": "Barbell Deadlift",
+        "required_equipment": [
             "Barbell"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -63,12 +63,12 @@
         "difficulty": "advanced"
     },
     {
-        "exercise": "Barbell Decline Bench Press",
-        "equipment": [
+        "exercise_name": "Barbell Decline Bench Press",
+        "required_equipment": [
             "Barbell",
             "Flat Bench"
         ],
-        "category": [
+        "muscle_group": [
             "Chest"
         ],
         "muscles": [
@@ -79,11 +79,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Barbell Front Squat",
-        "equipment": [
+        "exercise_name": "Barbell Front Squat",
+        "required_equipment": [
             "Barbell"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -94,12 +94,12 @@
         "difficulty": "advanced"
     },
     {
-        "exercise": "Barbell Incline Bench Press",
-        "equipment": [
+        "exercise_name": "Barbell Incline Bench Press",
+        "required_equipment": [
             "Barbell",
             "Flat Bench"
         ],
-        "category": [
+        "muscle_group": [
             "Chest"
         ],
         "muscles": [
@@ -110,11 +110,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Barbell Lunge",
-        "equipment": [
+        "exercise_name": "Barbell Lunge",
+        "required_equipment": [
             "Barbell"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -125,11 +125,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Barbell Overhead Press",
-        "equipment": [
+        "exercise_name": "Barbell Overhead Press",
+        "required_equipment": [
             "Barbell"
         ],
-        "category": [
+        "muscle_group": [
             "Shoulders"
         ],
         "muscles": [
@@ -140,11 +140,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Barbell Romanian Deadlift",
-        "equipment": [
+        "exercise_name": "Barbell Romanian Deadlift",
+        "required_equipment": [
             "Barbell"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -155,11 +155,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Barbell Squat",
-        "equipment": [
+        "exercise_name": "Barbell Squat",
+        "required_equipment": [
             "Barbell"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -171,11 +171,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Barbell Sumo Deadlift",
-        "equipment": [
+        "exercise_name": "Barbell Sumo Deadlift",
+        "required_equipment": [
             "Barbell"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -187,11 +187,11 @@
         "difficulty": "advanced"
     },
     {
-        "exercise": "Dumbbell Bent-Over Row",
-        "equipment": [
+        "exercise_name": "Dumbbell Bent-Over Row",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -203,11 +203,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Dumbbell Bicep Curl",
-        "equipment": [
+        "exercise_name": "Dumbbell Bicep Curl",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Biceps"
         ],
         "muscles": [
@@ -217,11 +217,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Dumbbell Front Raise",
-        "equipment": [
+        "exercise_name": "Dumbbell Front Raise",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Shoulders"
         ],
         "muscles": [
@@ -230,11 +230,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Dumbbell Hammer Curl",
-        "equipment": [
+        "exercise_name": "Dumbbell Hammer Curl",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Biceps"
         ],
         "muscles": [
@@ -245,11 +245,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Dumbbell Lateral Raise",
-        "equipment": [
+        "exercise_name": "Dumbbell Lateral Raise",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Shoulders"
         ],
         "muscles": [
@@ -258,11 +258,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Dumbbell Lunges",
-        "equipment": [
+        "exercise_name": "Dumbbell Lunges",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -273,11 +273,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Dumbbell Shoulder Press",
-        "equipment": [
+        "exercise_name": "Dumbbell Shoulder Press",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Shoulders"
         ],
         "muscles": [
@@ -288,11 +288,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Dumbbell Shrugs",
-        "equipment": [
+        "exercise_name": "Dumbbell Shrugs",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Traps"
         ],
         "muscles": [
@@ -301,11 +301,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Dumbbell Single-Arm Row",
-        "equipment": [
+        "exercise_name": "Dumbbell Single-Arm Row",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -317,11 +317,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Dumbbell Skull Crushers",
-        "equipment": [
+        "exercise_name": "Dumbbell Skull Crushers",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Triceps"
         ],
         "muscles": [
@@ -330,11 +330,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Dumbbell Tricep Extension",
-        "equipment": [
+        "exercise_name": "Dumbbell Tricep Extension",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Triceps"
         ],
         "muscles": [
@@ -343,11 +343,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Dumbbell Upright Row",
-        "equipment": [
+        "exercise_name": "Dumbbell Upright Row",
+        "required_equipment": [
             "Dumbbells"
         ],
-        "category": [
+        "muscle_group": [
             "Shoulders"
         ],
         "muscles": [
@@ -358,11 +358,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "EZ Bar Close-Grip Curl",
-        "equipment": [
+        "exercise_name": "EZ Bar Close-Grip Curl",
+        "required_equipment": [
             "EZ Bar"
         ],
-        "category": [
+        "muscle_group": [
             "Biceps"
         ],
         "muscles": [
@@ -372,11 +372,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "EZ Bar Curl",
-        "equipment": [
+        "exercise_name": "EZ Bar Curl",
+        "required_equipment": [
             "EZ Bar"
         ],
-        "category": [
+        "muscle_group": [
             "Biceps"
         ],
         "muscles": [
@@ -386,12 +386,12 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "EZ Bar Skull Crusher",
-        "equipment": [
+        "exercise_name": "EZ Bar Skull Crusher",
+        "required_equipment": [
             "EZ Bar",
             "Flat Bench"
         ],
-        "category": [
+        "muscle_group": [
             "Triceps"
         ],
         "muscles": [
@@ -400,11 +400,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "EZ Bar Wide-Grip Curl",
-        "equipment": [
+        "exercise_name": "EZ Bar Wide-Grip Curl",
+        "required_equipment": [
             "EZ Bar"
         ],
-        "category": [
+        "muscle_group": [
             "Biceps"
         ],
         "muscles": [
@@ -414,11 +414,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Lat Pulldown",
-        "equipment": [
+        "exercise_name": "Lat Pulldown",
+        "required_equipment": [
             "Lat Pulldown Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -429,11 +429,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Lat Pulldown Behind-the-Head",
-        "equipment": [
+        "exercise_name": "Lat Pulldown Behind-the-Head",
+        "required_equipment": [
             "Lat Pulldown Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -444,11 +444,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Lat Pulldown Narrow-Grip",
-        "equipment": [
+        "exercise_name": "Lat Pulldown Narrow-Grip",
+        "required_equipment": [
             "Lat Pulldown Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -459,11 +459,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Lat Pulldown Reverse-Grip",
-        "equipment": [
+        "exercise_name": "Lat Pulldown Reverse-Grip",
+        "required_equipment": [
             "Lat Pulldown Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -474,11 +474,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Lat Pulldown Single-Arm",
-        "equipment": [
+        "exercise_name": "Lat Pulldown Single-Arm",
+        "required_equipment": [
             "Lat Pulldown Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -489,11 +489,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Lat Pulldown Wide-Grip",
-        "equipment": [
+        "exercise_name": "Lat Pulldown Wide-Grip",
+        "required_equipment": [
             "Lat Pulldown Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -504,11 +504,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Leg Curl",
-        "equipment": [
+        "exercise_name": "Leg Curl",
+        "required_equipment": [
             "Leg Curl Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -517,11 +517,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Leg Curl + Isometric Hold",
-        "equipment": [
+        "exercise_name": "Leg Curl + Isometric Hold",
+        "required_equipment": [
             "Leg Curl Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -530,11 +530,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Leg Extension",
-        "equipment": [
+        "exercise_name": "Leg Extension",
+        "required_equipment": [
             "Leg Extension Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -543,11 +543,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Leg Extension + Isometric Hold",
-        "equipment": [
+        "exercise_name": "Leg Extension + Isometric Hold",
+        "required_equipment": [
             "Leg Extension Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -556,11 +556,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Leg Press",
-        "equipment": [
+        "exercise_name": "Leg Press",
+        "required_equipment": [
             "Leg Press Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -571,11 +571,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Machine Chest Press",
-        "equipment": [
+        "exercise_name": "Machine Chest Press",
+        "required_equipment": [
             "Chest Press Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Chest"
         ],
         "muscles": [
@@ -586,11 +586,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Machine Incline Chest Press",
-        "equipment": [
+        "exercise_name": "Machine Incline Chest Press",
+        "required_equipment": [
             "Chest Press Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Chest"
         ],
         "muscles": [
@@ -601,11 +601,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Machine Shoulder Press",
-        "equipment": [
+        "exercise_name": "Machine Shoulder Press",
+        "required_equipment": [
             "Chest Press Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Shoulders"
         ],
         "muscles": [
@@ -616,12 +616,12 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Smith Machine Bench Press",
-        "equipment": [
+        "exercise_name": "Smith Machine Bench Press",
+        "required_equipment": [
             "Smith Machine",
             "Flat Bench"
         ],
-        "category": [
+        "muscle_group": [
             "Chest"
         ],
         "muscles": [
@@ -632,11 +632,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Smith Machine Bent-Over Row",
-        "equipment": [
+        "exercise_name": "Smith Machine Bent-Over Row",
+        "required_equipment": [
             "Smith Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Back"
         ],
         "muscles": [
@@ -648,12 +648,12 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Smith Machine Close-Grip Bench Press",
-        "equipment": [
+        "exercise_name": "Smith Machine Close-Grip Bench Press",
+        "required_equipment": [
             "Smith Machine",
             "Flat Bench"
         ],
-        "category": [
+        "muscle_group": [
             "Chest"
         ],
         "muscles": [
@@ -663,12 +663,12 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Smith Machine Incline Bench Press",
-        "equipment": [
+        "exercise_name": "Smith Machine Incline Bench Press",
+        "required_equipment": [
             "Smith Machine",
             "Incline Bench"
         ],
-        "category": [
+        "muscle_group": [
             "Chest"
         ],
         "muscles": [
@@ -679,11 +679,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Smith Machine Lunges",
-        "equipment": [
+        "exercise_name": "Smith Machine Lunges",
+        "required_equipment": [
             "Smith Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -694,11 +694,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Smith Machine Shoulder Press",
-        "equipment": [
+        "exercise_name": "Smith Machine Shoulder Press",
+        "required_equipment": [
             "Smith Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Shoulders"
         ],
         "muscles": [
@@ -709,11 +709,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Smith Machine Shrugs",
-        "equipment": [
+        "exercise_name": "Smith Machine Shrugs",
+        "required_equipment": [
             "Smith Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Traps"
         ],
         "muscles": [
@@ -722,11 +722,11 @@
         "difficulty": "easy"
     },
     {
-        "exercise": "Smith Machine Squat",
-        "equipment": [
+        "exercise_name": "Smith Machine Squat",
+        "required_equipment": [
             "Smith Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Legs"
         ],
         "muscles": [
@@ -737,11 +737,11 @@
         "difficulty": "intermediate"
     },
     {
-        "exercise": "Rope Pulldown",
-        "equipment": [
+        "exercise_name": "Rope Pulldown",
+        "required_equipment": [
             "Cable Machine"
         ],
-        "category": [
+        "muscle_group": [
             "Triceps"
         ],
         "muscles": [

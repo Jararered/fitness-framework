@@ -1,9 +1,9 @@
 // Types for the exercise data;
 
 export interface Exercise {
-    exercise: string;
-    equipment: string[];
-    category: string[];
+    exercise_name: string;
+    required_equipment: string[];
+    muscle_group: string[];
     muscles: string[];
     difficulty: string;
 }

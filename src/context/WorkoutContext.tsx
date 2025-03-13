@@ -31,11 +31,11 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     const [exercises] = useState<Exercise[]>(exerciseData);
 
     const [equipment] = useState<string[]>(() => {
-        const allEquipment = exercises.flatMap((ex) => ex.equipment);
+        const allEquipment = exercises.flatMap((ex) => ex.required_equipment);
         return [...new Set(allEquipment)].sort();
     });
     const [categories] = useState<string[]>(() => {
-        const allCategories = exercises.flatMap((ex) => ex.category);
+        const allCategories = exercises.flatMap((ex) => ex.muscle_group);
         return [...new Set(allCategories)].sort();
     });
     const [difficulties] = useState<string[]>(() => {
