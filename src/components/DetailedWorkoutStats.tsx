@@ -39,21 +39,18 @@ const DetailedWorkoutStats: React.FC = () => {
     const muscleStats: MuscleStats = {};
     const categoryStats: CategoryStats = {};
     let totalWorkouts = recentLogs.length;
-    let totalDuration = 0;
+    let totalMinutes = 0;
 
     recentLogs.forEach((log) => {
-        const duration = (log.endTime.getTime() - log.startTime.getTime()) / 60000; // minutes
-        totalDuration += duration;
+        const minutes = (log.endTime.getTime() - log.startTime.getTime()) / 60000;
+        totalMinutes += minutes;
 
         log.exercises.forEach((exerciseLog) => {
             const exerciseDetails = exerciseMap.get(exerciseLog.exercise);
             if (!exerciseDetails) return;
 
             const exerciseReps = exerciseLog.reps.reduce((sum, reps) => sum + reps, 0);
-            const exerciseWeight = exerciseLog.weight.reduce(
-                (sum, weight) => sum + weight * exerciseLog.reps[0], // Assuming same reps for simplicity
-                0
-            );
+            const exerciseWeight = exerciseLog.weight.reduce((sum, weight) => sum + weight, 0);
 
             exerciseDetails.muscles.forEach((muscle) => {
                 if (!muscleStats[muscle]) {
@@ -82,7 +79,7 @@ const DetailedWorkoutStats: React.FC = () => {
         ([, a], [, b]) => b.totalWeight - a.totalWeight
     );
 
-    const averageDuration = totalWorkouts > 0 ? totalDuration / totalWorkouts : 0;
+    const averageDuration = totalWorkouts > 0 ? totalMinutes / totalWorkouts : 0;
     const unit = settings.unit === "metric" ? "kg" : "lbs";
 
     return (
@@ -91,10 +88,8 @@ const DetailedWorkoutStats: React.FC = () => {
 
             <div className="stats-section">
                 <h3>General Stats</h3>
-                <span>
-                    <p>Total Workouts: {totalWorkouts}</p>
-                    <p>Average Workout Duration: {averageDuration.toFixed(1)} minutes</p>
-                </span>
+                <p>Total Workouts: {totalWorkouts}</p>
+                <p>Average Workout Duration: {averageDuration.toFixed(1)} minutes</p>
             </div>
 
             <div className="stats-section">
@@ -103,8 +98,8 @@ const DetailedWorkoutStats: React.FC = () => {
                     <span className="stats-list">
                         {sortedMuscles.map(([muscle, stats]) => (
                             <p key={muscle}>
-                                {muscle}: {stats.totalWeight} {unit} lifted, {stats.totalReps} reps,
-                                used in {stats.workoutCount} workouts
+                                {muscle}: {stats.totalWeight}{unit} total, {stats.totalReps} reps,
+                                used in {stats.workoutCount} workout(s)
                             </p>
                         ))}
                     </span>
@@ -127,10 +122,6 @@ const DetailedWorkoutStats: React.FC = () => {
                 ) : (
                     <p>No category data available</p>
                 )}
-            </div>
-
-            <div className="graph-placeholder">
-                <p>Graph visualization coming soon...</p>
             </div>
         </div>
     );

@@ -36,12 +36,10 @@ const ProfilePage: React.FC = () => {
             </div>
             <div className="card">
                 <h2>Statistics</h2>
-                <span>
-                    <p>Workouts Last Week: {lastWeekLogs.length}</p>
-                    <p>Workouts Last Month: {lastMonthLogs.length}</p>
-                    <p>Total Weight Last Week: {totalWeightWeek} {settings.unit}</p>
-                    <p>Total Weight Last Month: {totalWeightMonth} {settings.unit}</p>
-                </span>
+                <p>Workouts Last Week: {lastWeekLogs.length}</p>
+                <p>Workouts Last Month: {lastMonthLogs.length}</p>
+                <p>Total Weight Last Week: {totalWeightWeek} {settings.unit}</p>
+                <p>Total Weight Last Month: {totalWeightMonth} {settings.unit}</p>
             </div>
             <div className="card">
                 <h2>Recent Workouts</h2>
