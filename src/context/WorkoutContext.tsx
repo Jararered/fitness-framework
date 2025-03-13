@@ -1,19 +1,7 @@
 import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 import exerciseData from "../data/exercises.json";
 import { Exercise, WorkoutPlan, WorkoutLog } from "../types";
-
-interface Settings {
-    name: string;
-    weight: number;
-    height: number;
-    unit: "imperial" | "metric";
-    darkMode: boolean;
-}
-
-interface EquipmentConfig {
-    name: string;
-    equipment: string[];
-}
+import { UserProvider } from "./UserContext";
 
 interface WorkoutState {
     currentPlan: WorkoutPlan | null;
@@ -33,12 +21,6 @@ interface WorkoutContextType {
     setWorkoutPlans: React.Dispatch<React.SetStateAction<WorkoutPlan[]>>;
     workoutLogs: WorkoutLog[];
     setWorkoutLogs: React.Dispatch<React.SetStateAction<WorkoutLog[]>>;
-    settings: Settings;
-    setSettings: React.Dispatch<React.SetStateAction<Settings>>;
-    equipmentConfigs: EquipmentConfig[];
-    setEquipmentConfigs: React.Dispatch<React.SetStateAction<EquipmentConfig[]>>;
-    equipmentLast: string;
-    setEquipmentLast: React.Dispatch<React.SetStateAction<string>>;
     workoutState: WorkoutState;
     setWorkoutState: React.Dispatch<React.SetStateAction<WorkoutState>>;
 }
@@ -82,20 +64,6 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
         }
         return [];
     });
-    const [settings, setSettings] = useState<Settings>(() => {
-        const saved = localStorage.getItem("settings");
-        return saved
-            ? JSON.parse(saved)
-            : { name: "", weight: 0, height: 0, unit: "metric", darkMode: false };
-    });
-    const [equipmentConfigs, setEquipmentConfigs] = useState<EquipmentConfig[]>(() => {
-        const saved = localStorage.getItem("equipmentConfigs");
-        return saved ? JSON.parse(saved) : [];
-    });
-    const [equipmentLast, setEquipmentLast] = useState<string>(() => {
-        const saved = localStorage.getItem("equipmentLast");
-        return saved ? JSON.parse(saved) : "";
-    });
     const [workoutState, setWorkoutState] = useState<WorkoutState>(() => {
         const saved = localStorage.getItem("workoutState");
         return saved
@@ -113,35 +81,28 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         localStorage.setItem("workoutPlans", JSON.stringify(workoutPlans));
         localStorage.setItem("workoutLogs", JSON.stringify(workoutLogs));
-        localStorage.setItem("settings", JSON.stringify(settings));
-        localStorage.setItem("equipmentConfigs", JSON.stringify(equipmentConfigs));
-        localStorage.setItem("equipmentLast", JSON.stringify(equipmentLast));
         localStorage.setItem("workoutState", JSON.stringify(workoutState));
-    }, [workoutPlans, workoutLogs, settings, equipmentConfigs, equipmentLast, workoutState]);
+    }, [workoutPlans, workoutLogs, workoutState]);
 
     return (
-        <WorkoutContext.Provider
-            value={{
-                exercises,
-                equipment,
-                categories,
-                difficulties,
-                workoutPlans,
-                setWorkoutPlans,
-                workoutLogs,
-                setWorkoutLogs,
-                settings,
-                setSettings,
-                equipmentConfigs,
-                setEquipmentConfigs,
-                equipmentLast,
-                setEquipmentLast,
-                workoutState,
-                setWorkoutState,
-            }}
-        >
-            {children}
-        </WorkoutContext.Provider>
+        <UserProvider>
+            <WorkoutContext.Provider
+                value={{
+                    exercises,
+                    equipment,
+                    categories,
+                    difficulties,
+                    workoutPlans,
+                    setWorkoutPlans,
+                    workoutLogs,
+                    setWorkoutLogs,
+                    workoutState,
+                    setWorkoutState,
+                }}
+            >
+                {children}
+            </WorkoutContext.Provider>
+        </UserProvider>
     );
 };
 

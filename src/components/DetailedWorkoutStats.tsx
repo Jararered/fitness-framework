@@ -1,5 +1,6 @@
 import React from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
+import { useUser } from "../context/UserContext.tsx";
 import { Exercise } from "../types";
 
 import "../styles/components/DetailedWorkoutStats.css";
@@ -21,7 +22,8 @@ interface CategoryStats {
 }
 
 const DetailedWorkoutStats: React.FC = () => {
-    const { workoutLogs, exercises, settings } = useWorkout();
+    const { workoutLogs, exercises } = useWorkout();
+    const { settings } = useUser();
 
     // Create a map of exercise names to their details for quick lookup
     const exerciseMap = new Map<string, Exercise>(

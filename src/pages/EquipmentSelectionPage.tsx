@@ -3,9 +3,11 @@ import { useWorkout } from "../context/WorkoutContext.tsx";
 import EquipmentToggle from "../components/EquipmentToggle.tsx";
 
 import "../styles/pages/EquipmentSelectionPage.css";
+import { useUser } from "../context/UserContext.tsx";
 
 const EquipmentSelectionPage: React.FC = () => {
-    const { equipment, equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useWorkout();
+    const { equipment } = useWorkout();
+    const { equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useUser();
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
     const [equipmentNameInput, setEquipmentNameInput] = useState<string>("");
 

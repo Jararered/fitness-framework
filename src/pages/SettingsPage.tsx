@@ -1,12 +1,12 @@
 import React from "react";
-import { useWorkout } from "../context/WorkoutContext.tsx";
 import ToastContainer from "../components/ToastContainer.tsx";
 
 import "../styles/components/PillToggle.css";
 import { useToast } from "../context/ToastContext.tsx";
+import { useUser } from "../context/UserContext.tsx";
 
 const SettingsPage: React.FC = () => {
-    const { settings, setSettings } = useWorkout();
+    const { settings, setSettings } = useUser();
     const { addToast } = useToast();
 
     const handleUpdateSetting = (key: keyof typeof settings, value: any) => {

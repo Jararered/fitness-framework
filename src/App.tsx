@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useWorkout } from "./context/WorkoutContext.tsx";
+import { useUser } from "./context/UserContext.tsx";
 
 import DockBar from "./components/DockBar.tsx";
 import ToastContainer from "./components/ToastContainer.tsx";
@@ -17,7 +17,7 @@ import WorkoutCompletePage from "./pages/WorkoutCompletePage.tsx";
 import "./styles/components/App.css";
 
 function App() {
-    const { settings } = useWorkout();
+    const { settings } = useUser();
     const location = useLocation();
 
     return (

@@ -1,22 +1,15 @@
 import React, { useState } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useNavigate } from "react-router-dom";
-
+import { useUser } from "../context/UserContext.tsx";
 interface ExercisePlanDraft {
     exercise: string;
     reps: number[];
 }
 
 const WorkoutCreationPage: React.FC = () => {
-    const {
-        exercises,
-        workoutPlans,
-        setWorkoutPlans,
-        workoutState,
-        setWorkoutState,
-        equipmentConfigs,
-        equipmentLast,
-    } = useWorkout();
+    const { exercises, workoutPlans, setWorkoutPlans, workoutState, setWorkoutState, } = useWorkout();
+    const { equipmentConfigs, equipmentLast } = useUser();
     const [plan, setPlan] = useState<ExercisePlanDraft[]>([{ exercise: "", reps: [10, 10, 10] }]);
     const [workoutName, setWorkoutName] = useState<string>("");
     const [loadedWorkout, setLoadedWorkout] = useState<string | null>(null);

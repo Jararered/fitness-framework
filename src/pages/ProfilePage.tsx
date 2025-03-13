@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useToast } from "../context/ToastContext.tsx"; // Add this import
 import DetailedWorkoutStats from "../components/DetailedWorkoutStats";
+import { useUser } from "../context/UserContext.tsx";
 
 const ProfilePage: React.FC = () => {
-    const { settings, workoutLogs } = useWorkout();
+    const { workoutLogs } = useWorkout();
+    const { settings } = useUser();
     const { addToast } = useToast(); // Add toast hook
     const [expanded, setExpanded] = useState(false);
 
