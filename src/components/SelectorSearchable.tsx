@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import '../styles/components/SearchableSelector.css';
+import '../styles/components/SelectorSearchable.css';
 
-interface SearchableSelectorProps<T> {
+interface SelectorSearchableProps<T> {
     options: T[];
     value: T | null;
     onChange: (value: T | null) => void;
@@ -10,14 +10,14 @@ interface SearchableSelectorProps<T> {
     className?: string;
 }
 
-export function SearchableSelector<T>({
+export function SelectorSearchable<T>({
     options,
     value,
     onChange,
     getOptionLabel,
     placeholder = 'Select',
     className = '',
-}: SearchableSelectorProps<T>) {
+}: SelectorSearchableProps<T>) {
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredOptions, setFilteredOptions] = useState<T[]>(options);
@@ -35,7 +35,7 @@ export function SearchableSelector<T>({
         // Handle clicking outside to close dropdown
         const handleClickOutside = (event: MouseEvent) => {
             const target = event.target as HTMLElement;
-            if (!target.closest('.searchable-selector')) {
+            if (!target.closest('.selector-searchable')) {
                 setIsOpen(false);
             }
         };

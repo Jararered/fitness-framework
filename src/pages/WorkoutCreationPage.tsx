@@ -8,7 +8,7 @@ import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import DividerSpaced from "../components/DividerSpaced.tsx";
-import { SearchableSelector } from "../components/SelectorSearchable.tsx";
+import { SelectorSearchable } from "../components/SelectorSearchable.tsx";
 
 import "../styles/pages/WorkoutCreationPage.css";
 
@@ -227,7 +227,7 @@ const WorkoutCreationPage: React.FC = () => {
                     <div key={exerciseIndex}>
                         <h2>Exercise {exerciseIndex + 1}</h2>
 
-                        <SearchableSelector
+                        <SelectorSearchable
                             options={avaliableExerciseNames}
                             value={p.exercise}
                             getOptionLabel={(option) => option}
