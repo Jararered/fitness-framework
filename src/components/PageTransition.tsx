@@ -22,7 +22,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
                 setDisplayChildren(children);
                 setTransitionStage('fadeIn');
                 setPrevPath(location.pathname);
-            }, 300);
+            }, 200);
 
             return () => clearTimeout(timeout);
         } else {

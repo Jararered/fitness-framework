@@ -1,11 +1,5 @@
 .page-transition {
-    position: relative;
-    width: 100%;
-    min-height: 100%;
-    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+    transition: opacity 200ms ease-in-out transform 200ms ease-in-out;
 }
 
 .page-transition.fadeIn {
@@ -15,7 +9,6 @@
 
 .page-transition.fadeOut {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(1rem);
     pointer-events: none;
-    /* Prevent interaction during fade out */
 }

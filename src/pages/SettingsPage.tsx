@@ -3,8 +3,6 @@ import React from "react";
 import { useToast } from "../context/ToastContext.tsx";
 import { useUser } from "../context/UserContext.tsx";
 
-import ToastContainer from "../components/ToastContainer.tsx";
-
 import "../styles/components/PillToggle.css";
 
 const SettingsPage: React.FC = () => {
@@ -91,7 +89,6 @@ const SettingsPage: React.FC = () => {
             <div className="card">
                 <h2>Debug</h2>
                 <p>Test Toast</p>
-                <ToastContainer />
             </div>
         </div>
     );
