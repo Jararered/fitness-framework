@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import EquipmentToggle from "../components/EquipmentToggle.tsx";
 import { useUser } from "../context/UserContext.tsx";
+
 import "../styles/pages/EquipmentSelectionPage.css";
 
 const EquipmentSelectionPage: React.FC = () => {
