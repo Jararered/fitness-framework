@@ -16,6 +16,11 @@ export const TimerCircular: React.FC<TimerCircularProps> = ({
 }) => {
     const [timeLeft, setTimeLeft] = useState(duration);
 
+    // Reset timer when duration changes
+    useEffect(() => {
+        setTimeLeft(duration);
+    }, [duration]);
+
     // Calculate circle properties
     const radius = (size - strokeWidth) / 2;
     const circumference = radius * 2 * Math.PI;
@@ -38,7 +43,7 @@ export const TimerCircular: React.FC<TimerCircularProps> = ({
     }, [timeLeft]);
 
     return (
-        <div style={{ position: 'relative', width: size, height: size }}>
+        <div className="timer-circular" style={{ position: 'relative', width: size, height: size }}>
             <svg
                 width={size}
                 height={size}
@@ -54,6 +59,7 @@ export const TimerCircular: React.FC<TimerCircularProps> = ({
                     stroke="#e9ecef"
                     strokeWidth={strokeWidth}
                 />
+
                 {/* Timer circle */}
                 <circle
                     cx={size / 2}
@@ -67,6 +73,7 @@ export const TimerCircular: React.FC<TimerCircularProps> = ({
                     style={{ transition: 'stroke-dashoffset 0.5s ease-in-out' }}
                 />
             </svg>
+
             {/* Timer text or check icon */}
             <div
                 style={{

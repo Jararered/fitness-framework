@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
+import { TimerCircular } from "../components/TimerCircular.tsx";
 
 const ExercisePreviewPage: React.FC = () => {
     const { workoutState } = useWorkout();
     const { settings } = useUser();
     const navigate = useNavigate();
-    const [breakTime, setBreakTime] = useState<number>(60);
-
-    useEffect(() => {
-        setBreakTime(60);
-        const timer = setInterval(() => {
-            setBreakTime((prev) => (prev > 0 ? prev - 1 : 0));
-        }, 1000);
-        return () => clearInterval(timer);
-    }, []);
+    const [breakTime] = useState<number>(60);
 
     const handleWeightUnit = () => {
         let weightUnit: string = "";
@@ -38,7 +31,7 @@ const ExercisePreviewPage: React.FC = () => {
         <div className="exercise-preview-page">
             <div className="card">
                 <h1>Up Next</h1>
-                {breakTime > 0 && <p>Break: {breakTime}s</p>}
+                <TimerCircular duration={breakTime} />
                 <p>Next up: {currentExercise.exercise}</p>
                 <p>{currentExercise.reps.length} sets ({currentExercise.reps.join(', ')} reps)</p>
                 <button onClick={() => navigate("/exercise")}>Continue</button>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useUser } from "../context/UserContext.tsx";
@@ -8,8 +8,6 @@ import ThreeSpaceDiv from "../components/DividerSpaced.tsx";
 import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
 import { TimerCircular } from "../components/TimerCircular.tsx";
 
-import "../styles/pages/ExercisePage.css";
-
 const ExercisePage: React.FC = () => {
     const { workoutState, setWorkoutState } = useWorkout();
     const { settings } = useUser();
@@ -17,16 +15,6 @@ const ExercisePage: React.FC = () => {
     const [repsInput, setRepsInput] = useState<number>(0);
     const [weightInput, setWeightInput] = useState<number>(0);
     const [breakTime, setBreakTime] = useState<number>(0);
-    const timerRef = useRef<number | null>(null);
-
-    // Start or reset the timer
-    const handleStartTimer = () => {
-        if (timerRef.current !== null) clearInterval(timerRef.current); // Clear existing timer
-        setBreakTime(60); // Reset to 60 seconds
-        timerRef.current = setInterval(() => {
-            setBreakTime((prev) => (prev > 0 ? prev - 1 : 0));
-        }, 1000);
-    };
 
     if (!workoutState.currentPlan) return <div>No workout loaded</div>;
 
@@ -36,7 +24,7 @@ const ExercisePage: React.FC = () => {
     const isFirstSet = workoutState.currentSetIndex === 0;
     const isFirstExercise = workoutState.currentExerciseIndex === 0;
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (repsInput === 0) {
             setRepsInput(currentExercise.reps[workoutState.currentSetIndex]);
         }
@@ -91,7 +79,7 @@ const ExercisePage: React.FC = () => {
                 repsCompleted: updatedReps,
                 weightsUsed: updatedWeights,
             });
-            handleStartTimer(); // Reset and start timer on "Next" within exercise
+            setBreakTime(60);
         }
 
         setRepsInput(0);
@@ -130,7 +118,7 @@ const ExercisePage: React.FC = () => {
                 ...workoutState,
                 currentSetIndex: workoutState.currentSetIndex + 1,
             });
-            handleStartTimer(); // Reset and start timer on "Skip" within exercise
+            setBreakTime(60);
         }
     };
 
@@ -139,7 +127,6 @@ const ExercisePage: React.FC = () => {
             <div className="card">
                 <h1>{currentExercise.exercise}</h1>
 
-                {breakTime > 0 && <p>Break: {breakTime}s</p>}
                 <TimerCircular duration={breakTime} />
 
                 <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.reps.length}</p>
@@ -147,7 +134,7 @@ const ExercisePage: React.FC = () => {
                 <span>
                     <div>
                         <label>Reps</label>
-                        <input className="input-reps"
+                        <input
                             type="number"
                             min="0"
                             value={repsInput}
@@ -155,8 +142,8 @@ const ExercisePage: React.FC = () => {
                         />
                     </div>
                     <div>
-                        <label>Weight</label>
-                        <input className="input-weight"
+                        <label>Weight ({handleWeightUnit()})</label>
+                        <input
                             type="number"
                             min="0"
                             step="2.5"
