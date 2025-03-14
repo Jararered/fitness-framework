@@ -23,7 +23,8 @@
 .selector-search {
     width: calc(100% - 1.5rem);
     padding: 0.5rem;
-    border: none;
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem;
     outline: none;
 }
 

@@ -31,33 +31,38 @@ export function SearchableSelector<T>({
         setFilteredOptions(filtered);
     }, [searchTerm, options, getOptionLabel]);
 
+    useEffect(() => {
+        // Handle clicking outside to close dropdown
+        const handleClickOutside = (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+            if (!target.closest('.searchable-selector')) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, []);
+
     const handleSelect = (option: T) => {
         onChange(option);
+        setSearchTerm(getOptionLabel(option));
         setIsOpen(false);
-        setSearchTerm('');
     };
 
     return (
         <div className={`searchable-selector ${className}`}>
-            <div
-                className="selector-trigger"
-                onClick={() => setIsOpen(!isOpen)}
-            >
-                {value ? getOptionLabel(value) : placeholder}
-            </div>
+            <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onFocus={() => setIsOpen(true)}
+                className="selector-search"
+                placeholder={value ? getOptionLabel(value) : placeholder}
+            />
 
             {isOpen && (
                 <div className="selector-dropdown">
-                    <input
-                        type="text"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="selector-search"
-                        placeholder="Type to search..."
-                        onClick={(e) => e.stopPropagation()}
-                        autoFocus
-                    />
-
                     <div className="options-container">
                         {filteredOptions.length === 0 ? (
                             <div className="no-results">No results found</div>
