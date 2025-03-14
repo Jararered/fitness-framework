@@ -68,7 +68,7 @@ const WorkoutCreatePage: React.FC = () => {
     const handleSetsChange = (exerciseIndex: number, change: string) => {
         const newWorkoutPlan = [...workoutPlanState];
         let newSets = newWorkoutPlan[exerciseIndex].sets;
-        
+
         if (change === "increase") {
             newSets = newWorkoutPlan[exerciseIndex].sets + 1;
         } else if (change === "decrease") {
@@ -86,7 +86,7 @@ const WorkoutCreatePage: React.FC = () => {
     const handleChangeBaseReps = (exerciseIndex: number, change: string) => {
         const newWorkoutPlan = [...workoutPlanState];
         let newBaseReps = newWorkoutPlan[exerciseIndex].baseReps;
-        
+
         if (change === "increase") {
             newBaseReps = newWorkoutPlan[exerciseIndex].baseReps + repsChange;
         } else if (change === "decrease") {
@@ -225,7 +225,7 @@ const WorkoutCreatePage: React.FC = () => {
             <h1>Create Workout</h1>
             <div className="card">
                 {workoutPlanState.map((p, exerciseIndex) => (
-                    <div key={exerciseIndex}>
+                    <div className="card-content" key={exerciseIndex}>
                         <h2>Exercise {exerciseIndex + 1}</h2>
 
                         <SelectorSearchable
@@ -241,51 +241,53 @@ const WorkoutCreatePage: React.FC = () => {
                             placeholder="Search for an exercise"
                         />
 
-                        <div className="reps-container">
+                        <div className="reps-display">
                             <p>{handleFormatReps(p.reps)} reps</p>
                         </div>
 
-                        <DividerSpaced
-                            left={<h3>Set Count</h3>}
-                            right={
-                                <span>
-                                    <button className="adjust" onClick={() => handleSetsChange(exerciseIndex, "decrease")}>
-                                        <LuMinus />
-                                    </button>
-                                    <button className="adjust" onClick={() => handleSetsChange(exerciseIndex, "increase")}>
-                                        <LuPlus />
-                                    </button>
-                                </span>
-                            }
-                        />
+                        <div className="exercise-adjustments">
+                            <DividerSpaced
+                                left={<h3>Set Count</h3>}
+                                right={
+                                    <span>
+                                        <button className="adjust" onClick={() => handleSetsChange(exerciseIndex, "decrease")}>
+                                            <LuMinus size={16} />
+                                        </button>
+                                        <button className="adjust" onClick={() => handleSetsChange(exerciseIndex, "increase")}>
+                                            <LuPlus size={16} />
+                                        </button>
+                                    </span>
+                                }
+                            />
 
-                        <DividerSpaced
-                            left={<h3>Rep Count</h3>}
-                            right={
-                                <span>
-                                    <button className="adjust" onClick={() => handleChangeBaseReps(exerciseIndex, "decrease")}>
-                                        <LuMinus />
-                                    </button>
-                                    <button className="adjust" onClick={() => handleChangeBaseReps(exerciseIndex, "increase")}>
-                                        <LuPlus />
-                                    </button>
-                                </span>
-                            }
-                        />
+                            <DividerSpaced
+                                left={<h3>Rep Count</h3>}
+                                right={
+                                    <span>
+                                        <button className="adjust" onClick={() => handleChangeBaseReps(exerciseIndex, "decrease")}>
+                                            <LuMinus size={16} />
+                                        </button>
+                                        <button className="adjust" onClick={() => handleChangeBaseReps(exerciseIndex, "increase")}>
+                                            <LuPlus size={16} />
+                                        </button>
+                                    </span>
+                                }
+                            />
 
-                        <DividerSpaced
-                            left={<h3>Set Style</h3>}
-                            right={
-                                <span>
-                                    <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "flat")}>
-                                        <LuAlignJustify className="flat-set-icon" />
-                                    </button>
-                                    <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "drop")}>
-                                        <LuChartNoAxesColumnDecreasing className="drop-set-icon" />
-                                    </button>
-                                </span>
-                            }
-                        />
+                            <DividerSpaced
+                                left={<h3>Set Style</h3>}
+                                right={
+                                    <span>
+                                        <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "flat")}>
+                                            <LuAlignJustify className="flat-set-icon" size={16} />
+                                        </button>
+                                        <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "drop")}>
+                                            <LuChartNoAxesColumnDecreasing className="drop-set-icon" size={16} />
+                                        </button>
+                                    </span>
+                                }
+                            />
+                        </div>
 
                     </div>
                 ))}
