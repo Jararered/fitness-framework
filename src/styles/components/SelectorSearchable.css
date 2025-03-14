@@ -1,0 +1,40 @@
+.selector-searchable {
+    position: relative;
+}
+
+.selector-dropdown {
+    position: absolute;
+    border-radius: 1.5rem;
+    overflow: hidden;
+
+    width: 120%;
+    left: -10%;
+
+    background-color: var(--card-background);
+    box-shadow: var(--card-shadow);
+    z-index: 1000;
+}
+
+.options-container {
+    max-height: 15rem;
+    overflow-y: auto;
+
+    /* Hides scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.option-item {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.option-item:hover {
+    color: var(--text-color-hover);
+    background-color: var(--background-color-hover);
+}
+
+.no-results {
+    padding: 0.5rem;
+    color: #666;
+}

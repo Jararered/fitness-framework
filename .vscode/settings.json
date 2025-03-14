@@ -12,5 +12,6 @@
         "**/bun.lockb": true,
         "**/yarn.lock": true,
         "**/pnpm-lock.yaml": true
-    }
+    },
+    "autoHide.autoHideSideBar": false
 }

@@ -1,55 +1,43 @@
-import React, { useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useUser } from "./context/UserContext.tsx";
 
-import { DockBar } from "./components/Navigation";
+import DockBar from "./components/DockBar.tsx";
+import ToastContainer from "./components/ToastContainer.tsx";
+import PageTransition from "./components/PageTransition.tsx";
 
-// Pages
-import PageHome from "./pages/PageHome";
-import PageWorkoutEditor from "./pages/PageWorkoutEditor";
-import PageGym from "./pages/PageGym";
-import PageProfile from "./pages/PageProfile";
-import PageSettings from "./pages/PageSettings";
+import HomePage from "./pages/HomePage.tsx";
+import EquipmentSelectPage from "./pages/EquipmentSelectPage.tsx";
+import WorkoutCreatePage from "./pages/WorkoutCreatePage.tsx";
+import ProfilePage from "./pages/ProfilePage.tsx";
+import SettingsPage from "./pages/SettingsPage.tsx";
+import ExercisePreviewPage from "./pages/ExerciseOverviewPage.tsx";
+import ExercisePage from "./pages/ExercisePage.tsx";
+import WorkoutCompletePage from "./pages/WorkoutCompletePage.tsx";
 
-// Styles
-import "./App.css";
-import "./styles/button.css";
-import "./styles/card.css";
+import "./styles/components/App.css";
 
-
-export type SetPageProps = {
-    setPage: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const App: React.FC = () => {
-    const [page, setPage] = useState<string>("home");
-
-    const renderMainContent = () => {
-        switch (page) {
-
-            case "gym":
-                return <PageGym />;
-            case "home":
-                return <PageHome setPage={setPage} />;
-            case "workout":
-                return <PageWorkoutEditor />;
-            case "profile":
-                return <PageProfile />;
-            case "settings":
-                return <PageSettings />;
-
-            default:
-                return <PageHome setPage={setPage} />;
-        }
-    };
+function App() {
+    const { settings } = useUser();
+    const location = useLocation();
 
     return (
-        <div className="App">
-            <div className="main-content">
-                {renderMainContent()}
-            </div>
-
-            <DockBar setContent={setPage} />
+        <div className={`App ${settings.darkMode ? "dark-mode" : ""}`}>
+            <PageTransition>
+                <Routes location={location} key={location.pathname}>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/equipment" element={<EquipmentSelectPage />} />
+                    <Route path="/create" element={<WorkoutCreatePage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/settings" element={<SettingsPage />} />
+                    <Route path="/preview" element={<ExercisePreviewPage />} />
+                    <Route path="/exercise" element={<ExercisePage />} />
+                    <Route path="/complete" element={<WorkoutCompletePage />} />
+                </Routes>
+            </PageTransition>
+            <ToastContainer />
+            <DockBar />
         </div>
     );
-};
+}
 
 export default App;

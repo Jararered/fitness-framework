@@ -1,0 +1,25 @@
+@import "../variables.css";
+
+.icon-button {
+    border-radius: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    height: 4rem;
+    width: 4rem;
+    transition: all 200ms;
+}
+
+.icon-button:hover {
+    color: var(--button-background);
+    background-color: var(--toggle-hover);
+}
+
+.icon-button svg {
+    color: var(--text-color);
+    margin: auto;
+    transition: all 200ms;
+}
+
+.icon-button:hover svg {
+    color: var(--button-background);
+}

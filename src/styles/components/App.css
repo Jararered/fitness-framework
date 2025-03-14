@@ -1,0 +1,43 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* Full viewport height */
+    min-height: 100vh;
+
+    /* Space for DockBar */
+    padding-bottom: 7rem;
+
+    /* Include padding in height calculation */
+    box-sizing: border-box;
+
+    color: var(--text-color);
+    background-color: var(--background-color);
+    background-image: radial-gradient(circle, var(--card-border) 0.0625rem, transparent 0.1rem);
+    background-size: 2.5rem 2.5rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: var(--card-background);
+    box-shadow: var(--card-shadow);
+    border-radius: 2rem;
+    padding: 1rem;
+    margin: 2rem;
+    min-width: 20rem;
+    max-width: 50rem;
+    border: 1px solid var(--card-border);
+    text-align: center;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
