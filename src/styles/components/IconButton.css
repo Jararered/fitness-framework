@@ -9,17 +9,17 @@
     transition: all 200ms;
 }
 
-.icon-button:hover {
-    color: var(--button-background);
-    background-color: var(--toggle-hover);
-}
-
 .icon-button svg {
     color: var(--text-color);
     margin: auto;
     transition: all 200ms;
 }
 
+.icon-button:hover {
+    color: var(--main-accent);
+    background-color: var(--toggle-hover);
+}
+
 .icon-button:hover svg {
-    color: var(--button-background);
+    color: var(--main-accent);
 }
