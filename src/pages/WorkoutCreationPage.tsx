@@ -237,6 +237,7 @@ const WorkoutCreationPage: React.FC = () => {
                                 setWorkoutPlan(newPlan);
                                 setLoadedWorkout(null);
                             }}
+                            placeholder="Search for an exercise"
                         />
 
                         <div className="reps-container">

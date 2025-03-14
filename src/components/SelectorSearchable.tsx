@@ -16,7 +16,7 @@ export function SelectorSearchable<T>({
     value,
     onChange,
     getOptionLabel,
-    placeholder = 'Select',
+    placeholder = 'Type to search...',
     className = '',
 }: SelectorSearchableProps<T>) {
     const [isOpen, setIsOpen] = useState(false);
