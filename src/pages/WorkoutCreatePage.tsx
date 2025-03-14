@@ -25,15 +25,15 @@ const WorkoutCreatePage: React.FC = () => {
     const { equipmentConfigs, equipmentLast } = useUser();
     const navigate = useNavigate();
 
-    const [workoutPlan, setWorkoutPlan] = useState<WorkoutPlan[]>([{
+    const [workoutPlanState, setWorkoutPlanState] = useState<WorkoutPlan[]>([{
         exercise: "",
         reps: [10, 10, 10],
         baseReps: 10,
         sets: 3,
         style: "flat"
     }]);
-    const [workoutName, setWorkoutName] = useState<string>("");
-    const [loadedWorkout, setLoadedWorkout] = useState<string | null>(null);
+    const [workoutNameState, setWorkoutNameState] = useState<string>("");
+    const [loadedWorkoutState, setLoadedWorkoutState] = useState<string | null>(null);
 
     const repsChange = 2;
 
@@ -52,105 +52,106 @@ const WorkoutCreatePage: React.FC = () => {
     useEffect(() => {
         const savedPlan = localStorage.getItem("temp-workout-plan");
         if (savedPlan) {
-            setWorkoutPlan(JSON.parse(savedPlan));
+            setWorkoutPlanState(JSON.parse(savedPlan));
         }
     }, []);
 
     // Save temporary workout plan to local storage if workoutPlan has changed
     useEffect(() => {
-        localStorage.setItem("temp-workout-plan", JSON.stringify(workoutPlan));
-    }, [workoutPlan]);
+        localStorage.setItem("temp-workout-plan", JSON.stringify(workoutPlanState));
+    }, [workoutPlanState]);
 
     const handleFormatReps = (reps: number[]) => {
         return reps.join(", ");
     };
 
     const handleSetsChange = (exerciseIndex: number, change: string) => {
-        const newPlan = [...workoutPlan];
-        let newSets = newPlan[exerciseIndex].sets;
+        const newWorkoutPlan = [...workoutPlanState];
+        let newSets = newWorkoutPlan[exerciseIndex].sets;
         
         if (change === "increase") {
-            newSets = newPlan[exerciseIndex].sets + 1;
+            newSets = newWorkoutPlan[exerciseIndex].sets + 1;
         } else if (change === "decrease") {
-            if (newPlan[exerciseIndex].sets > 1) {
-                newSets = newPlan[exerciseIndex].sets - 1;
+            if (newWorkoutPlan[exerciseIndex].sets > 1) {
+                newSets = newWorkoutPlan[exerciseIndex].sets - 1;
             } else {
-                return;
+                newSets = 1;
             }
         }
 
-        newPlan[exerciseIndex].sets = newSets;
+        newWorkoutPlan[exerciseIndex].sets = newSets;
         handleCalculateNewRepsArray(exerciseIndex);
-        setWorkoutPlan(newPlan);
     };
 
     const handleChangeBaseReps = (exerciseIndex: number, change: string) => {
-        const newPlan = [...workoutPlan];
-        let newBaseReps = newPlan[exerciseIndex].baseReps;
+        const newWorkoutPlan = [...workoutPlanState];
+        let newBaseReps = newWorkoutPlan[exerciseIndex].baseReps;
         
         if (change === "increase") {
-            newBaseReps = newPlan[exerciseIndex].baseReps + repsChange;
+            newBaseReps = newWorkoutPlan[exerciseIndex].baseReps + repsChange;
         } else if (change === "decrease") {
-            if (newPlan[exerciseIndex].baseReps > 2) {
-                newBaseReps = newPlan[exerciseIndex].baseReps - repsChange;
+            if (newWorkoutPlan[exerciseIndex].baseReps > repsChange) {
+                newBaseReps = newWorkoutPlan[exerciseIndex].baseReps - repsChange;
             } else {
-                return;
+                newBaseReps = 2;
             }
         }
 
-        newPlan[exerciseIndex].baseReps = newBaseReps;
+        newWorkoutPlan[exerciseIndex].baseReps = newBaseReps;
         handleCalculateNewRepsArray(exerciseIndex);
-        setWorkoutPlan(newPlan);
     };
 
     const handleSetStyle = (exerciseIndex: number, newStyle: "drop" | "flat") => {
-        const newPlan = [...workoutPlan];
-        newPlan[exerciseIndex].style = newStyle;
+        const newWorkoutPlan = [...workoutPlanState];
+        newWorkoutPlan[exerciseIndex].style = newStyle;
         handleCalculateNewRepsArray(exerciseIndex);
-        setWorkoutPlan(newPlan);
     };
 
     const handleCalculateNewRepsArray = (exerciseIndex: number) => {
-        const newPlan = [...workoutPlan];
-        const exercise = newPlan[exerciseIndex];
+        const newWorkoutPlan = [...workoutPlanState];
+        const exercise = newWorkoutPlan[exerciseIndex];
 
         if (exercise.style === "drop") {
             const dropSet = [exercise.baseReps];
             for (let i = 1; i < exercise.sets; i++) {
-                dropSet.push(dropSet[i - 1] - repsChange);
+                const nextRep = Math.max(dropSet[i - 1] - repsChange, 1);
+                dropSet.push(nextRep);
             }
             exercise.reps = dropSet;
         } else if (exercise.style === "flat") {
             exercise.reps = Array(exercise.sets).fill(exercise.baseReps);
         }
 
-        setWorkoutPlan(newPlan);
+        // Apply the minimum reps check before setting the state
+        newWorkoutPlan[exerciseIndex].reps = exercise.reps.map(rep => Math.max(rep, 1));
+
+        setWorkoutPlanState(newWorkoutPlan);
     };
 
     const handleAddExercise = () => {
-        setWorkoutPlan([...workoutPlan, {
+        setWorkoutPlanState([...workoutPlanState, {
             exercise: "",
             reps: [10, 10, 10],
             baseReps: 10,
             sets: 3,
             style: "flat"
         }]);
-        setLoadedWorkout(null);
+        setLoadedWorkoutState(null);
     };
 
     const handleRemoveExercise = () => {
-        if (workoutPlan.length > 1) {
-            setWorkoutPlan(workoutPlan.slice(0, workoutPlan.length - 1));
-            setLoadedWorkout(null);
+        if (workoutPlanState.length > 1) {
+            setWorkoutPlanState(workoutPlanState.slice(0, workoutPlanState.length - 1));
+            setLoadedWorkoutState(null);
         }
     };
 
     const handleSaveWorkout = (startWorkout: boolean = false) => {
-        const validPlan = workoutPlan
+        const validPlan = workoutPlanState
             .filter((p) => p.exercise && p.reps.every((r) => r > 0))
             .map((p) => ({ exercise: p.exercise, reps: p.reps }));
         if (validPlan.length > 0) {
-            const newWorkout = { name: workoutName || `Workout ${workoutPlans.length + 1}`, exercises: validPlan };
+            const newWorkout = { name: workoutNameState || `Workout ${workoutPlans.length + 1}`, exercises: validPlan };
             setWorkoutPlans([...workoutPlans, newWorkout]);
             if (startWorkout) {
                 setWorkoutState({
@@ -163,8 +164,8 @@ const WorkoutCreatePage: React.FC = () => {
                 });
                 navigate("/exercise");
             } else {
-                setWorkoutName("");
-                setLoadedWorkout(newWorkout.name);
+                setWorkoutNameState("");
+                setLoadedWorkoutState(newWorkout.name);
                 setWorkoutState((prevState) => ({
                     ...prevState,
                     currentPlan: newWorkout,
@@ -180,7 +181,7 @@ const WorkoutCreatePage: React.FC = () => {
 
     const handleLoadWorkout = (workout: { name?: string; exercises: { exercise: string; reps: number[] }[] }) => {
         const newPlan = workout.exercises.map((ex) => ({ exercise: ex.exercise, reps: [...ex.reps] }));
-        setWorkoutPlan(
+        setWorkoutPlanState(
             newPlan.map((p) => ({
                 exercise: p.exercise,
                 reps: p.reps,
@@ -189,8 +190,8 @@ const WorkoutCreatePage: React.FC = () => {
                 style: "flat"
             }))
         );
-        setWorkoutName(workout.name || "");
-        setLoadedWorkout(workout.name || `Workout ${workoutPlans.indexOf(workout) + 1}`);
+        setWorkoutNameState(workout.name || "");
+        setLoadedWorkoutState(workout.name || `Workout ${workoutPlans.indexOf(workout) + 1}`);
         setWorkoutState((prevState) => ({
             ...prevState,
             currentPlan: { name: workout.name, exercises: newPlan },
@@ -203,12 +204,12 @@ const WorkoutCreatePage: React.FC = () => {
     };
 
     const handleStartWorkout = () => {
-        const validPlan = workoutPlan
+        const validPlan = workoutPlanState
             .filter((p) => p.exercise && p.reps.every((r) => r > 0))
             .map((p) => ({ exercise: p.exercise, reps: p.reps }));
         if (validPlan.length > 0) {
             setWorkoutState({
-                currentPlan: { name: workoutName || loadedWorkout || "Unnamed", exercises: validPlan },
+                currentPlan: { name: workoutNameState || loadedWorkoutState || "Unnamed", exercises: validPlan },
                 isStarted: true,
                 currentExerciseIndex: 0,
                 currentSetIndex: 0,
@@ -223,7 +224,7 @@ const WorkoutCreatePage: React.FC = () => {
         <div className="workout-create-page">
             <h1>Create Workout</h1>
             <div className="card">
-                {workoutPlan.map((p, exerciseIndex) => (
+                {workoutPlanState.map((p, exerciseIndex) => (
                     <div key={exerciseIndex}>
                         <h2>Exercise {exerciseIndex + 1}</h2>
 
@@ -232,10 +233,10 @@ const WorkoutCreatePage: React.FC = () => {
                             value={p.exercise}
                             getOptionLabel={(option) => option}
                             onChange={(value) => {
-                                const newPlan = [...workoutPlan];
+                                const newPlan = [...workoutPlanState];
                                 newPlan[exerciseIndex].exercise = value || "";
-                                setWorkoutPlan(newPlan);
-                                setLoadedWorkout(null);
+                                setWorkoutPlanState(newPlan);
+                                setLoadedWorkoutState(null);
                             }}
                             placeholder="Search for an exercise"
                         />
@@ -302,8 +303,8 @@ const WorkoutCreatePage: React.FC = () => {
                 <span>
                     <input
                         type="text"
-                        value={workoutName}
-                        onChange={(e) => setWorkoutName(e.target.value)}
+                        value={workoutNameState}
+                        onChange={(e) => setWorkoutNameState(e.target.value)}
                         placeholder="Workout Name"
                     />
                     <button onClick={() => handleSaveWorkout(false)}>Save</button>
@@ -325,7 +326,7 @@ const WorkoutCreatePage: React.FC = () => {
                 <h2>Workout Preview</h2>
                 {workoutState.currentPlan && workoutState.currentPlan.exercises.length > 0 ? (
                     <>
-                        <p>{workoutState.currentPlan.name || workoutName || "Unnamed Workout"}</p>
+                        <p>{workoutState.currentPlan.name || workoutNameState || "Unnamed Workout"}</p>
                         {workoutState.currentPlan.exercises.map((exercise, index) => (
                             <p key={index}>
                                 {exercise.exercise}: {handleFormatReps(exercise.reps)} reps
