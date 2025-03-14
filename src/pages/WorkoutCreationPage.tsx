@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useNavigate } from "react-router-dom";
+
+import { LuChartNoAxesColumnDecreasing, LuAlignJustify } from "react-icons/lu";
+import { LuPlus, LuMinus } from "react-icons/lu";
+
+import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useUser } from "../context/UserContext.tsx";
 import { SearchableSelector } from "../components/SearchableSelector.tsx";
+import ThreeSpaceDiv from "../components/ThreeSpaceDiv.tsx";
+
+import "../styles/pages/WorkoutCreationPage.css";
 
 interface ExercisePlanDraft {
     exercise: string;
@@ -126,6 +133,12 @@ const WorkoutCreationPage: React.FC = () => {
         }
     };
 
+    const handleSetStyle = (exerciseIndex: number, style: "drop" | "flat") => {
+        const newPlan = [...plan];
+        newPlan[exerciseIndex].style = style;
+        setPlan(newPlan);
+    };
+
     return (
         <div className="workout-creation-page">
             <h1>Create Workout</h1>
@@ -133,23 +146,6 @@ const WorkoutCreationPage: React.FC = () => {
                 {plan.map((p, exerciseIndex) => (
                     <div key={exerciseIndex}>
                         <h2>Exercise {exerciseIndex + 1}</h2>
-
-                        {/* <select
-                            value={p.exercise}
-                            onChange={(e) => {
-                                const newPlan = [...plan];
-                                newPlan[exerciseIndex].exercise = e.target.value;
-                                setPlan(newPlan);
-                                setLoadedWorkout(null);
-                            }}
-                        >
-                            <option value="">Select Exercise</option>
-                            {availableExercises.map((ex) => (
-                                <option key={ex.exercise_name} value={ex.exercise_name}>
-                                    {ex.exercise_name}
-                                </option>
-                            ))}
-                        </select> */}
 
                         <SearchableSelector
                             options={avaliableExerciseNames}
@@ -163,15 +159,48 @@ const WorkoutCreationPage: React.FC = () => {
                             }}
                         />
 
-                        <span>
-                            <button className="adjust" onClick={() => handleDecreaseSets(exerciseIndex)}>
-                                -
-                            </button>
-                            <h2>Sets</h2>
-                            <button className="adjust" onClick={() => handleIncreaseSets(exerciseIndex)}>
-                                +
-                            </button>
-                        </span>
+                        <ThreeSpaceDiv
+                            left={<h3>Set Count</h3>}
+                            right={
+                                <span>
+                                    <button className="adjust" onClick={() => handleDecreaseSets(exerciseIndex)}>
+                                        <LuMinus />
+                                    </button>
+                                    <button className="adjust" onClick={() => handleIncreaseSets(exerciseIndex)}>
+                                        <LuPlus />
+                                    </button>
+                                </span>
+                            }
+                        />
+
+                        <ThreeSpaceDiv
+                            left={<h3>Rep Count</h3>}
+                            right={
+                                <span>
+                                    <button className="adjust" onClick={() => handleDecreaseSets(exerciseIndex)}>
+                                        <LuMinus />
+                                    </button>
+                                    <button className="adjust" onClick={() => handleIncreaseSets(exerciseIndex)}>
+                                        <LuPlus />
+                                    </button>
+                                </span>
+                            }
+                        />
+
+                        <ThreeSpaceDiv
+                            left={<h3>Set Style</h3>}
+                            right={
+                                <span>
+                                    <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "flat")}>
+                                        <LuAlignJustify className="flat-set-icon" />
+                                    </button>
+                                    <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "drop")}>
+                                        <LuChartNoAxesColumnDecreasing className="drop-set-icon" />
+                                    </button>
+                                </span>
+                            }
+                        />
+
                         {p.reps.map((rep, repIndex) => (
                             <span key={repIndex}>
                                 <label>Set {repIndex + 1}</label>
