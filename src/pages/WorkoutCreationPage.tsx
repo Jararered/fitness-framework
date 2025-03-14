@@ -8,7 +8,7 @@ import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import ThreeSpaceDiv from "../components/DividerSpaced.tsx";
-import { SearchableSelector } from "../components/SearchableSelector.tsx";
+import { SearchableSelector } from "../components/SelectorSearchable.tsx";
 
 import "../styles/pages/WorkoutCreationPage.css";
 
