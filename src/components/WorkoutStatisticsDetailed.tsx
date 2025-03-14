@@ -33,8 +33,8 @@ const DetailedWorkoutStats: React.FC = () => {
     );
 
     // Calculate stats for the last 30 days
-    const now = new Date();
-    const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+    const currentDate = new Date();
+    const monthAgo = new Date(currentDate.getTime() - 30 * 24 * 60 * 60 * 1000);
     const recentLogs = workoutLogs.filter((log) => log.startTime >= monthAgo);
 
     // Calculate muscle and category statistics
