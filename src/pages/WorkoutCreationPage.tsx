@@ -48,6 +48,19 @@ const WorkoutCreationPage: React.FC = () => {
 
     const avaliableExerciseNames = availableExercises.map((exercise) => exercise.exercise_name);
 
+    // Load temporary workout plan from local storage
+    useEffect(() => {
+        const savedPlan = localStorage.getItem("temp-workout-plan");
+        if (savedPlan) {
+            setWorkoutPlan(JSON.parse(savedPlan));
+        }
+    }, []);
+
+    // Save temporary workout plan to local storage if workoutPlan has changed
+    useEffect(() => {
+        localStorage.setItem("temp-workout-plan", JSON.stringify(workoutPlan));
+    }, [workoutPlan]);
+
     const handleFormatReps = (reps: number[]) => {
         return reps.join(", ");
     };
