@@ -52,7 +52,7 @@ export function SelectorSearchable<T>({
     };
 
     return (
-        <div className={`searchable-selector ${className}`}>
+        <div className={`selector-searchable ${className}`}>
             <input
                 type="text"
                 value={searchTerm}
