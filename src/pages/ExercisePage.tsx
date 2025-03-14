@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
-import ThreeSpaceDiv from "../components/ThreeSpaceDiv.tsx";
+import ThreeSpaceDiv from "../components/DividerSpaced.tsx";
 import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
 
 const ExercisePage: React.FC = () => {

@@ -7,7 +7,7 @@ import { LuPlus, LuMinus } from "react-icons/lu";
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
-import ThreeSpaceDiv from "../components/ThreeSpaceDiv.tsx";
+import ThreeSpaceDiv from "../components/DividerSpaced.tsx";
 import { SearchableSelector } from "../components/SearchableSelector.tsx";
 
 import "../styles/pages/WorkoutCreationPage.css";
