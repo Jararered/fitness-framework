@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+
 import { useWorkout } from "../context/WorkoutContext";
 
 const WorkoutPreview: React.FC = () => {

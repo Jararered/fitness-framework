@@ -1,6 +1,8 @@
 import React from "react";
-import "../styles/components/Toast.css";
+
 import { useToast } from "../context/ToastContext";
+
+import "../styles/components/Toast.css";
 
 interface ToastProps {
     toast: {
