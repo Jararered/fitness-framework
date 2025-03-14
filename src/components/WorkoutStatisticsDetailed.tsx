@@ -3,7 +3,7 @@ import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useUser } from "../context/UserContext.tsx";
 import { Exercise } from "../types.ts";
 
-import "../styles/components/DetailedWorkoutStats.css";
+import "../styles/components/WorkoutStatisticsDetailed.css";
 
 interface MuscleStats {
     [muscle: string]: {
