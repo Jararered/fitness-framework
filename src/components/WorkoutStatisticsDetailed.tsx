@@ -1,7 +1,7 @@
 import React from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useUser } from "../context/UserContext.tsx";
-import { Exercise } from "../types";
+import { Exercise } from "../types.ts";
 
 import "../styles/components/DetailedWorkoutStats.css";
 
