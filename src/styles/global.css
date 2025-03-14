@@ -97,6 +97,17 @@ select {
     margin: 0.25rem auto;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+    background-color: var(--input-background);
+}
+
+input[type="number"]::-webkit-inner-spin-button:hover,
+input[type="number"]::-webkit-outer-spin-button:hover {
+    background-color: var(--input-background);
+}
+
 button .caution {
     color: var(--caution-color);
 }

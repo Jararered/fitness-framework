@@ -1,5 +1,5 @@
 .page-transition {
-    transition: opacity 200ms ease-in-out transform 200ms ease-in-out;
+    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
 }
 
 .page-transition.fadeIn {

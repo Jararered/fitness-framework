@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { LuChartNoAxesColumnDecreasing, LuAlignJustify } from "react-icons/lu";
 import { LuPlus, LuMinus } from "react-icons/lu";
 
+import { useToast } from "../context/ToastContext.tsx";
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
@@ -24,6 +25,7 @@ const WorkoutCreatePage: React.FC = () => {
     const { exercises, workoutPlans, setWorkoutPlans, workoutState, setWorkoutState, } = useWorkout();
     const { equipmentConfigs, equipmentLast } = useUser();
     const navigate = useNavigate();
+    const { addToast } = useToast();
 
     const [workoutPlanState, setWorkoutPlanState] = useState<WorkoutPlan[]>(() => {
         const savedPlan = localStorage.getItem("temp-workout-plan");
@@ -175,6 +177,8 @@ const WorkoutCreatePage: React.FC = () => {
                 }));
             }
         }
+
+        addToast(`Workout saved: ${workoutNameState}`, "success");
     };
 
     const handleLoadWorkout = (workout: { name?: string; exercises: { exercise: string; reps: number[] }[] }) => {
@@ -199,6 +203,8 @@ const WorkoutCreatePage: React.FC = () => {
             repsCompleted: [],
             weightsUsed: [],
         }));
+
+        addToast(`Workout loaded: ${workout.name}`, "success");
     };
 
     const handleStartWorkout = () => {

@@ -2,14 +2,17 @@ import React, { useState, useCallback, useEffect } from "react";
 
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
+import { useToast } from "../context/ToastContext.tsx";
 
 import EquipmentToggle from "../components/EquipmentToggle.tsx";
 
 import "../styles/pages/EquipmentSelectPage.css";
 
 const EquipmentSelectPage: React.FC = () => {
+    const { addToast } = useToast();
     const { equipment } = useWorkout();
     const { equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useUser();
+
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
     const [equipmentNameInput, setEquipmentNameInput] = useState<string>("");
 
@@ -47,16 +50,22 @@ const EquipmentSelectPage: React.FC = () => {
                 setEquipmentLast(equipmentNameInput);
             }
         }
+
+        addToast(`Gym saved: ${equipmentNameInput}`, "success");
     };
 
     const handleLoadGym = (config: { name: string; equipment: string[] }) => {
         setEquipmentNameInput(config.name);
         setSelectedEquipment(config.equipment);
         setEquipmentLast(config.name);
+
+        addToast(`Gym loaded: ${config.name}`, "success");
     };
 
     const handleDeleteGym = (name: string) => {
         setEquipmentConfigs(equipmentConfigs.filter((config) => config.name !== name));
+
+        addToast(`Gym deleted: ${name}`, "success");
     };
 
     return (
