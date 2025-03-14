@@ -12,6 +12,8 @@ const ProfilePage: React.FC = () => {
     const { addToast } = useToast(); // Add toast hook
     const [expanded, setExpanded] = useState(false);
 
+    const units = settings.unit === "metric" ? "kg" : "lbs";
+
     const now = new Date();
     const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
     const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
@@ -32,16 +34,19 @@ const ProfilePage: React.FC = () => {
     return (
         <div className="profile-page">
             <h1>Profile</h1>
+
             <div className="card">
                 <h2>{settings.name || "User"}</h2>
             </div>
+
             <div className="card">
                 <h2>Statistics</h2>
                 <p>Workouts Last Week: {lastWeekLogs.length}</p>
                 <p>Workouts Last Month: {lastMonthLogs.length}</p>
-                <p>Total Weight Last Week: {totalWeightWeek} {settings.unit}</p>
-                <p>Total Weight Last Month: {totalWeightMonth} {settings.unit}</p>
+                <p>Total Weight Last Week: {totalWeightWeek} {units}</p>
+                <p>Total Weight Last Month: {totalWeightMonth} {units}</p>
             </div>
+
             <div className="card">
                 <h2>Recent Workouts</h2>
                 <span className="workout-list">

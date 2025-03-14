@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
-import ThreeSpaceDiv from "../components/DividerSpaced.tsx";
+import DividerSpaced from "../components/DividerSpaced.tsx";
 import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
 import { TimerCircular } from "../components/TimerCircular.tsx";
 
@@ -152,7 +152,7 @@ const ExercisePage: React.FC = () => {
                         />
                     </div>
                 </span>
-                <ThreeSpaceDiv
+                <DividerSpaced
                     left={
                         <button onClick={handleBack} className="secondary">
                             Back
