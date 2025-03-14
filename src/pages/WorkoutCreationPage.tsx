@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.tsx";
+import { SearchableSelector } from "../components/SearchableSelector.tsx";
+
 interface ExercisePlanDraft {
     exercise: string;
     reps: number[];
@@ -21,8 +23,10 @@ const WorkoutCreationPage: React.FC = () => {
             : [];
 
     const availableExercises = exercises.filter((exercise) =>
-        exercise.required_equipment.every((eq) => selectedEquipment.includes(eq))
+        exercise.required_equipment.every((equipment) => selectedEquipment.includes(equipment))
     );
+
+    const avaliableExerciseNames = availableExercises.map((exercise) => exercise.exercise_name);
 
     const handleUpdateReps = (exerciseIndex: number, repIndex: number, value: number) => {
         const newPlan = [...plan];
@@ -129,7 +133,8 @@ const WorkoutCreationPage: React.FC = () => {
                 {plan.map((p, exerciseIndex) => (
                     <div key={exerciseIndex}>
                         <h2>Exercise {exerciseIndex + 1}</h2>
-                        <select
+
+                        {/* <select
                             value={p.exercise}
                             onChange={(e) => {
                                 const newPlan = [...plan];
@@ -144,7 +149,20 @@ const WorkoutCreationPage: React.FC = () => {
                                     {ex.exercise_name}
                                 </option>
                             ))}
-                        </select>
+                        </select> */}
+
+                        <SearchableSelector
+                            options={avaliableExerciseNames}
+                            value={p.exercise}
+                            getOptionLabel={(option) => option}
+                            onChange={(value) => {
+                                const newPlan = [...plan];
+                                newPlan[exerciseIndex].exercise = value || "";
+                                setPlan(newPlan);
+                                setLoadedWorkout(null);
+                            }}
+                        />
+
                         <span>
                             <button className="adjust" onClick={() => handleDecreaseSets(exerciseIndex)}>
                                 -

@@ -1,0 +1,52 @@
+.searchable-selector {
+    position: relative;
+}
+
+.selector-trigger {
+    cursor: pointer;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem;
+}
+
+.selector-dropdown {
+    position: absolute;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 1.5rem;
+    background-color: var(--background-color);
+    overflow: hidden;
+
+    z-index: 1000;
+}
+
+.selector-search {
+    width: calc(100% - 1.5rem);
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+}
+
+.options-container {
+    max-height: 15rem;
+    overflow-y: auto;
+
+    /* Hides scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.option-item {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.option-item:hover {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.no-results {
+    padding: 0.5rem;
+    color: #666;
+}
