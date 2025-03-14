@@ -7,7 +7,7 @@ import { LuPlus, LuMinus } from "react-icons/lu";
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
-import ThreeSpaceDiv from "../components/DividerSpaced.tsx";
+import DividerSpaced from "../components/DividerSpaced.tsx";
 import { SearchableSelector } from "../components/SelectorSearchable.tsx";
 
 import "../styles/pages/WorkoutCreationPage.css";
@@ -243,7 +243,7 @@ const WorkoutCreationPage: React.FC = () => {
                             <p>{handleFormatReps(p.reps)} reps</p>
                         </div>
 
-                        <ThreeSpaceDiv
+                        <DividerSpaced
                             left={<h3>Set Count</h3>}
                             right={
                                 <span>
@@ -257,7 +257,7 @@ const WorkoutCreationPage: React.FC = () => {
                             }
                         />
 
-                        <ThreeSpaceDiv
+                        <DividerSpaced
                             left={<h3>Rep Count</h3>}
                             right={
                                 <span>
@@ -271,7 +271,7 @@ const WorkoutCreationPage: React.FC = () => {
                             }
                         />
 
-                        <ThreeSpaceDiv
+                        <DividerSpaced
                             left={<h3>Set Style</h3>}
                             right={
                                 <span>

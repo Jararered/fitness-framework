@@ -1,16 +1,16 @@
 import React, { ReactNode } from 'react';
 
-import "../styles/components/ThreeSpaceDiv.css";
+import "../styles/components/DividerSpaced.css";
 
-interface ThreeSpaceDivProps {
+interface SpacedDividerProps {
     left?: ReactNode;
     center?: ReactNode;
     right?: ReactNode;
 }
 
-const ThreeSpaceDiv: React.FC<ThreeSpaceDivProps> = ({ left, center, right }) => {
+const DividerSpaced: React.FC<SpacedDividerProps> = ({ left, center, right }) => {
     return (
-        <div className={"three-space-container"}>
+        <div className="divider-spaced-container">
             <div className="left-section">
                 {left}
             </div>
@@ -24,4 +24,4 @@ const ThreeSpaceDiv: React.FC<ThreeSpaceDivProps> = ({ left, center, right }) =>
     );
 };
 
-export default ThreeSpaceDiv;
+export default DividerSpaced;
