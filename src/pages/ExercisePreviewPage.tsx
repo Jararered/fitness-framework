@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useNavigate } from "react-router-dom";
-import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
+
 import { useUser } from "../context/UserContext.tsx";
+import { useWorkout } from "../context/WorkoutContext.tsx";
+
+import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
+
 const ExercisePreviewPage: React.FC = () => {
     const { workoutState } = useWorkout();
     const { settings } = useUser();

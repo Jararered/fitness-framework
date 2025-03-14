@@ -1,9 +1,10 @@
-// ProfilePage.tsx
 import React, { useState } from "react";
-import { useWorkout } from "../context/WorkoutContext.tsx";
-import { useToast } from "../context/ToastContext.tsx"; // Add this import
-import DetailedWorkoutStats from "../components/DetailedWorkoutStats";
+
+import { useToast } from "../context/ToastContext.tsx";
 import { useUser } from "../context/UserContext.tsx";
+import { useWorkout } from "../context/WorkoutContext.tsx";
+
+import DetailedWorkoutStats from "../components/DetailedWorkoutStats";
 
 const ProfilePage: React.FC = () => {
     const { workoutLogs } = useWorkout();

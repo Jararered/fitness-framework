@@ -1,4 +1,5 @@
 import React from "react";
+
 import WorkoutPreview from "../components/WorkoutPreview.tsx";
 
 const HomePage: React.FC = () => {

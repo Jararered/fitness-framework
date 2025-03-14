@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, ReactNode, useEffect } from "react";
+
 import exerciseData from "../data/exercises.json";
 import { Exercise, WorkoutPlan, WorkoutLog } from "../types";
 import { UserProvider } from "./UserContext";

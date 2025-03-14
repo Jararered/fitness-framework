@@ -1,9 +1,12 @@
 import React, { useState, useRef } from "react";
-import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useNavigate } from "react-router-dom";
-import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
-import ThreeSpaceDiv from "../components/ThreeSpaceDiv.tsx";
+
 import { useUser } from "../context/UserContext.tsx";
+import { useWorkout } from "../context/WorkoutContext.tsx";
+
+import ThreeSpaceDiv from "../components/ThreeSpaceDiv.tsx";
+import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
+
 const ExercisePage: React.FC = () => {
     const { workoutState, setWorkoutState } = useWorkout();
     const { settings } = useUser();

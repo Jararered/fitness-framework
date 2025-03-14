@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { LuChartNoAxesColumnDecreasing, LuAlignJustify } from "react-icons/lu";
 import { LuPlus, LuMinus } from "react-icons/lu";
 
-import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useUser } from "../context/UserContext.tsx";
-import { SearchableSelector } from "../components/SearchableSelector.tsx";
+import { useWorkout } from "../context/WorkoutContext.tsx";
+
 import ThreeSpaceDiv from "../components/ThreeSpaceDiv.tsx";
+import { SearchableSelector } from "../components/SearchableSelector.tsx";
 
 import "../styles/pages/WorkoutCreationPage.css";
 
