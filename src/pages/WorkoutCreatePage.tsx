@@ -25,17 +25,23 @@ const WorkoutCreatePage: React.FC = () => {
     const { equipmentConfigs, equipmentLast } = useUser();
     const navigate = useNavigate();
 
-    const [workoutPlanState, setWorkoutPlanState] = useState<WorkoutPlan[]>([{
-        exercise: "",
-        reps: [10, 10, 10],
-        baseReps: 10,
-        sets: 3,
-        style: "flat"
-    }]);
+    const [workoutPlanState, setWorkoutPlanState] = useState<WorkoutPlan[]>(() => {
+        const savedPlan = localStorage.getItem("temp-workout-plan");
+        if (savedPlan) {
+            return JSON.parse(savedPlan);
+        }
+        return [{
+            exercise: "",
+            reps: [10, 10, 10],
+            baseReps: 10,
+            sets: 3,
+            style: "flat"
+        }];
+    });
     const [workoutNameState, setWorkoutNameState] = useState<string>("");
     const [loadedWorkoutState, setLoadedWorkoutState] = useState<string | null>(null);
 
-    const repsChange = 2;
+    const repsChangeAmount = 2;
 
     const selectedEquipment =
         equipmentLast && equipmentConfigs.length > 0
@@ -47,14 +53,6 @@ const WorkoutCreatePage: React.FC = () => {
     );
 
     const avaliableExerciseNames = availableExercises.map((exercise) => exercise.exercise_name);
-
-    // Load temporary workout plan from local storage
-    useEffect(() => {
-        const savedPlan = localStorage.getItem("temp-workout-plan");
-        if (savedPlan) {
-            setWorkoutPlanState(JSON.parse(savedPlan));
-        }
-    }, []);
 
     // Save temporary workout plan to local storage if workoutPlan has changed
     useEffect(() => {
@@ -88,10 +86,10 @@ const WorkoutCreatePage: React.FC = () => {
         let newBaseReps = newWorkoutPlan[exerciseIndex].baseReps;
 
         if (change === "increase") {
-            newBaseReps = newWorkoutPlan[exerciseIndex].baseReps + repsChange;
+            newBaseReps = newWorkoutPlan[exerciseIndex].baseReps + repsChangeAmount;
         } else if (change === "decrease") {
-            if (newWorkoutPlan[exerciseIndex].baseReps > repsChange) {
-                newBaseReps = newWorkoutPlan[exerciseIndex].baseReps - repsChange;
+            if (newWorkoutPlan[exerciseIndex].baseReps > repsChangeAmount) {
+                newBaseReps = newWorkoutPlan[exerciseIndex].baseReps - repsChangeAmount;
             } else {
                 newBaseReps = 2;
             }
@@ -114,7 +112,7 @@ const WorkoutCreatePage: React.FC = () => {
         if (exercise.style === "drop") {
             const dropSet = [exercise.baseReps];
             for (let i = 1; i < exercise.sets; i++) {
-                const nextRep = Math.max(dropSet[i - 1] - repsChange, 1);
+                const nextRep = Math.max(dropSet[i - 1] - repsChangeAmount, 1);
                 dropSet.push(nextRep);
             }
             exercise.reps = dropSet;
@@ -207,6 +205,7 @@ const WorkoutCreatePage: React.FC = () => {
         const validPlan = workoutPlanState
             .filter((p) => p.exercise && p.reps.every((r) => r > 0))
             .map((p) => ({ exercise: p.exercise, reps: p.reps }));
+
         if (validPlan.length > 0) {
             setWorkoutState({
                 currentPlan: { name: workoutNameState || loadedWorkoutState || "Unnamed", exercises: validPlan },

@@ -6,6 +6,9 @@ import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import ThreeSpaceDiv from "../components/DividerSpaced.tsx";
 import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
+import { TimerCircular } from "../components/TimerCircular.tsx";
+
+import "../styles/pages/ExercisePage.css";
 
 const ExercisePage: React.FC = () => {
     const { workoutState, setWorkoutState } = useWorkout();
@@ -135,13 +138,16 @@ const ExercisePage: React.FC = () => {
         <div className="exercise-page">
             <div className="card">
                 <h1>{currentExercise.exercise}</h1>
+
                 {breakTime > 0 && <p>Break: {breakTime}s</p>}
+                <TimerCircular duration={breakTime} />
+
                 <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.reps.length}</p>
                 <p>Goal: {currentExercise.reps[workoutState.currentSetIndex]} reps</p>
                 <span>
                     <div>
                         <label>Reps</label>
-                        <input
+                        <input className="input-reps"
                             type="number"
                             min="0"
                             value={repsInput}
@@ -149,8 +155,8 @@ const ExercisePage: React.FC = () => {
                         />
                     </div>
                     <div>
-                        <label>Weight ({handleWeightUnit()})</label>
-                        <input
+                        <label>Weight</label>
+                        <input className="input-weight"
                             type="number"
                             min="0"
                             step="2.5"
