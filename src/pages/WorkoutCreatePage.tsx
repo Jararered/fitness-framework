@@ -10,7 +10,7 @@ import { useWorkout } from "../context/WorkoutContext.tsx";
 import DividerSpaced from "../components/DividerSpaced.tsx";
 import { SelectorSearchable } from "../components/SelectorSearchable.tsx";
 
-import "../styles/pages/WorkoutCreationPage.css";
+import "../styles/pages/WorkoutCreatePage.css";
 
 interface WorkoutPlan {
     exercise: string;
@@ -20,7 +20,7 @@ interface WorkoutPlan {
     style: "drop" | "flat";
 }
 
-const WorkoutCreationPage: React.FC = () => {
+const WorkoutCreatePage: React.FC = () => {
     const { exercises, workoutPlans, setWorkoutPlans, workoutState, setWorkoutState, } = useWorkout();
     const { equipmentConfigs, equipmentLast } = useUser();
     const navigate = useNavigate();
@@ -220,7 +220,7 @@ const WorkoutCreationPage: React.FC = () => {
     };
 
     return (
-        <div className="workout-creation-page">
+        <div className="workout-create-page">
             <h1>Create Workout</h1>
             <div className="card">
                 {workoutPlan.map((p, exerciseIndex) => (
@@ -341,4 +341,4 @@ const WorkoutCreationPage: React.FC = () => {
     );
 };
 
-export default WorkoutCreationPage;
+export default WorkoutCreatePage;

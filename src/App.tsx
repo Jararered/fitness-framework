@@ -6,8 +6,8 @@ import ToastContainer from "./components/ToastContainer.tsx";
 import PageTransition from "./components/PageTransition.tsx";
 
 import HomePage from "./pages/HomePage.tsx";
-import EquipmentSelectionPage from "./pages/EquipmentSelectionPage.tsx";
-import WorkoutCreationPage from "./pages/WorkoutCreationPage.tsx";
+import EquipmentSelectPage from "./pages/EquipmentSelectPage.tsx";
+import WorkoutCreatePage from "./pages/WorkoutCreatePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import SettingsPage from "./pages/SettingsPage.tsx";
 import ExercisePreviewPage from "./pages/ExerciseOverviewPage.tsx";
@@ -25,8 +25,8 @@ function App() {
             <PageTransition>
                 <Routes location={location} key={location.pathname}>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/equipment" element={<EquipmentSelectionPage />} />
-                    <Route path="/create" element={<WorkoutCreationPage />} />
+                    <Route path="/equipment" element={<EquipmentSelectPage />} />
+                    <Route path="/create" element={<WorkoutCreatePage />} />
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/settings" element={<SettingsPage />} />
                     <Route path="/preview" element={<ExercisePreviewPage />} />

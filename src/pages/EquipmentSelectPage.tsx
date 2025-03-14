@@ -5,9 +5,9 @@ import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import EquipmentToggle from "../components/EquipmentToggle.tsx";
 
-import "../styles/pages/EquipmentSelectionPage.css";
+import "../styles/pages/EquipmentSelectPage.css";
 
-const EquipmentSelectionPage: React.FC = () => {
+const EquipmentSelectPage: React.FC = () => {
     const { equipment } = useWorkout();
     const { equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useUser();
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
@@ -60,7 +60,7 @@ const EquipmentSelectionPage: React.FC = () => {
     };
 
     return (
-        <div className="equipment-selection-page">
+        <div className="equipment-select-page">
             <h1>Gym Equipment</h1>
 
             <div className="card">
@@ -105,4 +105,4 @@ const EquipmentSelectionPage: React.FC = () => {
     );
 };
 
-export default EquipmentSelectionPage;
+export default EquipmentSelectPage;
