@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-
 import { useWorkout } from "../context/WorkoutContext";
 
 import { DividerSpaced } from "./DividerSpaced";
+
+import "../styles/components/WorkoutPreview.css";
 
 const WorkoutPreview: React.FC = () => {
     const { workoutState, setWorkoutState } = useWorkout();
@@ -37,9 +38,10 @@ const WorkoutPreview: React.FC = () => {
                 <h2>Workout Preview</h2>
             )}
             {workoutState.currentPlan?.exercises ? (
-                <div>
-                    {workoutState.currentPlan.exercises.map((exercise) => (
+                <div className="workout-preview-exercises">
+                    {workoutState.currentPlan.exercises.map((exercise, key) => (
                         <DividerSpaced
+                            key={key}
                             left={<strong>{exercise.exercise}</strong>}
                             right={<p>{exercise.reps.join(", ")} reps</p>}
                         />
@@ -49,7 +51,6 @@ const WorkoutPreview: React.FC = () => {
                     ) : (
                         <button onClick={handleStartWorkout}>Start Workout</button>
                     )}
-
                 </div>
             ) : (
                 <p>No workout loaded yet.</p>
