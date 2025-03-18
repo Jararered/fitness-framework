@@ -11,6 +11,8 @@ import { DividerSpaced } from "../components/DividerSpaced.tsx";
 
 import "../styles/pages/ExercisePreviewPage.css";
 
+import quotes from "../data/quotes.json";
+
 interface MuscularLoadInfoFooterProps {
     reps: number;
     weight: number;
@@ -21,24 +23,33 @@ interface MuscularLoadInfoFooterProps {
 const MuscularLoadInfoFooter: React.FC<MuscularLoadInfoFooterProps> = ({ reps, weight, units, totalWeight }) => {
     return (
         <div className="muscular-load-info-footer">
-            <div className="muscular-load-info-title">Last Exercise</div>
+            <div className="muscular-load-info-title">
+                Last Exercise
+            </div>
 
             <div className="muscular-load-info-visual-calculation">
-                <div className="reps-value">{reps}</div>
-                <div className="reps-text">Reps</div>
+                <div className="reps-container">
+                    <div className="reps-value">{reps}</div>
+                    <div className="reps-text">Reps</div>
+                </div>
 
                 <div className="multiply-icon">
                     <FaTimes size={20} />
                 </div>
 
-                <div className="weight-value">{weight} {units}</div>
-                <div className="weight-text">Weight</div>
+                <div className="weight-container">
+                    <div className="weight-value">{weight}</div>
+                    <div className="weight-text">{units}</div>
+                </div>
 
                 <div className="equals-icon">
                     <FaEquals size={20} />
                 </div>
 
-                <div className="muscular-load-value">{weight * reps} {units}</div>
+                <div className="result-container">
+                    <div className="result-value">{weight * reps}</div>
+                    <div className="result-units">{units}</div>
+                </div>
             </div>
 
             <div className="muscular-load-info-explaination">
@@ -46,8 +57,8 @@ const MuscularLoadInfoFooter: React.FC<MuscularLoadInfoFooterProps> = ({ reps, w
             </div>
 
             <div className="muscular-load-info-total-calculation">
-                <div className="muscular-load-info-total-calculation-title">TOTAL MUSCULAR LOAD</div>
-                <div className="muscular-load-info-total-calculation-title">This Workout</div>
+                <div className="muscular-load-info-total-calculation-title">Total Muscular Load</div>
+                <div className="muscular-load-info-total-calculation-subtitle">This Workout</div>
                 <div className="muscular-load-info-total-calculation-value">{totalWeight} {units}</div>
             </div>
 
@@ -65,10 +76,9 @@ const ExercisePreviewPage: React.FC = () => {
     const { settings } = useUser();
     const navigate = useNavigate();
     const [breakTime] = useState<number>(60);
-    const { showFooterCard, hideFooterCard } = useFooterCard();
-
-    const lastReps = workoutState.repsCompleted[workoutState.currentExerciseIndex][workoutState.currentSetIndex - 1];
-    const lastWeight = workoutState.weightsUsed[workoutState.currentExerciseIndex][workoutState.currentSetIndex - 1];
+    const { showFooterCard } = useFooterCard();
+    const [quote] = useState<string>(quotes[Math.floor(Math.random() * quotes.length)].quote);
+    const [author] = useState<string>(quotes[Math.floor(Math.random() * quotes.length)].author);
 
     const MuscularLoad: React.FC<MuscularLoadProps> = ({ value, units }) => {
         return (
@@ -80,7 +90,10 @@ const ExercisePreviewPage: React.FC = () => {
                     Muscular Load
                 </div>
                 <div className="muscular-load-info-icon">
-                    <FaInfoCircle size={20} onClick={() => showFooterCard(<MuscularLoadInfoFooter reps={lastReps} weight={lastWeight} units={units} totalWeight={value} />)} />
+                    <FaInfoCircle size={20}
+                        onClick={() => showFooterCard(
+                            <MuscularLoadInfoFooter reps={69} weight={420} units={units} totalWeight={69420} />
+                        )} />
                 </div>
                 <div className="muscular-load-value">
                     {value} {units}
@@ -101,17 +114,24 @@ const ExercisePreviewPage: React.FC = () => {
 
     if (!workoutState.currentPlan) return <div>No workout loaded</div>;
 
-    const currentExercise = workoutState.currentPlan.exercises[workoutState.currentExerciseIndex];
-
     return (
         <div className="exercise-preview-page">
             <div className="card">
 
-                <h1>Up Next</h1>
+                <div className="quote-container">
+                    <div className="quote">{quote}</div>
+                    <div className="author">{author}</div>
+                </div>
 
                 <DividerSpaced
-                    center={<TimerCircular duration={breakTime} />}
+                    center={
+                        <div className="break-timer-container">
+                            <div className="break-text">REST</div>
+                            <TimerCircular duration={breakTime} />
+                        </div>
+                    }
                     right={
+
                         <div className="skip-break-container">
                             <button className="skip-break-button" onClick={() => navigate("/exercise")}>
                                 <FaArrowRight size={20} />
@@ -120,9 +140,7 @@ const ExercisePreviewPage: React.FC = () => {
                         </div>
                     }
                 />
-
                 <MuscularLoad value={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)} units={handleWeightUnit()} />
-
             </div>
         </div>
     );

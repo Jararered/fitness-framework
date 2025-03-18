@@ -1,3 +1,16 @@
+.break-timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.break-text {
+    color: var(--main-accent);
+    font-weight: bold;
+}
+
 .skip-break-button {
     height: 3rem;
     width: 3rem;
@@ -12,10 +25,14 @@
     font-size: 1.5rem;
 }
 
+.skip-break-text {
+    margin-top: 0.25rem;
+}
+
 .muscular-load-container {
     display: flex;
     gap: 0.5rem;
-    margin: 1rem 0;
+    margin-top: 2rem;
     padding: 0.5rem 1rem;
     background-color: var(--card-border);
     border-radius: 1rem;
@@ -51,4 +68,115 @@
 
 .muscular-load-value {
     margin-left: auto;
+}
+
+
+
+.muscular-load-info-title {
+    margin: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.muscular-load-info-visual-calculation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.reps-container {
+    background-color: var(--main-accent);
+
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.weight-container {
+    background-color: var(--main-accent);
+    width: 5rem;
+    height: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* Square background with top left and bottom right diagonals cut out */
+    clip-path: polygon(25% 0%, 100% 0, 100% 75%, 75% 100%, 0 100%, 0% 25%);
+}
+
+.weight-value {
+    font-size: 1.25rem;
+}
+
+.weight-text {
+    font-size: 1rem;
+}
+
+.result-container {
+    color: var(--main-accent);
+    border: 3px solid var(--main-accent);
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-value {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.result-units {
+    font-size: 1rem;
+}
+
+.muscular-load-info-explaination {
+    margin: 2rem 0;
+}
+
+.muscular-load-info-total-calculation {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr auto;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.muscular-load-info-total-calculation-title {
+    grid-area: 1 / 1 / 2 / 2;
+    margin-right: auto;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.muscular-load-info-total-calculation-subtitle {
+    grid-area: 2 / 1 / 3 / 2;
+    margin-right: auto;
+    font-style: italic;
+}
+
+.muscular-load-info-total-calculation-value {
+    grid-area: 1 / 2 / 3 / 3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+
+    font-size: 1.25rem;
+    font-weight: bold;
+
+    text-transform: uppercase;
 }

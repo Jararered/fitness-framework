@@ -22,6 +22,18 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
     const [reps, setReps] = useState(initialReps);
     const [weight, setWeight] = useState(initialWeight);
 
+    const handleSave = () => {
+        // Use placeholder values if no input is provided
+        if (reps === 0) {
+            setReps(initialReps);
+        }
+        if (weight === 0) {
+            setWeight(initialWeight);
+        }
+
+        onSave(reps, weight);
+    }
+
     return (
         <div className="exercise-page-input-container">
             <div className="exercise-page-input-header">
@@ -36,6 +48,7 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
                 <input
                     className="input-value reps-value"
                     type="number"
+                    inputMode="numeric"
                     value={reps}
                     step={1}
                     onChange={(e) => setReps(Math.max(0, Number(e.target.value)))}
@@ -45,8 +58,10 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
                 <input
                     className="input-value weight-value"
                     type="number"
-                    value={weight}
+                    inputMode="decimal"
+                    // value={weight}
                     step={2.5}
+                    placeholder={initialWeight.toString()}
                     onChange={(e) => setWeight(Math.max(0, Number(e.target.value)))}
                 />
 
@@ -56,7 +71,7 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
             <div className="footer-actions">
                 <button 
                     className="save-button"
-                    onClick={() => onSave(reps, weight)}
+                    onClick={handleSave}
                 >
                     Save
                 </button>

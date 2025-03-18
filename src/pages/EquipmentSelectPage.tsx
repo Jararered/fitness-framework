@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from "react";
-
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useToast } from "../context/ToastContext.tsx";
 import { useEquipment } from "../context/EquipmentContext.tsx";
@@ -7,6 +6,7 @@ import { useEquipment } from "../context/EquipmentContext.tsx";
 import { EquipmentToggleListItem } from "../components/EquipmentToggle.tsx";
 
 import "../styles/pages/EquipmentSelectPage.css";
+import { LuTrash, LuArrowRight, LuSave, LuArrowDownToLine } from "react-icons/lu";
 
 const EquipmentSelectPage: React.FC = () => {
     const { addToast } = useToast();
@@ -14,7 +14,6 @@ const EquipmentSelectPage: React.FC = () => {
     const { equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useEquipment();
 
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
-    const [equipmentNameInput, setEquipmentNameInput] = useState<string>("");
 
     useEffect(() => {
         if (equipmentLast && equipmentConfigs.length > 0) {
@@ -27,35 +26,50 @@ const EquipmentSelectPage: React.FC = () => {
 
     const handleEquipmentToggle = useCallback(
         (name: string) => {
-            setSelectedEquipment((prev) =>
-                prev.includes(name) ? prev.filter((item) => item !== name) : [...prev, name]
-            );
+            if (name === "all") {
+                setSelectedEquipment(equipment);
+            } else if (name === "none") {
+                setSelectedEquipment([]);
+            } else {
+                setSelectedEquipment((prev) =>
+                    prev.includes(name) ? prev.filter((item) => item !== name) : [...prev, name]
+                );
+            }
         },
         [setSelectedEquipment]
     );
 
     const handleSaveEquipment = () => {
-        // Check if name already exists in configs, if so, overwrite
-        const exists = equipmentConfigs.some((config) => config.name === equipmentNameInput);
+        // Prompt the user for a name if they haven't already entered one
+        const name = prompt("Please enter a name for the gym");
+        if (name && name.length > 0) {
+            setEquipmentConfigs([...equipmentConfigs, { name, equipment: selectedEquipment }]);
+            setEquipmentLast(name);
+        } else {
+            addToast("Please enter a name for the gym", "error");
+            return;
+        }
 
-        if (equipmentNameInput && selectedEquipment.length > 0) {
+        // Check if name already exists in configs, if so, overwrite
+        const exists = equipmentConfigs.some((config) => config.name === name);
+
+        if (selectedEquipment.length > 0) {
             if (exists) {
                 setEquipmentConfigs([
-                    ...equipmentConfigs.filter((config) => config.name !== equipmentNameInput),
-                    { name: equipmentNameInput, equipment: selectedEquipment },
+                    ...equipmentConfigs.filter((config) => config.name !== name),
+                    { name, equipment: selectedEquipment },
                 ]);
-                setEquipmentLast(equipmentNameInput);
+                setEquipmentLast(name);
             } else {
-                setEquipmentConfigs([...equipmentConfigs, { name: equipmentNameInput, equipment: selectedEquipment }]);
-                setEquipmentLast(equipmentNameInput);
+                setEquipmentConfigs([...equipmentConfigs, { name, equipment: selectedEquipment }]);
+                setEquipmentLast(name);
             }
         }
 
-        addToast(`Gym saved: ${equipmentNameInput}`, "success");
+        addToast(`Gym saved: ${name}`, "success");
     };
 
     const handleLoadGym = (config: { name: string; equipment: string[] }) => {
-        setEquipmentNameInput(config.name);
         setSelectedEquipment(config.equipment);
         setEquipmentLast(config.name);
 
@@ -87,31 +101,32 @@ const EquipmentSelectPage: React.FC = () => {
                         />
                     ))}
                 </div>
-            </div>
-
-            <div className="card">
-                <h2>Save Gym</h2>
-                <input
-                    type="text"
-                    value={equipmentNameInput}
-                    onChange={(e) => setEquipmentNameInput(e.target.value)}
-                    placeholder="Configuration Name"
-                />
-                <span>
-                    <button onClick={handleSaveEquipment}>Save</button>
-                    <button onClick={() => handleDeleteGym(equipmentNameInput)}>Delete</button>
-                </span>
+                <div className="equipment-toggles-buttons">
+                    <button onClick={handleSaveEquipment}>
+                        Save <LuSave size={24} />
+                    </button>
+                </div>
             </div>
 
             <div className="card">
                 <h2>Load Gym</h2>
-                <span>
-                    {equipmentConfigs.map((config) => (
-                        <button key={config.name} onClick={() => handleLoadGym(config)}>
-                            {config.name}
-                        </button>
+                <div className="gym-list">
+                    {equipmentConfigs.map((gym) => (
+                        <div className="gym-list-item" key={gym.name}>
+                            <div className="gym-name">
+                                {gym.name}
+                            </div>
+                            <div className="gym-buttons">
+                                <button onClick={() => handleLoadGym(gym)}>
+                                    <LuArrowDownToLine size={24} />
+                                </button>
+                                <button className="caution" onClick={() => handleDeleteGym(gym.name)}>
+                                    <LuTrash size={24} />
+                                </button>
+                            </div>
+                        </div>
                     ))}
-                </span>
+                </div>
             </div>
         </div>
     );

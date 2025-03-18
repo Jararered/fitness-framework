@@ -153,7 +153,17 @@ const WorkoutCreatePage: React.FC = () => {
             .map((p) => ({ exercise: p.exercise, reps: p.reps }));
         if (validPlan.length > 0) {
             const newWorkout = { name: workoutNameState || `Workout ${workoutPlans.length + 1}`, exercises: validPlan };
-            setWorkoutPlans([...workoutPlans, newWorkout]);
+            
+            // Find and update existing workout if it exists
+            const existingWorkoutIndex = workoutPlans.findIndex(w => w.name === loadedWorkoutState);
+            if (existingWorkoutIndex !== -1) {
+                const updatedWorkoutPlans = [...workoutPlans];
+                updatedWorkoutPlans[existingWorkoutIndex] = newWorkout;
+                setWorkoutPlans(updatedWorkoutPlans);
+            } else {
+                setWorkoutPlans([...workoutPlans, newWorkout]);
+            }
+
             if (startWorkout) {
                 setWorkoutState({
                     currentPlan: newWorkout,
@@ -298,14 +308,16 @@ const WorkoutCreatePage: React.FC = () => {
                         </div>
                     ))}
 
-                    <span>
-                        <button onClick={handleAddExercise}>
-                            Add Exercise <LuPlus size={24} />
+                    <div className="workout-modify-buttons">
+                        <button className="add-exercise-button" onClick={handleAddExercise}>
+                            Add Exercise
+                            <LuPlus size={24} />
                         </button>
-                        <button className="caution" onClick={handleRemoveExercise}>
-                            Remove Exercise <LuTrash size={24} />
+                        <button className="remove-exercise-button" onClick={handleRemoveExercise}>
+                            Remove Exercise
+                            <LuTrash size={24} />
                         </button>
-                    </span>
+                    </div>
                 </div>
 
                 <div className="card">
@@ -320,7 +332,7 @@ const WorkoutCreatePage: React.FC = () => {
                         />
                         <button className="save-button" onClick={() => handleSaveWorkout(false)}>
                             Save
-                            <LuSave size={24} />
+                            <LuSave />
                         </button>
                     </div>
                 </div>
@@ -337,7 +349,7 @@ const WorkoutCreatePage: React.FC = () => {
                                     onClick={() => handleLoadWorkout(workout)}
                                 >
                                     {workout.name || `Workout ${index + 1}`}
-                                    <LuRepeat size={24} />
+                                    <LuRepeat />
                                 </button>
                             ))
                         ) : (
@@ -356,12 +368,9 @@ const WorkoutCreatePage: React.FC = () => {
                                     {exercise.exercise}: {handleFormatReps(exercise.reps)} reps
                                 </p>
                             ))}
-                            <button 
-                                className="start-button"
-                                onClick={handleStartWorkout}
-                            >
+                            <button onClick={handleStartWorkout}>
                                 Start Workout
-                                <LuPlay size={24} />
+                                <LuPlay />
                             </button>
                         </>
                     ) : (

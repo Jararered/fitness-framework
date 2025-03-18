@@ -20,7 +20,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         const saved = localStorage.getItem("user-context");
         return saved
             ? JSON.parse(saved)
-            : { name: "", weight: 0, height: 0, unit: "imperial", darkMode: false };
+            : { name: "", weight: 0, height: 0, unit: "imperial", darkMode: true };
     });
 
     useEffect(() => {

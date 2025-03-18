@@ -4,6 +4,7 @@ import { useUser } from "../context/UserContext.tsx";
 
 import "../styles/pages/SettingsPage.css";
 import "../styles/components/PillToggle.css";
+import { LuTrash } from "react-icons/lu";
 
 // This function calculates the height in cm from the height in feet and inches
 const calculateHeightCm = (feet: number, inches: number) => {
@@ -107,6 +108,36 @@ const WeightInput = () => {
     );
 };
 
+const handlePromptDeleteData = (handleDelete: () => void) => {
+    const confirm = window.confirm("Are you sure you sure you want to delete this data? This action is irreversible.");
+    if (confirm) {
+        handleDelete();
+    }
+};
+
+const handleDeleteAllData = () => {
+    localStorage.clear();
+    window.location.reload();
+};
+
+const handleDeleteGyms = () => {
+    localStorage.removeItem("equipment-configs");
+    localStorage.removeItem("equipment-last");
+    window.location.reload();
+};
+
+const handleDeleteUserData = () => {
+    localStorage.removeItem("user-context");
+    localStorage.removeItem("workout-logs");
+    window.location.reload();
+};
+
+const handleDeleteWorkouts = () => {
+    localStorage.removeItem("workout-plans");
+    localStorage.removeItem("workout-state");
+    window.location.reload();
+};
+
 const SettingsPage: React.FC = () => {
     const { settings, setSettings } = useUser();
 
@@ -146,6 +177,37 @@ const SettingsPage: React.FC = () => {
                     onClick={() => setSettings({ ...settings, darkMode: !settings.darkMode })}
                 >
                     <span className="pill-circle"></span>
+                </button>
+            </div>
+
+            <h1>Manage Data</h1>
+            <div className="card">
+                <h2>Delete All Gyms</h2>
+                <p>This will delete all saved gyms from the app. This action is irreversible.</p>
+                <button className="delete-data-button" onClick={() => handlePromptDeleteData(handleDeleteGyms)}>
+                    <LuTrash />
+                    Delete All Gyms
+                </button>
+
+                <h2>Delete All Workouts</h2>
+                <p>This will delete all saved workouts from the app. This action is irreversible.</p>
+                <button className="delete-data-button" onClick={() => handlePromptDeleteData(handleDeleteWorkouts)}>
+                    <LuTrash />
+                    Delete All Workouts
+                </button>
+
+                <h2>Delete All User Data</h2>
+                <p>This will delete all user data from the app, including settings and workout logs. This action is irreversible.</p>
+                <button className="delete-data-button" onClick={() => handlePromptDeleteData(handleDeleteUserData)}>
+                    <LuTrash />
+                    Delete All User Data
+                </button>
+
+                <h2>Delete All Data</h2>
+                <p>This will delete all data from the app. This is a full reset of the app. This action is irreversible.</p>
+                <button className="delete-data-button" onClick={() => handlePromptDeleteData(handleDeleteAllData)}>
+                    <LuTrash />
+                    Delete All Data
                 </button>
             </div>
         </div>

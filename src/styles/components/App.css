@@ -7,6 +7,9 @@
     /* Full viewport height including safe areas */
     min-height: 100vh;
 
+    /* Space for notches */
+    padding-top: 3rem !important;
+
     /* Space for DockBar */
     padding-bottom: 7rem !important;
 

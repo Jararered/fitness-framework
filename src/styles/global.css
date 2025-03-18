@@ -7,11 +7,16 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+html {
+    overscroll-behavior: none;
+}
+
 body {
     margin: 0;
     padding: 0;
 
     overflow-x: hidden;
+    overscroll-behavior: none;
 }
 
 p {
@@ -44,18 +49,38 @@ h5 {
 }
 
 button {
-    display: inline-block;
+    /* Margin */
+    margin: 1rem;
+
+    /* Padding */
     padding: 0.75rem 1.5rem;
+
+    /* Font */
     font-size: 1rem;
     font-weight: bold;
-    background-color: var(--main-accent);
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
+    /* Color */
     color: white;
+    background-color: var(--main-accent);
+
+    /* Box Shadow */
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
+    /* Border */
     border: none;
     border-radius: 2rem;
+
+    /* Cursor */
     cursor: pointer;
-    margin: 1rem;
+
+    /* Transition */
     transition: all 200ms;
+
+    /* Display */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 button:hover {
@@ -105,8 +130,12 @@ input[type="number"]::-webkit-outer-spin-button:hover {
     background-color: var(--input-background);
 }
 
-button .caution {
-    color: var(--caution-color);
+button.caution {
+    background-color: var(--caution-color);
+}
+
+button.caution:hover {
+    background-color: var(--caution-hover);
 }
 
 div {
@@ -118,5 +147,4 @@ span {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
 }
