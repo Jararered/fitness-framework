@@ -1,3 +1,39 @@
 .flat-set-icon {
     transform: rotate(90deg);
 }
+
+.exercise-adjustments button.adjust {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    padding: 0.5rem;
+    margin: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.save-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.5rem;
+}
+
+.load-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.5rem;
+}
+
+.start-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.5rem;
+}

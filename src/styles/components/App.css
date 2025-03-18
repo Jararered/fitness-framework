@@ -8,7 +8,7 @@
     min-height: 100vh;
 
     /* Space for DockBar */
-    padding-bottom: 7rem;
+    padding-bottom: 7rem !important;
 
     /* Include padding in height calculation */
     box-sizing: border-box;

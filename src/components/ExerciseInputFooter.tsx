@@ -24,8 +24,8 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
 
     return (
         <div className="exercise-page-input-container">
-            <div>
-                <h2>{exerciseName}</h2>
+            <div className="exercise-page-input-header">
+                {exerciseName}
             </div>
 
             <div className="exercise-page-inputs">
