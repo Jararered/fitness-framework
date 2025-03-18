@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { WorkoutProvider } from "./context/WorkoutContext.tsx";
 import { ToastProvider } from "./context/ToastContext.tsx";
 import { EquipmentProvider } from "./context/EquipmentContext.tsx";
+import { FooterCardProvider } from "./context/FooterCardContext.tsx";
 
 import App from "./App.tsx";
 
@@ -15,9 +16,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <WorkoutProvider>
             <EquipmentProvider>
                 <ToastProvider>
-                    <BrowserRouter>
-                        <App />
-                    </BrowserRouter>
+                    <FooterCardProvider>
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                    </FooterCardProvider>
                 </ToastProvider>
             </EquipmentProvider>
         </WorkoutProvider>

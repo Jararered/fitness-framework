@@ -88,13 +88,19 @@ input,
 select {
     color: var(--text-color);
     background-color: var(--input-background);
-    border: 1px solid var(--input-border);
+    border: 2px solid var(--input-border);
     display: block;
     padding: 0.5rem;
     font-size: 1rem;
-    border-radius: 2rem;
+    border-radius: 1rem;
     text-align: center;
-    margin: 0.25rem auto;
+    margin: 0.25rem 0;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border: 2px solid var(--main-accent);
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -122,13 +128,4 @@ span {
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-}
-
-@media (max-width: 768px) {
-
-    input,
-    select,
-    button {
-        max-width: 100%;
-    }
 }

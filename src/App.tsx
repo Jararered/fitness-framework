@@ -4,6 +4,8 @@ import { useUser } from "./context/UserContext.tsx";
 import DockBar from "./components/DockBar.tsx";
 import ToastContainer from "./components/ToastContainer.tsx";
 import PageTransition from "./components/PageTransition.tsx";
+import FooterCard from "./components/FooterCard.tsx";
+import { useFooterCard } from "./context/FooterCardContext.tsx";
 
 import HomePage from "./pages/HomePage.tsx";
 import EquipmentSelectPage from "./pages/EquipmentSelectPage.tsx";
@@ -19,6 +21,7 @@ import "./styles/components/App.css";
 function App() {
     const { settings } = useUser();
     const location = useLocation();
+    const { isVisible, content, hideFooterCard } = useFooterCard();
 
     return (
         <div className={`App ${settings.darkMode ? "dark-mode" : ""}`}>
@@ -36,6 +39,11 @@ function App() {
             </PageTransition>
             <ToastContainer />
             <DockBar />
+            <FooterCard
+                isVisible={isVisible}
+                content={content}
+                onClose={hideFooterCard}
+            />
         </div>
     );
 }

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaPlusCircle } from "react-icons/fa";
 
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
+import { useFooterCard } from "../context/FooterCardContext.tsx";
 
 import { DividerSpaced } from "../components/DividerSpaced.tsx";
 
@@ -15,6 +16,7 @@ const ExercisePage: React.FC = () => {
     const navigate = useNavigate();
     const { workoutState, setWorkoutState } = useWorkout();
     const { settings } = useUser();
+    const { showFooterCard, hideFooterCard } = useFooterCard();
 
     const [repsInput, setRepsInput] = useState<number>(0);
     const [weightInput, setWeightInput] = useState<number>(0);
@@ -40,6 +42,74 @@ const ExercisePage: React.FC = () => {
             setRepsInput(currentExercise.reps[workoutState.currentSetIndex]);
         }
     }, [currentExercise.reps, workoutState.currentSetIndex, repsInput]);
+
+    const handleShowRepsInputFooter = () => {
+        const content = (
+
+            //     <div className="exercise-page-input-container-item">
+            //         <label>Reps</label>
+            //         <input
+            //             type="number"
+            //             min="0"
+            //             value={repsInput}
+            //             onChange={(e) => setRepsInput(Math.max(0, Number(e.target.value)))}
+            //         />
+            //     </div>
+            //     <div className="exercise-page-input-container-item">
+            //         <label>Weight ({handleWeightUnit()})</label>
+            //         <input
+            //             type="number"
+            //             min="0"
+            //             step="2.5"
+            //             value={weightInput}
+            //             onChange={(e) => setWeightInput(Math.max(0, Number(e.target.value)))}
+            //         />
+            //     </div>
+            //     <button
+            //         className="confirm-inputs-button"
+            //         onClick={() => hideFooterCard()}
+            //     >
+            //         Confirm
+            //     </button>
+            <div className="exercise-page-input-container">
+                {/* Show the current exercise Name */}
+                <div>
+                    <h2>{currentExercise.exercise}</h2>
+                </div>
+
+                <div className="exercise-page-inputs">
+                    {/* Shows the current set number */}
+                    <div className="input-label set-label">Set</div>
+                    <div className="input-value set-value">{workoutState.currentSetIndex + 1}</div>
+
+                    {/* Shows the reps input */}
+                    <div className="input-label reps-label">Reps</div>
+                    <input
+                        className="input-value reps-value"
+                        type="number"
+                        value={repsInput}
+                        step={1}
+                        onChange={(e) => setRepsInput(Math.max(0, Number(e.target.value)))}
+                    />
+
+                    {/* Shows the weight input */}
+                    <div className="input-label weight-label">Weight</div>
+                    <input
+                        className="input-value weight-value"
+                        type="number"
+                        value={weightInput}
+                        step={2.5}
+                        onChange={(e) => setWeightInput(Math.max(0, Number(e.target.value)))}
+                    />
+
+                    {/* Shows the weight unit */}
+                    <div className="input-label unit-label">{handleWeightUnit()}</div>
+                </div>
+            </div>
+        );
+
+        showFooterCard(content);
+    };
 
     const handleWeightUnit = () => {
         let weightUnit: string = "";
@@ -145,7 +215,7 @@ const ExercisePage: React.FC = () => {
 
                 <div className="last-weight">
                     <div className="last-weight-title">Last Round</div>
-                    <div className="last-weight-weight">{weightInput} {handleWeightUnit()}</div>
+                    <div className="last-weight-weight" onClick={handleShowRepsInputFooter}>{weightInput} {handleWeightUnit()} {<FaPlusCircle size={16} />}</div>
                 </div>
 
                 <DividerSpaced
@@ -164,28 +234,6 @@ const ExercisePage: React.FC = () => {
                         </div>
                     }
                 />
-
-                <span className="exercise-page-input-container">
-                    <div className="exercise-page-input-container-item">
-                        <label>Reps</label>
-                        <input
-                            type="number"
-                            min="0"
-                            value={repsInput}
-                            onChange={(e) => setRepsInput(Math.max(0, Number(e.target.value)))}
-                        />
-                    </div>
-                    <div className="exercise-page-input-container-item">
-                        <label>Weight ({handleWeightUnit()})</label>
-                        <input
-                            type="number"
-                            min="0"
-                            step="2.5"
-                            value={weightInput}
-                            onChange={(e) => setWeightInput(Math.max(0, Number(e.target.value)))}
-                        />
-                    </div>
-                </span>
 
                 <DividerSpaced
                     left={
@@ -206,12 +254,8 @@ const ExercisePage: React.FC = () => {
                 />
             </div>
 
-            <div className="card-footer">
-
-            </div>
         </div>
     );
 };
-
 
 export default ExercisePage;
