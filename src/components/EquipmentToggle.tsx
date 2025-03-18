@@ -9,7 +9,7 @@ interface EquipmentToggleProps {
     handleEquipmentToggle: (name: string) => void;
 }
 
-const EquipmentToggle: React.FC<EquipmentToggleProps> = ({ equipment, enabled, handleEquipmentToggle }) => {
+const EquipmentToggleCard: React.FC<EquipmentToggleProps> = ({ equipment, enabled, handleEquipmentToggle }) => {
     return (
         <div
             className={`equipment-toggle ${enabled ? "enabled" : ""}`}
@@ -22,4 +22,4 @@ const EquipmentToggle: React.FC<EquipmentToggleProps> = ({ equipment, enabled, h
     );
 };
 
-export default EquipmentToggle;
+export { EquipmentToggleCard as EquipmentToggle };

@@ -5,13 +5,13 @@ import { LuChartNoAxesColumnDecreasing, LuAlignJustify } from "react-icons/lu";
 import { LuPlus, LuMinus } from "react-icons/lu";
 
 import { useToast } from "../context/ToastContext.tsx";
-import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import DividerSpaced from "../components/DividerSpaced.tsx";
 import { SelectorSearchable } from "../components/SelectorSearchable.tsx";
 
 import "../styles/pages/WorkoutCreatePage.css";
+import { EquipmentProvider, useEquipment } from "../context/EquipmentContext.tsx";
 
 interface WorkoutPlan {
     exercise: string;
@@ -23,7 +23,7 @@ interface WorkoutPlan {
 
 const WorkoutCreatePage: React.FC = () => {
     const { exercises, workoutPlans, setWorkoutPlans, workoutState, setWorkoutState, } = useWorkout();
-    const { equipmentConfigs, equipmentLast } = useUser();
+    const { equipmentConfigs, equipmentLast } = useEquipment();
     const navigate = useNavigate();
     const { addToast } = useToast();
 
@@ -226,126 +226,128 @@ const WorkoutCreatePage: React.FC = () => {
     };
 
     return (
-        <div className="workout-create-page">
-            <h1>Create Workout</h1>
-            <div className="card">
-                {workoutPlanState.map((p, exerciseIndex) => (
-                    <div className="card-content" key={exerciseIndex}>
-                        <h2>Exercise {exerciseIndex + 1}</h2>
+        <EquipmentProvider>
+            <div className="workout-create-page">
+                <h1>Create Workout</h1>
+                <div className="card">
+                    {workoutPlanState.map((p, exerciseIndex) => (
+                        <div className="card-content" key={exerciseIndex}>
+                            <h2>Exercise {exerciseIndex + 1}</h2>
 
-                        <SelectorSearchable
-                            options={avaliableExerciseNames}
-                            value={p.exercise}
-                            getOptionLabel={(option) => option}
-                            onChange={(value) => {
-                                const newPlan = [...workoutPlanState];
-                                newPlan[exerciseIndex].exercise = value || "";
-                                setWorkoutPlanState(newPlan);
-                                setLoadedWorkoutState(null);
-                            }}
-                            placeholder="Search for an exercise"
-                        />
+                            <SelectorSearchable
+                                options={avaliableExerciseNames}
+                                value={p.exercise}
+                                getOptionLabel={(option) => option}
+                                onChange={(value) => {
+                                    const newPlan = [...workoutPlanState];
+                                    newPlan[exerciseIndex].exercise = value || "";
+                                    setWorkoutPlanState(newPlan);
+                                    setLoadedWorkoutState(null);
+                                }}
+                                placeholder="Search for an exercise"
+                            />
 
-                        <div className="reps-display">
-                            <p>{handleFormatReps(p.reps)} reps</p>
+                            <div className="reps-display">
+                                <p>{handleFormatReps(p.reps)} reps</p>
+                            </div>
+
+                            <div className="exercise-adjustments">
+                                <DividerSpaced
+                                    left={<h3>Set Count</h3>}
+                                    right={
+                                        <span>
+                                            <button className="adjust" onClick={() => handleSetsChange(exerciseIndex, "decrease")}>
+                                                <LuMinus size={16} />
+                                            </button>
+                                            <button className="adjust" onClick={() => handleSetsChange(exerciseIndex, "increase")}>
+                                                <LuPlus size={16} />
+                                            </button>
+                                        </span>
+                                    }
+                                />
+
+                                <DividerSpaced
+                                    left={<h3>Rep Count</h3>}
+                                    right={
+                                        <span>
+                                            <button className="adjust" onClick={() => handleChangeBaseReps(exerciseIndex, "decrease")}>
+                                                <LuMinus size={16} />
+                                            </button>
+                                            <button className="adjust" onClick={() => handleChangeBaseReps(exerciseIndex, "increase")}>
+                                                <LuPlus size={16} />
+                                            </button>
+                                        </span>
+                                    }
+                                />
+
+                                <DividerSpaced
+                                    left={<h3>Set Style</h3>}
+                                    right={
+                                        <span>
+                                            <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "flat")}>
+                                                <LuAlignJustify className="flat-set-icon" size={16} />
+                                            </button>
+                                            <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "drop")}>
+                                                <LuChartNoAxesColumnDecreasing className="drop-set-icon" size={16} />
+                                            </button>
+                                        </span>
+                                    }
+                                />
+                            </div>
+
                         </div>
-
-                        <div className="exercise-adjustments">
-                            <DividerSpaced
-                                left={<h3>Set Count</h3>}
-                                right={
-                                    <span>
-                                        <button className="adjust" onClick={() => handleSetsChange(exerciseIndex, "decrease")}>
-                                            <LuMinus size={16} />
-                                        </button>
-                                        <button className="adjust" onClick={() => handleSetsChange(exerciseIndex, "increase")}>
-                                            <LuPlus size={16} />
-                                        </button>
-                                    </span>
-                                }
-                            />
-
-                            <DividerSpaced
-                                left={<h3>Rep Count</h3>}
-                                right={
-                                    <span>
-                                        <button className="adjust" onClick={() => handleChangeBaseReps(exerciseIndex, "decrease")}>
-                                            <LuMinus size={16} />
-                                        </button>
-                                        <button className="adjust" onClick={() => handleChangeBaseReps(exerciseIndex, "increase")}>
-                                            <LuPlus size={16} />
-                                        </button>
-                                    </span>
-                                }
-                            />
-
-                            <DividerSpaced
-                                left={<h3>Set Style</h3>}
-                                right={
-                                    <span>
-                                        <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "flat")}>
-                                            <LuAlignJustify className="flat-set-icon" size={16} />
-                                        </button>
-                                        <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "drop")}>
-                                            <LuChartNoAxesColumnDecreasing className="drop-set-icon" size={16} />
-                                        </button>
-                                    </span>
-                                }
-                            />
-                        </div>
-
-                    </div>
-                ))}
-
-                <span>
-                    <button onClick={handleAddExercise}>Add Exercise</button>
-                    <button className="caution" onClick={handleRemoveExercise}>
-                        Remove Exercise
-                    </button>
-                </span>
-            </div>
-
-            <div className="card">
-                <h2>Save Workout</h2>
-                <span>
-                    <input
-                        type="text"
-                        value={workoutNameState}
-                        onChange={(e) => setWorkoutNameState(e.target.value)}
-                        placeholder="Workout Name"
-                    />
-                    <button onClick={() => handleSaveWorkout(false)}>Save</button>
-                </span>
-            </div>
-
-            <div className="card">
-                <h2>Load Workout</h2>
-                <span>
-                    {workoutPlans.map((workout, index) => (
-                        <button key={index} onClick={() => handleLoadWorkout(workout)}>
-                            {workout.name || `Workout ${index + 1}`}
-                        </button>
                     ))}
-                </span>
-            </div>
 
-            <div className="card">
-                <h2>Workout Preview</h2>
-                {workoutState.currentPlan && workoutState.currentPlan.exercises.length > 0 ? (
-                    <>
-                        <p>{workoutState.currentPlan.name || workoutNameState || "Unnamed Workout"}</p>
-                        {workoutState.currentPlan.exercises.map((exercise, index) => (
-                            <p key={index}>
-                                {exercise.exercise}: {handleFormatReps(exercise.reps)} reps
-                            </p>
+                    <span>
+                        <button onClick={handleAddExercise}>Add Exercise</button>
+                        <button className="caution" onClick={handleRemoveExercise}>
+                            Remove Exercise
+                        </button>
+                    </span>
+                </div>
+
+                <div className="card">
+                    <h2>Save Workout</h2>
+                    <span>
+                        <input
+                            type="text"
+                            value={workoutNameState}
+                            onChange={(e) => setWorkoutNameState(e.target.value)}
+                            placeholder="Workout Name"
+                        />
+                        <button onClick={() => handleSaveWorkout(false)}>Save</button>
+                    </span>
+                </div>
+
+                <div className="card">
+                    <h2>Load Workout</h2>
+                    <span>
+                        {workoutPlans.map((workout, index) => (
+                            <button key={index} onClick={() => handleLoadWorkout(workout)}>
+                                {workout.name || `Workout ${index + 1}`}
+                            </button>
                         ))}
-                        <button onClick={handleStartWorkout}>Start Workout</button>
-                    </>
-                ) : (
-                    <p>No workout loaded into current plan yet.</p>
-                )}
+                    </span>
+                </div>
+
+                <div className="card">
+                    <h2>Workout Preview</h2>
+                    {workoutState.currentPlan && workoutState.currentPlan.exercises.length > 0 ? (
+                        <>
+                            <p>{workoutState.currentPlan.name || workoutNameState || "Unnamed Workout"}</p>
+                            {workoutState.currentPlan.exercises.map((exercise, index) => (
+                                <p key={index}>
+                                    {exercise.exercise}: {handleFormatReps(exercise.reps)} reps
+                                </p>
+                            ))}
+                            <button onClick={handleStartWorkout}>Start Workout</button>
+                        </>
+                    ) : (
+                        <p>No workout loaded into current plan yet.</p>
+                    )}
+                </div>
             </div>
-        </div>
+        </EquipmentProvider>
     );
 };
 

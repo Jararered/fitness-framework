@@ -1,8 +1,11 @@
-import ReactDOM from "react-dom/client";
 import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+
 import { WorkoutProvider } from "./context/WorkoutContext.tsx";
 import { ToastProvider } from "./context/ToastContext.tsx";
-import { BrowserRouter } from "react-router-dom";
+import { EquipmentProvider } from "./context/EquipmentContext.tsx";
+
 import App from "./App.tsx";
 
 import "./styles/global.css";
@@ -10,11 +13,13 @@ import "./styles/global.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <WorkoutProvider>
-            <ToastProvider>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-            </ToastProvider>
+            <EquipmentProvider>
+                <ToastProvider>
+                    <BrowserRouter>
+                        <App />
+                    </BrowserRouter>
+                </ToastProvider>
+            </EquipmentProvider>
         </WorkoutProvider>
     </React.StrictMode>
 );

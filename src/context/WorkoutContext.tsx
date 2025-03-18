@@ -45,11 +45,11 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     });
 
     const [workoutPlans, setWorkoutPlans] = useState<WorkoutPlan[]>(() => {
-        const saved = localStorage.getItem("workoutPlans");
+        const saved = localStorage.getItem("workout-plans");
         return saved ? JSON.parse(saved) : [];
     });
     const [workoutLogs, setWorkoutLogs] = useState<WorkoutLog[]>(() => {
-        const saved = localStorage.getItem("workoutLogs");
+        const saved = localStorage.getItem("workout-logs");
         if (saved) {
             const parsedLogs = JSON.parse(saved);
             return parsedLogs.map((log: WorkoutLog) => ({
@@ -66,7 +66,7 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
         return [];
     });
     const [workoutState, setWorkoutState] = useState<WorkoutState>(() => {
-        const saved = localStorage.getItem("workoutState");
+        const saved = localStorage.getItem("workout-state");
         return saved
             ? JSON.parse(saved)
             : {
@@ -80,9 +80,9 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     });
 
     useEffect(() => {
-        localStorage.setItem("workoutPlans", JSON.stringify(workoutPlans));
-        localStorage.setItem("workoutLogs", JSON.stringify(workoutLogs));
-        localStorage.setItem("workoutState", JSON.stringify(workoutState));
+        localStorage.setItem("workout-plans", JSON.stringify(workoutPlans));
+        localStorage.setItem("workout-logs", JSON.stringify(workoutLogs));
+        localStorage.setItem("workout-state", JSON.stringify(workoutState));
     }, [workoutPlans, workoutLogs, workoutState]);
 
     return (

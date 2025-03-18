@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 
-import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useToast } from "../context/ToastContext.tsx";
+import { useEquipment } from "../context/EquipmentContext.tsx";
 
 import EquipmentToggle from "../components/EquipmentToggle.tsx";
 
@@ -11,7 +11,7 @@ import "../styles/pages/EquipmentSelectPage.css";
 const EquipmentSelectPage: React.FC = () => {
     const { addToast } = useToast();
     const { equipment } = useWorkout();
-    const { equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useUser();
+    const { equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useEquipment();
 
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
     const [equipmentNameInput, setEquipmentNameInput] = useState<string>("");
