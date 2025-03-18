@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaCheck, FaPlusCircle } from "react-icons/fa";
+import { FaCheck, FaPlusCircle, FaArrowLeft } from "react-icons/fa";
 
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useFooterCard } from "../context/FooterCardContext.tsx";
 
 import { DividerSpaced } from "../components/DividerSpaced.tsx";
+import ExerciseInputFooter from "../components/ExerciseInputFooter.tsx";
 
 import "../styles/pages/ExercisePage.css";
 
@@ -44,42 +45,22 @@ const ExercisePage: React.FC = () => {
     }, [currentExercise.reps, workoutState.currentSetIndex, repsInput]);
 
     const handleShowRepsInputFooter = () => {
+        const handleSave = (newReps: number, newWeight: number) => {
+            setRepsInput(newReps);
+            setWeightInput(newWeight);
+            hideFooterCard();
+        };
+
         const content = (
-            <div className="exercise-page-input-container">
-                {/* Show the current exercise Name */}
-                <div>
-                    <h2>{currentExercise.exercise}</h2>
-                </div>
-
-                <div className="exercise-page-inputs">
-                    {/* Shows the current set number */}
-                    <div className="input-label set-label">Set</div>
-                    <div className="input-value set-value">{workoutState.currentSetIndex + 1}</div>
-
-                    {/* Shows the reps input */}
-                    <div className="input-label reps-label">Reps</div>
-                    <input
-                        className="input-value reps-value"
-                        type="number"
-                        value={repsInput}
-                        step={1}
-                        onChange={(e) => setRepsInput(Math.max(0, Number(e.target.value)))}
-                    />
-
-                    {/* Shows the weight input */}
-                    <div className="input-label weight-label">Weight</div>
-                    <input
-                        className="input-value weight-value"
-                        type="number"
-                        value={weightInput}
-                        step={2.5}
-                        onChange={(e) => setWeightInput(Math.max(0, Number(e.target.value)))}
-                    />
-
-                    {/* Shows the weight unit */}
-                    <div className="input-label unit-label">{handleWeightUnit()}</div>
-                </div>
-            </div>
+            <ExerciseInputFooter
+                exerciseName={currentExercise.exercise}
+                currentSet={workoutState.currentSetIndex + 1}
+                initialReps={repsInput}
+                initialWeight={weightInput}
+                weightUnit={handleWeightUnit()}
+                onSave={handleSave}
+                onCancel={hideFooterCard}
+            />
         );
 
         showFooterCard(content);
@@ -193,6 +174,14 @@ const ExercisePage: React.FC = () => {
                 </div>
 
                 <DividerSpaced
+                    left={
+                        <div className="back-exercise-container">
+                            <button className="back-exercise-button" onClick={handleBack}>
+                                <FaArrowLeft size={20} />
+                            </button>
+                            <div className="back-exercise-text">Back</div>
+                        </div>
+                    }
                     center={
                         <div className="reps-goal">
                             <div onClick={() => setRepsInput(13)} className="reps-goal-number">{currentExercise.reps[workoutState.currentSetIndex]}</div>
@@ -208,26 +197,7 @@ const ExercisePage: React.FC = () => {
                         </div>
                     }
                 />
-
-                <DividerSpaced
-                    left={
-                        <button onClick={handleBack}>
-                            Back
-                        </button>
-                    }
-                    center={
-                        <button onClick={handleNext}>
-                            {isLastSet && isLastExercise ? "Complete" : "Next"}
-                        </button>
-                    }
-                    right={
-                        <button onClick={handleSkip}>
-                            Skip
-                        </button>
-                    }
-                />
             </div>
-
         </div>
     );
 };

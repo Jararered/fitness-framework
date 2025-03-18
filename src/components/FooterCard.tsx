@@ -28,15 +28,19 @@ const FooterCard: React.FC<FooterCardProps> = ({
             <div
                 ref={nodeRef}
                 className={`footer-card`}
+                onClick={(e) => {
+                    // Prevent clicks within the card from closing it
+                    e.stopPropagation();
+                }}
             >
                 <div className={`footer-card-inner`}>
                     <div className="footer-card-content">
                         {content}
                     </div>
 
-                    {onClose && (
+                    {/* {onClose && (
                         <IoMdCloseCircle className="footer-card-close" size={24} onClick={onClose} />
-                    )}
+                    )} */}
                 </div>
             </div>
         </CSSTransition>
