@@ -17,15 +17,13 @@
     width: 100vw;
     margin: 0;
     padding: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+
+    /* Prevent scrolling to the left and right */
+    overflow-x: hidden;
 
     color: var(--text-color);
     background-color: var(--background-color);
-    background-image: radial-gradient(circle, var(--card-border) 0.0625rem, transparent 0.1rem);
+    background-image: radial-gradient(circle, #717171cc 0.0625rem, transparent 0.1rem);
     background-size: 2.5rem 2.5rem;
 }
 
