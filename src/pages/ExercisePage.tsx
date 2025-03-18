@@ -45,32 +45,6 @@ const ExercisePage: React.FC = () => {
 
     const handleShowRepsInputFooter = () => {
         const content = (
-
-            //     <div className="exercise-page-input-container-item">
-            //         <label>Reps</label>
-            //         <input
-            //             type="number"
-            //             min="0"
-            //             value={repsInput}
-            //             onChange={(e) => setRepsInput(Math.max(0, Number(e.target.value)))}
-            //         />
-            //     </div>
-            //     <div className="exercise-page-input-container-item">
-            //         <label>Weight ({handleWeightUnit()})</label>
-            //         <input
-            //             type="number"
-            //             min="0"
-            //             step="2.5"
-            //             value={weightInput}
-            //             onChange={(e) => setWeightInput(Math.max(0, Number(e.target.value)))}
-            //         />
-            //     </div>
-            //     <button
-            //         className="confirm-inputs-button"
-            //         onClick={() => hideFooterCard()}
-            //     >
-            //         Confirm
-            //     </button>
             <div className="exercise-page-input-container">
                 {/* Show the current exercise Name */}
                 <div>
