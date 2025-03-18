@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaCheck } from "react-icons/fa";
 
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import { DividerSpaced } from "../components/DividerSpaced.tsx";
+
+import "../styles/pages/ExercisePage.css";
+
+import quotes from "../data/quotes.json";
 
 const ExercisePage: React.FC = () => {
     const navigate = useNavigate();
@@ -21,6 +26,14 @@ const ExercisePage: React.FC = () => {
     const isLastExercise = workoutState.currentExerciseIndex === workoutState.currentPlan.exercises.length - 1;
     const isFirstSet = workoutState.currentSetIndex === 0;
     const isFirstExercise = workoutState.currentExerciseIndex === 0;
+
+    const [randomQuote, setRandomQuote] = useState<string>("");
+    const [randomQuoteAuthor, setRandomQuoteAuthor] = useState<string>("");
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        setRandomQuote(quotes[randomIndex].quote);
+        setRandomQuoteAuthor(quotes[randomIndex].author);
+    }, []);
 
     useEffect(() => {
         if (repsInput === 0) {
@@ -125,8 +138,32 @@ const ExercisePage: React.FC = () => {
 
             <div className="card">
 
-                <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.reps.length}</p>
-                <p>Goal: {currentExercise.reps[workoutState.currentSetIndex]} reps</p>
+                <div className="quote-container">
+                    <div className="quote-text">{randomQuote}</div>
+                    <div className="quote-author">{randomQuoteAuthor}</div>
+                </div>
+
+                <div className="last-weight">
+                    <div className="last-weight-title">Last Round</div>
+                    <div className="last-weight-weight">{weightInput} {handleWeightUnit()}</div>
+                </div>
+
+                <DividerSpaced
+                    center={
+                        <div className="reps-goal">
+                            <div onClick={() => setRepsInput(13)} className="reps-goal-number">{currentExercise.reps[workoutState.currentSetIndex]}</div>
+                            <div className="reps-goal-text">reps</div>
+                        </div>
+                    }
+                    right={
+                        <div className="next-exercise-container">
+                            <button className="next-exercise-button" onClick={handleNext}>
+                                <FaCheck size={20} />
+                            </button>
+                            <div className="next-exercise-text">Next</div>
+                        </div>
+                    }
+                />
 
                 <span className="exercise-page-input-container">
                     <div className="exercise-page-input-container-item">
@@ -167,6 +204,10 @@ const ExercisePage: React.FC = () => {
                         </button>
                     }
                 />
+            </div>
+
+            <div className="card-footer">
+
             </div>
         </div>
     );

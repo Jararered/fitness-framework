@@ -1,9 +1,10 @@
 .divider-spaced-container {
-    position: relative;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    gap: 1rem;
+    min-height: fit-content;
 }
 
 .left-section {
@@ -14,14 +15,10 @@
 }
 
 .center-section {
-    flex: 1;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 0;
+    z-index: 1;
     width: auto;
 }
 

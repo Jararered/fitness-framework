@@ -7,3 +7,55 @@
     width: 5rem;
     text-align: center;
 }
+
+.reps-goal {
+    width: 7rem;
+    height: 7rem;
+
+    border: 5px solid var(--card-border);
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.reps-goal-number {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.reps-goal-text {
+    font-size: 1rem;
+}
+
+.last-weight-weight {
+    background-color: var(--card-border);
+    border-radius: 1rem;
+    padding: 0.25rem;
+    margin: 0.25rem;
+    margin-bottom: 2rem;
+}
+
+.next-exercise-button {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    
+    padding: 0;
+    line-height: 3rem;
+    text-align: center;
+    
+    margin-bottom: 0;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.quote-container
+{
+    background-color: var(--card-border);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 0.25rem;
+    margin-bottom: 2rem;
+}
