@@ -123,7 +123,16 @@ const ExercisePage: React.FC = () => {
 
     const handleBack = () => {
         if (isFirstSet && isFirstExercise) {
-            navigate("/preview");
+            // Reset workout state
+            setWorkoutState({
+                ...workoutState,
+                isStarted: false,
+                currentExerciseIndex: 0,
+                currentSetIndex: 0,
+                repsCompleted: [],
+                weightsUsed: [],
+            });
+            navigate("/");
         } else if (isFirstSet && workoutState.currentPlan) {
             setWorkoutState({
                 ...workoutState,
