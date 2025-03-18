@@ -5,7 +5,6 @@ import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import { DividerSpaced } from "../components/DividerSpaced.tsx";
-import { WorkoutStatistics } from "../components/WorkoutStatistics.tsx";
 
 const ExercisePage: React.FC = () => {
     const navigate = useNavigate();
@@ -121,13 +120,16 @@ const ExercisePage: React.FC = () => {
 
     return (
         <div className="exercise-page">
+
+            <h1>{currentExercise.exercise}</h1>
+
             <div className="card">
-                <h1>{currentExercise.exercise}</h1>
 
                 <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.reps.length}</p>
                 <p>Goal: {currentExercise.reps[workoutState.currentSetIndex]} reps</p>
-                <span>
-                    <div>
+
+                <span className="exercise-page-input-container">
+                    <div className="exercise-page-input-container-item">
                         <label>Reps</label>
                         <input
                             type="number"
@@ -136,7 +138,7 @@ const ExercisePage: React.FC = () => {
                             onChange={(e) => setRepsInput(Math.max(0, Number(e.target.value)))}
                         />
                     </div>
-                    <div>
+                    <div className="exercise-page-input-container-item">
                         <label>Weight ({handleWeightUnit()})</label>
                         <input
                             type="number"
@@ -147,29 +149,25 @@ const ExercisePage: React.FC = () => {
                         />
                     </div>
                 </span>
+
                 <DividerSpaced
                     left={
-                        <button onClick={handleBack} className="secondary">
+                        <button onClick={handleBack}>
                             Back
                         </button>
                     }
                     center={
-                        <button onClick={handleNext} className="primary">
+                        <button onClick={handleNext}>
                             {isLastSet && isLastExercise ? "Complete" : "Next"}
                         </button>
                     }
                     right={
-                        <button onClick={handleSkip} className="secondary">
+                        <button onClick={handleSkip}>
                             Skip
                         </button>
                     }
                 />
             </div>
-            <WorkoutStatistics
-                repsCompleted={workoutState.repsCompleted}
-                weightsUsed={workoutState.weightsUsed}
-                units={handleWeightUnit()}
-            />
         </div>
     );
 };
