@@ -6,7 +6,6 @@ import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import { DividerSpaced } from "../components/DividerSpaced.tsx";
 import { WorkoutStatistics } from "../components/WorkoutStatistics.tsx";
-import { TimerCircular } from "../components/TimerCircular.tsx";
 
 const ExercisePage: React.FC = () => {
     const navigate = useNavigate();
@@ -15,7 +14,6 @@ const ExercisePage: React.FC = () => {
 
     const [repsInput, setRepsInput] = useState<number>(0);
     const [weightInput, setWeightInput] = useState<number>(0);
-    const [breakTime, setBreakTime] = useState<number>(0);
 
     if (!workoutState.currentPlan) return <div>No workout loaded</div>;
 
@@ -80,7 +78,6 @@ const ExercisePage: React.FC = () => {
                 repsCompleted: updatedReps,
                 weightsUsed: updatedWeights,
             });
-            setBreakTime(60);
         }
 
         setRepsInput(0);
@@ -119,7 +116,6 @@ const ExercisePage: React.FC = () => {
                 ...workoutState,
                 currentSetIndex: workoutState.currentSetIndex + 1,
             });
-            setBreakTime(60);
         }
     };
 
@@ -127,8 +123,6 @@ const ExercisePage: React.FC = () => {
         <div className="exercise-page">
             <div className="card">
                 <h1>{currentExercise.exercise}</h1>
-
-                <TimerCircular duration={breakTime} />
 
                 <p>Set {workoutState.currentSetIndex + 1} of {currentExercise.reps.length}</p>
                 <p>Goal: {currentExercise.reps[workoutState.currentSetIndex]} reps</p>
