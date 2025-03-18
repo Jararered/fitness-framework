@@ -24,4 +24,4 @@ const DividerSpaced: React.FC<DividerSpacedProps> = ({ left, center, right }) =>
     );
 };
 
-export default DividerSpaced;
+export { DividerSpaced };

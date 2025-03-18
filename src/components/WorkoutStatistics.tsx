@@ -24,4 +24,4 @@ const WorkoutStatistics: React.FC<WorkoutStatisticsProps> = ({ repsCompleted, we
     );
 };
 
-export default WorkoutStatistics;
+export { WorkoutStatistics };

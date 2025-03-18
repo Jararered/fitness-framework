@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
-import WorkoutStatistics from "../components/WorkoutStatistics.tsx";
+import { WorkoutStatistics } from "../components/WorkoutStatistics.tsx";
 import { TimerCircular } from "../components/TimerCircular.tsx";
 
 const ExercisePreviewPage: React.FC = () => {

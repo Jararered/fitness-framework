@@ -83,8 +83,8 @@ const kgToGrams = (kg: number) => {
 const WeightInput = () => {
     const { settings, setSettings } = useUser();
     const isImperial = settings.unit === "imperial";
-    
-    const displayWeight = isImperial 
+
+    const displayWeight = isImperial
         ? gramsToLbs(settings.weight)
         : gramsToKg(settings.weight);
 
@@ -96,7 +96,7 @@ const WeightInput = () => {
                 value={displayWeight}
                 onChange={(e) => {
                     const value = Number(e.target.value);
-                    const weightInGrams = isImperial 
+                    const weightInGrams = isImperial
                         ? lbsToGrams(value)
                         : kgToGrams(value);
                     setSettings({ ...settings, weight: weightInGrams });

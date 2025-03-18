@@ -7,7 +7,7 @@ import { LuPlus, LuMinus } from "react-icons/lu";
 import { useToast } from "../context/ToastContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
-import DividerSpaced from "../components/DividerSpaced.tsx";
+import { DividerSpaced } from "../components/DividerSpaced.tsx";
 import { SelectorSearchable } from "../components/SelectorSearchable.tsx";
 
 import "../styles/pages/WorkoutCreatePage.css";

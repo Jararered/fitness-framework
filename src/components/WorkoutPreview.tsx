@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useWorkout } from "../context/WorkoutContext";
 
-import DividerSpaced from "./DividerSpaced";
+import { DividerSpaced } from "./DividerSpaced";
 
 const WorkoutPreview: React.FC = () => {
     const { workoutState, setWorkoutState } = useWorkout();

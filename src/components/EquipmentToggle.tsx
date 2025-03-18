@@ -12,7 +12,7 @@ interface EquipmentToggleProps {
 const EquipmentToggleCard: React.FC<EquipmentToggleProps> = ({ equipment, enabled, handleEquipmentToggle }) => {
     return (
         <div
-            className={`equipment-toggle ${enabled ? "enabled" : ""}`}
+            className={`equipment-toggle large ${enabled ? "enabled" : ""}`}
             onClick={() => handleEquipmentToggle(equipment)}
         >
             <div className="icon"> {<FaDumbbell size={48} />} </div>
@@ -22,4 +22,15 @@ const EquipmentToggleCard: React.FC<EquipmentToggleProps> = ({ equipment, enable
     );
 };
 
-export { EquipmentToggleCard as EquipmentToggle };
+const EquipmentToggleListItem: React.FC<EquipmentToggleProps> = ({ equipment, enabled, handleEquipmentToggle }) => {
+    return (
+        <div className={`equipment-toggle list-item ${enabled ? "enabled" : ""}`}
+            onClick={() => handleEquipmentToggle(equipment)}>
+            <div className="icon"> {<FaDumbbell size={30} />} </div>
+            <div className="name">{equipment}</div>
+            <div className="check">{enabled && <FaCheck size={20} />}</div>
+        </div>
+    );
+};
+
+export { EquipmentToggleCard, EquipmentToggleListItem };

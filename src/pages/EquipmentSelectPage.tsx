@@ -4,7 +4,9 @@ import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useToast } from "../context/ToastContext.tsx";
 import { useEquipment } from "../context/EquipmentContext.tsx";
 
-import EquipmentToggle from "../components/EquipmentToggle.tsx";
+import { EquipmentToggleCard, EquipmentToggleListItem } from "../components/EquipmentToggle.tsx";
+import { PillToggle } from "../components/PillToggle.tsx";
+import { DividerSpaced } from "../components/DividerSpaced.tsx";
 
 import "../styles/pages/EquipmentSelectPage.css";
 
@@ -15,6 +17,8 @@ const EquipmentSelectPage: React.FC = () => {
 
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
     const [equipmentNameInput, setEquipmentNameInput] = useState<string>("");
+
+    const [listView, setListView] = useState<boolean>(false);
 
     useEffect(() => {
         if (equipmentLast && equipmentConfigs.length > 0) {
@@ -73,15 +77,30 @@ const EquipmentSelectPage: React.FC = () => {
             <h1>Gym Equipment</h1>
 
             <div className="card">
-                <h2>Equipment Selection</h2>
+                <div className="card-title">
+                    <DividerSpaced
+                        center={<h2>Equipment Selection</h2>}
+                        right={<PillToggle isActive={listView} onChange={() => setListView(!listView)} />}
+                    />
+                </div>
+
                 <div className="equipment-toggles">
                     {equipment.map((equipment) => (
-                        <EquipmentToggle
-                            key={equipment}
-                            equipment={equipment}
-                            enabled={selectedEquipment.includes(equipment)}
-                            handleEquipmentToggle={handleEquipmentToggle}
-                        />
+                        listView ? (
+                            <EquipmentToggleListItem
+                                key={equipment}
+                                equipment={equipment}
+                                enabled={selectedEquipment.includes(equipment)}
+                                handleEquipmentToggle={handleEquipmentToggle}
+                            />
+                        ) : (
+                            <EquipmentToggleCard
+                                key={equipment}
+                                equipment={equipment}
+                                enabled={selectedEquipment.includes(equipment)}
+                                handleEquipmentToggle={handleEquipmentToggle}
+                            />
+                        )
                     ))}
                 </div>
             </div>

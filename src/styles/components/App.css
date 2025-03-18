@@ -35,6 +35,11 @@
     text-align: center;
 }
 
+.card-title {
+    margin: 1rem 0;
+    width: 100%;
+}
+
 .card-content {
     display: flex;
     flex-direction: column;
