@@ -10,8 +10,8 @@ import EquipmentSelectPage from "./pages/EquipmentSelectPage.tsx";
 import WorkoutCreatePage from "./pages/WorkoutCreatePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import SettingsPage from "./pages/SettingsPage.tsx";
-import ExercisePreviewPage from "./pages/ExerciseOverviewPage.tsx";
 import ExercisePage from "./pages/ExercisePage.tsx";
+import ExercisePreviewPage from "./pages/ExercisePreviewPage.tsx";
 import WorkoutCompletePage from "./pages/WorkoutCompletePage.tsx";
 
 import "./styles/components/App.css";
