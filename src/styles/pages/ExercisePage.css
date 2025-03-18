@@ -44,6 +44,21 @@
     font-size: 1rem;
 }
 
+.back-exercise-button {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+
+    padding: 0;
+    line-height: 3rem;
+    text-align: center;
+
+    margin-bottom: 0;
+    color: var(--text-color);
+    background-color: var(--card-border);
+    font-size: 1.5rem;
+}
+
 .next-exercise-button {
     height: 3rem;
     width: 3rem;

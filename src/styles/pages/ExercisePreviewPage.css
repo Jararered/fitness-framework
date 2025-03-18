@@ -1,0 +1,52 @@
+.skip-break-button {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+
+    padding: 0;
+    line-height: 3rem;
+    text-align: center;
+
+    margin-bottom: 0;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.muscular-load {
+    display: flex;
+
+    gap: 0.5rem;
+    margin: 1rem 0;
+    padding: 0.5rem 2rem;
+
+    background-color: var(--card-border);
+    border-radius: 1rem;
+    justify-content: flex-start;
+}
+
+.muscular-load-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--main-accent);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.muscular-load-text {
+}
+
+.muscular-load-info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.muscular-load-value {
+}
