@@ -9,9 +9,10 @@ import { WorkoutStatistics } from "../components/WorkoutStatistics.tsx";
 import { TimerCircular } from "../components/TimerCircular.tsx";
 
 const ExercisePage: React.FC = () => {
+    const navigate = useNavigate();
     const { workoutState, setWorkoutState } = useWorkout();
     const { settings } = useUser();
-    const navigate = useNavigate();
+
     const [repsInput, setRepsInput] = useState<number>(0);
     const [weightInput, setWeightInput] = useState<number>(0);
     const [breakTime, setBreakTime] = useState<number>(0);

@@ -4,8 +4,6 @@ import { useToast } from "../context/ToastContext.tsx";
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
-import DetailedWorkoutStats from "../components/WorkoutStatisticsDetailed.tsx";
-
 const ProfilePage: React.FC = () => {
     const { workoutLogs } = useWorkout();
     const { settings } = useUser();
@@ -63,7 +61,6 @@ const ProfilePage: React.FC = () => {
                     <button onClick={handleShowMore}>Show More</button>
                 )}
             </div>
-            <DetailedWorkoutStats />
         </div>
     );
 };
