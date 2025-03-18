@@ -1,7 +1,5 @@
-import React, { useRef } from "react";
-import { CSSTransition } from "react-transition-group";
+import React from "react";
 import { IoMdCloseCircle } from "react-icons/io";
-
 import "../styles/components/FooterCard.css";
 
 interface FooterCardProps {
@@ -15,35 +13,23 @@ const FooterCard: React.FC<FooterCardProps> = ({
     content,
     onClose,
 }) => {
-    const nodeRef = useRef(null);
+    if (!isVisible) return null;
 
     return (
-        <CSSTransition
-            in={isVisible}
-            timeout={300}
-            classNames="footer-card"
-            unmountOnExit
-            nodeRef={nodeRef}
-        >
-            <div
-                ref={nodeRef}
-                className={`footer-card`}
-                onClick={(e) => {
-                    // Prevent clicks within the card from closing it
-                    e.stopPropagation();
-                }}
-            >
-                <div className={`footer-card-inner`}>
-                    <div className="footer-card-content">
-                        {content}
-                    </div>
-
-                    {/* {onClose && (
-                        <IoMdCloseCircle className="footer-card-close" size={24} onClick={onClose} />
-                    )} */}
+        <div className="footer-card">
+            <div className="footer-card-inner">
+                {onClose && (
+                    <IoMdCloseCircle 
+                        className="footer-card-close-icon" 
+                        size={24} 
+                        onClick={onClose} 
+                    />
+                )}
+                <div className="footer-card-content">
+                    {content}
                 </div>
             </div>
-        </CSSTransition>
+        </div>
     );
 };
 
