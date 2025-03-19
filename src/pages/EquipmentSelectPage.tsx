@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { LuTrash, LuSave, LuArrowDownToLine } from "react-icons/lu";
+
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useToast } from "../context/ToastContext.tsx";
 import { useEquipment } from "../context/EquipmentContext.tsx";
-
-import { LuTrash, LuSave, LuArrowDownToLine } from "react-icons/lu";
 
 import { EquipmentToggleListItem } from "../components/EquipmentToggle.tsx";
 

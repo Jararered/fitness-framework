@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowRight, FaTrophy, FaInfoCircle, FaTimes, FaEquals } from "react-icons/fa";
+import { LuArrowRight, LuTrophy, LuCircleAlert, LuX, LuEqual } from "react-icons/lu";
 
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
@@ -32,7 +32,7 @@ const MuscularLoadInfoFooter: React.FC<MuscularLoadInfoFooterProps> = ({ reps, w
                 </div>
 
                 <div className="multiply-icon">
-                    <FaTimes size={20} />
+                    <LuX size={20} />
                 </div>
 
                 <div className="weight-container">
@@ -41,7 +41,7 @@ const MuscularLoadInfoFooter: React.FC<MuscularLoadInfoFooterProps> = ({ reps, w
                 </div>
 
                 <div className="equals-icon">
-                    <FaEquals size={20} />
+                    <LuEqual size={20} />
                 </div>
 
                 <div className="result-container">
@@ -81,11 +81,11 @@ const ExercisePreviewPage: React.FC = () => {
         return (
             <span className="muscular-load-container">
                 <div className="muscular-load-icon">
-                    <FaTrophy size={20} />
+                    <LuTrophy size={20} />
                 </div>
                 <div className="muscular-load-text">Muscular Load</div>
                 <div className="muscular-load-info-icon">
-                    <FaInfoCircle size={20} onClick={() => showFooterCard(<MuscularLoadInfoFooter reps={69} weight={420} units={units} totalWeight={69420} />)} />
+                    <LuCircleAlert size={20} onClick={() => showFooterCard(<MuscularLoadInfoFooter reps={69} weight={420} units={units} totalWeight={69420} />)} />
                 </div>
                 <div className="muscular-load-value">
                     {value} {units}
@@ -124,7 +124,7 @@ const ExercisePreviewPage: React.FC = () => {
                     right={
                         <div className="skip-break-container">
                             <button className="skip-break-button" onClick={() => navigate("/exercise")}>
-                                <FaArrowRight size={20} />
+                                <LuArrowRight />
                             </button>
                             <div className="skip-break-text">Skip Break</div>
                         </div>

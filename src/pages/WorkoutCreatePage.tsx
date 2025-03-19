@@ -316,9 +316,7 @@ const WorkoutCreatePage: React.FC = () => {
                     ))}
 
                     <span className="card-row">
-                        <button
-                            onClick={handleAddExercise}
-                        >
+                        <button onClick={handleAddExercise}>
                             Add Exercise
                             <LuPlus />
                         </button>

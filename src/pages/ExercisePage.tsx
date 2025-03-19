@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaCheck, FaPlusCircle, FaArrowLeft } from "react-icons/fa";
+import { LuCheck, LuCirclePlus, LuArrowLeft } from "react-icons/lu";
 
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
@@ -185,7 +185,7 @@ const ExercisePage: React.FC = () => {
                             className="last-weight-weight"
                             onClick={handleShowRepsInputFooter}
                         >
-                            {weightInput} {handleWeightUnit()} {<FaPlusCircle size={20} />}
+                            {weightInput} {handleWeightUnit()} {<LuCirclePlus />}
                         </span>
                     </div>
 
@@ -196,7 +196,7 @@ const ExercisePage: React.FC = () => {
                                     className="back-exercise-button"
                                     onClick={handleBack}
                                 >
-                                    <FaArrowLeft size={20} />
+                                    <LuArrowLeft />
                                 </button>
                                 <div className="back-exercise-text">Back</div>
                             </div>
@@ -218,7 +218,7 @@ const ExercisePage: React.FC = () => {
                                     className="next-exercise-button"
                                     onClick={handleNext}
                                 >
-                                    <FaCheck size={20} />
+                                    <LuCheck />
                                 </button>
                                 <div className="next-exercise-text">Next</div>
                             </div>
