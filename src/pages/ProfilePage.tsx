@@ -30,7 +30,7 @@ const ProfilePage: React.FC = () => {
     };
 
     return (
-        <div className="profile-page">
+        <div className="profile-page page-container">
             <h1>Profile</h1>
 
             <div className="card">

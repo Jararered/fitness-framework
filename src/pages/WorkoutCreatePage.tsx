@@ -437,7 +437,7 @@ const WorkoutCreatePage: React.FC = () => {
     };
 
     return (
-        <div className="workout-create-page">
+        <div className="workout-create-page page-container">
             <h1>Create Workout</h1>
             <WorkoutCreateCard />
             <SaveWorkoutCard />

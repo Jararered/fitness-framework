@@ -43,6 +43,7 @@
 
     padding: 1rem;
     margin: 1rem 2rem;
+    width: calc(100% - 8rem);
     min-width: 20rem;
     max-width: 50rem;
 }
@@ -55,10 +56,13 @@
     font-size: 1rem;
     font-style: italic;
 }
+
 .card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: calc(100% - 2rem);
     margin: 1rem;
 }
 
@@ -68,4 +72,17 @@
     justify-content: space-between;
     padding: 0.5rem 0;
     gap: 1rem;
+    width: 100%;
+}
+
+.card-row label {
+    text-align: left;
+}
+
+.page-transition {
+    width: 100%;
+}
+
+.page-container {
+    width: 100%;
 }

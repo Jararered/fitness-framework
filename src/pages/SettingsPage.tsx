@@ -122,7 +122,7 @@ const SettingsPage: React.FC = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="settings-page">
+        <div className="settings-page page-container">
             <h1>Settings</h1>
             <div className="card">
                 <div className="card-header">

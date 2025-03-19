@@ -4,34 +4,35 @@
 
 .selector-dropdown {
     position: absolute;
-    border-radius: 1.5rem;
+    top: 100%;
+    border-radius: 1rem;
+
     overflow: hidden;
-
-    width: 120%;
-    left: -10%;
-
+    
+    border: 1px solid var(--card-border);
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
+    
     z-index: 1000;
 }
 
 .options-container {
-    max-height: 15rem;
+    max-height: 20rem;
     overflow-y: auto;
 
-    /* Hides scrollbar */
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
 .option-item {
+    width: 100%;
     padding: 0.5rem;
     cursor: pointer;
 }
 
 .option-item:hover {
     color: var(--text-color-hover);
-    background-color: var(--background-color-hover);
+    background-color: var(--toggle-background);
 }
 
 .no-results {

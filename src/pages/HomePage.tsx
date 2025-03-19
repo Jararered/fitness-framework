@@ -4,7 +4,7 @@ import WorkoutPreview from "../components/WorkoutPreview.tsx";
 
 const HomePage: React.FC = () => {
     return (
-        <div className="home-page">
+        <div className="home-page page-container">
             <h1>Home</h1>
             <div className="card">
                 <div className="card-header">

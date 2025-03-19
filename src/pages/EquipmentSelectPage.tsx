@@ -84,7 +84,7 @@ const EquipmentSelectPage: React.FC = () => {
     };
 
     return (
-        <div className="equipment-select-page">
+        <div className="equipment-select-page page-container">
             <h1>Gym Equipment</h1>
 
             <div className="card">
