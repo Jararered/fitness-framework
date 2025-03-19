@@ -4,7 +4,8 @@ import { useUser } from "../context/UserContext.tsx";
 
 import "../styles/pages/SettingsPage.css";
 import "../styles/components/PillToggle.css";
-import { LuTrash } from "react-icons/lu";
+import { LuArrowRight } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 
 // This function calculates the height in cm from the height in feet and inches
 const calculateHeightCm = (feet: number, inches: number) => {
@@ -116,105 +117,84 @@ const WeightInput = () => {
     );
 };
 
-const handlePromptDeleteData = (handleDelete: () => void) => {
-    const confirm = window.confirm("Are you sure you sure you want to delete this data? This action is irreversible.");
-    if (confirm) {
-        handleDelete();
-    }
-};
-
-const handleDeleteAllData = () => {
-    localStorage.clear();
-    window.location.reload();
-};
-
-const handleDeleteGyms = () => {
-    localStorage.removeItem("equipment-configs");
-    localStorage.removeItem("equipment-last");
-    window.location.reload();
-};
-
-const handleDeleteUserData = () => {
-    localStorage.removeItem("user-context");
-    localStorage.removeItem("workout-logs");
-    window.location.reload();
-};
-
-const handleDeleteWorkouts = () => {
-    localStorage.removeItem("workout-plans");
-    localStorage.removeItem("workout-state");
-    window.location.reload();
-};
-
 const SettingsPage: React.FC = () => {
     const { settings, setSettings } = useUser();
+    const navigate = useNavigate();
 
     return (
         <div className="settings-page">
             <h1>Settings</h1>
             <div className="card">
-                <div className="card-content">
-                    <div className="card-row">
-                        <label>Name</label>
-                        <input type="text" value={settings.name} onChange={(e) => setSettings({ ...settings, name: e.target.value })} />
-                    </div>
+                <div className="card-header">
+                    <h2>User Settings</h2>
+                    <p>
+                        Below are your user settings. <br />
+                        All info is optional and stored locally.
+                    </p>
+                </div>
 
-                    <div className="card-row">
+                <div className="card-content">
+                    <span className="card-row">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            value={settings.name}
+                            onChange={(e) => setSettings({ ...settings, name: e.target.value })}
+                        />
+                    </span>
+
+                    <span className="card-row">
                         <label>Weight ({settings.unit === "imperial" ? "lb" : "kg"})</label>
                         <WeightInput />
-                    </div>
+                    </span>
 
-                    <div className="card-row">
+                    <span className="card-row">
                         <label>Height</label>
                         {settings.unit === "imperial" ? <HeightInputImperial /> : <HeightInputMetric />}
+                    </span>
+
+                    <div className="card-header">
+                        <h2>App Settings</h2>
+                        <p>
+                            Below are the app settings. <br />
+                            These settings customize the look and feel of the app.
+                        </p>
                     </div>
 
-                    <div className="card-row">
+                    <span className="card-row">
                         <label>Units</label>
-                        <select value={settings.unit} onChange={(e) => setSettings({ ...settings, unit: e.target.value as "imperial" | "metric" })}>
+                        <select
+                            value={settings.unit}
+                            onChange={(e) =>
+                                setSettings({ ...settings, unit: e.target.value as "imperial" | "metric" })
+                            }
+                        >
                             <option value="imperial">imperial</option>
                             <option value="metric">metric</option>
                         </select>
-                    </div>
+                    </span>
 
-                    <div className="card-row">
+                    <span className="card-row">
                         <label>Dark Mode</label>
-                        <button className={`pill-toggle ${settings.darkMode ? "active" : ""}`} onClick={() => setSettings({ ...settings, darkMode: !settings.darkMode })}>
+                        <button
+                            className={`pill-toggle ${settings.darkMode ? "active" : ""}`}
+                            onClick={() => setSettings({ ...settings, darkMode: !settings.darkMode })}
+                        >
                             <span className="pill-circle"></span>
                         </button>
-                    </div>
+                    </span>
+
+                    <span className="card-row">
+                        <label>Manage Data</label>
+                        <button
+                            className="caution"
+                            onClick={() => navigate("/manage-data")}
+                        >
+                            Manage Data
+                            <LuArrowRight size={24} />
+                        </button>
+                    </span>
                 </div>
-            </div>
-
-            <h1>Manage Data</h1>
-            <div className="card">
-                <h2>Delete All Gyms</h2>
-                <p>This will delete all saved gyms from the app. This action is irreversible.</p>
-                <button className="delete-data-button" onClick={() => handlePromptDeleteData(handleDeleteGyms)}>
-                    <LuTrash />
-                    Delete All Gyms
-                </button>
-
-                <h2>Delete All Workouts</h2>
-                <p>This will delete all saved workouts from the app. This action is irreversible.</p>
-                <button className="delete-data-button" onClick={() => handlePromptDeleteData(handleDeleteWorkouts)}>
-                    <LuTrash />
-                    Delete All Workouts
-                </button>
-
-                <h2>Delete All User Data</h2>
-                <p>This will delete all user data from the app, including settings and workout logs. This action is irreversible.</p>
-                <button className="delete-data-button" onClick={() => handlePromptDeleteData(handleDeleteUserData)}>
-                    <LuTrash />
-                    Delete All User Data
-                </button>
-
-                <h2>Delete All Data</h2>
-                <p>This will delete all data from the app. This is a full reset of the app. This action is irreversible.</p>
-                <button className="delete-data-button" onClick={() => handlePromptDeleteData(handleDeleteAllData)}>
-                    <LuTrash />
-                    Delete All Data
-                </button>
             </div>
         </div>
     );

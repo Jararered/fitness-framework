@@ -34,31 +34,52 @@ const ProfilePage: React.FC = () => {
             <h1>Profile</h1>
 
             <div className="card">
-                <h2>{settings.name || "User"}</h2>
+                <div className="card-header">
+                    <h2>Hi, {settings.name || "User"}</h2>
+                    <p>Below is your profile information and info about your workout history.</p>
+                </div>
             </div>
 
             <div className="card">
-                <h2>Statistics</h2>
-                <p>Workouts Last Week: {lastWeekLogs.length}</p>
-                <p>Workouts Last Month: {lastMonthLogs.length}</p>
-                <p>
-                    Total Weight Last Week: {totalWeightWeek} {units}
-                </p>
-                <p>
-                    Total Weight Last Month: {totalWeightMonth} {units}
-                </p>
+                <div className="card-header">
+                    <h2>Statistics</h2>
+                    <p>Below are various statistics about your workout history.</p>
+                </div>
+
+                <div className="card-content">
+                    <p>Workouts Last Week: {lastWeekLogs.length}</p>
+                    <p>Workouts Last Month: {lastMonthLogs.length}</p>
+                    <p>
+                        Total Weight Last Week: {totalWeightWeek} {units}
+                    </p>
+                    <p>
+                        Total Weight Last Month: {totalWeightMonth} {units}
+                    </p>
+                </div>
             </div>
 
             <div className="card">
-                <h2>Recent Workouts</h2>
-                <span className="workout-list">
-                    {logsToShow.map((log) => (
-                        <p key={log.workoutId}>
-                            Workout ID: {log.workoutId} - {log.startTime instanceof Date && !isNaN(log.startTime.getTime()) ? log.startTime.toLocaleDateString() : "Invalid Date"}
-                        </p>
-                    ))}
-                </span>
-                {workoutLogs.length > 5 && !expanded && <button onClick={handleShowMore}>Show More</button>}
+                <div className="card-header">
+                    <h2>Recent Workouts</h2>
+                    <p>Below is a list of your most recent workouts.</p>
+                </div>
+                <div className="card-content">
+                    <span className="workout-list">
+                        {logsToShow.length > 0 ? (
+                            logsToShow.map((log) => (
+                                <p key={log.workoutId}>
+                                    Workout ID: {log.workoutId} -{" "}
+                                    {log.startTime instanceof Date && !isNaN(log.startTime.getTime())
+                                        ? log.startTime.toLocaleDateString()
+                                        : "Invalid Date"}
+                                </p>
+                            ))
+                        ) : (
+                            <strong>No workouts logged</strong>
+                        )}
+                    </span>
+                    {workoutLogs.length > 5 && !expanded && <button onClick={handleShowMore}>Show More</button>}
+                </div>
             </div>
         </div>
     );

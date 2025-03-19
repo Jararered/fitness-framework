@@ -1,14 +1,18 @@
 .equipment-toggle {
     display: flex;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
+    align-items: left;
+    justify-content: left;
+    width: 100%;
+
+    border-radius: 1rem;
+    border: 3px solid var(--card-border);
+    background-color: var(--card-background);
 
     transition: all 200ms;
 
-    color: var(--text-color);
-    background-color: var(--card-background);
-    border: 3px solid var(--card-border);
+    cursor: pointer;
+
+    padding: 0.5rem;
 }
 
 .equipment-toggle.enabled {
@@ -16,53 +20,16 @@
     background-color: var(--main-accent-light);
 }
 
+.equipment-toggle .icon {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
 .equipment-toggle .name {
     font-weight: bold;
 }
 
 .equipment-toggle .check {
-    color: var(--text-color);
-}
-
-.equipment-toggle.large {
-    flex-direction: column;
-    text-align: center;
-    width: 5rem;
-    height: 10rem;
-    margin: 0.25rem;
-    padding: 0.5rem;
-    border-radius: 1rem;
-}
-
-.equipment-toggle.large .check {
-    position: absolute;
-    bottom: 10px;
-}
-
-.equipment-toggle.list-item {
-    justify-content: center;
-    width: 100%;
-    padding: 0.5rem;
-    margin: 0.25rem;
-    border-radius: 1rem;
-}
-
-.equipment-toggle.list-item .icon {
-    margin-left: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.equipment-toggle.list-item .name {
-    flex: 1;
-    margin-left: 0.5rem;
-    text-align: left;
-}
-
-.equipment-toggle.list-item .check {
+    margin-left: auto;
     margin-right: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }

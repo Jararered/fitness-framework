@@ -34,35 +34,38 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 
     border: 1px solid var(--card-border);
+    border-radius: 2rem;
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
-    border-radius: 2rem;
+
     padding: 1rem;
-    margin: 2rem;
+    margin: 1rem 2rem;
     min-width: 20rem;
     max-width: 50rem;
-    text-align: center;
 }
 
-.card-title {
-    margin: 1rem 0;
+.card-header {
     width: 100%;
 }
 
+.card-header p {
+    font-size: 1rem;
+    font-style: italic;
+}
 .card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    margin: 1rem;
 }
 
 .card-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: calc(100% - 2rem);
     padding: 0.5rem 0;
     gap: 1rem;
 }

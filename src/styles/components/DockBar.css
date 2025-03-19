@@ -23,3 +23,12 @@
 .dockbar.hidden {
     transform: translateX(-50%) translateY(150%);
 }
+
+.icon-button svg {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.icon-button.active {
+    background-color: var(--main-accent);
+}

@@ -13,5 +13,8 @@
         "**/yarn.lock": true,
         "**/pnpm-lock.yaml": true
     },
-    "autoHide.autoHideSideBar": false
+    "autoHide.autoHideSideBar": false,
+    "prettier.printWidth": 120,
+    "prettier.tabWidth": 4,
+    "prettier.singleAttributePerLine": true
 }

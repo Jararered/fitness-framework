@@ -2,14 +2,6 @@
     width: 4rem;
 }
 
-.delete-data-button {
-    background-color: var(--caution-color);
-}
-
-.delete-data-button:hover {
-    background-color: var(--caution-hover);
-}
-
 .imperial-height-input-container {
     display: flex;
     flex-direction: row;

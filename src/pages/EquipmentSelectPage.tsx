@@ -3,10 +3,11 @@ import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useToast } from "../context/ToastContext.tsx";
 import { useEquipment } from "../context/EquipmentContext.tsx";
 
+import { LuTrash, LuSave, LuArrowDownToLine } from "react-icons/lu";
+
 import { EquipmentToggleListItem } from "../components/EquipmentToggle.tsx";
 
 import "../styles/pages/EquipmentSelectPage.css";
-import { LuTrash, LuArrowRight, LuSave, LuArrowDownToLine } from "react-icons/lu";
 
 const EquipmentSelectPage: React.FC = () => {
     const { addToast } = useToast();
@@ -31,7 +32,9 @@ const EquipmentSelectPage: React.FC = () => {
             } else if (name === "none") {
                 setSelectedEquipment([]);
             } else {
-                setSelectedEquipment((prev) => (prev.includes(name) ? prev.filter((item) => item !== name) : [...prev, name]));
+                setSelectedEquipment((prev) =>
+                    prev.includes(name) ? prev.filter((item) => item !== name) : [...prev, name]
+                );
             }
         },
         [setSelectedEquipment]
@@ -53,7 +56,10 @@ const EquipmentSelectPage: React.FC = () => {
 
         if (selectedEquipment.length > 0) {
             if (exists) {
-                setEquipmentConfigs([...equipmentConfigs.filter((config) => config.name !== name), { name, equipment: selectedEquipment }]);
+                setEquipmentConfigs([
+                    ...equipmentConfigs.filter((config) => config.name !== name),
+                    { name, equipment: selectedEquipment },
+                ]);
                 setEquipmentLast(name);
             } else {
                 setEquipmentConfigs([...equipmentConfigs, { name, equipment: selectedEquipment }]);
@@ -82,13 +88,19 @@ const EquipmentSelectPage: React.FC = () => {
             <h1>Gym Equipment</h1>
 
             <div className="card">
-                <div className="card-title">
+                <div className="card-header">
                     <h2>Equipment Selection</h2>
+                    <p>Select the equipment that is available at your gym</p>
                 </div>
 
-                <div className="equipment-toggles">
+                <div className="equipment-toggle-container">
                     {equipment.map((equipment) => (
-                        <EquipmentToggleListItem key={equipment} equipment={equipment} enabled={selectedEquipment.includes(equipment)} handleEquipmentToggle={handleEquipmentToggle} />
+                        <EquipmentToggleListItem
+                            key={equipment}
+                            equipment={equipment}
+                            enabled={selectedEquipment.includes(equipment)}
+                            handleEquipmentToggle={handleEquipmentToggle}
+                        />
                     ))}
                 </div>
                 <div className="equipment-toggles-buttons">
@@ -99,19 +111,36 @@ const EquipmentSelectPage: React.FC = () => {
             </div>
 
             <div className="card">
-                <h2>Load Gym</h2>
+                <div className="card-header">
+                    <h2>Load Gym</h2>
+                    <p>
+                        Below is a list of all the gyms you have saved. <br />
+                        The last gym used will be auto-loaded next time you open the app.
+                    </p>
+                </div>
+
                 <div className="gym-list">
                     {equipmentConfigs.map((gym) => (
-                        <div className="gym-list-item" key={gym.name}>
-                            <div className="gym-name">{gym.name}</div>
-                            <div className="gym-buttons">
-                                <button onClick={() => handleLoadGym(gym)}>
+                        <div
+                            className="gym-list-item"
+                            key={gym.name}
+                        >
+                            <div className="gym-list-item-name">{gym.name}</div>
+                            <span className="gym-list-item-buttons">
+                                <button
+                                    className="gym-list-item-button"
+                                    onClick={() => handleLoadGym(gym)}
+                                >
+                                    Load
                                     <LuArrowDownToLine size={24} />
                                 </button>
-                                <button className="caution" onClick={() => handleDeleteGym(gym.name)}>
+                                <button
+                                    className="gym-list-item-button caution icon"
+                                    onClick={() => handleDeleteGym(gym.name)}
+                                >
                                     <LuTrash size={24} />
                                 </button>
-                            </div>
+                            </span>
                         </div>
                     ))}
                 </div>

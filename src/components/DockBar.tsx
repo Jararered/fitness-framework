@@ -1,7 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useWorkout } from "../context/WorkoutContext";
-import { FaHome, FaDumbbell, FaMapPin, FaUser, FaCog } from "react-icons/fa";
+import { LuHouse, LuDumbbell, LuMapPin, LuUser, LuCog } from "react-icons/lu";
 
 import "../styles/components/DockBar.css";
 import "../styles/components/IconButton.css";
@@ -9,25 +9,40 @@ import "../styles/components/IconButton.css";
 const DockBar: React.FC = () => {
     const navigate = useNavigate();
     const { workoutState } = useWorkout();
-
+    const location = useLocation();
     return (
-        <div className={`dockbar ${workoutState.isStarted ? "hidden" : ""}`}>
-            <div className="icon-button" onClick={() => navigate("/")}>
-                <FaHome size={24} />
+        <span className={`dockbar ${workoutState.isStarted ? "hidden" : ""}`}>
+            <div
+                className={`icon-button ${location.pathname === "/" ? "active" : ""}`}
+                onClick={() => navigate("/")}
+            >
+                <LuHouse />
             </div>
-            <div className="icon-button" onClick={() => navigate("/equipment")}>
-                <FaMapPin size={24} />
+            <div
+                className={`icon-button ${location.pathname === "/equipment" ? "active" : ""}`}
+                onClick={() => navigate("/equipment")}
+            >
+                <LuMapPin />
             </div>
-            <div className="icon-button" onClick={() => navigate("/create")}>
-                <FaDumbbell size={24} />
+            <div
+                className={`icon-button ${location.pathname === "/create" ? "active" : ""}`}
+                onClick={() => navigate("/create")}
+            >
+                <LuDumbbell />
             </div>
-            <div className="icon-button" onClick={() => navigate("/profile")}>
-                <FaUser size={24} />
+            <div
+                className={`icon-button ${location.pathname === "/profile" ? "active" : ""}`}
+                onClick={() => navigate("/profile")}
+            >
+                <LuUser />
             </div>
-            <div className="icon-button" onClick={() => navigate("/settings")}>
-                <FaCog size={24} />
+            <div
+                className={`icon-button ${location.pathname === "/settings" ? "active" : ""}`}
+                onClick={() => navigate("/settings")}
+            >
+                <LuCog />
             </div>
-        </div>
+        </span>
     );
 };
 

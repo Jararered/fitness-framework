@@ -32,16 +32,24 @@ const WorkoutPreview: React.FC = () => {
 
     return (
         <div className="workout-preview">
-            {workoutState.currentPlan?.name ? <h2>{workoutState.currentPlan.name}</h2> : <h2>Workout Preview</h2>}
+            {workoutState.currentPlan?.name ? <h2>{workoutState.currentPlan.name}</h2> : ""}
             {workoutState.currentPlan?.exercises ? (
                 <div className="workout-preview-exercises">
                     {workoutState.currentPlan.exercises.map((exercise, key) => (
-                        <DividerSpaced key={key} left={<strong>{exercise.exercise}</strong>} right={<p>{exercise.reps.join(", ")} reps</p>} />
+                        <DividerSpaced
+                            key={key}
+                            left={<strong>{exercise.exercise}</strong>}
+                            right={<p>{exercise.reps.join(", ")} reps</p>}
+                        />
                     ))}
-                    {workoutState.isStarted ? <button onClick={handleResumeWorkout}>Resume Workout</button> : <button onClick={handleStartWorkout}>Start Workout</button>}
+                    {workoutState.isStarted ? (
+                        <button onClick={handleResumeWorkout}>Resume Workout</button>
+                    ) : (
+                        <button onClick={handleStartWorkout}>Start Workout</button>
+                    )}
                 </div>
             ) : (
-                <p>No workout loaded yet.</p>
+                <strong>No workout loaded yet.</strong>
             )}
         </div>
     );

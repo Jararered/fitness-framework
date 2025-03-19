@@ -7,24 +7,33 @@
     min-height: fit-content;
 }
 
-.left-section {
+.divider-spaced-container .left-section {
     display: flex;
+    flex-direction: row;
+
     align-items: center;
     justify-content: flex-start;
+
     z-index: 1;
 }
 
-.center-section {
+.divider-spaced-container .center-section {
     display: flex;
+    flex-direction: row;
+
     align-items: center;
     justify-content: center;
+
     z-index: 1;
     width: auto;
 }
 
-.right-section {
+.divider-spaced-container .right-section {
     display: flex;
+    flex-direction: row;
+
     align-items: center;
     justify-content: flex-end;
+
     z-index: 1;
 }

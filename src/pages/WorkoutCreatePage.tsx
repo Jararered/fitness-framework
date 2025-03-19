@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { LuChartNoAxesColumnDecreasing, LuAlignJustify, LuRepeat } from "react-icons/lu";
+import { LuChartNoAxesColumnDecreasing, LuAlignJustify, LuRepeat, LuPlay } from "react-icons/lu";
 import { LuPlus, LuMinus, LuSave, LuTrash } from "react-icons/lu";
-import { LuPlay } from "react-icons/lu";
 
+import { useNavigate } from "react-router-dom";
 import { useToast } from "../context/ToastContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
@@ -48,9 +46,14 @@ const WorkoutCreatePage: React.FC = () => {
 
     const repsChangeAmount = 2;
 
-    const selectedEquipment = equipmentLast && equipmentConfigs.length > 0 ? equipmentConfigs.find((config) => config.name === equipmentLast)?.equipment || [] : [];
+    const selectedEquipment =
+        equipmentLast && equipmentConfigs.length > 0
+            ? equipmentConfigs.find((config) => config.name === equipmentLast)?.equipment || []
+            : [];
 
-    const availableExercises = exercises.filter((exercise) => exercise.required_equipment.every((equipment) => selectedEquipment.includes(equipment)));
+    const availableExercises = exercises.filter((exercise) =>
+        exercise.required_equipment.every((equipment) => selectedEquipment.includes(equipment))
+    );
 
     const avaliableExerciseNames = availableExercises.map((exercise) => exercise.exercise_name);
 
@@ -148,7 +151,9 @@ const WorkoutCreatePage: React.FC = () => {
     };
 
     const handleSaveWorkout = (startWorkout: boolean = false) => {
-        const validPlan = workoutPlanState.filter((p) => p.exercise && p.reps.every((r) => r > 0)).map((p) => ({ exercise: p.exercise, reps: p.reps }));
+        const validPlan = workoutPlanState
+            .filter((p) => p.exercise && p.reps.every((r) => r > 0))
+            .map((p) => ({ exercise: p.exercise, reps: p.reps }));
         if (validPlan.length > 0) {
             const newWorkout = { name: workoutNameState || `Workout ${workoutPlans.length + 1}`, exercises: validPlan };
 
@@ -217,7 +222,9 @@ const WorkoutCreatePage: React.FC = () => {
     };
 
     const handleStartWorkout = () => {
-        const validPlan = workoutPlanState.filter((p) => p.exercise && p.reps.every((r) => r > 0)).map((p) => ({ exercise: p.exercise, reps: p.reps }));
+        const validPlan = workoutPlanState
+            .filter((p) => p.exercise && p.reps.every((r) => r > 0))
+            .map((p) => ({ exercise: p.exercise, reps: p.reps }));
 
         if (validPlan.length > 0) {
             setWorkoutState({
@@ -232,14 +239,16 @@ const WorkoutCreatePage: React.FC = () => {
         }
     };
 
-    return (
-        <EquipmentProvider>
-            <div className="workout-create-page">
-                <h1>Create Workout</h1>
+    const WorkoutCreateCard = () => {
+        return (
+            <EquipmentProvider>
                 <div className="card">
                     {workoutPlanState.map((p, exerciseIndex) => (
-                        <div className="card-content" key={exerciseIndex}>
-                            <h2>Exercise {exerciseIndex + 1}</h2>
+                        <div key={exerciseIndex}>
+                            <div className="card-header">
+                                <h2>Exercise {exerciseIndex + 1}</h2>
+                                <p>Select an exercise to add to the workout</p>
+                            </div>
 
                             <SelectorSearchable
                                 options={avaliableExerciseNames}
@@ -263,10 +272,16 @@ const WorkoutCreatePage: React.FC = () => {
                                     left={<h3>Set Count</h3>}
                                     right={
                                         <span>
-                                            <button className="adjust" onClick={() => handleSetsChange(exerciseIndex, "decrease")}>
+                                            <button
+                                                className="icon"
+                                                onClick={() => handleSetsChange(exerciseIndex, "decrease")}
+                                            >
                                                 <LuMinus size={24} />
                                             </button>
-                                            <button className="adjust" onClick={() => handleSetsChange(exerciseIndex, "increase")}>
+                                            <button
+                                                className="icon"
+                                                onClick={() => handleSetsChange(exerciseIndex, "increase")}
+                                            >
                                                 <LuPlus size={24} />
                                             </button>
                                         </span>
@@ -277,10 +292,16 @@ const WorkoutCreatePage: React.FC = () => {
                                     left={<h3>Rep Count</h3>}
                                     right={
                                         <span>
-                                            <button className="adjust" onClick={() => handleChangeBaseReps(exerciseIndex, "decrease")}>
+                                            <button
+                                                className="icon"
+                                                onClick={() => handleChangeBaseReps(exerciseIndex, "decrease")}
+                                            >
                                                 <LuMinus size={24} />
                                             </button>
-                                            <button className="adjust" onClick={() => handleChangeBaseReps(exerciseIndex, "increase")}>
+                                            <button
+                                                className="icon"
+                                                onClick={() => handleChangeBaseReps(exerciseIndex, "increase")}
+                                            >
                                                 <LuPlus size={24} />
                                             </button>
                                         </span>
@@ -291,11 +312,20 @@ const WorkoutCreatePage: React.FC = () => {
                                     left={<h3>Set Style</h3>}
                                     right={
                                         <span>
-                                            <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "flat")}>
-                                                <LuAlignJustify className="flat-set-icon" size={24} />
+                                            <button
+                                                className="icon"
+                                                onClick={() => handleSetStyle(exerciseIndex, "flat")}
+                                            >
+                                                <LuAlignJustify
+                                                    size={24}
+                                                    style={{ transform: "rotate(90deg)" }}
+                                                />
                                             </button>
-                                            <button className="adjust" onClick={() => handleSetStyle(exerciseIndex, "drop")}>
-                                                <LuChartNoAxesColumnDecreasing className="drop-set-icon" size={24} />
+                                            <button
+                                                className="icon"
+                                                onClick={() => handleSetStyle(exerciseIndex, "drop")}
+                                            >
+                                                <LuChartNoAxesColumnDecreasing size={24} />
                                             </button>
                                         </span>
                                     }
@@ -304,49 +334,87 @@ const WorkoutCreatePage: React.FC = () => {
                         </div>
                     ))}
 
-                    <div className="workout-modify-buttons">
-                        <button className="add-exercise-button" onClick={handleAddExercise}>
+                    <span className="workout-modify-buttons">
+                        <button
+                            className="add-exercise-button"
+                            onClick={handleAddExercise}
+                        >
                             Add Exercise
                             <LuPlus size={24} />
                         </button>
-                        <button className="remove-exercise-button" onClick={handleRemoveExercise}>
-                            Remove Exercise
+                        <button
+                            className="remove-exercise-button caution"
+                            onClick={handleRemoveExercise}
+                        >
                             <LuTrash size={24} />
                         </button>
-                    </div>
+                    </span>
                 </div>
+            </EquipmentProvider>
+        );
+    };
 
-                <div className="card">
+    const SaveWorkoutCard = () => {
+        return (
+            <div className="card">
+                <div className="card-header">
                     <h2>Save Workout</h2>
-                    <p>Save the current workout plan to the workout library</p>
-                    <div className="card-content">
-                        <input type="text" value={workoutNameState} onChange={(e) => setWorkoutNameState(e.target.value)} placeholder="Workout Name" />
-                        <button className="save-button" onClick={() => handleSaveWorkout(false)}>
-                            Save
-                            <LuSave />
-                        </button>
-                    </div>
+                    <p>Save the current workout plan to your saved workouts</p>
                 </div>
+                <div className="card-content">
+                    <input
+                        type="text"
+                        value={workoutNameState}
+                        onChange={(e) => setWorkoutNameState(e.target.value)}
+                        placeholder="Workout Name"
+                    />
+                    <button
+                        className="save-button"
+                        onClick={() => handleSaveWorkout(false)}
+                    >
+                        Save
+                        <LuSave />
+                    </button>
+                </div>
+            </div>
+        );
+    };
 
-                <div className="card">
+    const LoadWorkoutCard = () => {
+        return (
+            <div className="card">
+                <div className="card-header">
                     <h2>Load Workout</h2>
                     <p>Select a workout to load into the current plan</p>
-                    <div className="card-content">
-                        {workoutPlans.length > 0 ? (
-                            workoutPlans.map((workout, index) => (
-                                <button key={index} className="load-button" onClick={() => handleLoadWorkout(workout)}>
-                                    {workout.name || `Workout ${index + 1}`}
-                                    <LuRepeat />
-                                </button>
-                            ))
-                        ) : (
-                            <p>No saved workouts yet!</p>
-                        )}
-                    </div>
                 </div>
+                <div className="card-content">
+                    {workoutPlans.length > 0 ? (
+                        workoutPlans.map((workout, index) => (
+                            <button
+                                key={index}
+                                className="load-button"
+                                onClick={() => handleLoadWorkout(workout)}
+                            >
+                                {workout.name || `Workout ${index + 1}`}
+                                <LuRepeat />
+                            </button>
+                        ))
+                    ) : (
+                        <strong>No saved workouts yet.</strong>
+                    )}
+                </div>
+            </div>
+        );
+    };
 
-                <div className="card">
+    const WorkoutPreviewCard = () => {
+        return (
+            <div className="card">
+                <div className="card-header">
                     <h2>Workout Preview</h2>
+                    <p>Preview the current workout plan</p>
+                </div>
+                <div className="card-content">
                     {workoutState.currentPlan && workoutState.currentPlan.exercises.length > 0 ? (
                         <>
                             <p>{workoutState.currentPlan.name || workoutNameState || "Unnamed Workout"}</p>
@@ -361,11 +429,21 @@ const WorkoutCreatePage: React.FC = () => {
                             </button>
                         </>
                     ) : (
-                        <p>No workout loaded into current plan yet.</p>
+                        <strong>No workout loaded into current plan yet.</strong>
                     )}
                 </div>
             </div>
-        </EquipmentProvider>
+        );
+    };
+
+    return (
+        <div className="workout-create-page">
+            <h1>Create Workout</h1>
+            <WorkoutCreateCard />
+            <SaveWorkoutCard />
+            <LoadWorkoutCard />
+            <WorkoutPreviewCard />
+        </div>
     );
 };
 
