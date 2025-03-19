@@ -1,7 +1,7 @@
 import React from "react";
 import { FaCheck, FaDumbbell } from "react-icons/fa";
 
-import "../styles/components/EquipmentToggle.css"
+import "../styles/components/EquipmentToggle.css";
 
 interface EquipmentToggleProps {
     equipment: string;
@@ -11,10 +11,7 @@ interface EquipmentToggleProps {
 
 const EquipmentToggleCard: React.FC<EquipmentToggleProps> = ({ equipment, enabled, handleEquipmentToggle }) => {
     return (
-        <div
-            className={`equipment-toggle large ${enabled ? "enabled" : ""}`}
-            onClick={() => handleEquipmentToggle(equipment)}
-        >
+        <div className={`equipment-toggle large ${enabled ? "enabled" : ""}`} onClick={() => handleEquipmentToggle(equipment)}>
             <div className="icon"> {<FaDumbbell size={48} />} </div>
             <div className="name">{equipment}</div>
             <div className="check">{enabled && <FaCheck size={18} />}</div>
@@ -24,8 +21,7 @@ const EquipmentToggleCard: React.FC<EquipmentToggleProps> = ({ equipment, enable
 
 const EquipmentToggleListItem: React.FC<EquipmentToggleProps> = ({ equipment, enabled, handleEquipmentToggle }) => {
     return (
-        <div className={`equipment-toggle list-item ${enabled ? "enabled" : ""}`}
-            onClick={() => handleEquipmentToggle(equipment)}>
+        <div className={`equipment-toggle list-item ${enabled ? "enabled" : ""}`} onClick={() => handleEquipmentToggle(equipment)}>
             <div className="icon"> {<FaDumbbell size={30} />} </div>
             <div className="name">{equipment}</div>
             <div className="check">{enabled && <FaCheck size={20} />}</div>

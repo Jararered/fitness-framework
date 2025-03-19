@@ -4,19 +4,19 @@ Fitness Framework is a fitness application that allows users to create, manage, 
 
 ## Features
 
-- Create and manage workouts
-- Track exercises with sets and reps
-- User profile and preferences
-- Responsive design
+-   Create and manage workouts
+-   Track exercises with sets and reps
+-   User profile and preferences
+-   Responsive design
 
 ## Tools Used
 
-- Vite
-- React
-- TypeScript
-- Tailwind CSS
-- Bun
-- ESLint
+-   Vite
+-   React
+-   TypeScript
+-   Tailwind CSS
+-   Bun
+-   ESLint
 
 ## Getting Started
 

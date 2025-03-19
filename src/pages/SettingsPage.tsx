@@ -35,7 +35,8 @@ const HeightInputImperial = () => {
 
     return (
         <span>
-            <input className="height-input"
+            <input
+                className="height-input"
                 type="number"
                 value={feet}
                 onChange={(e) => {
@@ -47,7 +48,8 @@ const HeightInputImperial = () => {
                 min="0"
             />
             ft
-            <input className="height-input"
+            <input
+                className="height-input"
                 type="number"
                 value={inches}
                 onChange={(e) => {
@@ -66,7 +68,7 @@ const HeightInputImperial = () => {
 
 // Weight conversion functions
 const gramsToLbs = (grams: number) => {
-    return Math.round(grams / 453.592 * 10) / 10;
+    return Math.round((grams / 453.592) * 10) / 10;
 };
 
 const lbsToGrams = (lbs: number) => {
@@ -85,21 +87,18 @@ const WeightInput = () => {
     const { settings, setSettings } = useUser();
     const isImperial = settings.unit === "imperial";
 
-    const displayWeight = isImperial
-        ? gramsToLbs(settings.weight)
-        : gramsToKg(settings.weight);
+    const displayWeight = isImperial ? gramsToLbs(settings.weight) : gramsToKg(settings.weight);
 
     return (
         <span>
-            <input className="weight-input"
+            <input
+                className="weight-input"
                 type="number"
                 step="0.1"
                 value={displayWeight}
                 onChange={(e) => {
                     const value = Number(e.target.value);
-                    const weightInGrams = isImperial
-                        ? lbsToGrams(value)
-                        : kgToGrams(value);
+                    const weightInGrams = isImperial ? lbsToGrams(value) : kgToGrams(value);
                     setSettings({ ...settings, weight: weightInGrams });
                 }}
             />
@@ -146,36 +145,22 @@ const SettingsPage: React.FC = () => {
             <h1>Settings</h1>
             <div className="card">
                 <label>Name</label>
-                <input
-                    type="text"
-                    value={settings.name}
-                    onChange={(e) => setSettings({ ...settings, name: e.target.value })}
-                />
+                <input type="text" value={settings.name} onChange={(e) => setSettings({ ...settings, name: e.target.value })} />
 
                 <label>Weight ({settings.unit === "imperial" ? "lb" : "kg"})</label>
                 <WeightInput />
 
                 <label>Height</label>
-                {settings.unit === "imperial" ? (
-                    <HeightInputImperial />
-                ) : (
-                    <HeightInputMetric />
-                )}
+                {settings.unit === "imperial" ? <HeightInputImperial /> : <HeightInputMetric />}
 
                 <label>Units</label>
-                <select
-                    value={settings.unit}
-                    onChange={(e) => setSettings({ ...settings, unit: e.target.value as "imperial" | "metric" })}
-                >
+                <select value={settings.unit} onChange={(e) => setSettings({ ...settings, unit: e.target.value as "imperial" | "metric" })}>
                     <option value="imperial">imperial</option>
                     <option value="metric">metric</option>
                 </select>
 
                 <label>Dark Mode</label>
-                <button
-                    className={`pill-toggle ${settings.darkMode ? "active" : ""}`}
-                    onClick={() => setSettings({ ...settings, darkMode: !settings.darkMode })}
-                >
+                <button className={`pill-toggle ${settings.darkMode ? "active" : ""}`} onClick={() => setSettings({ ...settings, darkMode: !settings.darkMode })}>
                     <span className="pill-circle"></span>
                 </button>
             </div>

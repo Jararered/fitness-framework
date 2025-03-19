@@ -41,8 +41,12 @@ const ProfilePage: React.FC = () => {
                 <h2>Statistics</h2>
                 <p>Workouts Last Week: {lastWeekLogs.length}</p>
                 <p>Workouts Last Month: {lastMonthLogs.length}</p>
-                <p>Total Weight Last Week: {totalWeightWeek} {units}</p>
-                <p>Total Weight Last Month: {totalWeightMonth} {units}</p>
+                <p>
+                    Total Weight Last Week: {totalWeightWeek} {units}
+                </p>
+                <p>
+                    Total Weight Last Month: {totalWeightMonth} {units}
+                </p>
             </div>
 
             <div className="card">
@@ -50,16 +54,11 @@ const ProfilePage: React.FC = () => {
                 <span className="workout-list">
                     {logsToShow.map((log) => (
                         <p key={log.workoutId}>
-                            Workout ID: {log.workoutId} -{" "}
-                            {log.startTime instanceof Date && !isNaN(log.startTime.getTime())
-                                ? log.startTime.toLocaleDateString()
-                                : "Invalid Date"}
+                            Workout ID: {log.workoutId} - {log.startTime instanceof Date && !isNaN(log.startTime.getTime()) ? log.startTime.toLocaleDateString() : "Invalid Date"}
                         </p>
                     ))}
                 </span>
-                {workoutLogs.length > 5 && !expanded && (
-                    <button onClick={handleShowMore}>Show More</button>
-                )}
+                {workoutLogs.length > 5 && !expanded && <button onClick={handleShowMore}>Show More</button>}
             </div>
         </div>
     );

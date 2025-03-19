@@ -96,7 +96,7 @@
     -webkit-appearance: none;
 }
 
-.exercise-page-inputs input[type=number] {
+.exercise-page-inputs input[type="number"] {
     -moz-appearance: textfield;
     appearance: textfield;
 }

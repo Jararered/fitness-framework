@@ -30,13 +30,18 @@ export const EquipmentProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem("equipment-last", JSON.stringify(equipmentLast));
     }, [equipmentConfigs, equipmentLast]);
 
-    return <EquipmentContext.Provider
-        value={{
-            equipmentConfigs,
-            setEquipmentConfigs,
-            equipmentLast,
-            setEquipmentLast
-        }}>{children}</EquipmentContext.Provider>;
+    return (
+        <EquipmentContext.Provider
+            value={{
+                equipmentConfigs,
+                setEquipmentConfigs,
+                equipmentLast,
+                setEquipmentLast,
+            }}
+        >
+            {children}
+        </EquipmentContext.Provider>
+    );
 };
 
 export const useEquipment = () => {

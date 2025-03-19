@@ -31,9 +31,7 @@ const EquipmentSelectPage: React.FC = () => {
             } else if (name === "none") {
                 setSelectedEquipment([]);
             } else {
-                setSelectedEquipment((prev) =>
-                    prev.includes(name) ? prev.filter((item) => item !== name) : [...prev, name]
-                );
+                setSelectedEquipment((prev) => (prev.includes(name) ? prev.filter((item) => item !== name) : [...prev, name]));
             }
         },
         [setSelectedEquipment]
@@ -55,10 +53,7 @@ const EquipmentSelectPage: React.FC = () => {
 
         if (selectedEquipment.length > 0) {
             if (exists) {
-                setEquipmentConfigs([
-                    ...equipmentConfigs.filter((config) => config.name !== name),
-                    { name, equipment: selectedEquipment },
-                ]);
+                setEquipmentConfigs([...equipmentConfigs.filter((config) => config.name !== name), { name, equipment: selectedEquipment }]);
                 setEquipmentLast(name);
             } else {
                 setEquipmentConfigs([...equipmentConfigs, { name, equipment: selectedEquipment }]);
@@ -93,12 +88,7 @@ const EquipmentSelectPage: React.FC = () => {
 
                 <div className="equipment-toggles">
                     {equipment.map((equipment) => (
-                        <EquipmentToggleListItem
-                            key={equipment}
-                            equipment={equipment}
-                            enabled={selectedEquipment.includes(equipment)}
-                            handleEquipmentToggle={handleEquipmentToggle}
-                        />
+                        <EquipmentToggleListItem key={equipment} equipment={equipment} enabled={selectedEquipment.includes(equipment)} handleEquipmentToggle={handleEquipmentToggle} />
                     ))}
                 </div>
                 <div className="equipment-toggles-buttons">
@@ -113,9 +103,7 @@ const EquipmentSelectPage: React.FC = () => {
                 <div className="gym-list">
                     {equipmentConfigs.map((gym) => (
                         <div className="gym-list-item" key={gym.name}>
-                            <div className="gym-name">
-                                {gym.name}
-                            </div>
+                            <div className="gym-name">{gym.name}</div>
                             <div className="gym-buttons">
                                 <button onClick={() => handleLoadGym(gym)}>
                                     <LuArrowDownToLine size={24} />

@@ -11,7 +11,7 @@ import { DividerSpaced } from "../components/DividerSpaced.tsx";
 
 import "../styles/pages/ExercisePreviewPage.css";
 
-import quotes from "../data/quotes.json";
+import { QUOTES } from "../data/quotes.ts";
 
 interface MuscularLoadInfoFooterProps {
     reps: number;
@@ -23,9 +23,7 @@ interface MuscularLoadInfoFooterProps {
 const MuscularLoadInfoFooter: React.FC<MuscularLoadInfoFooterProps> = ({ reps, weight, units, totalWeight }) => {
     return (
         <div className="muscular-load-info-footer">
-            <div className="muscular-load-info-title">
-                Last Exercise
-            </div>
+            <div className="muscular-load-info-title">Last Exercise</div>
 
             <div className="muscular-load-info-visual-calculation">
                 <div className="reps-container">
@@ -52,16 +50,15 @@ const MuscularLoadInfoFooter: React.FC<MuscularLoadInfoFooterProps> = ({ reps, w
                 </div>
             </div>
 
-            <div className="muscular-load-info-explaination">
-                Muscular Load is a measure of force excerted on your body throughout your workout based on the weights logged & your bodyweight.
-            </div>
+            <div className="muscular-load-info-explaination">Muscular Load is a measure of force excerted on your body throughout your workout based on the weights logged & your bodyweight.</div>
 
             <div className="muscular-load-info-total-calculation">
                 <div className="muscular-load-info-total-calculation-title">Total Muscular Load</div>
                 <div className="muscular-load-info-total-calculation-subtitle">This Workout</div>
-                <div className="muscular-load-info-total-calculation-value">{totalWeight} {units}</div>
+                <div className="muscular-load-info-total-calculation-value">
+                    {totalWeight} {units}
+                </div>
             </div>
-
         </div>
     );
 };
@@ -77,8 +74,8 @@ const ExercisePreviewPage: React.FC = () => {
     const navigate = useNavigate();
     const [breakTime] = useState<number>(60);
     const { showFooterCard } = useFooterCard();
-    const [quote] = useState<string>(quotes[Math.floor(Math.random() * quotes.length)].quote);
-    const [author] = useState<string>(quotes[Math.floor(Math.random() * quotes.length)].author);
+    const [quote] = useState<string>(QUOTES[Math.floor(Math.random() * QUOTES.length)].quote);
+    const [author] = useState<string>(QUOTES[Math.floor(Math.random() * QUOTES.length)].author);
 
     const MuscularLoad: React.FC<MuscularLoadProps> = ({ value, units }) => {
         return (
@@ -86,14 +83,9 @@ const ExercisePreviewPage: React.FC = () => {
                 <div className="muscular-load-icon">
                     <FaTrophy size={20} />
                 </div>
-                <div className="muscular-load-text">
-                    Muscular Load
-                </div>
+                <div className="muscular-load-text">Muscular Load</div>
                 <div className="muscular-load-info-icon">
-                    <FaInfoCircle size={20}
-                        onClick={() => showFooterCard(
-                            <MuscularLoadInfoFooter reps={69} weight={420} units={units} totalWeight={69420} />
-                        )} />
+                    <FaInfoCircle size={20} onClick={() => showFooterCard(<MuscularLoadInfoFooter reps={69} weight={420} units={units} totalWeight={69420} />)} />
                 </div>
                 <div className="muscular-load-value">
                     {value} {units}
@@ -117,7 +109,6 @@ const ExercisePreviewPage: React.FC = () => {
     return (
         <div className="exercise-preview-page">
             <div className="card">
-
                 <div className="quote-container">
                     <div className="quote">{quote}</div>
                     <div className="author">{author}</div>
@@ -131,7 +122,6 @@ const ExercisePreviewPage: React.FC = () => {
                         </div>
                     }
                     right={
-
                         <div className="skip-break-container">
                             <button className="skip-break-button" onClick={() => navigate("/exercise")}>
                                 <FaArrowRight size={20} />

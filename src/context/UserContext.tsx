@@ -18,9 +18,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [settings, setSettings] = useState<Settings>(() => {
         const saved = localStorage.getItem("user-context");
-        return saved
-            ? JSON.parse(saved)
-            : { name: "", weight: 0, height: 0, unit: "imperial", darkMode: true };
+        return saved ? JSON.parse(saved) : { name: "", weight: 0, height: 0, unit: "imperial", darkMode: true };
     });
 
     useEffect(() => {
@@ -45,4 +43,4 @@ export const useUser = () => {
         throw new Error("useUser must be used within a UserProvider");
     }
     return context;
-}; 
+};

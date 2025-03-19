@@ -1,6 +1,6 @@
 import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 
-import exerciseData from "../data/exercises.json";
+import { EXERCISES } from "../data/exercises";
 import { Exercise, WorkoutPlan, WorkoutLog } from "../types";
 import { UserProvider } from "./UserContext";
 
@@ -29,7 +29,7 @@ interface WorkoutContextType {
 const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
 
 export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
-    const [exercises] = useState<Exercise[]>(exerciseData);
+    const [exercises] = useState<Exercise[]>(EXERCISES);
 
     const [equipment] = useState<string[]>(() => {
         const allEquipment = exercises.flatMap((ex) => ex.required_equipment);
@@ -70,13 +70,13 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
         return saved
             ? JSON.parse(saved)
             : {
-                currentPlan: null,
-                isStarted: false,
-                currentExerciseIndex: 0,
-                currentSetIndex: 0,
-                repsCompleted: [],
-                weightsUsed: [],
-            };
+                  currentPlan: null,
+                  isStarted: false,
+                  currentExerciseIndex: 0,
+                  currentSetIndex: 0,
+                  repsCompleted: [],
+                  weightsUsed: [],
+              };
     });
 
     useEffect(() => {

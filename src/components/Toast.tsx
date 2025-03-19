@@ -22,7 +22,7 @@ const Toast: React.FC<ToastProps> = ({ toast, removeToast }) => {
     };
 
     return (
-        <div className={`toast toast-${toast.type} ${toast.isExiting ? 'toast-exiting' : ''}`}>
+        <div className={`toast toast-${toast.type} ${toast.isExiting ? "toast-exiting" : ""}`}>
             <span>{toast.message}</span>
             <button className="toast-close" onClick={handleRemove}>
                 ×

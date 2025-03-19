@@ -20,7 +20,7 @@ const WorkoutCompletePage: React.FC = () => {
             // Store the statistics data before resetting the state
             setStats({
                 repsCompleted: [...workoutState.repsCompleted],
-                weightsUsed: [...workoutState.weightsUsed]
+                weightsUsed: [...workoutState.weightsUsed],
             });
 
             const exerciseLogs = workoutState.currentPlan.exercises.map((ex, index) => ({
@@ -30,12 +30,8 @@ const WorkoutCompletePage: React.FC = () => {
                 startTime: new Date(), // Placeholder; could track actual times
                 endTime: new Date(),
             }));
-            const totalReps = workoutState.repsCompleted
-                .flat()
-                .reduce((sum, val) => sum + (val || 0), 0);
-            const totalWeight = workoutState.weightsUsed
-                .flat()
-                .reduce((sum, val) => sum + (val || 0), 0);
+            const totalReps = workoutState.repsCompleted.flat().reduce((sum, val) => sum + (val || 0), 0);
+            const totalWeight = workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0);
             setWorkoutLogs([
                 ...workoutLogs,
                 {
@@ -58,7 +54,7 @@ const WorkoutCompletePage: React.FC = () => {
                 weightsUsed: [],
             });
         }
-    }, []);  // Only run once on component mount
+    }, []); // Only run once on component mount
 
     const handleWeightUnit = () => {
         let weightUnit: string = "";
@@ -76,13 +72,7 @@ const WorkoutCompletePage: React.FC = () => {
                 <h1>Congratulations!</h1>
                 <button onClick={() => navigate("/")}>Back to Home</button>
             </div>
-            {stats && (
-                <WorkoutStatistics
-                    repsCompleted={stats.repsCompleted}
-                    weightsUsed={stats.weightsUsed}
-                    units={handleWeightUnit()}
-                />
-            )}
+            {stats && <WorkoutStatistics repsCompleted={stats.repsCompleted} weightsUsed={stats.weightsUsed} units={handleWeightUnit()} />}
         </div>
     );
 };

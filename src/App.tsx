@@ -39,11 +39,7 @@ function App() {
             </PageTransition>
             <ToastContainer />
             <DockBar />
-            <FooterCard
-                isVisible={isVisible}
-                content={content}
-                onClose={hideFooterCard}
-            />
+            <FooterCard isVisible={isVisible} content={content} onClose={hideFooterCard} />
         </div>
     );
 }

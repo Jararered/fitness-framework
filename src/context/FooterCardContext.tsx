@@ -42,4 +42,4 @@ export const FooterCardProvider: React.FC<{ children: ReactNode }> = ({ children
             {children}
         </FooterCardContext.Provider>
     );
-}; 
+};

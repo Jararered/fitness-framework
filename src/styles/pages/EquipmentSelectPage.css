@@ -15,8 +15,7 @@
     width: 100%;
 }
 
-.gym-list-item
-{
+.gym-list-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,6 +38,3 @@
     margin: 0;
     padding: 0;
 }
-
-
-

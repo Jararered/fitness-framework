@@ -11,7 +11,7 @@ import ExerciseInputFooter from "../components/ExerciseInputFooter.tsx";
 
 import "../styles/pages/ExercisePage.css";
 
-import quotes from "../data/quotes.json";
+import { QUOTES } from "../data/quotes.ts";
 
 const ExercisePage: React.FC = () => {
     const navigate = useNavigate();
@@ -33,9 +33,9 @@ const ExercisePage: React.FC = () => {
     const [randomQuote, setRandomQuote] = useState<string>("");
     const [randomQuoteAuthor, setRandomQuoteAuthor] = useState<string>("");
     useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * quotes.length);
-        setRandomQuote(quotes[randomIndex].quote);
-        setRandomQuoteAuthor(quotes[randomIndex].author);
+        const randomIndex = Math.floor(Math.random() * QUOTES.length);
+        setRandomQuote(QUOTES[randomIndex].quote);
+        setRandomQuoteAuthor(QUOTES[randomIndex].author);
     }, []);
 
     useEffect(() => {
@@ -167,11 +167,9 @@ const ExercisePage: React.FC = () => {
 
     return (
         <div className="exercise-page">
-
             <h1>{currentExercise.exercise}</h1>
 
             <div className="card">
-
                 <div className="quote-container">
                     <div className="quote-text">{randomQuote}</div>
                     <div className="quote-author">{randomQuoteAuthor}</div>
@@ -179,7 +177,9 @@ const ExercisePage: React.FC = () => {
 
                 <div className="last-weight">
                     <div className="last-weight-title">Last Round</div>
-                    <div className="last-weight-weight" onClick={handleShowRepsInputFooter}>{weightInput} {handleWeightUnit()} {<FaPlusCircle size={16} />}</div>
+                    <div className="last-weight-weight" onClick={handleShowRepsInputFooter}>
+                        {weightInput} {handleWeightUnit()} {<FaPlusCircle size={16} />}
+                    </div>
                 </div>
 
                 <DividerSpaced
@@ -193,7 +193,9 @@ const ExercisePage: React.FC = () => {
                     }
                     center={
                         <div className="reps-goal">
-                            <div onClick={() => setRepsInput(13)} className="reps-goal-number">{currentExercise.reps[workoutState.currentSetIndex]}</div>
+                            <div onClick={() => setRepsInput(13)} className="reps-goal-number">
+                                {currentExercise.reps[workoutState.currentSetIndex]}
+                            </div>
                             <div className="reps-goal-text">reps</div>
                         </div>
                     }

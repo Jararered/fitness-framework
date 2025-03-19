@@ -23,7 +23,7 @@ interface WorkoutPlan {
 }
 
 const WorkoutCreatePage: React.FC = () => {
-    const { exercises, workoutPlans, setWorkoutPlans, workoutState, setWorkoutState, } = useWorkout();
+    const { exercises, workoutPlans, setWorkoutPlans, workoutState, setWorkoutState } = useWorkout();
     const { equipmentConfigs, equipmentLast } = useEquipment();
     const navigate = useNavigate();
     const { addToast } = useToast();
@@ -33,27 +33,24 @@ const WorkoutCreatePage: React.FC = () => {
         if (savedPlan) {
             return JSON.parse(savedPlan);
         }
-        return [{
-            exercise: "",
-            reps: [10, 10, 10],
-            baseReps: 10,
-            sets: 3,
-            style: "flat"
-        }];
+        return [
+            {
+                exercise: "",
+                reps: [10, 10, 10],
+                baseReps: 10,
+                sets: 3,
+                style: "flat",
+            },
+        ];
     });
     const [workoutNameState, setWorkoutNameState] = useState<string>("");
     const [loadedWorkoutState, setLoadedWorkoutState] = useState<string | null>(null);
 
     const repsChangeAmount = 2;
 
-    const selectedEquipment =
-        equipmentLast && equipmentConfigs.length > 0
-            ? equipmentConfigs.find((config) => config.name === equipmentLast)?.equipment || []
-            : [];
+    const selectedEquipment = equipmentLast && equipmentConfigs.length > 0 ? equipmentConfigs.find((config) => config.name === equipmentLast)?.equipment || [] : [];
 
-    const availableExercises = exercises.filter((exercise) =>
-        exercise.required_equipment.every((equipment) => selectedEquipment.includes(equipment))
-    );
+    const availableExercises = exercises.filter((exercise) => exercise.required_equipment.every((equipment) => selectedEquipment.includes(equipment)));
 
     const avaliableExerciseNames = availableExercises.map((exercise) => exercise.exercise_name);
 
@@ -124,19 +121,22 @@ const WorkoutCreatePage: React.FC = () => {
         }
 
         // Apply the minimum reps check before setting the state
-        newWorkoutPlan[exerciseIndex].reps = exercise.reps.map(rep => Math.max(rep, 1));
+        newWorkoutPlan[exerciseIndex].reps = exercise.reps.map((rep) => Math.max(rep, 1));
 
         setWorkoutPlanState(newWorkoutPlan);
     };
 
     const handleAddExercise = () => {
-        setWorkoutPlanState([...workoutPlanState, {
-            exercise: "",
-            reps: [10, 10, 10],
-            baseReps: 10,
-            sets: 3,
-            style: "flat"
-        }]);
+        setWorkoutPlanState([
+            ...workoutPlanState,
+            {
+                exercise: "",
+                reps: [10, 10, 10],
+                baseReps: 10,
+                sets: 3,
+                style: "flat",
+            },
+        ]);
         setLoadedWorkoutState(null);
     };
 
@@ -148,14 +148,12 @@ const WorkoutCreatePage: React.FC = () => {
     };
 
     const handleSaveWorkout = (startWorkout: boolean = false) => {
-        const validPlan = workoutPlanState
-            .filter((p) => p.exercise && p.reps.every((r) => r > 0))
-            .map((p) => ({ exercise: p.exercise, reps: p.reps }));
+        const validPlan = workoutPlanState.filter((p) => p.exercise && p.reps.every((r) => r > 0)).map((p) => ({ exercise: p.exercise, reps: p.reps }));
         if (validPlan.length > 0) {
             const newWorkout = { name: workoutNameState || `Workout ${workoutPlans.length + 1}`, exercises: validPlan };
-            
+
             // Find and update existing workout if it exists
-            const existingWorkoutIndex = workoutPlans.findIndex(w => w.name === loadedWorkoutState);
+            const existingWorkoutIndex = workoutPlans.findIndex((w) => w.name === loadedWorkoutState);
             if (existingWorkoutIndex !== -1) {
                 const updatedWorkoutPlans = [...workoutPlans];
                 updatedWorkoutPlans[existingWorkoutIndex] = newWorkout;
@@ -200,7 +198,7 @@ const WorkoutCreatePage: React.FC = () => {
                 reps: p.reps,
                 baseReps: p.reps[0],
                 sets: p.reps.length,
-                style: "flat"
+                style: "flat",
             }))
         );
         setWorkoutNameState(workout.name || "");
@@ -219,9 +217,7 @@ const WorkoutCreatePage: React.FC = () => {
     };
 
     const handleStartWorkout = () => {
-        const validPlan = workoutPlanState
-            .filter((p) => p.exercise && p.reps.every((r) => r > 0))
-            .map((p) => ({ exercise: p.exercise, reps: p.reps }));
+        const validPlan = workoutPlanState.filter((p) => p.exercise && p.reps.every((r) => r > 0)).map((p) => ({ exercise: p.exercise, reps: p.reps }));
 
         if (validPlan.length > 0) {
             setWorkoutState({
@@ -324,12 +320,7 @@ const WorkoutCreatePage: React.FC = () => {
                     <h2>Save Workout</h2>
                     <p>Save the current workout plan to the workout library</p>
                     <div className="card-content">
-                        <input
-                            type="text"
-                            value={workoutNameState}
-                            onChange={(e) => setWorkoutNameState(e.target.value)}
-                            placeholder="Workout Name"
-                        />
+                        <input type="text" value={workoutNameState} onChange={(e) => setWorkoutNameState(e.target.value)} placeholder="Workout Name" />
                         <button className="save-button" onClick={() => handleSaveWorkout(false)}>
                             Save
                             <LuSave />
@@ -343,11 +334,7 @@ const WorkoutCreatePage: React.FC = () => {
                     <div className="card-content">
                         {workoutPlans.length > 0 ? (
                             workoutPlans.map((workout, index) => (
-                                <button
-                                    key={index}
-                                    className="load-button"
-                                    onClick={() => handleLoadWorkout(workout)}
-                                >
+                                <button key={index} className="load-button" onClick={() => handleLoadWorkout(workout)}>
                                     {workout.name || `Workout ${index + 1}`}
                                     <LuRepeat />
                                 </button>

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import '../styles/components/PillToggle.css';
+import "../styles/components/PillToggle.css";
 
 interface PillToggleProps {
     isActive: boolean;
@@ -9,10 +9,7 @@ interface PillToggleProps {
 
 const PillToggle: React.FC<PillToggleProps> = ({ isActive, onChange }) => {
     return (
-        <button
-            className={`pill-toggle ${isActive ? "active" : ""}`}
-            onClick={onChange}
-        >
+        <button className={`pill-toggle ${isActive ? "active" : ""}`} onClick={onChange}>
             <span className="pill-circle"></span>
         </button>
     );

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-import '../styles/components/PageTransition.css';
+import "../styles/components/PageTransition.css";
 
 interface PageTransitionProps {
     children: React.ReactNode;
@@ -10,17 +10,17 @@ interface PageTransitionProps {
 const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
     const location = useLocation();
     const [displayChildren, setDisplayChildren] = useState(children);
-    const [transitionStage, setTransitionStage] = useState('fadeIn');
+    const [transitionStage, setTransitionStage] = useState("fadeIn");
     const [prevPath, setPrevPath] = useState(location.pathname);
 
     useEffect(() => {
         // Only trigger transition if the path actually changed
         if (location.pathname !== prevPath) {
-            setTransitionStage('fadeOut');
+            setTransitionStage("fadeOut");
 
             const timeout = setTimeout(() => {
                 setDisplayChildren(children);
-                setTransitionStage('fadeIn');
+                setTransitionStage("fadeIn");
                 setPrevPath(location.pathname);
             }, 200);
 
@@ -31,11 +31,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
         }
     }, [location, children, prevPath]);
 
-    return (
-        <div className={`page-transition ${transitionStage}`}>
-            {displayChildren}
-        </div>
-    );
+    return <div className={`page-transition ${transitionStage}`}>{displayChildren}</div>;
 };
 
 export default PageTransition;

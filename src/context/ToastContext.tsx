@@ -31,11 +31,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
 
     const startToastExit = (id: number) => {
         // Mark the toast as exiting to trigger animation
-        setToasts(prev =>
-            prev.map(toast =>
-                toast.id === id ? { ...toast, isExiting: true } : toast
-            )
-        );
+        setToasts((prev) => prev.map((toast) => (toast.id === id ? { ...toast, isExiting: true } : toast)));
 
         // Remove the toast after animation completes
         setTimeout(() => {
@@ -47,11 +43,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
         setToasts((prev) => prev.filter((toast) => toast.id !== id));
     };
 
-    return (
-        <ToastContext.Provider value={{ toasts, addToast, removeToast, startToastExit }}>
-            {children}
-        </ToastContext.Provider>
-    );
+    return <ToastContext.Provider value={{ toasts, addToast, removeToast, startToastExit }}>{children}</ToastContext.Provider>;
 };
 
 export const useToast = () => {
