@@ -8,11 +8,12 @@
 
     color: var(--text-color);
     background-color: var(--card-background);
-    border: 2px solid var(--card-border);
+    border: 3px solid var(--card-border);
 }
 
 .equipment-toggle.enabled {
-    border-color: var(--enabled-border-color);
+    border-color: var(--main-accent);
+    background-color: var(--main-accent-light);
 }
 
 .equipment-toggle .name {
@@ -20,7 +21,7 @@
 }
 
 .equipment-toggle .check {
-    color: var(--enabled-color);
+    color: var(--text-color);
 }
 
 .equipment-toggle.large {

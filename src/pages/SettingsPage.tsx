@@ -22,8 +22,14 @@ const HeightInputMetric = () => {
     const { settings, setSettings } = useUser();
 
     return (
-        <span>
-            <input className="height-input" type="number" value={settings.height} onChange={(e) => setSettings({ ...settings, height: Number(e.target.value) })} />
+        <span className="height-input-container">
+            <input
+                className="number-input"
+                type="number"
+                value={settings.height}
+                inputMode="decimal"
+                onChange={(e) => setSettings({ ...settings, height: Number(e.target.value) })}
+            />
             cm
         </span>
     );
@@ -34,11 +40,12 @@ const HeightInputImperial = () => {
     const { feet, inches } = calculateHeightImperial(settings.height);
 
     return (
-        <span>
+        <div className="imperial-height-input-container">
             <input
-                className="height-input"
+                className="number-input"
                 type="number"
                 value={feet}
+                inputMode="numeric"
                 onChange={(e) => {
                     const newFeet = Number(e.target.value);
                     const heightCm = calculateHeightCm(newFeet, inches);
@@ -47,11 +54,12 @@ const HeightInputImperial = () => {
                 placeholder="ft"
                 min="0"
             />
-            ft
+            <div className="height-input-divider">ft</div>
             <input
-                className="height-input"
+                className="number-input"
                 type="number"
                 value={inches}
+                inputMode="numeric"
                 onChange={(e) => {
                     const newInches = Number(e.target.value);
                     const heightCm = calculateHeightCm(feet, newInches);
@@ -61,8 +69,8 @@ const HeightInputImperial = () => {
                 min="0"
                 max="11"
             />
-            in
-        </span>
+            <div className="height-input-divider">in</div>
+        </div>
     );
 };
 
@@ -90,11 +98,12 @@ const WeightInput = () => {
     const displayWeight = isImperial ? gramsToLbs(settings.weight) : gramsToKg(settings.weight);
 
     return (
-        <span>
+        <span className="weight-input-container">
             <input
-                className="weight-input"
+                className="number-input"
                 type="number"
-                step="0.1"
+                step="1"
+                inputMode="decimal"
                 value={displayWeight}
                 onChange={(e) => {
                     const value = Number(e.target.value);
@@ -102,7 +111,7 @@ const WeightInput = () => {
                     setSettings({ ...settings, weight: weightInGrams });
                 }}
             />
-            {isImperial ? "lb" : "kg"}
+            <div className="weight-input-divider">{isImperial ? "lb" : "kg"}</div>
         </span>
     );
 };
@@ -144,25 +153,37 @@ const SettingsPage: React.FC = () => {
         <div className="settings-page">
             <h1>Settings</h1>
             <div className="card">
-                <label>Name</label>
-                <input type="text" value={settings.name} onChange={(e) => setSettings({ ...settings, name: e.target.value })} />
+                <div className="card-content">
+                    <div className="card-row">
+                        <label>Name</label>
+                        <input type="text" value={settings.name} onChange={(e) => setSettings({ ...settings, name: e.target.value })} />
+                    </div>
 
-                <label>Weight ({settings.unit === "imperial" ? "lb" : "kg"})</label>
-                <WeightInput />
+                    <div className="card-row">
+                        <label>Weight ({settings.unit === "imperial" ? "lb" : "kg"})</label>
+                        <WeightInput />
+                    </div>
 
-                <label>Height</label>
-                {settings.unit === "imperial" ? <HeightInputImperial /> : <HeightInputMetric />}
+                    <div className="card-row">
+                        <label>Height</label>
+                        {settings.unit === "imperial" ? <HeightInputImperial /> : <HeightInputMetric />}
+                    </div>
 
-                <label>Units</label>
-                <select value={settings.unit} onChange={(e) => setSettings({ ...settings, unit: e.target.value as "imperial" | "metric" })}>
-                    <option value="imperial">imperial</option>
-                    <option value="metric">metric</option>
-                </select>
+                    <div className="card-row">
+                        <label>Units</label>
+                        <select value={settings.unit} onChange={(e) => setSettings({ ...settings, unit: e.target.value as "imperial" | "metric" })}>
+                            <option value="imperial">imperial</option>
+                            <option value="metric">metric</option>
+                        </select>
+                    </div>
 
-                <label>Dark Mode</label>
-                <button className={`pill-toggle ${settings.darkMode ? "active" : ""}`} onClick={() => setSettings({ ...settings, darkMode: !settings.darkMode })}>
-                    <span className="pill-circle"></span>
-                </button>
+                    <div className="card-row">
+                        <label>Dark Mode</label>
+                        <button className={`pill-toggle ${settings.darkMode ? "active" : ""}`} onClick={() => setSettings({ ...settings, darkMode: !settings.darkMode })}>
+                            <span className="pill-circle"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <h1>Manage Data</h1>

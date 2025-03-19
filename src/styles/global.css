@@ -93,6 +93,14 @@ button:active {
     transform: translate(2px, 2px);
 }
 
+button.caution {
+    background-color: var(--caution-color);
+}
+
+button.caution:hover {
+    background-color: var(--caution-hover);
+}
+
 label {
     display: block;
     margin: 10px 0 5px;
@@ -103,7 +111,7 @@ input,
 select {
     color: var(--text-color);
     background-color: var(--input-background);
-    border: 2px solid var(--input-border);
+    border: 3px solid var(--input-border);
     display: block;
     padding: 0.5rem;
     font-size: 1rem;
@@ -116,7 +124,7 @@ select {
 input:focus,
 select:focus {
     outline: none;
-    border: 2px solid var(--main-accent);
+    border: 3px solid var(--main-accent);
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -128,14 +136,6 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"]::-webkit-inner-spin-button:hover,
 input[type="number"]::-webkit-outer-spin-button:hover {
     background-color: var(--input-background);
-}
-
-button.caution {
-    background-color: var(--caution-color);
-}
-
-button.caution:hover {
-    background-color: var(--caution-hover);
 }
 
 div {

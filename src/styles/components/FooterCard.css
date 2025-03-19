@@ -4,7 +4,6 @@
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--card-background);
-    border: 1px solid var(--card-border);
     box-shadow: var(--card-shadow);
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;

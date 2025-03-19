@@ -22,13 +22,12 @@
     border-radius: 2rem;
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
-    border: 1px solid var(--card-border);
     color: var(--text-color);
     animation: slideIn 0.3s ease-out;
 }
 
 .toast-success {
-    background-color: var(--pill-active);
+    background-color: var(--main-accent);
     color: white;
 }
 
@@ -38,24 +37,25 @@
 }
 
 .toast-info {
-    background-color: var(--button-background);
     color: white;
 }
 
 .toast-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     margin: 0 0 0 1rem;
     padding: 0;
     width: 1.5rem;
     height: 1.5rem;
-    font-size: 1rem;
-    background: none;
+    font-size: 1.5rem;
     box-shadow: none;
-    color: inherit;
     border-radius: 50%;
 }
 
 .toast-close:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.0);
     transform: none;
 }
 

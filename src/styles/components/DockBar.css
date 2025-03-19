@@ -3,7 +3,6 @@
 .dockbar {
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
-    border: 1px solid var(--card-border);
 
     border-radius: 2rem;
     bottom: 2rem;
