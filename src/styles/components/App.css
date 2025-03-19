@@ -16,8 +16,8 @@
     /* Include padding in height calculation */
     box-sizing: border-box;
 
-    /* Ensure background extends to edges */
-    width: 100vw;
+    /* Use 100% instead of 100vw to prevent horizontal scrollbar */
+    width: 100%;
     margin: 0;
     padding: 0;
 
@@ -35,6 +35,7 @@
     flex-direction: column;
     align-items: center;
 
+    border: 1px solid var(--card-border);
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
     border-radius: 2rem;

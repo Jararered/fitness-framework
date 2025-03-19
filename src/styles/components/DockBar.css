@@ -3,18 +3,21 @@
 .dockbar {
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
+    border: 1px solid var(--card-border);
 
     border-radius: 2rem;
-    bottom: 2rem;
-    display: flex;
     gap: 0.25rem;
-    left: 50%;
     padding: 0.5rem;
-    position: fixed;
-    transform: translateX(-50%);
-    z-index: 1000;
 
+    display: flex;
+    left: 50%;
+    bottom: 2rem;
+    position: fixed;
+
+    transform: translateX(-50%);
     transition: transform 0.3s ease-in-out;
+
+    z-index: 1000;
 }
 
 .dockbar.hidden {
