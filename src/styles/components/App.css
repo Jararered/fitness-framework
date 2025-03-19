@@ -8,10 +8,10 @@
     min-height: 100vh;
 
     /* Space for notches */
-    padding-top: 3rem !important;
+    padding-top: 2rem !important;
 
     /* Space for DockBar */
-    padding-bottom: 7rem !important;
+    padding-bottom: 8rem !important;
 
     /* Include padding in height calculation */
     box-sizing: border-box;
@@ -56,6 +56,9 @@
 }
 
 .card-row {
+    border-radius: 1rem;
+    min-height: 2rem;
+    padding: 0.5rem;
     width: 100%;
     gap: 0.5rem;
 }

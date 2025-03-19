@@ -4,7 +4,7 @@ import { useUser } from "../context/UserContext.tsx";
 
 import "../styles/pages/SettingsPage.css";
 import "../styles/components/PillToggle.css";
-import { LuArrowRight } from "react-icons/lu";
+import { LuArrowRight, LuGithub, LuMail } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 
 // This function calculates the height in cm from the height in feet and inches
@@ -17,62 +17,6 @@ const calculateHeightImperial = (cm: number) => {
     const feet = Math.floor(cm / 30.48);
     const inches = Math.round((cm % 30.48) / 2.54);
     return { feet, inches };
-};
-
-const HeightInputMetric = () => {
-    const { settings, setSettings } = useUser();
-
-    return (
-        <span className="height-input-container">
-            <input
-                className="number-input"
-                type="number"
-                value={settings.height}
-                inputMode="decimal"
-                onChange={(e) => setSettings({ ...settings, height: Number(e.target.value) })}
-            />
-            cm
-        </span>
-    );
-};
-
-const HeightInputImperial = () => {
-    const { settings, setSettings } = useUser();
-    const { feet, inches } = calculateHeightImperial(settings.height);
-
-    return (
-        <div className="imperial-height-input-container">
-            <input
-                className="number-input"
-                type="number"
-                value={feet}
-                inputMode="numeric"
-                onChange={(e) => {
-                    const newFeet = Number(e.target.value);
-                    const heightCm = calculateHeightCm(newFeet, inches);
-                    setSettings({ ...settings, height: heightCm });
-                }}
-                placeholder="ft"
-                min="0"
-            />
-            <div className="height-input-divider">ft</div>
-            <input
-                className="number-input"
-                type="number"
-                value={inches}
-                inputMode="numeric"
-                onChange={(e) => {
-                    const newInches = Number(e.target.value);
-                    const heightCm = calculateHeightCm(feet, newInches);
-                    setSettings({ ...settings, height: heightCm });
-                }}
-                placeholder="in"
-                min="0"
-                max="11"
-            />
-            <div className="height-input-divider">in</div>
-        </div>
-    );
 };
 
 // Weight conversion functions
@@ -112,7 +56,63 @@ const WeightInput = () => {
                     setSettings({ ...settings, weight: weightInGrams });
                 }}
             />
-            <div className="weight-input-divider">{isImperial ? "lb" : "kg"}</div>
+            <div className="units-label">{isImperial ? "lb" : "kg"}</div>
+        </span>
+    );
+};
+
+const HeightInputMetric = () => {
+    const { settings, setSettings } = useUser();
+
+    return (
+        <span className="height-input-container">
+            <input
+                className="number-input"
+                type="number"
+                value={settings.height}
+                inputMode="decimal"
+                onChange={(e) => setSettings({ ...settings, height: Number(e.target.value) })}
+            />
+            <div className="units-label">cm</div>
+        </span>
+    );
+};
+
+const HeightInputImperial = () => {
+    const { settings, setSettings } = useUser();
+    const { feet, inches } = calculateHeightImperial(settings.height);
+
+    return (
+        <span className="imperial-height-input-container">
+            <input
+                className="number-input"
+                type="number"
+                value={feet}
+                inputMode="numeric"
+                onChange={(e) => {
+                    const newFeet = Number(e.target.value);
+                    const heightCm = calculateHeightCm(newFeet, inches);
+                    setSettings({ ...settings, height: heightCm });
+                }}
+                placeholder="ft"
+                min="0"
+            />
+            <div className="units-label">ft</div>
+            <input
+                className="number-input"
+                type="number"
+                value={inches}
+                inputMode="numeric"
+                onChange={(e) => {
+                    const newInches = Number(e.target.value);
+                    const heightCm = calculateHeightCm(feet, newInches);
+                    setSettings({ ...settings, height: heightCm });
+                }}
+                placeholder="in"
+                min="0"
+                max="11"
+            />
+            <div className="units-label">in</div>
         </span>
     );
 };
@@ -144,7 +144,7 @@ const SettingsPage: React.FC = () => {
                     </span>
 
                     <span className="card-row">
-                        <label>Weight ({settings.unit === "imperial" ? "lb" : "kg"})</label>
+                        <label>Weight</label>
                         <WeightInput />
                     </span>
 
@@ -195,6 +195,41 @@ const SettingsPage: React.FC = () => {
                             Manage Data
                             <LuArrowRight size={24} />
                         </button>
+                    </span>
+
+                    <hr />
+
+                    <div className="card-header">
+                        <h2>About</h2>
+                        <p>
+                            This app is a work in progress. <br />
+                            Please report any issues to the developer.
+                        </p>
+                    </div>
+                    <span className="card-row">
+                        <label>Version</label>
+                        <span className="version-number">0.0.1</span>
+                    </span>
+                    <span className="card-row">
+                        <label>Developer</label>
+                        <a
+                            href="mailto:jararered@icloud.com"
+                            className="developer-name"
+                        >
+                            Email <LuMail />
+                        </a>
+                    </span>
+                    <span className="card-row">
+                        <label>Github</label>
+                        <a href="https://github.com/Jararered">
+                            Github <LuGithub />
+                        </a>
+                    </span>
+                    <span className="card-row">
+                        <label>Source Code</label>
+                        <a href="https://github.com/Jararered/fitness-framework">
+                            Github <LuGithub />
+                        </a>
                     </span>
                 </div>
             </div>

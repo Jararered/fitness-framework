@@ -106,7 +106,8 @@ const EquipmentSelectPage: React.FC = () => {
                     </div>
                     <div className="equipment-toggles-buttons">
                         <button onClick={handleSaveEquipment}>
-                            Save <LuSave />
+                            Save
+                            <LuSave />
                         </button>
                     </div>
                 </div>

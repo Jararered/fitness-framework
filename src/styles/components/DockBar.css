@@ -31,3 +31,7 @@
 .icon-button.active {
     background-color: var(--main-accent);
 }
+
+.icon-button.active svg {
+    color: white;
+}

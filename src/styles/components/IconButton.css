@@ -1,24 +1,16 @@
 @import "../variables.css";
 
 .icon-button {
-    border-radius: 1.5rem;
-    cursor: pointer;
     height: 4rem;
     width: 4rem;
+
+    border-radius: 1.5rem;
+
+    cursor: pointer;
+
     transition: all 200ms;
 }
 
 .icon-button svg {
-    color: var(--text-color);
-    margin: auto;
     transition: all 200ms;
-}
-
-.icon-button:hover {
-    color: var(--main-accent);
-    background-color: var(--toggle-hover);
-}
-
-.icon-button:hover svg {
-    color: var(--main-accent);
 }
