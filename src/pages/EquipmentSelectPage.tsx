@@ -93,20 +93,22 @@ const EquipmentSelectPage: React.FC = () => {
                     <p>Select the equipment that is available at your gym</p>
                 </div>
 
-                <div className="equipment-toggle-container">
-                    {equipment.map((equipment) => (
-                        <EquipmentToggleListItem
-                            key={equipment}
-                            equipment={equipment}
-                            enabled={selectedEquipment.includes(equipment)}
-                            handleEquipmentToggle={handleEquipmentToggle}
-                        />
-                    ))}
-                </div>
-                <div className="equipment-toggles-buttons">
-                    <button onClick={handleSaveEquipment}>
-                        Save <LuSave size={24} />
-                    </button>
+                <div className="card-content">
+                    <div className="equipment-toggle-container">
+                        {equipment.map((equipment) => (
+                            <EquipmentToggleListItem
+                                key={equipment}
+                                equipment={equipment}
+                                enabled={selectedEquipment.includes(equipment)}
+                                handleEquipmentToggle={handleEquipmentToggle}
+                            />
+                        ))}
+                    </div>
+                    <div className="equipment-toggles-buttons">
+                        <button onClick={handleSaveEquipment}>
+                            Save <LuSave />
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -119,29 +121,29 @@ const EquipmentSelectPage: React.FC = () => {
                     </p>
                 </div>
 
-                <div className="gym-list">
+                <div className="card-content">
                     {equipmentConfigs.map((gym) => (
-                        <div
-                            className="gym-list-item"
+                        <span
                             key={gym.name}
+                            className="card-row"
                         >
-                            <div className="gym-list-item-name">{gym.name}</div>
+                            <label className="gym-list-item-name">{gym.name}</label>
                             <span className="gym-list-item-buttons">
                                 <button
                                     className="gym-list-item-button"
                                     onClick={() => handleLoadGym(gym)}
                                 >
                                     Load
-                                    <LuArrowDownToLine size={24} />
+                                    <LuArrowDownToLine />
                                 </button>
                                 <button
                                     className="gym-list-item-button caution icon"
                                     onClick={() => handleDeleteGym(gym.name)}
                                 >
-                                    <LuTrash size={24} />
+                                    <LuTrash />
                                 </button>
                             </span>
-                        </div>
+                        </span>
                     ))}
                 </div>
             </div>

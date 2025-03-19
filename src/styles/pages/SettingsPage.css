@@ -1,11 +1,6 @@
-.number-input {
-    width: 4rem;
-}
-
 .imperial-height-input-container {
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
 }
 
 .height-input-label {
@@ -13,15 +8,6 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-}
-
-.weight-input-container
-{
-    gap: 0.5rem;
-}
-
-.height-input-container {
-    gap: 0.5rem;
 }
 
 .settings-page input::-webkit-outer-spin-button,

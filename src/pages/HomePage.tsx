@@ -11,8 +11,9 @@ const HomePage: React.FC = () => {
                     <h2>Workout Preview</h2>
                     <p>Below will show a preview of your workout once you have loaded a workout.</p>
                 </div>
-
-                <WorkoutPreview />
+                <div className="card-content">
+                    <WorkoutPreview />
+                </div>
             </div>
         </div>
     );

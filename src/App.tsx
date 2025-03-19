@@ -27,7 +27,7 @@ function App() {
 
     return (
         <div className={`App ${settings.darkMode ? "dark-mode" : ""}`}>
-            <IconContext.Provider value={{ size: "20px" }}>
+            <IconContext.Provider value={{ size: "1.5rem" }}>
                 <PageTransition>
                     <Routes
                         location={location}
