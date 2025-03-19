@@ -168,8 +168,18 @@
     padding: 0.5rem 1rem;
 }
 
+.exercise-page-input-container .number-input {
+    grid-column: 3;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+.footer-actions {
+    width: 100%;
+}
+
 .footer-actions .save-button {
-    width: 80%;
     font-size: 1.25rem;
-    margin: 0 auto;
+    width: 100%;
 }

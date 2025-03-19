@@ -1,14 +1,9 @@
 .equipment-toggle {
-    display: flex;
-    align-items: left;
-    justify-content: left;
     width: 100%;
 
     border-radius: 1rem;
     border: 3px solid var(--card-border);
     background-color: var(--card-background);
-
-    transition: all 200ms;
 
     cursor: pointer;
 

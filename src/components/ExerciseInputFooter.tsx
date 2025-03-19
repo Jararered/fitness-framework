@@ -10,7 +10,15 @@ interface ExerciseInputFooterProps {
     onCancel: () => void;
 }
 
-const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({ exerciseName, currentSet, initialReps, initialWeight, weightUnit, onSave, onCancel }) => {
+const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
+    exerciseName,
+    currentSet,
+    initialReps,
+    initialWeight,
+    weightUnit,
+    onSave,
+    onCancel,
+}) => {
     const [reps, setReps] = useState(initialReps);
     const [weight, setWeight] = useState(initialWeight);
 
@@ -35,14 +43,20 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({ exerciseName,
                 <div className="input-value set-value">{currentSet}</div>
 
                 <div className="input-label reps-label">Reps</div>
-                <input className="input-value reps-value" type="number" inputMode="numeric" value={reps} step={1} onChange={(e) => setReps(Math.max(0, Number(e.target.value)))} />
+                <input
+                    className="input-value reps-value"
+                    type="number"
+                    inputMode="numeric"
+                    value={reps}
+                    step={1}
+                    onChange={(e) => setReps(Math.max(0, Number(e.target.value)))}
+                />
 
                 <div className="input-label weight-label">Weight</div>
                 <input
                     className="input-value weight-value"
                     type="number"
                     inputMode="decimal"
-                    // value={weight}
                     step={2.5}
                     placeholder={initialWeight.toString()}
                     onChange={(e) => setWeight(Math.max(0, Number(e.target.value)))}
@@ -52,7 +66,10 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({ exerciseName,
             </div>
 
             <div className="footer-actions">
-                <button className="save-button" onClick={handleSave}>
+                <button
+                    className="save-button"
+                    onClick={handleSave}
+                >
                     Save
                 </button>
             </div>

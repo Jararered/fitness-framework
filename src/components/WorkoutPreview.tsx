@@ -1,9 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useWorkout } from "../context/WorkoutContext";
-
-import { DividerSpaced } from "./DividerSpaced";
-
-import "../styles/components/WorkoutPreview.css";
+import { LuPlay } from "react-icons/lu";
 
 const WorkoutPreview: React.FC = () => {
     const { workoutState, setWorkoutState } = useWorkout();
@@ -31,26 +28,37 @@ const WorkoutPreview: React.FC = () => {
     };
 
     return (
-        <div className="workout-preview">
-            {workoutState.currentPlan?.name ? <h2>{workoutState.currentPlan.name}</h2> : ""}
-            {workoutState.currentPlan?.exercises ? (
-                <div className="workout-preview-exercises">
-                    {workoutState.currentPlan.exercises.map((exercise, key) => (
-                        <DividerSpaced
-                            key={key}
-                            left={<strong>{exercise.exercise}</strong>}
-                            right={<p>{exercise.reps.join(", ")} reps</p>}
-                        />
-                    ))}
-                    {workoutState.isStarted ? (
-                        <button onClick={handleResumeWorkout}>Resume Workout</button>
-                    ) : (
-                        <button onClick={handleStartWorkout}>Start Workout</button>
-                    )}
-                </div>
-            ) : (
-                <strong>No workout loaded yet.</strong>
-            )}
+        <div className="workout-preview component">
+            <div className="card-header">
+                {workoutState.currentPlan?.name ? <label>{workoutState.currentPlan.name}</label> : ""}
+            </div>
+
+            <div className="card-content">
+                {workoutState.currentPlan?.exercises ? (
+                    <>
+                        {workoutState.currentPlan.exercises.map((exercise, key) => (
+                            <span className="card-row">
+                                <label>{exercise.exercise}</label>
+                                <p>{exercise.reps.join(", ")} reps</p>
+                            </span>
+                        ))}
+
+                        {workoutState.isStarted ? (
+                            <button onClick={handleResumeWorkout}>
+                                Resume Workout
+                                <LuPlay />
+                            </button>
+                        ) : (
+                            <button onClick={handleStartWorkout}>
+                                Start Workout
+                                <LuPlay />
+                            </button>
+                        )}
+                    </>
+                ) : (
+                    <strong>No workout loaded yet.</strong>
+                )}
+            </div>
         </div>
     );
 };

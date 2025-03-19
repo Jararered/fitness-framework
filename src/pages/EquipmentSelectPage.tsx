@@ -121,6 +121,8 @@ const EquipmentSelectPage: React.FC = () => {
                     </p>
                 </div>
 
+                <hr />
+
                 <div className="card-content">
                     {equipmentConfigs.map((gym) => (
                         <span

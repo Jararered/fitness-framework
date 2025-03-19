@@ -24,7 +24,6 @@ div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.25rem;
 }
 
 span {
@@ -32,41 +31,22 @@ span {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
 }
 
 p {
-    margin: 0.5rem 0;
+    margin: 0;
 }
 
-h1 {
-    font-size: 2rem;
-    margin: 2rem 0;
-}
-
-h2 {
-    font-size: 1.5rem;
-    margin: 1rem 0;
-}
-
-h3 {
-    font-size: 1rem;
-    margin: 0.75rem 0;
-}
-
-h4 {
-    font-size: 0.75rem;
-    margin: 0.75rem 0;
-}
-
-h5 {
-    font-size: 0.5rem;
-    margin: 0.5rem 0;
+hr {
+    margin: 0;
+    width: 90%;
+    border: 1px solid var(--card-border);
 }
 
 button {
     /* Margin */
-    margin: 0.75rem 0;
+    margin: 0.25rem 0;
 
     /* Padding */
     padding: 0.75rem 1rem;
@@ -120,7 +100,6 @@ button.caution:hover {
 button.icon {
     width: 3rem;
     height: 3rem;
-    margin: 0.25rem;
     padding: 0;
 }
 
@@ -140,6 +119,7 @@ select {
     text-align: center;
 
     padding: 0.5rem;
+    margin: 0.5rem 0;
 
     font-size: 1rem;
 }

@@ -1,7 +1,5 @@
 .equipment-toggle-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    width: inherit;
     gap: 0.5rem;
 }
 
@@ -17,6 +15,6 @@
 
 .gym-list-item-name {
     flex: 1;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: bold;
 }

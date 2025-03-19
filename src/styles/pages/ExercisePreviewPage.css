@@ -111,10 +111,6 @@
     clip-path: polygon(25% 0%, 100% 0, 100% 75%, 75% 100%, 0 100%, 0% 25%);
 }
 
-.weight-value {
-    font-size: 1.25rem;
-}
-
 .weight-text {
     font-size: 1rem;
 }

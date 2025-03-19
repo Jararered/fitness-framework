@@ -53,6 +53,8 @@ const ManageDataPage: React.FC = () => {
                     </button>
                 </div>
 
+                <hr />
+
                 <div className="card-header">
                     <h2>Delete All Workouts</h2>
                     <p>This will delete all saved workouts from the app. This action is irreversible.</p>
@@ -67,6 +69,8 @@ const ManageDataPage: React.FC = () => {
                         <LuTrash />
                     </button>
                 </div>
+
+                <hr />
 
                 <div className="card-header">
                     <h2>Delete All User Data</h2>
@@ -85,6 +89,8 @@ const ManageDataPage: React.FC = () => {
                         <LuTrash />
                     </button>
                 </div>
+
+                <hr />
 
                 <div className="card-header">
                     <h2>Delete All Data</h2>

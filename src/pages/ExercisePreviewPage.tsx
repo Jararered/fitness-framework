@@ -79,7 +79,7 @@ const ExercisePreviewPage: React.FC = () => {
 
     const MuscularLoad: React.FC<MuscularLoadProps> = ({ value, units }) => {
         return (
-            <div className="muscular-load-container">
+            <span className="muscular-load-container">
                 <div className="muscular-load-icon">
                     <FaTrophy size={20} />
                 </div>
@@ -90,7 +90,7 @@ const ExercisePreviewPage: React.FC = () => {
                 <div className="muscular-load-value">
                     {value} {units}
                 </div>
-            </div>
+            </span>
         );
     };
 

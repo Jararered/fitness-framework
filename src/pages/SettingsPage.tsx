@@ -153,6 +153,8 @@ const SettingsPage: React.FC = () => {
                         {settings.unit === "imperial" ? <HeightInputImperial /> : <HeightInputMetric />}
                     </span>
 
+                    <hr />
+
                     <div className="card-header">
                         <h2>App Settings</h2>
                         <p>

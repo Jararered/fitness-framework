@@ -8,6 +8,7 @@
     border-radius: 1rem;
 
     overflow: hidden;
+    width: 100%;
     
     border: 1px solid var(--card-border);
     background-color: var(--card-background);
@@ -19,6 +20,7 @@
 .options-container {
     max-height: 20rem;
     overflow-y: auto;
+    width: 100%;
 
     scrollbar-width: none;
     -ms-overflow-style: none;

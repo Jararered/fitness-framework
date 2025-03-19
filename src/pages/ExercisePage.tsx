@@ -137,7 +137,8 @@ const ExercisePage: React.FC = () => {
             setWorkoutState({
                 ...workoutState,
                 currentExerciseIndex: workoutState.currentExerciseIndex - 1,
-                currentSetIndex: workoutState.currentPlan.exercises[workoutState.currentExerciseIndex - 1].reps.length - 1,
+                currentSetIndex:
+                    workoutState.currentPlan.exercises[workoutState.currentExerciseIndex - 1].reps.length - 1,
             });
         } else {
             setWorkoutState({
@@ -170,44 +171,60 @@ const ExercisePage: React.FC = () => {
             <h1>{currentExercise.exercise}</h1>
 
             <div className="card">
-                <div className="quote-container">
-                    <div className="quote-text">{randomQuote}</div>
-                    <div className="quote-author">{randomQuoteAuthor}</div>
-                </div>
-
-                <div className="last-weight">
-                    <div className="last-weight-title">Last Round</div>
-                    <div className="last-weight-weight" onClick={handleShowRepsInputFooter}>
-                        {weightInput} {handleWeightUnit()} {<FaPlusCircle size={16} />}
+                <div className="card-header">
+                    <div className="quote-container">
+                        <div className="quote-text">{randomQuote}</div>
+                        <div className="quote-author">{randomQuoteAuthor}</div>
                     </div>
                 </div>
 
-                <DividerSpaced
-                    left={
-                        <div className="back-exercise-container">
-                            <button className="back-exercise-button" onClick={handleBack}>
-                                <FaArrowLeft size={20} />
-                            </button>
-                            <div className="back-exercise-text">Back</div>
-                        </div>
-                    }
-                    center={
-                        <div className="reps-goal">
-                            <div onClick={() => setRepsInput(13)} className="reps-goal-number">
-                                {currentExercise.reps[workoutState.currentSetIndex]}
+                <div className="card-content">
+                    <div className="last-weight">
+                        <div className="last-weight-title">Last Round</div>
+                        <span
+                            className="last-weight-weight"
+                            onClick={handleShowRepsInputFooter}
+                        >
+                            {weightInput} {handleWeightUnit()} {<FaPlusCircle size={20} />}
+                        </span>
+                    </div>
+
+                    <DividerSpaced
+                        left={
+                            <div className="back-exercise-container">
+                                <button
+                                    className="back-exercise-button"
+                                    onClick={handleBack}
+                                >
+                                    <FaArrowLeft size={20} />
+                                </button>
+                                <div className="back-exercise-text">Back</div>
                             </div>
-                            <div className="reps-goal-text">reps</div>
-                        </div>
-                    }
-                    right={
-                        <div className="next-exercise-container">
-                            <button className="next-exercise-button" onClick={handleNext}>
-                                <FaCheck size={20} />
-                            </button>
-                            <div className="next-exercise-text">Next</div>
-                        </div>
-                    }
-                />
+                        }
+                        center={
+                            <div className="reps-goal">
+                                <div
+                                    onClick={() => setRepsInput(13)}
+                                    className="reps-goal-number"
+                                >
+                                    {currentExercise.reps[workoutState.currentSetIndex]}
+                                </div>
+                                <div className="reps-goal-text">reps</div>
+                            </div>
+                        }
+                        right={
+                            <div className="next-exercise-container">
+                                <button
+                                    className="next-exercise-button"
+                                    onClick={handleNext}
+                                >
+                                    <FaCheck size={20} />
+                                </button>
+                                <div className="next-exercise-text">Next</div>
+                            </div>
+                        }
+                    />
+                </div>
             </div>
         </div>
     );

@@ -7,7 +7,7 @@
     min-height: fit-content;
 }
 
-.divider-spaced-container .left-section {
+.left-section {
     display: flex;
     flex-direction: row;
 
@@ -17,7 +17,7 @@
     z-index: 1;
 }
 
-.divider-spaced-container .center-section {
+.center-section {
     display: flex;
     flex-direction: row;
 
@@ -28,7 +28,7 @@
     width: auto;
 }
 
-.divider-spaced-container .right-section {
+.right-section {
     display: flex;
     flex-direction: row;
 
