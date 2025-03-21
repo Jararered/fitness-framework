@@ -22,7 +22,6 @@ const WorkoutCreatePage: React.FC = () => {
     const { equipmentConfigs, equipmentLast } = useEquipment();
     const navigate = useNavigate();
     const { addToast } = useToast();
-    const [isAddCircuitPopupOpen, setIsAddCircuitPopupOpen] = useState(false);
 
     // State for the workout plan
     const [workoutNameState, setWorkoutNameState] = useState<string>("");
@@ -218,7 +217,6 @@ const WorkoutCreatePage: React.FC = () => {
             ...workoutPlanState,
             circuits: [...workoutPlanState.circuits, { exercises: [] }],
         });
-        setIsAddCircuitPopupOpen(true);
     };
 
     const handleAddExerciseToCircuit = (circuitIndex: number) => {
