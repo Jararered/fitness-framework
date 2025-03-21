@@ -67,8 +67,10 @@ const MuscularLoadInfoFooter: React.FC<MuscularLoadInfoFooterProps> = ({ reps, w
 };
 
 interface MuscularLoadProps {
-    value: number;
-    units: string;
+    reps: number; // Reps used in the previous exercise
+    weight: number; // Weight used in the previous exercise
+    units: string; // Units of the weight
+    totalWeight: number; // Total weight used in the workout
 }
 
 const ExercisePreviewPage: React.FC = () => {
@@ -81,7 +83,7 @@ const ExercisePreviewPage: React.FC = () => {
     const [quote] = useState<string>(QUOTES[Math.floor(Math.random() * QUOTES.length)].quote);
     const [author] = useState<string>(QUOTES[Math.floor(Math.random() * QUOTES.length)].author);
 
-    const MuscularLoad: React.FC<MuscularLoadProps> = ({ value, units }) => {
+    const MuscularLoad: React.FC<MuscularLoadProps> = ({ reps, weight, units, totalWeight }) => {
         return (
             <span className="muscular-load-container">
                 <div className="muscular-load-icon">
@@ -95,17 +97,17 @@ const ExercisePreviewPage: React.FC = () => {
                         onClick={() =>
                             showFooterCard(
                                 <MuscularLoadInfoFooter
-                                    reps={69}
-                                    weight={420}
+                                    reps={reps}
+                                    weight={weight}
                                     units={units}
-                                    totalWeight={69420}
+                                    totalWeight={totalWeight}
                                 />
                             )
                         }
                     />
                 </div>
                 <div className="muscular-load-value">
-                    {value} {units}
+                    {totalWeight} {units}
                 </div>
             </span>
         );
@@ -158,8 +160,10 @@ const ExercisePreviewPage: React.FC = () => {
                     }
                 />
                 <MuscularLoad
-                    value={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)}
+                    reps={workoutState.repsCompleted.flat().reduce((sum, val) => sum + (val || 0), 0)}
+                    weight={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)}
                     units={handleWeightUnit()}
+                    totalWeight={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)}
                 />
             </div>
         </div>

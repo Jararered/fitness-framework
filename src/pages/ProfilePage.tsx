@@ -6,11 +6,9 @@ import { useWorkout } from "../context/WorkoutContext.tsx";
 
 const ProfilePage: React.FC = () => {
     const { workoutLogs } = useWorkout();
-    const { settings } = useUser();
     const { addToast } = useToast(); // Add toast hook
     const [expanded, setExpanded] = useState(false);
-
-    const units = settings.unit === "metric" ? "kg" : "lbs";
+    const { settings } = useUser();
 
     const now = new Date();
     const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -50,10 +48,10 @@ const ProfilePage: React.FC = () => {
                     <p>Workouts Last Week: {lastWeekLogs.length}</p>
                     <p>Workouts Last Month: {lastMonthLogs.length}</p>
                     <p>
-                        Total Weight Last Week: {totalWeightWeek} {units}
+                        Total Weekly Load: {totalWeightWeek} {settings.unit}
                     </p>
                     <p>
-                        Total Weight Last Month: {totalWeightMonth} {units}
+                        Total Monthly Load: {totalWeightMonth} {settings.unit}
                     </p>
                 </div>
             </div>
@@ -64,20 +62,29 @@ const ProfilePage: React.FC = () => {
                     <p>Below is a list of your most recent workouts.</p>
                 </div>
                 <div className="card-content">
-                    <span className="workout-list">
+                    <div className="card-row">
                         {logsToShow.length > 0 ? (
                             logsToShow.map((log) => (
-                                <p key={log.workoutId}>
-                                    Workout ID: {log.workoutId} -{" "}
-                                    {log.startTime instanceof Date && !isNaN(log.startTime.getTime())
-                                        ? log.startTime.toLocaleDateString()
-                                        : "Invalid Date"}
-                                </p>
+                                <div
+                                    className="card-row"
+                                    key={log.workoutId}
+                                >
+                                    <div className="card-row-item">
+                                        {log.startTime instanceof Date && !isNaN(log.startTime.getTime())
+                                            ? log.startTime.toLocaleDateString()
+                                            : "Invalid Date"}
+                                    </div>
+
+                                    <div className="card-row-item">
+                                        <div className="card-row-item-label">Workout ID:</div>
+                                        <div className="card-row-item-value">{log.workoutId}</div>
+                                    </div>
+                                </div>
                             ))
                         ) : (
                             <strong>No workouts logged</strong>
                         )}
-                    </span>
+                    </div>
                     {workoutLogs.length > 5 && !expanded && <button onClick={handleShowMore}>Show More</button>}
                 </div>
             </div>
