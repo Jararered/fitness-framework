@@ -17,6 +17,7 @@ import ExercisePage from "./pages/ExercisePage.tsx";
 import ExercisePreviewPage from "./pages/ExercisePreviewPage.tsx";
 import WorkoutCompletePage from "./pages/WorkoutCompletePage.tsx";
 import ManageDataPage from "./pages/ManageDataPage.tsx";
+import CircuitPreviewPage from "./pages/CircuitPreviewPage.tsx";
 
 import "./styles/components/App.css";
 
@@ -68,6 +69,10 @@ function App() {
                         <Route
                             path="/manage-data"
                             element={<ManageDataPage />}
+                        />
+                        <Route
+                            path="/circuit-preview"
+                            element={<CircuitPreviewPage />}
                         />
                     </Routes>
                 </PageTransition>

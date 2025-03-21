@@ -23,7 +23,7 @@ const WorkoutCompletePage: React.FC = () => {
                 weightsUsed: [...workoutState.weightsUsed],
             });
 
-            const exerciseLogs = workoutState.currentPlan.exercises.map((ex, index) => ({
+            const exerciseLogs = workoutState.currentPlan.circuits[workoutState.currentCircuitIndex].exercises.map((ex, index) => ({
                 exercise: ex.exercise,
                 reps: workoutState.repsCompleted[index] || ex.reps.map(() => 0),
                 weight: workoutState.weightsUsed[index] || ex.reps.map(() => 0),
@@ -48,6 +48,7 @@ const WorkoutCompletePage: React.FC = () => {
             setWorkoutState({
                 currentPlan: null,
                 isStarted: false,
+                currentCircuitIndex: 0,
                 currentExerciseIndex: 0,
                 currentSetIndex: 0,
                 repsCompleted: [],

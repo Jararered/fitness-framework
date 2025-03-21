@@ -8,6 +8,7 @@ import { EXERCISES } from "../data/exercises";
 interface WorkoutState {
     currentPlan: WorkoutPlan | null;
     isStarted: boolean;
+    currentCircuitIndex: number;
     currentExerciseIndex: number;
     currentSetIndex: number;
     repsCompleted: number[][];
@@ -66,6 +67,7 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
         }
         return [];
     });
+
     const [workoutState, setWorkoutState] = useState<WorkoutState>(() => {
         const saved = localStorage.getItem("workout-state");
         return saved
@@ -73,6 +75,7 @@ export const WorkoutProvider = ({ children }: { children: ReactNode }) => {
             : {
                   currentPlan: null,
                   isStarted: false,
+                  currentCircuitIndex: 0,
                   currentExerciseIndex: 0,
                   currentSetIndex: 0,
                   repsCompleted: [],

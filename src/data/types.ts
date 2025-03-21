@@ -88,9 +88,13 @@ export interface ExercisePlan {
     reps: number[];
 }
 
+export interface CircuitPlan {
+    exercises: ExercisePlan[];
+}
+
 export interface WorkoutPlan {
     name?: string;
-    exercises: ExercisePlan[];
+    circuits: CircuitPlan[];
 }
 
 // Types for logging a workout
@@ -111,3 +115,33 @@ export interface WorkoutLog {
     totalWeight: number;
     totalReps: number;
 }
+
+export const ExampleWorkout: WorkoutPlan = {
+    name: "Example Workout",
+    circuits: [
+        {
+            exercises: [
+                { exercise: "Barbell Bent-Over Row", reps: [10, 10, 10] },
+                { exercise: "Barbell Deadlift", reps: [8, 6, 4] },
+            ],
+        },
+        {
+            exercises: [
+                { exercise: "Leg Press", reps: [10, 8, 6, 4, 2] },
+                { exercise: "Leg Extension", reps: [10, 10, 10, 10, 10] },
+            ],
+        },
+        {
+            exercises: [
+                { exercise: "Dumbbell Bench Press", reps: [15, 12, 10] },
+                { exercise: "Dumbbell French Press", reps: [15, 12, 10] },
+            ],
+        },
+        {
+            exercises: [
+                { exercise: "Lat Pulldown", reps: [10, 10, 10] },
+                { exercise: "Lat Pulldown Reverse-Grip", reps: [10, 10, 10] },
+            ],
+        },
+    ],
+};

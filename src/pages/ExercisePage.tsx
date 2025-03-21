@@ -22,11 +22,15 @@ const ExercisePage: React.FC = () => {
     const [repsInput, setRepsInput] = useState<number>(0);
     const [weightInput, setWeightInput] = useState<number>(0);
 
-    if (!workoutState.currentPlan) return <div>No workout loaded</div>;
+    if (!workoutState.currentPlan || !workoutState.currentPlan.circuits[0].exercises)
+        return <div>No workout loaded</div>;
 
-    const currentExercise = workoutState.currentPlan.exercises[workoutState.currentExerciseIndex];
+    const currentExercise = workoutState.currentPlan.circuits[0].exercises[workoutState.currentExerciseIndex];
+    if (!currentExercise) return <div>Invalid exercise index</div>;
+
     const isLastSet = workoutState.currentSetIndex === currentExercise.reps.length - 1;
-    const isLastExercise = workoutState.currentExerciseIndex === workoutState.currentPlan.exercises.length - 1;
+    const isLastExercise =
+        workoutState.currentExerciseIndex === workoutState.currentPlan.circuits[0].exercises.length - 1;
     const isFirstSet = workoutState.currentSetIndex === 0;
     const isFirstExercise = workoutState.currentExerciseIndex === 0;
 
@@ -138,7 +142,8 @@ const ExercisePage: React.FC = () => {
                 ...workoutState,
                 currentExerciseIndex: workoutState.currentExerciseIndex - 1,
                 currentSetIndex:
-                    workoutState.currentPlan.exercises[workoutState.currentExerciseIndex - 1].reps.length - 1,
+                    workoutState.currentPlan.circuits[0].exercises[workoutState.currentExerciseIndex - 1].reps.length -
+                    1,
             });
         } else {
             setWorkoutState({

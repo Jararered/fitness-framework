@@ -152,7 +152,10 @@ const WorkoutCreatePage: React.FC = () => {
             .filter((p) => p.exercise && p.reps.every((r) => r > 0))
             .map((p) => ({ exercise: p.exercise, reps: p.reps }));
         if (validPlan.length > 0) {
-            const newWorkout = { name: workoutNameState || `Workout ${workoutPlans.length + 1}`, exercises: validPlan };
+            const newWorkout = {
+                name: workoutNameState || `Workout ${workoutPlans.length + 1}`,
+                circuits: [{ exercises: validPlan }],
+            };
 
             // Find and update existing workout if it exists
             const existingWorkoutIndex = workoutPlans.findIndex((w) => w.name === loadedWorkoutState);
@@ -168,6 +171,7 @@ const WorkoutCreatePage: React.FC = () => {
                 setWorkoutState({
                     currentPlan: newWorkout,
                     isStarted: true,
+                    currentCircuitIndex: 0,
                     currentExerciseIndex: 0,
                     currentSetIndex: 0,
                     repsCompleted: [],
@@ -192,8 +196,11 @@ const WorkoutCreatePage: React.FC = () => {
         addToast(`Workout saved: ${workoutNameState}`, "success");
     };
 
-    const handleLoadWorkout = (workout: { name?: string; exercises: { exercise: string; reps: number[] }[] }) => {
-        const newPlan = workout.exercises.map((ex) => ({ exercise: ex.exercise, reps: [...ex.reps] }));
+    const handleLoadWorkout = (workout: {
+        name?: string;
+        circuits: { exercises: { exercise: string; reps: number[] }[] }[];
+    }) => {
+        const newPlan = workout.circuits[0].exercises.map((ex) => ({ exercise: ex.exercise, reps: [...ex.reps] }));
         setWorkoutPlanState(
             newPlan.map((p) => ({
                 exercise: p.exercise,
@@ -207,7 +214,7 @@ const WorkoutCreatePage: React.FC = () => {
         setLoadedWorkoutState(workout.name || `Workout ${workoutPlans.indexOf(workout) + 1}`);
         setWorkoutState((prevState) => ({
             ...prevState,
-            currentPlan: { name: workout.name, exercises: newPlan },
+            currentPlan: { name: workout.name, circuits: [{ exercises: newPlan }] },
             isStarted: false,
             currentExerciseIndex: 0,
             currentSetIndex: 0,
@@ -225,8 +232,12 @@ const WorkoutCreatePage: React.FC = () => {
 
         if (validPlan.length > 0) {
             setWorkoutState({
-                currentPlan: { name: workoutNameState || loadedWorkoutState || "Unnamed", exercises: validPlan },
+                currentPlan: {
+                    name: workoutNameState || loadedWorkoutState || "Unnamed",
+                    circuits: [{ exercises: validPlan }],
+                },
                 isStarted: true,
+                currentCircuitIndex: 0,
                 currentExerciseIndex: 0,
                 currentSetIndex: 0,
                 repsCompleted: [],
@@ -384,10 +395,10 @@ const WorkoutCreatePage: React.FC = () => {
                     <p>Preview the current workout plan</p>
                 </div>
                 <div className="card-content">
-                    {workoutState.currentPlan && workoutState.currentPlan.exercises.length > 0 ? (
+                    {workoutState.currentPlan && workoutState.currentPlan.circuits[0].exercises.length > 0 ? (
                         <>
                             <p>{workoutState.currentPlan.name || workoutNameState || "Unnamed Workout"}</p>
-                            {workoutState.currentPlan.exercises.map((exercise, index) => (
+                            {workoutState.currentPlan.circuits[0].exercises.map((exercise, index) => (
                                 <p key={index}>
                                     {exercise.exercise}: {handleFormatReps(exercise.reps)} reps
                                 </p>
