@@ -90,6 +90,7 @@ const ExercisePreviewPage: React.FC = () => {
                 <div className="muscular-load-text">Muscular Load</div>
                 <div className="muscular-load-info-icon">
                     <LuCircleAlert
+                        style={{ transform: "rotate(180deg)" }}
                         size={20}
                         onClick={() =>
                             showFooterCard(
@@ -138,8 +139,8 @@ const ExercisePreviewPage: React.FC = () => {
                     center={
                         <div className="break-timer-container">
                             <div className="break-timer-text">REST</div>
-                            <TimerCircular 
-                                duration={breakTime} 
+                            <TimerCircular
+                                duration={breakTime}
                                 onTimeUpdate={handleTimeUpdate}
                             />
                         </div>
