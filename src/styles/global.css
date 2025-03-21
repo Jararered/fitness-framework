@@ -25,15 +25,15 @@ body {
 }
 
 div {
-    align-items: center;
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
 }
 
 span {
-    align-items: center;
     display: flex;
+    align-items: center;
     flex-direction: row;
     justify-content: center;
     gap: 0.5rem;
@@ -151,7 +151,7 @@ input[type="number"]::-webkit-outer-spin-button:hover {
 }
 
 a {
-    color: var(--text-color);
+    color: var(--main-accent);
     text-decoration: none;
     cursor: pointer;
     transition: all 200ms;

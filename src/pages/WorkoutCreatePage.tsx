@@ -249,69 +249,72 @@ const WorkoutCreatePage: React.FC = () => {
                                 <p>Select an exercise to add to the workout</p>
                             </div>
 
-                            <SelectorSearchable
-                                options={avaliableExerciseNames}
-                                value={p.exercise}
-                                getOptionLabel={(option) => option}
-                                onChange={(value) => {
-                                    const newPlan = [...workoutPlanState];
-                                    newPlan[exerciseIndex].exercise = value || "";
-                                    setWorkoutPlanState(newPlan);
-                                    setLoadedWorkoutState(null);
-                                }}
-                                placeholder="Search for an exercise"
-                            />
+                            <div className="card-content">
+                                <SelectorSearchable
+                                    options={avaliableExerciseNames}
+                                    value={p.exercise}
+                                    getOptionLabel={(option) => option}
+                                    onChange={(value) => {
+                                        const newPlan = [...workoutPlanState];
+                                        newPlan[exerciseIndex].exercise = value || "";
+                                        setWorkoutPlanState(newPlan);
+                                        setLoadedWorkoutState(null);
+                                    }}
+                                    placeholder="Search for an exercise"
+                                />
 
-                            <div className="reps-display">
-                                <p>{handleFormatReps(p.reps)} reps</p>
+                                <div className="reps-display">
+                                    <strong>{handleFormatReps(p.reps)} reps</strong>
+                                </div>
+
+                                <span className="card-row">
+                                    <label>Set Count</label>
+                                    <button
+                                        className="icon"
+                                        onClick={() => handleSetsChange(exerciseIndex, "decrease")}
+                                    >
+                                        <LuMinus />
+                                    </button>
+                                    <button
+                                        className="icon"
+                                        onClick={() => handleSetsChange(exerciseIndex, "increase")}
+                                    >
+                                        <LuPlus />
+                                    </button>
+                                </span>
+                                <span className="card-row">
+                                    <label>Rep Count</label>
+                                    <button
+                                        className="icon"
+                                        onClick={() => handleChangeBaseReps(exerciseIndex, "decrease")}
+                                    >
+                                        <LuMinus />
+                                    </button>
+                                    <button
+                                        className="icon"
+                                        onClick={() => handleChangeBaseReps(exerciseIndex, "increase")}
+                                    >
+                                        <LuPlus />
+                                    </button>
+                                </span>
+
+                                <span className="card-row">
+                                    <label>Set Style</label>
+                                    <button
+                                        className="icon"
+                                        onClick={() => handleSetStyle(exerciseIndex, "flat")}
+                                    >
+                                        <LuAlignJustify style={{ transform: "rotate(90deg)" }} />
+                                    </button>
+                                    <button
+                                        className="icon"
+                                        onClick={() => handleSetStyle(exerciseIndex, "drop")}
+                                    >
+                                        <LuChartNoAxesColumnDecreasing />
+                                    </button>
+                                </span>
+                                {exerciseIndex < workoutPlanState.length - 1 && <hr />}
                             </div>
-
-                            <span className="card-row">
-                                <label>Set Count</label>
-                                <button
-                                    className="icon"
-                                    onClick={() => handleSetsChange(exerciseIndex, "decrease")}
-                                >
-                                    <LuMinus />
-                                </button>
-                                <button
-                                    className="icon"
-                                    onClick={() => handleSetsChange(exerciseIndex, "increase")}
-                                >
-                                    <LuPlus />
-                                </button>
-                            </span>
-                            <span className="card-row">
-                                <label>Rep Count</label>
-                                <button
-                                    className="icon"
-                                    onClick={() => handleChangeBaseReps(exerciseIndex, "decrease")}
-                                >
-                                    <LuMinus />
-                                </button>
-                                <button
-                                    className="icon"
-                                    onClick={() => handleChangeBaseReps(exerciseIndex, "increase")}
-                                >
-                                    <LuPlus />
-                                </button>
-                            </span>
-
-                            <span className="card-row">
-                                <label>Set Style</label>
-                                <button
-                                    className="icon"
-                                    onClick={() => handleSetStyle(exerciseIndex, "flat")}
-                                >
-                                    <LuAlignJustify style={{ transform: "rotate(90deg)" }} />
-                                </button>
-                                <button
-                                    className="icon"
-                                    onClick={() => handleSetStyle(exerciseIndex, "drop")}
-                                >
-                                    <LuChartNoAxesColumnDecreasing />
-                                </button>
-                            </span>
                         </div>
                     ))}
 
