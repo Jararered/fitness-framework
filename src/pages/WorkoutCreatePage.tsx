@@ -242,10 +242,10 @@ const WorkoutCreatePage: React.FC = () => {
 
             <EquipmentProvider>
                 <div className="card">
-                    {workoutPlanState.map((p, exerciseIndex) => (
-                        <div key={exerciseIndex}>
+                    {workoutPlanState.map((p, index) => (
+                        <React.Fragment key={index}>
                             <div className="card-header">
-                                <h2>Exercise {exerciseIndex + 1}</h2>
+                                <h2>Exercise {index + 1}</h2>
                                 <p>Select an exercise to add to the workout</p>
                             </div>
 
@@ -256,7 +256,7 @@ const WorkoutCreatePage: React.FC = () => {
                                     getOptionLabel={(option) => option}
                                     onChange={(value) => {
                                         const newPlan = [...workoutPlanState];
-                                        newPlan[exerciseIndex].exercise = value || "";
+                                        newPlan[index].exercise = value || "";
                                         setWorkoutPlanState(newPlan);
                                         setLoadedWorkoutState(null);
                                     }}
@@ -271,13 +271,13 @@ const WorkoutCreatePage: React.FC = () => {
                                     <label>Set Count</label>
                                     <button
                                         className="icon"
-                                        onClick={() => handleSetsChange(exerciseIndex, "decrease")}
+                                        onClick={() => handleSetsChange(index, "decrease")}
                                     >
                                         <LuMinus />
                                     </button>
                                     <button
                                         className="icon"
-                                        onClick={() => handleSetsChange(exerciseIndex, "increase")}
+                                        onClick={() => handleSetsChange(index, "increase")}
                                     >
                                         <LuPlus />
                                     </button>
@@ -286,13 +286,13 @@ const WorkoutCreatePage: React.FC = () => {
                                     <label>Rep Count</label>
                                     <button
                                         className="icon"
-                                        onClick={() => handleChangeBaseReps(exerciseIndex, "decrease")}
+                                        onClick={() => handleChangeBaseReps(index, "decrease")}
                                     >
                                         <LuMinus />
                                     </button>
                                     <button
                                         className="icon"
-                                        onClick={() => handleChangeBaseReps(exerciseIndex, "increase")}
+                                        onClick={() => handleChangeBaseReps(index, "increase")}
                                     >
                                         <LuPlus />
                                     </button>
@@ -302,20 +302,20 @@ const WorkoutCreatePage: React.FC = () => {
                                     <label>Set Style</label>
                                     <button
                                         className="icon"
-                                        onClick={() => handleSetStyle(exerciseIndex, "flat")}
+                                        onClick={() => handleSetStyle(index, "flat")}
                                     >
                                         <LuAlignJustify style={{ transform: "rotate(90deg)" }} />
                                     </button>
                                     <button
                                         className="icon"
-                                        onClick={() => handleSetStyle(exerciseIndex, "drop")}
+                                        onClick={() => handleSetStyle(index, "drop")}
                                     >
                                         <LuChartNoAxesColumnDecreasing />
                                     </button>
                                 </span>
-                                {exerciseIndex < workoutPlanState.length - 1 && <hr />}
+                                {index < workoutPlanState.length - 1 && <hr />}
                             </div>
-                        </div>
+                        </React.Fragment>
                     ))}
 
                     <span className="card-row">

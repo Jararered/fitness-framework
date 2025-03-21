@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useWorkout } from "../context/WorkoutContext";
 import { LuPlay } from "react-icons/lu";
+import React from "react";
 
 const WorkoutPreview: React.FC = () => {
     const { workoutState, setWorkoutState } = useWorkout();
@@ -35,9 +36,9 @@ const WorkoutPreview: React.FC = () => {
 
             <div className="card-content">
                 {workoutState.currentPlan?.exercises ? (
-                    <>
-                        {workoutState.currentPlan.exercises.map((exercise, key) => (
-                            <span className="card-row">
+                    <React.Fragment>
+                        {workoutState.currentPlan.exercises.map((exercise, index) => (
+                            <span className="card-row" key={index}>
                                 <label>{exercise.exercise}</label>
                                 <p>{exercise.reps.join(", ")} reps</p>
                             </span>
@@ -54,7 +55,7 @@ const WorkoutPreview: React.FC = () => {
                                 <LuPlay />
                             </button>
                         )}
-                    </>
+                    </React.Fragment>
                 ) : (
                     <strong>No workout loaded yet.</strong>
                 )}
