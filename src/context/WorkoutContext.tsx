@@ -1,6 +1,6 @@
 import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 
-import { Exercise, WorkoutPlan, WorkoutLog } from "../types";
+import { Exercise, WorkoutPlan, WorkoutLog } from "../data/types";
 import { UserProvider } from "./UserContext";
 
 import { EXERCISES } from "../data/exercises";

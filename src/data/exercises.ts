@@ -1,4 +1,4 @@
-import { Exercise } from "../types";
+import { Exercise } from "./types";
 
 const BACK_EXERCISES: Exercise[] = [
     {

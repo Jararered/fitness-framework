@@ -129,6 +129,17 @@ const ExercisePreviewPage: React.FC = () => {
 
     if (!workoutState.currentPlan) return <div>No workout loaded</div>;
 
+    /* These should always be valid since this page is only called after an exercise has been completed */
+    /* Last exercise, last set of last exercise */
+    const lastExerciseReps =
+        workoutState.repsCompleted[workoutState.currentExerciseIndex - 1][
+            workoutState.repsCompleted[workoutState.currentExerciseIndex - 1].length - 1
+        ];
+    const lastExerciseWeight =
+        workoutState.weightsUsed[workoutState.currentExerciseIndex - 1][
+            workoutState.weightsUsed[workoutState.currentExerciseIndex - 1].length - 1
+        ];
+
     return (
         <div className="exercise-preview-page">
             <div className="card">
@@ -160,8 +171,8 @@ const ExercisePreviewPage: React.FC = () => {
                     }
                 />
                 <MuscularLoad
-                    reps={workoutState.repsCompleted.flat().reduce((sum, val) => sum + (val || 0), 0)}
-                    weight={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)}
+                    reps={lastExerciseReps}
+                    weight={lastExerciseWeight}
                     units={handleWeightUnit()}
                     totalWeight={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)}
                 />
