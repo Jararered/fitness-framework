@@ -191,14 +191,14 @@ const ExercisePage: React.FC = () => {
 
                     <DividerSpaced
                         left={
-                            <div className="back-exercise-container">
+                            <div className="navigation-button-container">
                                 <button
-                                    className="back-exercise-button"
+                                    className="icon caution"
                                     onClick={handleBack}
                                 >
                                     <LuArrowLeft />
                                 </button>
-                                <div className="back-exercise-text">Back</div>
+                                <div className="navigation-button-text">Back</div>
                             </div>
                         }
                         center={
@@ -213,14 +213,14 @@ const ExercisePage: React.FC = () => {
                             </div>
                         }
                         right={
-                            <div className="next-exercise-container">
+                            <div className="navigation-button-container">
                                 <button
-                                    className="next-exercise-button"
+                                    className="icon"
                                     onClick={handleNext}
                                 >
                                     <LuCheck />
                                 </button>
-                                <div className="next-exercise-text">Next</div>
+                                <div className="navigation-button-text">Next</div>
                             </div>
                         }
                     />

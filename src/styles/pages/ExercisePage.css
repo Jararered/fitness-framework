@@ -66,20 +66,6 @@
     font-size: 1.5rem;
 }
 
-.next-exercise-button {
-    height: 3rem;
-    width: 3rem;
-    border-radius: 50%;
-
-    padding: 0;
-    line-height: 3rem;
-    text-align: center;
-
-    margin-bottom: 0;
-    color: var(--text-color);
-    font-size: 1.5rem;
-}
-
 .exercise-page-input-header {
     display: flex;
     align-items: center;
@@ -173,6 +159,15 @@
     font-weight: bold;
     font-size: 1.5rem;
     padding: 0 0.5rem;
+}
+
+.navigation-button-container {
+    position: relative;
+}
+
+.navigation-button-text {
+    position: absolute;
+    top: 3rem;
 }
 
 .footer-actions {

@@ -50,7 +50,10 @@ const MuscularLoadInfoFooter: React.FC<MuscularLoadInfoFooterProps> = ({ reps, w
                 </div>
             </div>
 
-            <div className="muscular-load-info-explaination">Muscular Load is a measure of force excerted on your body throughout your workout based on the weights logged & your bodyweight.</div>
+            <div className="muscular-load-info-explaination">
+                Muscular Load is a measure of force excerted on your body throughout your workout based on the weights
+                logged & your bodyweight.
+            </div>
 
             <div className="muscular-load-info-total-calculation">
                 <div className="muscular-load-info-total-calculation-title">Total Muscular Load</div>
@@ -85,7 +88,19 @@ const ExercisePreviewPage: React.FC = () => {
                 </div>
                 <div className="muscular-load-text">Muscular Load</div>
                 <div className="muscular-load-info-icon">
-                    <LuCircleAlert size={20} onClick={() => showFooterCard(<MuscularLoadInfoFooter reps={69} weight={420} units={units} totalWeight={69420} />)} />
+                    <LuCircleAlert
+                        size={20}
+                        onClick={() =>
+                            showFooterCard(
+                                <MuscularLoadInfoFooter
+                                    reps={69}
+                                    weight={420}
+                                    units={units}
+                                    totalWeight={69420}
+                                />
+                            )
+                        }
+                    />
                 </div>
                 <div className="muscular-load-value">
                     {value} {units}
@@ -117,20 +132,26 @@ const ExercisePreviewPage: React.FC = () => {
                 <DividerSpaced
                     center={
                         <div className="break-timer-container">
-                            <div className="break-text">REST</div>
+                            <div className="break-timer-text">REST</div>
                             <TimerCircular duration={breakTime} />
                         </div>
                     }
                     right={
-                        <div className="skip-break-container">
-                            <button className="skip-break-button" onClick={() => navigate("/exercise")}>
+                        <div className="navigation-button-container">
+                            <button
+                                className="icon caution"
+                                onClick={() => navigate("/exercise")}
+                            >
                                 <LuArrowRight />
                             </button>
-                            <div className="skip-break-text">Skip Break</div>
+                            <div className="navigation-button-text">Skip Break</div>
                         </div>
                     }
                 />
-                <MuscularLoad value={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)} units={handleWeightUnit()} />
+                <MuscularLoad
+                    value={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)}
+                    units={handleWeightUnit()}
+                />
             </div>
         </div>
     );
