@@ -11,6 +11,7 @@ import { useFooterCard } from "./context/FooterCardContext.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import EquipmentSelectPage from "./pages/EquipmentSelectPage.tsx";
 import WorkoutCreatePage from "./pages/WorkoutCreatePage.tsx";
+import TestPage from "./components/PopupContainer.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import SettingsPage from "./pages/SettingsPage.tsx";
 import ExercisePage from "./pages/ExercisePage.tsx";
@@ -20,6 +21,7 @@ import ManageDataPage from "./pages/ManageDataPage.tsx";
 import CircuitPreviewPage from "./pages/CircuitPreviewPage.tsx";
 
 import "./styles/components/App.css";
+import "./styles/components/Card.css";
 
 function App() {
     const { settings } = useUser();
@@ -45,6 +47,10 @@ function App() {
                         <Route
                             path="/create"
                             element={<WorkoutCreatePage />}
+                        />
+                        <Route
+                            path="/test"
+                            element={<TestPage />}
                         />
                         <Route
                             path="/profile"

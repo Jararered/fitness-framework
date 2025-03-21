@@ -1,0 +1,20 @@
+.exercise-edit-buttons {
+    position: absolute;
+    right: 1rem;
+}
+
+.add-exercise-button-container {
+    width: 100%;
+    justify-content: center;
+    margin: 0.5rem 0;
+}
+
+.add-circuit-button-container {
+    margin: 1rem 0;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.workout-preview-container {
+    width: calc(100% - 4rem);
+}

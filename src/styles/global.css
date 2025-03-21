@@ -51,7 +51,7 @@ hr {
 
 button {
     /* Padding */
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
 
     /* Font */
     font-size: 1rem;
@@ -100,8 +100,8 @@ button.caution:hover {
 }
 
 button.icon {
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
     padding: 0;
 }
 

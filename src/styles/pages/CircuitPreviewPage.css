@@ -5,9 +5,10 @@
 }
 
 .workout-preview-container {
+    min-width: 350px;
+
     /* Leaves room for last rounds tag */
     margin-bottom: 3rem;
-    min-width: 350px;
 }
 
 .circuit-container {
@@ -31,18 +32,6 @@
     font-weight: bold;
     align-items: flex-start;
     font-size: 1.25rem;
-}
-
-.exercise-name {
-    font-weight: bold;
-    color: var(--main-accent);
-}
-
-.exercise-icon {
-    width: 8rem;
-    height: 4rem;
-    background-color: var(--card-border);
-    border-radius: 0.5rem;
 }
 
 .circuit-divider {
@@ -75,7 +64,7 @@
 .circuit-rep-index {
     position: absolute;
     right: -2px;
-    bottom: calc(-2.5rem + 2px);
+    bottom: calc(-2.5rem + 5px);
     color: white;
     font-weight: 500;
     border-bottom-left-radius: 0.5rem;
@@ -91,22 +80,6 @@
     text-align: left;
 }
 
-.exercise-details {
-    align-items: flex-start;
-}
-
-.exercise-divider {
-    height: 1rem;
-    position: relative;
-    padding-left: 1rem;
-}
-
-.exercise-divider svg {
-    position: absolute;
-    color: var(--main-accent);
-    left: 3.75rem;
-}
-
 .current-circuit-label {
     position: absolute;
     background-color: var(--main-accent);
@@ -114,4 +87,34 @@
     font-weight: bold;
     border-radius: 1rem;
     padding: 0.25rem 0.5rem;
+}
+
+.exercise-icon {
+    width: 5rem;
+    height: 3.5rem;
+    background-color: var(--card-border);
+    border-radius: 0.5rem;
+}
+
+.exercise-details {
+    font-size: 0.8rem;
+    align-items: flex-start;
+}
+
+.exercise-name {
+    font-weight: bold;
+    color: var(--main-accent);
+}
+
+.exercise-divider {
+    font-size: 0.8rem;
+    height: 1rem;
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+.exercise-divider svg {
+    position: absolute;
+    color: var(--main-accent);
+    left: 2.4rem;
 }

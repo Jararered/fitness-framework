@@ -1,0 +1,52 @@
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutDown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+}
+
+.popup-container {
+    position: fixed;
+    background-color: var(--card-background);
+    box-shadow: var(--card-shadow);
+    outline: 1px solid var(--card-border);
+    border-radius: 2rem;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.popup-content {
+    height: 20rem;
+    width: 20rem;
+}
+
+.popup-close-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+.popup-container.open {
+    opacity: 1;
+    visibility: visible;
+    animation: fadeInUp 250ms forwards;
+}
+
+.popup-container.closing {
+    animation: fadeOutDown 250ms forwards;
+}

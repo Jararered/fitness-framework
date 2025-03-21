@@ -1,57 +1,63 @@
 import React, { useEffect, useState } from "react";
-import { LuChartNoAxesColumnDecreasing, LuAlignJustify, LuRepeat, LuPlay } from "react-icons/lu";
+import { LuChartNoAxesColumnDecreasing, LuAlignJustify, LuRepeat, LuPlay, LuPencil } from "react-icons/lu";
 import { LuPlus, LuMinus, LuSave, LuTrash } from "react-icons/lu";
+import { LuDumbbell, LuArrowDown } from "react-icons/lu";
 
 import { useNavigate } from "react-router-dom";
 import { EquipmentProvider, useEquipment } from "../context/EquipmentContext.tsx";
 import { useToast } from "../context/ToastContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
+import { PopupContainer } from "../components/PopupContainer.tsx";
 import { SelectorSearchable } from "../components/SelectorSearchable.tsx";
+import { CircuitPlan, ExercisePlan, WorkoutPlan } from "../data/types.ts";
 
-interface WorkoutPlan {
-    exercise: string;
-    reps: number[];
-    baseReps: number;
-    sets: number;
-    style: "drop" | "flat";
-}
+import "../styles/pages/CircuitPreviewPage.css";
+import "../styles/components/PopupContainer.css";
+import "../styles/pages/WorkoutCreatePage.css";
+const repsChangeAmount = 2;
 
 const WorkoutCreatePage: React.FC = () => {
     const { exercises, workoutPlans, setWorkoutPlans, workoutState, setWorkoutState } = useWorkout();
     const { equipmentConfigs, equipmentLast } = useEquipment();
     const navigate = useNavigate();
     const { addToast } = useToast();
+    const [isAddCircuitPopupOpen, setIsAddCircuitPopupOpen] = useState(false);
 
-    const [workoutPlanState, setWorkoutPlanState] = useState<WorkoutPlan[]>(() => {
+    // State for the workout plan
+    const [workoutNameState, setWorkoutNameState] = useState<string>("");
+    const [baseReps, setBaseReps] = useState<number>(10);
+    const [reps, setReps] = useState<number[]>([10, 10, 10]);
+    const [sets, setSets] = useState<number>(3);
+    const [style, setStyle] = useState<"drop" | "flat">("flat");
+
+    const [workoutPlanState, setWorkoutPlanState] = useState<WorkoutPlan>(() => {
         const savedPlan = localStorage.getItem("temp-workout-plan");
         if (savedPlan) {
             return JSON.parse(savedPlan);
         }
-        return [
-            {
-                exercise: "",
-                reps: [10, 10, 10],
-                baseReps: 10,
-                sets: 3,
-                style: "flat",
-            },
-        ];
+        return { circuits: [] };
     });
-    const [workoutNameState, setWorkoutNameState] = useState<string>("");
-    const [loadedWorkoutState, setLoadedWorkoutState] = useState<string | null>(null);
 
-    const repsChangeAmount = 2;
+    const handleValidateWorkout = () => {
+        if (workoutState.currentPlan?.circuits.length === 0) {
+            return;
+        }
+    };
+
+    const handleRepTag = (circuitIndex: number, exerciseIndex: number) => {
+        // Returns the number of exercises in the circuit
+        // Ex: "2 Rounds" if there are 2 exercises in the circuit
+        return <React.Fragment>{workoutPlanState.circuits[circuitIndex].exercises.length} Rounds</React.Fragment>;
+    };
 
     const selectedEquipment =
         equipmentLast && equipmentConfigs.length > 0
             ? equipmentConfigs.find((config) => config.name === equipmentLast)?.equipment || []
             : [];
-
     const availableExercises = exercises.filter((exercise) =>
         exercise.required_equipment.every((equipment) => selectedEquipment.includes(equipment))
     );
-
     const avaliableExerciseNames = availableExercises.map((exercise) => exercise.exercise_name);
 
     // Save temporary workout plan to local storage if workoutPlan has changed
@@ -59,112 +65,88 @@ const WorkoutCreatePage: React.FC = () => {
         localStorage.setItem("temp-workout-plan", JSON.stringify(workoutPlanState));
     }, [workoutPlanState]);
 
-    const handleFormatReps = (reps: number[]) => {
-        return reps.join(", ");
-    };
-
-    const handleSetsChange = (exerciseIndex: number, change: string) => {
-        const newWorkoutPlan = [...workoutPlanState];
-        let newSets = newWorkoutPlan[exerciseIndex].sets;
+    const handleSetsChange = (change: string) => {
+        let newSets = sets;
 
         if (change === "increase") {
-            newSets = newWorkoutPlan[exerciseIndex].sets + 1;
+            newSets = sets + 1;
         } else if (change === "decrease") {
-            if (newWorkoutPlan[exerciseIndex].sets > 1) {
-                newSets = newWorkoutPlan[exerciseIndex].sets - 1;
+            if (sets > 1) {
+                newSets = sets - 1;
             } else {
                 newSets = 1;
             }
         }
 
-        newWorkoutPlan[exerciseIndex].sets = newSets;
-        handleCalculateNewRepsArray(exerciseIndex);
+        setSets(newSets);
+        handleCalculateNewRepsArray();
     };
 
-    const handleChangeBaseReps = (exerciseIndex: number, change: string) => {
-        const newWorkoutPlan = [...workoutPlanState];
-        let newBaseReps = newWorkoutPlan[exerciseIndex].baseReps;
+    const handleChangeBaseReps = (change: string) => {
+        let newBaseReps = baseReps;
 
         if (change === "increase") {
-            newBaseReps = newWorkoutPlan[exerciseIndex].baseReps + repsChangeAmount;
+            newBaseReps = baseReps + repsChangeAmount;
         } else if (change === "decrease") {
-            if (newWorkoutPlan[exerciseIndex].baseReps > repsChangeAmount) {
-                newBaseReps = newWorkoutPlan[exerciseIndex].baseReps - repsChangeAmount;
+            if (baseReps > repsChangeAmount) {
+                newBaseReps = baseReps - repsChangeAmount;
             } else {
                 newBaseReps = 2;
             }
         }
 
-        newWorkoutPlan[exerciseIndex].baseReps = newBaseReps;
-        handleCalculateNewRepsArray(exerciseIndex);
+        setBaseReps(newBaseReps);
+        handleCalculateNewRepsArray();
     };
 
-    const handleSetStyle = (exerciseIndex: number, newStyle: "drop" | "flat") => {
-        const newWorkoutPlan = [...workoutPlanState];
-        newWorkoutPlan[exerciseIndex].style = newStyle;
-        handleCalculateNewRepsArray(exerciseIndex);
+    const handleSetStyle = (newStyle: "drop" | "flat") => {
+        setStyle(newStyle);
+        handleCalculateNewRepsArray();
     };
 
-    const handleCalculateNewRepsArray = (exerciseIndex: number) => {
-        const newWorkoutPlan = [...workoutPlanState];
-        const exercise = newWorkoutPlan[exerciseIndex];
-
-        if (exercise.style === "drop") {
-            const dropSet = [exercise.baseReps];
-            for (let i = 1; i < exercise.sets; i++) {
+    const handleCalculateNewRepsArray = () => {
+        if (style === "drop") {
+            const dropSet = [baseReps];
+            for (let i = 1; i < sets; i++) {
                 const nextRep = Math.max(dropSet[i - 1] - repsChangeAmount, 1);
                 dropSet.push(nextRep);
             }
-            exercise.reps = dropSet;
-        } else if (exercise.style === "flat") {
-            exercise.reps = Array(exercise.sets).fill(exercise.baseReps);
+            setReps(dropSet);
+        } else if (style === "flat") {
+            setReps(Array(sets).fill(baseReps));
         }
 
         // Apply the minimum reps check before setting the state
-        newWorkoutPlan[exerciseIndex].reps = exercise.reps.map((rep) => Math.max(rep, 1));
-
-        setWorkoutPlanState(newWorkoutPlan);
-    };
-
-    const handleAddExercise = () => {
-        setWorkoutPlanState([
-            ...workoutPlanState,
-            {
-                exercise: "",
-                reps: [10, 10, 10],
-                baseReps: 10,
-                sets: 3,
-                style: "flat",
-            },
-        ]);
-        setLoadedWorkoutState(null);
-    };
-
-    const handleRemoveExercise = () => {
-        if (workoutPlanState.length > 1) {
-            setWorkoutPlanState(workoutPlanState.slice(0, workoutPlanState.length - 1));
-            setLoadedWorkoutState(null);
-        }
+        setReps(reps.map((rep) => Math.max(rep, 1)));
     };
 
     const handleSaveWorkout = (startWorkout: boolean = false) => {
-        const validPlan = workoutPlanState
-            .filter((p) => p.exercise && p.reps.every((r) => r > 0))
-            .map((p) => ({ exercise: p.exercise, reps: p.reps }));
+        // Prompt user for workout name if it is not already set
+        if (!workoutNameState) {
+            const name = prompt("Enter a name for the workout");
+            if (name) {
+                setWorkoutNameState(name);
+            }
+        }
+
+        const validPlan: CircuitPlan[] = workoutPlanState.circuits.map((c) => ({
+            exercises: c.exercises.filter((e) => e.exercise && e.reps.every((r) => r > 0)),
+        }));
+
         if (validPlan.length > 0) {
-            const newWorkout = {
+            const newWorkout: WorkoutPlan = {
                 name: workoutNameState || `Workout ${workoutPlans.length + 1}`,
-                circuits: [{ exercises: validPlan }],
+                circuits: validPlan,
             };
 
             // Find and update existing workout if it exists
-            const existingWorkoutIndex = workoutPlans.findIndex((w) => w.name === loadedWorkoutState);
+            const existingWorkoutIndex = workoutPlans.findIndex((w) => w.name === newWorkout.name);
             if (existingWorkoutIndex !== -1) {
                 const updatedWorkoutPlans = [...workoutPlans];
-                updatedWorkoutPlans[existingWorkoutIndex] = newWorkout;
+                updatedWorkoutPlans[existingWorkoutIndex] = newWorkout as WorkoutPlan;
                 setWorkoutPlans(updatedWorkoutPlans);
             } else {
-                setWorkoutPlans([...workoutPlans, newWorkout]);
+                setWorkoutPlans([...workoutPlans, newWorkout as WorkoutPlan]);
             }
 
             if (startWorkout) {
@@ -180,7 +162,6 @@ const WorkoutCreatePage: React.FC = () => {
                 navigate("/exercise");
             } else {
                 setWorkoutNameState("");
-                setLoadedWorkoutState(newWorkout.name);
                 setWorkoutState((prevState) => ({
                     ...prevState,
                     currentPlan: newWorkout,
@@ -196,47 +177,31 @@ const WorkoutCreatePage: React.FC = () => {
         addToast(`Workout saved: ${workoutNameState}`, "success");
     };
 
-    const handleLoadWorkout = (workout: {
-        name?: string;
-        circuits: { exercises: { exercise: string; reps: number[] }[] }[];
-    }) => {
-        const newPlan = workout.circuits[0].exercises.map((ex) => ({ exercise: ex.exercise, reps: [...ex.reps] }));
-        setWorkoutPlanState(
-            newPlan.map((p) => ({
-                exercise: p.exercise,
-                reps: p.reps,
-                baseReps: p.reps[0],
-                sets: p.reps.length,
-                style: "flat",
-            }))
-        );
+    const handleLoadWorkout = (workout: WorkoutPlan) => {
+        setWorkoutPlanState(workout);
         setWorkoutNameState(workout.name || "");
-        setLoadedWorkoutState(workout.name || `Workout ${workoutPlans.indexOf(workout) + 1}`);
-        setWorkoutState((prevState) => ({
-            ...prevState,
-            currentPlan: { name: workout.name, circuits: [{ exercises: newPlan }] },
+        setWorkoutState({
+            currentPlan: workout,
             isStarted: false,
+            currentCircuitIndex: 0,
             currentExerciseIndex: 0,
             currentSetIndex: 0,
             repsCompleted: [],
             weightsUsed: [],
-        }));
+        });
 
         addToast(`Workout loaded: ${workout.name}`, "success");
     };
 
     const handleStartWorkout = () => {
-        const validPlan = workoutPlanState
-            .filter((p) => p.exercise && p.reps.every((r) => r > 0))
-            .map((p) => ({ exercise: p.exercise, reps: p.reps }));
+        const validPlan = workoutPlanState.circuits.map((circuit) =>
+            circuit.exercises.filter((exercise) => exercise.exercise && exercise.reps.every((rep) => rep > 0))
+        );
 
         if (validPlan.length > 0) {
             setWorkoutState({
-                currentPlan: {
-                    name: workoutNameState || loadedWorkoutState || "Unnamed",
-                    circuits: [{ exercises: validPlan }],
-                },
-                isStarted: true,
+                currentPlan: workoutPlanState,
+                isStarted: false,
                 currentCircuitIndex: 0,
                 currentExerciseIndex: 0,
                 currentSetIndex: 0,
@@ -247,172 +212,139 @@ const WorkoutCreatePage: React.FC = () => {
         }
     };
 
+    const handleAddCircuit = () => {
+        // Append a new circuit to the workout plan
+        setWorkoutPlanState({
+            ...workoutPlanState,
+            circuits: [...workoutPlanState.circuits, { exercises: [] }],
+        });
+        setIsAddCircuitPopupOpen(true);
+    };
+
+    const handleAddExerciseToCircuit = (circuitIndex: number) => {
+        // Append a new exercise to the circuit at the given index
+        setWorkoutPlanState({
+            ...workoutPlanState,
+            circuits: workoutPlanState.circuits.map((circuit, index) =>
+                index === circuitIndex
+                    ? { ...circuit, exercises: [...circuit.exercises, { exercise: "", reps: [] }] }
+                    : circuit
+            ),
+        });
+    };
+
+    const handleDeleteExerciseFromCircuit = (circuitIndex: number, exerciseIndex: number) => {
+        setWorkoutPlanState({
+            ...workoutPlanState,
+            circuits: workoutPlanState.circuits.map((circuit, index) =>
+                index === circuitIndex
+                    ? { ...circuit, exercises: circuit.exercises.filter((_, i) => i !== exerciseIndex) }
+                    : circuit
+            ),
+        });
+    };
+
+    const handleEditExercise = (circuitIndex: number, exerciseIndex: number) => {};
+
     return (
         <div className="workout-create-page page-container">
-            <h1>Create Workout</h1>
+            <div className="card-header">
+                <h1>Create Workout</h1>
+            </div>
 
             <EquipmentProvider>
-                <div className="card">
-                    {workoutPlanState.map((p, index) => (
-                        <React.Fragment key={index}>
-                            <div className="card-header">
-                                <h2>Exercise {index + 1}</h2>
-                                <p>Select an exercise to add to the workout</p>
-                            </div>
-
-                            <div className="card-content">
-                                <SelectorSearchable
-                                    options={avaliableExerciseNames}
-                                    value={p.exercise}
-                                    getOptionLabel={(option) => option}
-                                    onChange={(value) => {
-                                        const newPlan = [...workoutPlanState];
-                                        newPlan[index].exercise = value || "";
-                                        setWorkoutPlanState(newPlan);
-                                        setLoadedWorkoutState(null);
-                                    }}
-                                    placeholder="Search for an exercise"
-                                />
-
-                                <div className="reps-display">
-                                    <strong>{handleFormatReps(p.reps)} reps</strong>
+                <div className="card-content">
+                    <div className="workout-preview-container">
+                        {/* Iterate over each circuit */}
+                        {workoutPlanState.circuits.map((circuit, circuitIndex) => (
+                            <React.Fragment key={circuitIndex}>
+                                <div className="circuit-container">
+                                    <div className="circuit-header">Circuit {circuitIndex + 1}</div>
+                                    <hr />
+                                    {/* Iterate over each exercise */}
+                                    {circuit.exercises.map((exercise, exerciseIndex) => (
+                                        <React.Fragment key={exerciseIndex}>
+                                            <div
+                                                className="circuit-preview-exercise"
+                                                key={exerciseIndex}
+                                            >
+                                                <span className="exercise-preview-item">
+                                                    <div className="exercise-icon">
+                                                        <LuDumbbell />
+                                                    </div>
+                                                    <div className="exercise-details">
+                                                        <div className="exercise-name">
+                                                            {exercise.exercise
+                                                                ? exercise.exercise
+                                                                : "No exercise selected"}
+                                                        </div>
+                                                        <div className="exercise-reps">
+                                                            {exercise.reps.length > 0
+                                                                ? exercise.reps.join(", ")
+                                                                : "No reps selected"}
+                                                        </div>
+                                                    </div>
+                                                    <span className="exercise-edit-buttons">
+                                                        <button
+                                                            className="exercise-edit-button icon"
+                                                            onClick={() =>
+                                                                handleEditExercise(circuitIndex, exerciseIndex)
+                                                            }
+                                                        >
+                                                            <LuPencil />
+                                                        </button>
+                                                        <button
+                                                            className="exercise-delete-button icon caution"
+                                                            onClick={() =>
+                                                                handleDeleteExerciseFromCircuit(
+                                                                    circuitIndex,
+                                                                    exerciseIndex
+                                                                )
+                                                            }
+                                                        >
+                                                            <LuTrash />
+                                                        </button>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            {exerciseIndex < circuit.exercises.length - 1 && (
+                                                <span className="exercise-divider">
+                                                    <p>1:00</p>
+                                                    <LuArrowDown />
+                                                </span>
+                                            )}
+                                        </React.Fragment>
+                                    ))}
+                                    <div className="add-exercise-button-container">
+                                        <button
+                                            className="add-exercise-button"
+                                            onClick={() => handleAddExerciseToCircuit(circuitIndex)}
+                                        >
+                                            Add Exercise <LuPlus />
+                                        </button>
+                                    </div>
+                                    <div className="circuit-rep-index">{handleRepTag(circuitIndex, 0)}</div>
                                 </div>
 
-                                <span className="card-row">
-                                    <label>Set Count</label>
-                                    <button
-                                        className="icon"
-                                        onClick={() => handleSetsChange(index, "decrease")}
-                                    >
-                                        <LuMinus />
-                                    </button>
-                                    <button
-                                        className="icon"
-                                        onClick={() => handleSetsChange(index, "increase")}
-                                    >
-                                        <LuPlus />
-                                    </button>
-                                </span>
-                                <span className="card-row">
-                                    <label>Rep Count</label>
-                                    <button
-                                        className="icon"
-                                        onClick={() => handleChangeBaseReps(index, "decrease")}
-                                    >
-                                        <LuMinus />
-                                    </button>
-                                    <button
-                                        className="icon"
-                                        onClick={() => handleChangeBaseReps(index, "increase")}
-                                    >
-                                        <LuPlus />
-                                    </button>
-                                </span>
+                                {circuitIndex < workoutPlanState.circuits.length - 1 && (
+                                    <div className="circuit-divider">
+                                        <div className="circuit-divider-text">Move to next circuit</div>
+                                    </div>
+                                )}
+                            </React.Fragment>
+                        ))}
 
-                                <span className="card-row">
-                                    <label>Set Style</label>
-                                    <button
-                                        className="icon"
-                                        onClick={() => handleSetStyle(index, "flat")}
-                                    >
-                                        <LuAlignJustify style={{ transform: "rotate(90deg)" }} />
-                                    </button>
-                                    <button
-                                        className="icon"
-                                        onClick={() => handleSetStyle(index, "drop")}
-                                    >
-                                        <LuChartNoAxesColumnDecreasing />
-                                    </button>
-                                </span>
-                                {index < workoutPlanState.length - 1 && <hr />}
-                            </div>
-                        </React.Fragment>
-                    ))}
-
-                    <span className="card-row">
-                        <button onClick={handleAddExercise}>
-                            Add Exercise
-                            <LuPlus />
-                        </button>
-                        <button
-                            className="icon caution"
-                            onClick={handleRemoveExercise}
-                        >
-                            <LuTrash />
-                        </button>
-                    </span>
+                        <div className="add-circuit-button-container">
+                            <button
+                                className="new-circuit-button"
+                                onClick={handleAddCircuit}
+                            >
+                                New Circuit <LuPlus />
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </EquipmentProvider>
-
-            <div className="card">
-                <div className="card-header">
-                    <h2>Save Workout</h2>
-                    <p>Save the current workout plan to your saved workouts</p>
-                </div>
-                <div className="card-content">
-                    <input
-                        type="text"
-                        value={workoutNameState}
-                        onChange={(e) => setWorkoutNameState(e.target.value)}
-                        placeholder="Workout Name"
-                    />
-                    <button
-                        className="save-button"
-                        onClick={() => handleSaveWorkout(false)}
-                    >
-                        Save
-                        <LuSave />
-                    </button>
-                </div>
-            </div>
-
-            <div className="card">
-                <div className="card-header">
-                    <h2>Load Workout</h2>
-                    <p>Select a workout to load into the current plan</p>
-                </div>
-                <div className="card-content">
-                    {workoutPlans.length > 0 ? (
-                        workoutPlans.map((workout, index) => (
-                            <button
-                                key={index}
-                                className="load-button"
-                                onClick={() => handleLoadWorkout(workout)}
-                            >
-                                {workout.name || `Workout ${index + 1}`}
-                                <LuRepeat />
-                            </button>
-                        ))
-                    ) : (
-                        <strong>No saved workouts yet.</strong>
-                    )}
-                </div>
-            </div>
-
-            <div className="card">
-                <div className="card-header">
-                    <h2>Workout Preview</h2>
-                    <p>Preview the current workout plan</p>
-                </div>
-                <div className="card-content">
-                    {workoutState.currentPlan && workoutState.currentPlan.circuits[0].exercises.length > 0 ? (
-                        <>
-                            <p>{workoutState.currentPlan.name || workoutNameState || "Unnamed Workout"}</p>
-                            {workoutState.currentPlan.circuits[0].exercises.map((exercise, index) => (
-                                <p key={index}>
-                                    {exercise.exercise}: {handleFormatReps(exercise.reps)} reps
-                                </p>
-                            ))}
-                            <button onClick={handleStartWorkout}>
-                                Start Workout
-                                <LuPlay />
-                            </button>
-                        </>
-                    ) : (
-                        <strong>No workout loaded into current plan yet.</strong>
-                    )}
-                </div>
-            </div>
         </div>
     );
 };
