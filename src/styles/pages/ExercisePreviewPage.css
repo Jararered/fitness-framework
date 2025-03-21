@@ -1,12 +1,12 @@
 .break-timer-container {
-    display: relative;
+    position: relative;
 }
 
 .break-timer-text {
     position: absolute;
     color: var(--main-accent);
     font-weight: bold;
-    top: 0;
+    top: -2rem;
 }
 
 .muscular-load-container {

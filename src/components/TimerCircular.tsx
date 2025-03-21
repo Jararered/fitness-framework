@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { FaCheck } from "react-icons/fa";
 
 interface TimerCircularProps {
@@ -6,12 +6,21 @@ interface TimerCircularProps {
     size?: number; // Size of the circle in pixels
     strokeWidth?: number; // Width of the circle border
     color?: string; // Color of the circle
+    onTimeUpdate?: (timeLeft: number) => void; // Callback to update parent component
 }
 
-export const TimerCircular: React.FC<TimerCircularProps> = ({ duration, size = 100, strokeWidth = 4, color = "#007bff" }) => {
+export const TimerCircular: React.FC<TimerCircularProps> = ({
+    duration,
+    size = 100,
+    strokeWidth = 4,
+    color = "#007bff",
+    onTimeUpdate,
+}) => {
     const [timeLeft, setTimeLeft] = useState(duration);
+    // Store the initial duration as a ref to avoid dependency issues
+    const initialDuration = useMemo(() => duration, []);
 
-    // Reset timer when duration changes
+    // Reset timer when duration prop changes
     useEffect(() => {
         setTimeLeft(duration);
     }, [duration]);
@@ -19,29 +28,62 @@ export const TimerCircular: React.FC<TimerCircularProps> = ({ duration, size = 1
     // Calculate circle properties
     const radius = (size - strokeWidth) / 2;
     const circumference = radius * 2 * Math.PI;
-    const strokeDashoffset = ((duration - timeLeft) / duration) * circumference;
 
+    // Use useMemo to recalculate strokeDashoffset whenever timeLeft changes
+    const strokeDashoffset = useMemo(() => {
+        // Always use the initial duration for calculation
+        const fillPercentage = timeLeft / initialDuration;
+        return circumference * (1 - fillPercentage);
+    }, [timeLeft, circumference, initialDuration]);
+
+    // Notify parent on initial render
+    useEffect(() => {
+        if (onTimeUpdate) {
+            onTimeUpdate(timeLeft);
+        }
+    }, []);
+
+    // Timer effect
     useEffect(() => {
         if (timeLeft <= 0) return;
 
         const timer = setInterval(() => {
             setTimeLeft((prevTime) => {
+                const newTime = prevTime <= 1 ? 0 : prevTime - 1;
                 if (prevTime <= 1) {
                     clearInterval(timer);
-                    return 0;
                 }
-                return prevTime - 1;
+                // Notify parent component about time update
+                if (onTimeUpdate) {
+                    onTimeUpdate(newTime);
+                }
+                return newTime;
             });
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [timeLeft]);
+    }, [timeLeft, onTimeUpdate]);
 
     return (
-        <div className="timer-circular" style={{ position: "relative", width: size, height: size }}>
-            <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transform: "rotate(-90deg)" }}>
+        <div
+            className="timer-circular"
+            style={{ position: "relative", width: size, height: size }}
+        >
+            <svg
+                width={size}
+                height={size}
+                viewBox={`0 0 ${size} ${size}`}
+                style={{ transform: "rotate(-90deg)" }}
+            >
                 {/* Background circle */}
-                <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#e9ecef" strokeWidth={strokeWidth} />
+                <circle
+                    cx={size / 2}
+                    cy={size / 2}
+                    r={radius}
+                    fill="none"
+                    stroke="#e9ecef"
+                    strokeWidth={strokeWidth}
+                />
 
                 {/* Timer circle */}
                 <circle
@@ -53,7 +95,7 @@ export const TimerCircular: React.FC<TimerCircularProps> = ({ duration, size = 1
                     strokeWidth={strokeWidth}
                     strokeDasharray={circumference}
                     strokeDashoffset={strokeDashoffset}
-                    style={{ transition: "stroke-dashoffset 0.5s ease-in-out" }}
+                    style={{ transition: "stroke-dashoffset 0.3s linear" }}
                 />
             </svg>
 

@@ -1,39 +1,25 @@
 .divider-spaced-container {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    width: 100%;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     min-height: fit-content;
+    position: relative;
+    width: calc(100% - 2rem);
 }
 
 .left-section {
-    display: flex;
-    flex-direction: row;
-
-    align-items: center;
     justify-content: flex-start;
-
-    z-index: 1;
+    margin-right: auto;
 }
 
 .center-section {
-    display: flex;
-    flex-direction: row;
-
-    align-items: center;
     justify-content: center;
-
-    z-index: 1;
     width: auto;
 }
 
 .right-section {
-    display: flex;
-    flex-direction: row;
-
-    align-items: center;
     justify-content: flex-end;
-
-    z-index: 1;
+    margin-left: auto;
 }

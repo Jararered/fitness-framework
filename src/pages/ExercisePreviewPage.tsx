@@ -75,8 +75,9 @@ const ExercisePreviewPage: React.FC = () => {
     const { workoutState } = useWorkout();
     const { settings } = useUser();
     const navigate = useNavigate();
-    const [breakTime] = useState<number>(60);
+    const [breakTime, setBreakTime] = useState<number>(60);
     const { showFooterCard } = useFooterCard();
+
     const [quote] = useState<string>(QUOTES[Math.floor(Math.random() * QUOTES.length)].quote);
     const [author] = useState<string>(QUOTES[Math.floor(Math.random() * QUOTES.length)].author);
 
@@ -119,6 +120,10 @@ const ExercisePreviewPage: React.FC = () => {
         return weightUnit;
     };
 
+    const handleTimeUpdate = (timeLeft: number) => {
+        setBreakTime(timeLeft);
+    };
+
     if (!workoutState.currentPlan) return <div>No workout loaded</div>;
 
     return (
@@ -133,18 +138,21 @@ const ExercisePreviewPage: React.FC = () => {
                     center={
                         <div className="break-timer-container">
                             <div className="break-timer-text">REST</div>
-                            <TimerCircular duration={breakTime} />
+                            <TimerCircular 
+                                duration={breakTime} 
+                                onTimeUpdate={handleTimeUpdate}
+                            />
                         </div>
                     }
                     right={
                         <div className="navigation-button-container">
                             <button
-                                className="icon caution"
+                                className={`icon ${breakTime === 0 ? "" : "caution"}`}
                                 onClick={() => navigate("/exercise")}
                             >
                                 <LuArrowRight />
                             </button>
-                            <div className="navigation-button-text">Skip Break</div>
+                            <div className="navigation-button-text">{breakTime === 0 ? "Next" : "Skip Break"}</div>
                         </div>
                     }
                 />
