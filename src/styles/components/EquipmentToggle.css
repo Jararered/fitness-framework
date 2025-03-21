@@ -1,7 +1,5 @@
 .equipment-toggle {
-    width: 100%;
-    max-width: 15rem;
-    flex-grow: 1;
+    min-width: 16rem;
 
     border-radius: 1rem;
     border: 1px solid var(--card-border);
