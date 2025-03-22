@@ -22,12 +22,11 @@
 
 .container-popup {
     position: fixed;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
-    outline: 1px solid var(--card-border);
+    outline: 3px solid var(--card-border);
     border-radius: 2rem;
     opacity: 0;
     visibility: hidden;

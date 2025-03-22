@@ -18,7 +18,7 @@ const ContainerPopup = ({ isOpen, content, onClose }: ContainerPopupProps) => {
     };
 
     return (
-        <div className={`container-popup ${isOpen ? "open" : ""}${isPopupClosing ? "closing" : ""}`}>
+        <div className={`container-popup ${isOpen ? "open" : ""} ${isPopupClosing ? "closing" : ""}`}>
             <div className="container-popup-content">{content}</div>
             <button
                 className="container-popup-close-button icon caution"

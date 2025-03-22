@@ -19,6 +19,11 @@ const ContainerFooter: React.FC<ContainerFooterProps> = ({ isOpen, content, onCl
         }
     };
 
+    // If neither open nor closing, don't render to improve performance
+    if (!isOpen && !isFooterClosing) {
+        return null;
+    }
+
     return (
         <div className={`container-footer ${isOpen ? "open" : ""} ${isFooterClosing ? "closing" : ""}`}>
             <div className="container-footer-inner">

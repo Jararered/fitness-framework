@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 interface Toast {
     id: number;
@@ -46,6 +46,26 @@ export const ContainerProvider: React.FC<{ children: ReactNode }> = ({ children 
     const [contentPopup, setContentPopup] = useState<ReactNode>(null);
     const [contentToast, setContentToast] = useState<Toast[]>([]);
 
+    // Reset closing state when popup is fully closed
+    useEffect(() => {
+        if (isPopupClosing) {
+            const timer = setTimeout(() => {
+                setIsPopupClosing(false);
+            }, 300);
+            return () => clearTimeout(timer);
+        }
+    }, [isPopupClosing]);
+
+    // Reset closing state when footer is fully closed
+    useEffect(() => {
+        if (isFooterClosing) {
+            const timer = setTimeout(() => {
+                setIsFooterClosing(false);
+            }, 300);
+            return () => clearTimeout(timer);
+        }
+    }, [isFooterClosing]);
+
     const showFooterCard = (content: ReactNode) => {
         setContentFooter(content);
         setIsFooterOpen(true);
@@ -53,8 +73,10 @@ export const ContainerProvider: React.FC<{ children: ReactNode }> = ({ children 
     };
 
     const hideFooterCard = () => {
-        setIsFooterOpen(false);
         setIsFooterClosing(true);
+        setTimeout(() => {
+            setIsFooterOpen(false);
+        }, 300);
     };
 
     const showPopup = (content: ReactNode) => {
@@ -64,8 +86,10 @@ export const ContainerProvider: React.FC<{ children: ReactNode }> = ({ children 
     };
 
     const hidePopup = () => {
-        setIsPopupOpen(false);
         setIsPopupClosing(true);
+        setTimeout(() => {
+            setIsPopupOpen(false);
+        }, 300);
     };
 
     const showToast = (message: string, type: "success" | "error" | "info") => {

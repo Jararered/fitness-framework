@@ -7,27 +7,37 @@ import React from "react";
 // Import the ContainerPopup component
 import { useContainer } from "../context/ContainerContext.tsx";
 
-const ToastExample = "Test Toast";
-const ToastType = "success";
-
-const ContentPopupExample = () => {
-    return (
-        <div>
-            <h1>Popup</h1>
-        </div>
-    );
-};
-
-const ContentFooterExample = () => {
-    return (
-        <div>
-            <h1>Footer</h1>
-        </div>
-    );
-};
-
 const SandboxPage: React.FC = () => {
     const { showPopup, showFooterCard, addToast } = useContainer();
+
+    const ToastExample = "Test Toast";
+    const ToastType = "success";
+
+    const ContentPopupExample = () => {
+        return (
+            <div className="card-content">
+                <h1>Popup</h1>
+                <p style={{ fontStyle: "italic" }}>This is a popup which is a card that slides up from the bottom of the screen</p>
+                <p style={{ fontStyle: "italic" }}>It has a close button which is a circle with an X in the center</p>
+                <p style={{ fontStyle: "italic" }}>It has a content area which is the main content of the page</p>
+                <p style={{ fontStyle: "italic" }}>It has a button to add a toast</p>
+                <button onClick={() => addToast(ToastExample, ToastType)}>Add Toast</button>
+            </div>
+        );
+    };
+
+    const ContentFooterExample = () => {
+        return (
+            <div className="card-content">
+                <h1>Footer</h1>
+                <p style={{ fontStyle: "italic" }}>This is a footer which is a card that slides up from the bottom of the screen</p>
+                <p style={{ fontStyle: "italic" }}>It has a close button which is a circle with an X in the center</p>
+                <p style={{ fontStyle: "italic" }}>It has a content area which is the main content of the page</p>
+                <p style={{ fontStyle: "italic" }}>It has a button to add a toast</p>
+                <button onClick={() => addToast(ToastExample, ToastType)}>Add Toast</button>
+            </div>
+        );
+    };
 
     return (
         <div className="sandbox-page">

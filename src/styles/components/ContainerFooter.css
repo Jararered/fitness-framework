@@ -1,21 +1,21 @@
 @keyframes fadeInUp {
     0% {
-        transform: translateY(100%);
+        transform: translate(-50%, 100%);
         opacity: 0;
     }
     100% {
-        transform: translateY(0);
+        transform: translate(-50%, 0);
         opacity: 1;
     }
 }
 
 @keyframes fadeOutDown {
     0% {
-        transform: translateY(0);
+        transform: translate(-50%, 0);
         opacity: 1;
     }
     100% {
-        transform: translateY(-100%);
+        transform: translate(-50%, 100%);
         opacity: 0;
     }
 }
@@ -30,7 +30,7 @@
     outline: 3px solid var(--card-border);
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
-    z-index: 900;
+    z-index: 800;
     padding: 0;
     padding-bottom: 2rem;
     min-height: 2rem;
@@ -45,11 +45,13 @@
 .container-footer.open {
     opacity: 1;
     visibility: visible;
+    transform: translate(-50%, 0);
     animation: fadeInUp 0.3s ease-in-out;
 }
 
 .container-footer.closing {
     animation: fadeOutDown 0.3s ease-in-out;
+    opacity: 0;
 }
 
 .container-footer-inner {
