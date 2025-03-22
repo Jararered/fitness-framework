@@ -3,15 +3,12 @@ import { useUser } from "./context/UserContext.tsx";
 import { IconContext } from "react-icons";
 
 import DockBar from "./components/DockBar.tsx";
-import ToastContainer from "./components/ToastContainer.tsx";
 import PageTransition from "./components/PageTransition.tsx";
-import FooterCard from "./components/FooterCard.tsx";
-import { useFooterCard } from "./context/FooterCardContext.tsx";
+import { useContainer } from "./context/ContainerContext.tsx";
 
 import HomePage from "./pages/HomePage.tsx";
 import EquipmentSelectPage from "./pages/EquipmentSelectPage.tsx";
 import WorkoutCreatePage from "./pages/WorkoutCreatePage.tsx";
-import TestPage from "./components/PopupContainer.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import SettingsPage from "./pages/SettingsPage.tsx";
 import ExercisePage from "./pages/ExercisePage.tsx";
@@ -19,6 +16,11 @@ import ExercisePreviewPage from "./pages/ExercisePreviewPage.tsx";
 import WorkoutCompletePage from "./pages/WorkoutCompletePage.tsx";
 import ManageDataPage from "./pages/ManageDataPage.tsx";
 import CircuitPreviewPage from "./pages/CircuitPreviewPage.tsx";
+import SandboxPage from "./pages/SandboxPage.tsx";
+
+import ContainerPopup from "./components/ContainerPopup.tsx";
+import ContainerFooter from "./components/ContainerFooter.tsx";
+import ContainerToast from "./components/ContainerToast.tsx";
 
 import "./styles/components/App.css";
 import "./styles/components/Card.css";
@@ -26,11 +28,18 @@ import "./styles/components/Card.css";
 function App() {
     const { settings } = useUser();
     const location = useLocation();
-    const { isVisible, content, hideFooterCard } = useFooterCard();
-
+    const { isFooterOpen, contentFooter, hideFooterCard } = useContainer();
+    const { isPopupOpen, contentPopup, hidePopup } = useContainer();
     return (
         <div className={`App ${settings.darkMode ? "dark-mode" : ""}`}>
             <IconContext.Provider value={{ size: "1.5rem" }}>
+                <ContainerPopup
+                    isOpen={isPopupOpen}
+                    content={contentPopup}
+                    onClose={hidePopup}
+                />
+                <ContainerToast />
+
                 <PageTransition>
                     <Routes
                         location={location}
@@ -47,10 +56,6 @@ function App() {
                         <Route
                             path="/create"
                             element={<WorkoutCreatePage />}
-                        />
-                        <Route
-                            path="/test"
-                            element={<TestPage />}
                         />
                         <Route
                             path="/profile"
@@ -80,13 +85,18 @@ function App() {
                             path="/circuit-preview"
                             element={<CircuitPreviewPage />}
                         />
+                        <Route
+                            path="/sandbox"
+                            element={<SandboxPage />}
+                        />
                     </Routes>
                 </PageTransition>
-                <ToastContainer />
+
                 <DockBar />
-                <FooterCard
-                    isVisible={isVisible}
-                    content={content}
+
+                <ContainerFooter
+                    isOpen={isFooterOpen}
+                    content={contentFooter}
                     onClose={hideFooterCard}
                 />
             </IconContext.Provider>

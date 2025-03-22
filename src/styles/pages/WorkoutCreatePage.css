@@ -16,5 +16,8 @@
 }
 
 .workout-preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: calc(100% - 4rem);
 }

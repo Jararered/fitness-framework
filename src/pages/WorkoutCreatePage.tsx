@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { LuChartNoAxesColumnDecreasing, LuAlignJustify, LuRepeat, LuPlay, LuPencil } from "react-icons/lu";
-import { LuPlus, LuMinus, LuSave, LuTrash } from "react-icons/lu";
+import { LuChartNoAxesColumnDecreasing, LuAlignJustify, LuPencil } from "react-icons/lu";
+import { LuPlus, LuMinus, LuTrash } from "react-icons/lu";
 import { LuDumbbell, LuArrowDown } from "react-icons/lu";
 
 import { useNavigate } from "react-router-dom";
-import { EquipmentProvider, useEquipment } from "../context/EquipmentContext.tsx";
-import { useToast } from "../context/ToastContext.tsx";
+import { useEquipment } from "../context/EquipmentContext.tsx";
+import { useContainer } from "../context/ContainerContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
-import { PopupContainer } from "../components/PopupContainer.tsx";
 import { SelectorSearchable } from "../components/SelectorSearchable.tsx";
-import { CircuitPlan, ExercisePlan, WorkoutPlan } from "../data/types.ts";
+import { CircuitPlan, Exercise, WorkoutPlan } from "../data/types.ts";
 
 import "../styles/pages/CircuitPreviewPage.css";
-import "../styles/components/PopupContainer.css";
 import "../styles/pages/WorkoutCreatePage.css";
+
 const repsChangeAmount = 2;
 
 const WorkoutCreatePage: React.FC = () => {
     const { exercises, workoutPlans, setWorkoutPlans, workoutState, setWorkoutState } = useWorkout();
     const { equipmentConfigs, equipmentLast } = useEquipment();
     const navigate = useNavigate();
-    const { addToast } = useToast();
+    const { addToast } = useContainer();
 
     // State for the workout plan
     const [workoutNameState, setWorkoutNameState] = useState<string>("");
+    const [exercise, setExercise] = useState<Exercise>();
     const [baseReps, setBaseReps] = useState<number>(10);
     const [reps, setReps] = useState<number[]>([10, 10, 10]);
     const [sets, setSets] = useState<number>(3);
     const [style, setStyle] = useState<"drop" | "flat">("flat");
-
+    const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
     const [workoutPlanState, setWorkoutPlanState] = useState<WorkoutPlan>(() => {
         const savedPlan = localStorage.getItem("temp-workout-plan");
         if (savedPlan) {
@@ -64,7 +64,7 @@ const WorkoutCreatePage: React.FC = () => {
         localStorage.setItem("temp-workout-plan", JSON.stringify(workoutPlanState));
     }, [workoutPlanState]);
 
-    const handleSetsChange = (change: string) => {
+    const handleSetsChange = (circuitIndex: number, exerciseIndex: number, change: string) => {
         let newSets = sets;
 
         if (change === "increase") {
@@ -77,11 +77,12 @@ const WorkoutCreatePage: React.FC = () => {
             }
         }
 
-        setSets(newSets);
-        handleCalculateNewRepsArray();
+        workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex].reps = Array(newSets).fill(baseReps);
+        setWorkoutPlanState(workoutPlanState);
+        handleCalculateNewRepsArray(circuitIndex, exerciseIndex);
     };
 
-    const handleChangeBaseReps = (change: string) => {
+    const handleChangeBaseReps = (circuitIndex: number, exerciseIndex: number, change: string) => {
         let newBaseReps = baseReps;
 
         if (change === "increase") {
@@ -94,29 +95,32 @@ const WorkoutCreatePage: React.FC = () => {
             }
         }
 
-        setBaseReps(newBaseReps);
-        handleCalculateNewRepsArray();
+        workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex].reps = Array(sets).fill(newBaseReps);
+        setWorkoutPlanState(workoutPlanState);
+        handleCalculateNewRepsArray(circuitIndex, exerciseIndex);
     };
 
-    const handleSetStyle = (newStyle: "drop" | "flat") => {
+    const handleSetStyle = (circuitIndex: number, exerciseIndex: number, newStyle: "drop" | "flat") => {
         setStyle(newStyle);
-        handleCalculateNewRepsArray();
+        handleCalculateNewRepsArray(circuitIndex, exerciseIndex);
     };
 
-    const handleCalculateNewRepsArray = () => {
+    const handleCalculateNewRepsArray = (circuitIndex: number, exerciseIndex: number) => {
         if (style === "drop") {
             const dropSet = [baseReps];
             for (let i = 1; i < sets; i++) {
                 const nextRep = Math.max(dropSet[i - 1] - repsChangeAmount, 1);
                 dropSet.push(nextRep);
             }
-            setReps(dropSet);
+            workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex].reps = dropSet;
         } else if (style === "flat") {
-            setReps(Array(sets).fill(baseReps));
+            workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex].reps = Array(sets).fill(baseReps);
         }
 
         // Apply the minimum reps check before setting the state
-        setReps(reps.map((rep) => Math.max(rep, 1)));
+        workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex].reps = workoutPlanState.circuits[
+            circuitIndex
+        ].exercises[exerciseIndex].reps.map((rep) => Math.max(rep, 1));
     };
 
     const handleSaveWorkout = (startWorkout: boolean = false) => {
@@ -242,7 +246,91 @@ const WorkoutCreatePage: React.FC = () => {
         });
     };
 
-    const handleEditExercise = (circuitIndex: number, exerciseIndex: number) => {};
+    const handleEditExercise = (circuitIndex: number, exerciseIndex: number) => {
+        setIsPopupOpen(true);
+    };
+
+    const EditExercisePopup = ({ circuitIndex, exerciseIndex }: { circuitIndex: number; exerciseIndex: number }) => {
+        const [reps, setReps] = useState<number[]>(
+            workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex].reps
+        );
+        const [sets, setSets] = useState<number>(
+            workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex].reps.length
+        );
+        const [baseReps, setBaseReps] = useState<number>(
+            workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex].reps[0]
+        );
+
+        return (
+            <div className="edit-exercise-popup">
+                <h1>Edit Exercise</h1>
+                <SelectorSearchable
+                    options={avaliableExerciseNames}
+                    onChange={(exercise) => {
+                        const newExercise = availableExercises.find((e) => e.exercise_name === exercise);
+                        if (newExercise) {
+                            workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex].exercise =
+                                newExercise.exercise_name;
+                            setWorkoutPlanState(workoutPlanState);
+                        }
+                    }}
+                    value={workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex].exercise || ""}
+                    getOptionLabel={(option) => option}
+                />
+
+                <div className="reps-display">
+                    <strong>{reps.join(", ")} reps</strong>
+                </div>
+
+                <span className="card-row">
+                    <label>Set Count</label>
+                    <button
+                        className="icon"
+                        onClick={() => handleSetsChange(circuitIndex, exerciseIndex, "decrease")}
+                    >
+                        <LuMinus />
+                    </button>
+                    <button
+                        className="icon"
+                        onClick={() => handleSetsChange(circuitIndex, exerciseIndex, "increase")}
+                    >
+                        <LuPlus />
+                    </button>
+                </span>
+                <span className="card-row">
+                    <label>Rep Count</label>
+                    <button
+                        className="icon"
+                        onClick={() => handleChangeBaseReps(circuitIndex, exerciseIndex, "decrease")}
+                    >
+                        <LuMinus />
+                    </button>
+                    <button
+                        className="icon"
+                        onClick={() => handleChangeBaseReps(circuitIndex, exerciseIndex, "increase")}
+                    >
+                        <LuPlus />
+                    </button>
+                </span>
+
+                <span className="card-row">
+                    <label>Set Style</label>
+                    <button
+                        className="icon"
+                        onClick={() => handleSetStyle(circuitIndex, exerciseIndex, "flat")}
+                    >
+                        <LuAlignJustify style={{ transform: "rotate(90deg)" }} />
+                    </button>
+                    <button
+                        className="icon"
+                        onClick={() => handleSetStyle(circuitIndex, exerciseIndex, "drop")}
+                    >
+                        <LuChartNoAxesColumnDecreasing />
+                    </button>
+                </span>
+            </div>
+        );
+    };
 
     return (
         <div className="workout-create-page page-container">
@@ -250,99 +338,90 @@ const WorkoutCreatePage: React.FC = () => {
                 <h1>Create Workout</h1>
             </div>
 
-            <EquipmentProvider>
-                <div className="card-content">
-                    <div className="workout-preview-container">
-                        {/* Iterate over each circuit */}
-                        {workoutPlanState.circuits.map((circuit, circuitIndex) => (
-                            <React.Fragment key={circuitIndex}>
-                                <div className="circuit-container">
-                                    <div className="circuit-header">Circuit {circuitIndex + 1}</div>
-                                    <hr />
-                                    {/* Iterate over each exercise */}
-                                    {circuit.exercises.map((exercise, exerciseIndex) => (
-                                        <React.Fragment key={exerciseIndex}>
-                                            <div
-                                                className="circuit-preview-exercise"
-                                                key={exerciseIndex}
-                                            >
-                                                <span className="exercise-preview-item">
-                                                    <div className="exercise-icon">
-                                                        <LuDumbbell />
-                                                    </div>
-                                                    <div className="exercise-details">
-                                                        <div className="exercise-name">
-                                                            {exercise.exercise
-                                                                ? exercise.exercise
-                                                                : "No exercise selected"}
-                                                        </div>
-                                                        <div className="exercise-reps">
-                                                            {exercise.reps.length > 0
-                                                                ? exercise.reps.join(", ")
-                                                                : "No reps selected"}
-                                                        </div>
-                                                    </div>
-                                                    <span className="exercise-edit-buttons">
-                                                        <button
-                                                            className="exercise-edit-button icon"
-                                                            onClick={() =>
-                                                                handleEditExercise(circuitIndex, exerciseIndex)
-                                                            }
-                                                        >
-                                                            <LuPencil />
-                                                        </button>
-                                                        <button
-                                                            className="exercise-delete-button icon caution"
-                                                            onClick={() =>
-                                                                handleDeleteExerciseFromCircuit(
-                                                                    circuitIndex,
-                                                                    exerciseIndex
-                                                                )
-                                                            }
-                                                        >
-                                                            <LuTrash />
-                                                        </button>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                            {exerciseIndex < circuit.exercises.length - 1 && (
-                                                <span className="exercise-divider">
-                                                    <p>1:00</p>
-                                                    <LuArrowDown />
-                                                </span>
-                                            )}
-                                        </React.Fragment>
-                                    ))}
-                                    <div className="add-exercise-button-container">
-                                        <button
-                                            className="add-exercise-button"
-                                            onClick={() => handleAddExerciseToCircuit(circuitIndex)}
+            <div className="card-content">
+                <div className="workout-preview-container">
+                    {/* Iterate over each circuit */}
+                    {workoutPlanState.circuits.map((circuit, circuitIndex) => (
+                        <React.Fragment key={circuitIndex}>
+                            <div className="circuit-container">
+                                <div className="circuit-header">Circuit {circuitIndex + 1}</div>
+                                <hr />
+                                {/* Iterate over each exercise */}
+                                {circuit.exercises.map((exercise, exerciseIndex) => (
+                                    <React.Fragment key={exerciseIndex}>
+                                        <div
+                                            className="circuit-preview-exercise"
+                                            key={exerciseIndex}
                                         >
-                                            Add Exercise <LuPlus />
-                                        </button>
-                                    </div>
-                                    <div className="circuit-rep-index">{handleRepTag(circuitIndex, 0)}</div>
+                                            <span className="exercise-preview-item">
+                                                <div className="exercise-icon">
+                                                    <LuDumbbell />
+                                                </div>
+                                                <div className="exercise-details">
+                                                    <div className="exercise-name">
+                                                        {exercise.exercise ? exercise.exercise : "No exercise selected"}
+                                                    </div>
+                                                    <div className="exercise-reps">
+                                                        {exercise.reps.length > 0
+                                                            ? `${exercise.reps.join(", ")} Reps`
+                                                            : "No reps selected"}
+                                                    </div>
+                                                </div>
+                                                <span className="exercise-edit-buttons">
+                                                    <button
+                                                        className="exercise-edit-button icon"
+                                                        onClick={() => handleEditExercise(circuitIndex, exerciseIndex)}
+                                                    >
+                                                        <LuPencil />
+                                                    </button>
+                                                    <button
+                                                        className="exercise-delete-button icon caution"
+                                                        onClick={() =>
+                                                            handleDeleteExerciseFromCircuit(circuitIndex, exerciseIndex)
+                                                        }
+                                                    >
+                                                        <LuTrash />
+                                                    </button>
+                                                </span>
+                                            </span>
+                                        </div>
+                                        {exerciseIndex < circuit.exercises.length - 1 && (
+                                            <span className="exercise-divider">
+                                                <p>1:00</p>
+                                                <LuArrowDown />
+                                            </span>
+                                        )}
+                                    </React.Fragment>
+                                ))}
+                                <div className="add-exercise-button-container">
+                                    <button
+                                        className="add-exercise-button"
+                                        onClick={() => handleAddExerciseToCircuit(circuitIndex)}
+                                    >
+                                        Add Exercise <LuPlus />
+                                    </button>
                                 </div>
+                                <div className="circuit-rep-index">{handleRepTag(circuitIndex, 0)}</div>
+                            </div>
 
-                                {circuitIndex < workoutPlanState.circuits.length - 1 && (
-                                    <div className="circuit-divider">
-                                        <div className="circuit-divider-text">Move to next circuit</div>
-                                    </div>
-                                )}
-                            </React.Fragment>
-                        ))}
+                            {circuitIndex < workoutPlanState.circuits.length - 1 && (
+                                <div className="circuit-divider">
+                                    <div className="circuit-divider-text">Move to next circuit</div>
+                                </div>
+                            )}
+                        </React.Fragment>
+                    ))}
 
-                        <div className="add-circuit-button-container">
-                            <button
-                                className="new-circuit-button"
-                                onClick={handleAddCircuit}
-                            >
-                                New Circuit <LuPlus />
-                            </button>
-                        </div>
+                    <div className="add-circuit-button-container">
+                        <button
+                            className="new-circuit-button"
+                            onClick={handleAddCircuit}
+                        >
+                            New Circuit <LuPlus />
+                        </button>
                     </div>
                 </div>
-            </EquipmentProvider>
+            </div>
         </div>
     );
 };

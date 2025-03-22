@@ -25,6 +25,9 @@
 
     --toggle-background: #e0e0e0;
     --toggle-hover: #d0d0d0;
+
+    --success-accent: #289028;
+    --error-accent: #ff0000;
 }
 
 .dark-mode {

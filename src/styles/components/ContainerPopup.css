@@ -20,33 +20,47 @@
     }
 }
 
-.popup-container {
+.container-popup {
     position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
     outline: 1px solid var(--card-border);
     border-radius: 2rem;
     opacity: 0;
     visibility: hidden;
+    z-index: 1000;
+    min-width: 300px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
-.popup-content {
-    height: 20rem;
-    width: 20rem;
+.container-popup-content h1 {
+    margin-left: 3rem;
+    margin-right: 3rem;
 }
 
-.popup-close-button {
+.container-popup-content {
+    margin: 1rem;
+}
+
+.container-popup-close-button {
     position: absolute;
     top: 1rem;
     left: 1rem;
 }
 
-.popup-container.open {
+.container-popup.open {
     opacity: 1;
     visibility: visible;
     animation: fadeInUp 250ms forwards;
 }
 
-.popup-container.closing {
+.container-popup.closing {
     animation: fadeOutDown 250ms forwards;
+    opacity: 0;
+    visibility: hidden;
 }

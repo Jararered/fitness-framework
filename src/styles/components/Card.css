@@ -1,5 +1,5 @@
 .card {
-    border: 1px solid var(--card-border);
+    outline: 3px solid var(--card-border);
     border-radius: 2rem;
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
@@ -16,12 +16,7 @@
     gap: 1rem;
 }
 
-.card-header {
-    margin-top: 1rem;
-}
-
 .card-header p {
-    font-size: 1rem;
     font-style: italic;
 }
 

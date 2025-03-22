@@ -4,7 +4,7 @@ import { LuArrowRight, LuTrophy, LuCircleAlert, LuX, LuEqual } from "react-icons
 
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
-import { useFooterCard } from "../context/FooterCardContext.tsx";
+import { useContainer } from "../context/ContainerContext.tsx";
 
 import { TimerCircular } from "../components/TimerCircular.tsx";
 import { DividerSpaced } from "../components/DividerSpaced.tsx";
@@ -78,7 +78,7 @@ const ExercisePreviewPage: React.FC = () => {
     const { settings } = useUser();
     const navigate = useNavigate();
     const [breakTime, setBreakTime] = useState<number>(60);
-    const { showFooterCard } = useFooterCard();
+    const { showFooterCard } = useContainer();
 
     const [quote] = useState<string>(QUOTES[Math.floor(Math.random() * QUOTES.length)].quote);
     const [author] = useState<string>(QUOTES[Math.floor(Math.random() * QUOTES.length)].author);

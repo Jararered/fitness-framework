@@ -2,15 +2,14 @@ import React, { useState, useCallback, useEffect } from "react";
 import { LuTrash, LuSave, LuArrowDownToLine } from "react-icons/lu";
 
 import { useWorkout } from "../context/WorkoutContext.tsx";
-import { useToast } from "../context/ToastContext.tsx";
 import { useEquipment } from "../context/EquipmentContext.tsx";
-
+import { useContainer } from "../context/ContainerContext.tsx";
 import { EquipmentToggleListItem } from "../components/EquipmentToggle.tsx";
 
 import "../styles/pages/EquipmentSelectPage.css";
 
 const EquipmentSelectPage: React.FC = () => {
-    const { addToast } = useToast();
+    const { addToast } = useContainer();
     const { equipment } = useWorkout();
     const { equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useEquipment();
 

@@ -2,18 +2,18 @@
     min-width: 16rem;
 
     border-radius: 1rem;
-    border: 1px solid var(--card-border);
     background-color: var(--card-border);
 
     cursor: pointer;
 
     padding: 0.75rem 1rem;
+
+    transition: background-color 200ms ease-in-out;
 }
 
 .equipment-toggle.enabled {
     color: white;
-    border-color: var(--main-accent);
-    background-color: var(--main-accent-light);
+    background-color: var(--main-accent);
 }
 
 .equipment-toggle .icon {
