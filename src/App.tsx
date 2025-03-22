@@ -30,8 +30,11 @@ function App() {
     const location = useLocation();
     const { isFooterOpen, contentFooter, hideFooterCard } = useContainer();
     const { isPopupOpen, contentPopup, hidePopup } = useContainer();
+
+    const dimApp = isPopupOpen || isFooterOpen;
+
     return (
-        <div className={`App ${settings.darkMode ? "dark-mode" : ""}`}>
+        <div className={`App ${settings.darkMode ? "dark-mode" : ""} `}>
             <IconContext.Provider value={{ size: "1.5rem" }}>
                 <ContainerPopup
                     isOpen={isPopupOpen}
@@ -40,59 +43,63 @@ function App() {
                 />
                 <ContainerToast />
 
-                <PageTransition>
-                    <Routes
-                        location={location}
-                        key={location.pathname}
-                    >
-                        <Route
-                            path="/"
-                            element={<HomePage />}
-                        />
-                        <Route
-                            path="/equipment"
-                            element={<EquipmentSelectPage />}
-                        />
-                        <Route
-                            path="/create"
-                            element={<WorkoutCreatePage />}
-                        />
-                        <Route
-                            path="/profile"
-                            element={<ProfilePage />}
-                        />
-                        <Route
-                            path="/settings"
-                            element={<SettingsPage />}
-                        />
-                        <Route
-                            path="/preview"
-                            element={<ExercisePreviewPage />}
-                        />
-                        <Route
-                            path="/exercise"
-                            element={<ExercisePage />}
-                        />
-                        <Route
-                            path="/complete"
-                            element={<WorkoutCompletePage />}
-                        />
-                        <Route
-                            path="/manage-data"
-                            element={<ManageDataPage />}
-                        />
-                        <Route
-                            path="/circuit-preview"
-                            element={<CircuitPreviewPage />}
-                        />
-                        <Route
-                            path="/sandbox"
-                            element={<SandboxPage />}
-                        />
-                    </Routes>
-                </PageTransition>
+                <div className={`app-content ${dimApp ? "dimmed" : ""}`}>
+                    <PageTransition>
+                        <Routes
+                            location={location}
+                            key={location.pathname}
+                        >
+                            <Route
+                                path="/"
+                                element={<HomePage />}
+                            />
+                            <Route
+                                path="/equipment"
+                                element={<EquipmentSelectPage />}
+                            />
+                            <Route
+                                path="/create"
+                                element={<WorkoutCreatePage />}
+                            />
+                            <Route
+                                path="/profile"
+                                element={<ProfilePage />}
+                            />
+                            <Route
+                                path="/settings"
+                                element={<SettingsPage />}
+                            />
+                            <Route
+                                path="/preview"
+                                element={<ExercisePreviewPage />}
+                            />
+                            <Route
+                                path="/exercise"
+                                element={<ExercisePage />}
+                            />
+                            <Route
+                                path="/complete"
+                                element={<WorkoutCompletePage />}
+                            />
+                            <Route
+                                path="/manage-data"
+                                element={<ManageDataPage />}
+                            />
+                            <Route
+                                path="/circuit-preview"
+                                element={<CircuitPreviewPage />}
+                            />
+                            <Route
+                                path="/sandbox"
+                                element={<SandboxPage />}
+                            />
+                        </Routes>
+                    </PageTransition>
+                </div>
 
-                <DockBar />
+                <div className={dimApp ? "dimmed" : ""}>
+                    <DockBar />
+                </div>
 
                 <ContainerFooter
                     isOpen={isFooterOpen}

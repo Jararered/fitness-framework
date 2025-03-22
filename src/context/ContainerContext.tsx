@@ -47,21 +47,21 @@ export const ContainerProvider: React.FC<{ children: ReactNode }> = ({ children 
     const [contentToast, setContentToast] = useState<Toast[]>([]);
 
     // Reset closing state when popup is fully closed
-    useEffect(() => {
-        if (isPopupClosing) {
-            const timer = setTimeout(() => {
-                setIsPopupClosing(false);
-            }, 300);
-            return () => clearTimeout(timer);
-        }
-    }, [isPopupClosing]);
+    // useEffect(() => {
+    //     if (isPopupClosing) {
+    //         const timer = setTimeout(() => {
+    //             setIsPopupClosing(false);
+    //         }, 250);
+    //         return () => clearTimeout(timer);
+    //     }
+    // }, [isPopupClosing]);
 
     // Reset closing state when footer is fully closed
     useEffect(() => {
         if (isFooterClosing) {
             const timer = setTimeout(() => {
                 setIsFooterClosing(false);
-            }, 300);
+            }, 250);
             return () => clearTimeout(timer);
         }
     }, [isFooterClosing]);
@@ -76,7 +76,7 @@ export const ContainerProvider: React.FC<{ children: ReactNode }> = ({ children 
         setIsFooterClosing(true);
         setTimeout(() => {
             setIsFooterOpen(false);
-        }, 300);
+        }, 250);
     };
 
     const showPopup = (content: ReactNode) => {
@@ -89,7 +89,7 @@ export const ContainerProvider: React.FC<{ children: ReactNode }> = ({ children 
         setIsPopupClosing(true);
         setTimeout(() => {
             setIsPopupOpen(false);
-        }, 300);
+        }, 250);
     };
 
     const showToast = (message: string, type: "success" | "error" | "info") => {

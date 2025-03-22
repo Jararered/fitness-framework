@@ -2,7 +2,6 @@ import React from "react";
 
 import { useUser } from "../context/UserContext.tsx";
 
-import "../styles/pages/SettingsPage.css";
 import "../styles/components/PillToggle.css";
 import { LuArrowRight, LuGithub, LuMail } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +55,7 @@ const WeightInput = () => {
                     setSettings({ ...settings, weight: weightInGrams });
                 }}
             />
-            <div className="units-label">{isImperial ? "lb" : "kg"}</div>
+            <div className="units-label">{isImperial ? "lbs" : "kg"}</div>
         </span>
     );
 };
@@ -121,6 +120,20 @@ const SettingsPage: React.FC = () => {
     const { settings, setSettings } = useUser();
     const navigate = useNavigate();
 
+    const handleUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const unit = e.target.value as "imperial" | "metric";
+
+        if (unit === "imperial") {
+            setSettings({ ...settings, unit, weightUnit: "lbs" });
+        } else {
+            setSettings({ ...settings, unit, weightUnit: "kg" });
+        }
+    };
+
+    const handleQuoteModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSettings({ ...settings, quoteMode: e.target.value as "gentle" | "moderate" | "hardcore" | "xxx" });
+    };
+
     return (
         <div className="settings-page page-container">
             <h1>Settings</h1>
@@ -167,12 +180,23 @@ const SettingsPage: React.FC = () => {
                         <label>Units</label>
                         <select
                             value={settings.unit}
-                            onChange={(e) =>
-                                setSettings({ ...settings, unit: e.target.value as "imperial" | "metric" })
-                            }
+                            onChange={handleUnitChange}
                         >
-                            <option value="imperial">imperial</option>
-                            <option value="metric">metric</option>
+                            <option value="imperial">Imperial</option>
+                            <option value="metric">Metric</option>
+                        </select>
+                    </span>
+
+                    <span className="card-row">
+                        <label>Quote Mode</label>
+                        <select
+                            value={settings.quoteMode}
+                            onChange={handleQuoteModeChange}
+                        >
+                            <option value="gentle">Gentle</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="hardcore">Hardcore</option>
+                            <option value="xxx">XXX</option>
                         </select>
                     </span>
 

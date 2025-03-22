@@ -6,9 +6,6 @@
 
 .workout-preview-container {
     min-width: 350px;
-
-    /* Leaves room for last rounds tag */
-    margin-bottom: 3rem;
 }
 
 .circuit-container {
@@ -21,17 +18,21 @@
 }
 
 .circuit-container hr {
+    margin-top: 0 !important;
     outline: 1px solid var(--card-border);
     width: 100%;
 }
 
 .circuit-header {
     width: calc(100% - 2rem);
-    margin: 1rem 2rem;
+    margin: 1rem;
     text-transform: uppercase;
     font-weight: bold;
     align-items: flex-start;
     font-size: 1.25rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .circuit-divider {
@@ -74,7 +75,7 @@
 }
 
 .circuit-preview-exercise {
-    width: calc(100% - 2rem);
+    width: calc(100% - 1rem);
     margin: 0.5rem;
     align-items: flex-start;
     text-align: left;
@@ -87,6 +88,7 @@
     font-weight: bold;
     border-radius: 1rem;
     padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
 }
 
 .exercise-icon {

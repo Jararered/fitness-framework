@@ -21,3 +21,11 @@
     align-items: center;
     width: calc(100% - 4rem);
 }
+
+.circuit-header button {
+    margin-left: auto;
+}
+
+.reps-display {
+    margin-top: 0.5rem;
+}

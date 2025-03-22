@@ -1,5 +1,6 @@
-type MuscleGroup = "Back" | "Biceps" | "Chest" | "Legs" | "Shoulders" | "Triceps" | "Abs" | "Obliques";
-type Equipment =
+export type MuscleGroup = "Back" | "Biceps" | "Chest" | "Legs" | "Shoulders" | "Triceps" | "Abs" | "Obliques";
+
+export type Equipment =
     | "Barbell"
     | "Cable Machine"
     | "Chest Press Machine"
@@ -12,7 +13,7 @@ type Equipment =
     | "Pullup Bar"
     | "Smith Machine";
 
-type Muscle =
+export type Muscle =
     | ""
     | "Abs"
     | "Anterior Deltoids"
@@ -69,7 +70,7 @@ type Muscle =
     | "Upper Trapezius"
     | "Upper Trapezius";
 
-type Difficulty = "" | "Beginner" | "Intermediate" | "Advanced";
+export type Difficulty = "" | "Beginner" | "Intermediate" | "Advanced";
 
 export type Exercise = {
     exercise_name: string;
@@ -86,6 +87,9 @@ export type Exercise = {
 export interface ExercisePlan {
     exercise: string;
     reps: number[];
+    sets: number;
+    style: "drop" | "flat";
+    baseReps: number;
 }
 
 export interface CircuitPlan {
@@ -121,26 +125,26 @@ export const ExampleWorkout: WorkoutPlan = {
     circuits: [
         {
             exercises: [
-                { exercise: "Barbell Bent-Over Row", reps: [10, 10, 10] },
-                { exercise: "Barbell Deadlift", reps: [8, 6, 4] },
+                { exercise: "Barbell Bent-Over Row", reps: [10, 10, 10], sets: 3, style: "flat", baseReps: 10 },
+                { exercise: "Barbell Deadlift", reps: [8, 6, 4], sets: 3, style: "drop", baseReps: 8 },
             ],
         },
         {
             exercises: [
-                { exercise: "Leg Press", reps: [10, 8, 6, 4, 2] },
-                { exercise: "Leg Extension", reps: [10, 10, 10, 10, 10] },
+                { exercise: "Leg Press", reps: [10, 8, 6, 4, 2], sets: 3, style: "drop", baseReps: 10 },
+                { exercise: "Leg Extension", reps: [10, 10, 10, 10, 10], sets: 5, style: "flat", baseReps: 10 },
             ],
         },
         {
             exercises: [
-                { exercise: "Dumbbell Bench Press", reps: [15, 12, 10] },
-                { exercise: "Dumbbell French Press", reps: [15, 12, 10] },
+                { exercise: "Dumbbell Bench Press", reps: [15, 12, 10], sets: 3, style: "drop", baseReps: 15 },
+                { exercise: "Dumbbell French Press", reps: [15, 12, 10], sets: 3, style: "drop", baseReps: 15 },
             ],
         },
         {
             exercises: [
-                { exercise: "Lat Pulldown", reps: [10, 10, 10] },
-                { exercise: "Lat Pulldown Reverse-Grip", reps: [10, 10, 10] },
+                { exercise: "Lat Pulldown", reps: [10, 10, 10], sets: 3, style: "flat", baseReps: 10 },
+                { exercise: "Lat Pulldown Reverse-Grip", reps: [10, 10, 10], sets: 3, style: "flat", baseReps: 10 },
             ],
         },
     ],

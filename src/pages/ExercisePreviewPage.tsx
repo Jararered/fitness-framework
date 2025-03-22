@@ -80,8 +80,12 @@ const ExercisePreviewPage: React.FC = () => {
     const [breakTime, setBreakTime] = useState<number>(60);
     const { showFooterCard } = useContainer();
 
-    const [quote] = useState<string>(QUOTES[Math.floor(Math.random() * QUOTES.length)].quote);
-    const [author] = useState<string>(QUOTES[Math.floor(Math.random() * QUOTES.length)].author);
+    const [quote] = useState<string>(
+        QUOTES[settings.quoteMode][Math.floor(Math.random() * QUOTES[settings.quoteMode].length)].quote
+    );
+    const [author] = useState<string>(
+        QUOTES[settings.quoteMode][Math.floor(Math.random() * QUOTES[settings.quoteMode].length)].author
+    );
 
     const MuscularLoad: React.FC<MuscularLoadProps> = ({ reps, weight, units, totalWeight }) => {
         return (
@@ -111,16 +115,6 @@ const ExercisePreviewPage: React.FC = () => {
                 </div>
             </span>
         );
-    };
-
-    const handleWeightUnit = () => {
-        let weightUnit: string = "";
-        if (settings.unit === "metric") {
-            weightUnit = "kg";
-        } else if (settings.unit === "imperial") {
-            weightUnit = "lbs";
-        }
-        return weightUnit;
     };
 
     const handleTimeUpdate = (timeLeft: number) => {
@@ -173,7 +167,7 @@ const ExercisePreviewPage: React.FC = () => {
                 <MuscularLoad
                     reps={lastExerciseReps}
                     weight={lastExerciseWeight}
-                    units={handleWeightUnit()}
+                    units={settings.weightUnit}
                     totalWeight={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)}
                 />
             </div>

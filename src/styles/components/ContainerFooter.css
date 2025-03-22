@@ -1,4 +1,4 @@
-@keyframes fadeInUp {
+@keyframes footerOpening {
     0% {
         transform: translate(-50%, 100%);
         opacity: 0;
@@ -9,7 +9,7 @@
     }
 }
 
-@keyframes fadeOutDown {
+@keyframes footerClosing {
     0% {
         transform: translate(-50%, 0);
         opacity: 1;
@@ -26,7 +26,6 @@
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--card-background);
-    box-shadow: var(--card-shadow);
     outline: 3px solid var(--card-border);
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
@@ -46,11 +45,11 @@
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
-    animation: fadeInUp 0.3s ease-in-out;
+    animation: footerOpening 250ms ease-in-out;
 }
 
 .container-footer.closing {
-    animation: fadeOutDown 0.3s ease-in-out;
+    animation: footerClosing 250ms ease-in-out;
     opacity: 0;
 }
 

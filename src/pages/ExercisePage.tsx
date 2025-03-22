@@ -34,13 +34,12 @@ const ExercisePage: React.FC = () => {
     const isFirstSet = workoutState.currentSetIndex === 0;
     const isFirstExercise = workoutState.currentExerciseIndex === 0;
 
-    const [randomQuote, setRandomQuote] = useState<string>("");
-    const [randomQuoteAuthor, setRandomQuoteAuthor] = useState<string>("");
-    useEffect(() => {
-        const randomIndex = Math.floor(Math.random() * QUOTES.length);
-        setRandomQuote(QUOTES[randomIndex].quote);
-        setRandomQuoteAuthor(QUOTES[randomIndex].author);
-    }, []);
+    const [quote] = useState<string>(
+        QUOTES[settings.quoteMode][Math.floor(Math.random() * QUOTES[settings.quoteMode].length)].quote
+    );
+    const [author] = useState<string>(
+        QUOTES[settings.quoteMode][Math.floor(Math.random() * QUOTES[settings.quoteMode].length)].author
+    );
 
     useEffect(() => {
         if (repsInput === 0) {
@@ -61,23 +60,13 @@ const ExercisePage: React.FC = () => {
                 currentSet={workoutState.currentSetIndex + 1}
                 initialReps={repsInput}
                 initialWeight={weightInput}
-                weightUnit={handleWeightUnit()}
+                weightUnit={settings.weightUnit}
                 onSave={handleSave}
                 onCancel={hideFooterCard}
             />
         );
 
         showFooterCard(content);
-    };
-
-    const handleWeightUnit = () => {
-        let weightUnit: string = "";
-        if (settings.unit === "metric") {
-            weightUnit = "kg";
-        } else if (settings.unit === "imperial") {
-            weightUnit = "lbs";
-        }
-        return weightUnit;
     };
 
     const handleNext = () => {
@@ -178,8 +167,8 @@ const ExercisePage: React.FC = () => {
             <div className="card">
                 <div className="card-header">
                     <div className="quote-container">
-                        <div className="quote-text">{randomQuote}</div>
-                        <div className="quote-author">{randomQuoteAuthor}</div>
+                        <div className="quote-text">{quote}</div>
+                        <div className="quote-author">{author}</div>
                     </div>
                 </div>
 
@@ -190,7 +179,7 @@ const ExercisePage: React.FC = () => {
                             className="last-weight-weight"
                             onClick={handleShowRepsInputFooter}
                         >
-                            {weightInput} {handleWeightUnit()} {<LuCirclePlus />}
+                            {weightInput} {settings.weightUnit} {<LuCirclePlus />}
                         </span>
                     </div>
 

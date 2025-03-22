@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { LuX } from "react-icons/lu";
 
-import "../styles/components/ContainerPopup.css";
 import { useContainer } from "../context/ContainerContext";
+
+import "../styles/components/ContainerPopup.css";
 
 interface ContainerPopupProps {
     isOpen: boolean;
@@ -16,6 +17,14 @@ const ContainerPopup = ({ isOpen, content, onClose }: ContainerPopupProps) => {
     const handleClose = () => {
         onClose();
     };
+
+    // useEffect(() => {
+    //     if (isPopupClosing) {
+    //         setTimeout(() => {
+    //             onClose();
+    //         }, 250);
+    //     }
+    // }, [isPopupClosing]);
 
     return (
         <div className={`container-popup ${isOpen ? "open" : ""} ${isPopupClosing ? "closing" : ""}`}>

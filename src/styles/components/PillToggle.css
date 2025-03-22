@@ -9,7 +9,8 @@
     border: none;
     padding: 0;
     margin: 5px 0;
-    transition: all 200ms;
+
+    transition: all 250ms;
 }
 
 .pill-toggle:hover {
@@ -28,7 +29,7 @@
     height: 22px;
     background-color: white;
     border-radius: 50%;
-    transition: all 200ms;
+    transition: all 250ms;
 }
 
 .pill-toggle.active .pill-circle {

@@ -29,6 +29,7 @@ const handleDeleteUserData = () => {
 const handleDeleteWorkouts = () => {
     localStorage.removeItem("workout-plans");
     localStorage.removeItem("workout-state");
+    localStorage.removeItem("temp-workout-plan");
     window.location.reload();
 };
 

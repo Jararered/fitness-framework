@@ -1,4 +1,5 @@
 import { createContext, useState, ReactNode, useEffect, useContext } from "react";
+import { Equipment } from "../data/types";
 
 interface EquipmentContextType {
     equipmentConfigs: EquipmentConfig[];
@@ -9,7 +10,7 @@ interface EquipmentContextType {
 
 interface EquipmentConfig {
     name: string;
-    equipment: string[];
+    equipment: Equipment[];
 }
 
 export const EquipmentContext = createContext<EquipmentContextType | undefined>(undefined);

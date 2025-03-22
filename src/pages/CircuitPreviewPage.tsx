@@ -15,7 +15,7 @@ const CircuitPreviewPage: React.FC = () => {
         setWorkoutState({
             ...workoutState,
             currentPlan: ExampleWorkout,
-            isStarted: true,
+            isStarted: false,
             currentCircuitIndex: 0,
             currentExerciseIndex: 0,
             currentSetIndex: 0,
@@ -48,61 +48,57 @@ const CircuitPreviewPage: React.FC = () => {
 
     return (
         <div className="workout-preview-page">
-            <div className="card">
-                <div className="card-header">
-                    <h2>FOR TODAY</h2>
-                </div>
-                <div className="card-content">
-                    <div className="workout-preview-container">
-                        {/* Iterate over each circuit */}
-                        {workoutState.currentPlan?.circuits.map((circuit, circuitIndex) => (
-                            <React.Fragment key={circuitIndex}>
-                                <div className="circuit-container">
-                                    <div className="circuit-header">Circuit {circuitIndex + 1}</div>
-                                    <hr />
-                                    {/* Iterate over each exercise */}
-                                    {circuit.exercises.map((exercise, exerciseIndex) => (
-                                        <React.Fragment key={exerciseIndex}>
-                                            <div
-                                                className="circuit-preview-exercise"
-                                                key={exerciseIndex}
-                                            >
-                                                <span className="exercise-preview-item">
-                                                    <div className="exercise-icon">
-                                                        <LuDumbbell />
-                                                        {/* If the exercise is the current exercise, and the circuit is the current circuit, add a label */}
-                                                        {exerciseIndex === workoutState.currentExerciseIndex &&
-                                                            circuitIndex === workoutState.currentCircuitIndex && (
-                                                                <span className="current-circuit-label">Current</span>
-                                                            )}
-                                                    </div>
-                                                    <div className="exercise-details">
-                                                        <div className="exercise-name">{exercise.exercise}</div>
-                                                        <div className="exercise-reps">
-                                                            {exercise.reps.join(", ")} Reps
-                                                        </div>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                            {exerciseIndex < circuit.exercises.length - 1 && (
-                                                <span className="exercise-divider">
-                                                    <p>1:00</p>
-                                                    <LuArrowDown />
-                                                </span>
-                                            )}
-                                        </React.Fragment>
-                                    ))}
-                                    <div className="circuit-rep-index">{handleRepTag(circuitIndex, 0)}</div>
-                                    {/* Add a divider between exercises */}
+            <div className="card-header">
+                <h2>FOR TODAY</h2>
+            </div>
+            <div className="card-content">
+                <div className="workout-preview-container">
+                    {/* Iterate over each circuit */}
+                    {workoutState.currentPlan?.circuits.map((circuit, circuitIndex) => (
+                        <React.Fragment key={circuitIndex}>
+                            <div className="circuit-container">
+                                <div className="circuit-header">Circuit {circuitIndex + 1}</div>
+                                <hr />
+                                {/* Iterate over each exercise */}
+                                {circuit.exercises.map((exercise, exerciseIndex) => (
+                                    <React.Fragment key={exerciseIndex}>
+                                        <div
+                                            className="circuit-preview-exercise"
+                                            key={exerciseIndex}
+                                        >
+                                            <span className="exercise-preview-item">
+                                                <div className="exercise-icon">
+                                                    <LuDumbbell />
+                                                    {/* If the exercise is the current exercise, and the circuit is the current circuit, add a label */}
+                                                    {exerciseIndex === workoutState.currentExerciseIndex &&
+                                                        circuitIndex === workoutState.currentCircuitIndex && (
+                                                            <span className="current-circuit-label">Current</span>
+                                                        )}
+                                                </div>
+                                                <div className="exercise-details">
+                                                    <div className="exercise-name">{exercise.exercise}</div>
+                                                    <div className="exercise-reps">{exercise.reps.join(", ")} Reps</div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                        {exerciseIndex < circuit.exercises.length - 1 && (
+                                            <span className="exercise-divider">
+                                                <p>1:00</p>
+                                                <LuArrowDown />
+                                            </span>
+                                        )}
+                                    </React.Fragment>
+                                ))}
+                                <div className="circuit-rep-index">{handleRepTag(circuitIndex, 0)}</div>
+                                {/* Add a divider between exercises */}
+                            </div>
+                            {circuitIndex < (workoutState.currentPlan?.circuits.length ?? 0) - 1 && (
+                                <div className="circuit-divider">
+                                    <div className="circuit-divider-text">Move to next circuit</div>
                                 </div>
-                                {circuitIndex < (workoutState.currentPlan?.circuits.length ?? 0) - 1 && (
-                                    <div className="circuit-divider">
-                                        <div className="circuit-divider-text">Move to next circuit</div>
-                                    </div>
-                                )}
-                            </React.Fragment>
-                        ))}
-                    </div>
+                            )}
+                        </React.Fragment>
+                    ))}
                 </div>
             </div>
         </div>

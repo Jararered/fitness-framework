@@ -1,5 +1,68 @@
 import { Exercise } from "./types";
 
+type EXERCISE_NAMES =
+    | "Barbell Bent-Over Row"
+    | "Barbell Deadlift"
+    | "Dumbbell Bent-Over Row"
+    | "Dumbbell Single-Arm Row"
+    | "Lat Pulldown"
+    | "Lat Pulldown Behind-the-Head"
+    | "Lat Pulldown Narrow-Grip"
+    | "Lat Pulldown Reverse-Grip"
+    | "Lat Pulldown Single-Arm"
+    | "Lat Pulldown Wide-Grip"
+    | "Smith Machine Bent-Over Row"
+    | "Barbell Curl"
+    | "Dumbbell Bicep Curl"
+    | "Dumbbell Hammer Curl"
+    | "EZ Bar Close-Grip Curl"
+    | "EZ Bar Curl"
+    | "EZ Bar Wide-Grip Curl"
+    | "Machine Chest Press"
+    | "Machine Incline Chest Press"
+    | "Smith Machine Bench Press"
+    | "Smith Machine Close-Grip Bench Press"
+    | "Smith Machine Incline Bench Press"
+    | "Barbell Front Squat"
+    | "Barbell Lunge"
+    | "Barbell Romanian Deadlift"
+    | "Barbell Squat"
+    | "Barbell Sumo Deadlift"
+    | "Dumbbell Lunges"
+    | "Leg Curl"
+    | "Leg Curl + Isometric Hold"
+    | "Leg Extension"
+    | "Leg Extension + Isometric Hold"
+    | "Leg Press"
+    | "Smith Machine Lunges"
+    | "Smith Machine Squat"
+    | "Barbell Overhead Press"
+    | "Dumbbell Front Raise"
+    | "Dumbbell Lateral Raise"
+    | "Dumbbell Shoulder Press"
+    | "Dumbbell Shrugs"
+    | "Dumbbell Upright Row"
+    | "Machine Shoulder Press"
+    | "Smith Machine Shoulder Press"
+    | "Smith Machine Shrugs"
+    | "Dumbell Seated Military Press"
+    | "Dumbbell Standing Military Press"
+    | "Dumbbell Seated Arnold Press"
+    | "Dumbbell Seated Reverse Arnold Press"
+    | "Dumbbell Seated Arnold Rotations"
+    | "Dumbbell Hammer Shrug"
+    | "Dumbbell Skull Crushers"
+    | "Dumbbell Tricep Extension"
+    | "EZ Bar Skull Crusher"
+    | "Rope Pulldown"
+    | "Dumbbell Side Oblique Crunch"
+    | "Cable Straight Arm Oblique Twist"
+    | "Cable Bent Over Oblique Dig"
+    | "Rope Crunch"
+    | "Hanging Leg Raise"
+    | "Hanging Knee Raise"
+    | "Weighted Hanging Knee Raise";
+
 const BACK_EXERCISES: Exercise[] = [
     {
         exercise_name: "Barbell Bent-Over Row",
@@ -99,6 +162,60 @@ const BACK_EXERCISES: Exercise[] = [
         secondary_muscles: [""],
         stabilizing_muscles: [""],
         difficulty: "",
+    },
+    {
+        exercise_name: "Pullup",
+        muscle_group: ["Back"],
+        required_equipment: ["Pullup Bar"],
+        primary_muscles: [""],
+        secondary_muscles: [""],
+        stabilizing_muscles: [""],
+        difficulty: "",
+    },
+    {
+        exercise_name: "Cable Lat Pulldown",
+        muscle_group: ["Back"],
+        required_equipment: ["Cable Machine"],
+        primary_muscles: ["Latissimus Dorsi"],
+        secondary_muscles: ["Rhomboids", "Trapezius"],
+        stabilizing_muscles: ["Biceps"],
+        difficulty: "Beginner",
+    },
+    {
+        exercise_name: "Seated Cable Row",
+        muscle_group: ["Back"],
+        required_equipment: ["Cable Machine"],
+        primary_muscles: ["Latissimus Dorsi", "Rhomboids"],
+        secondary_muscles: ["Trapezius", "Rear Deltoids"],
+        stabilizing_muscles: ["Biceps", "Abs"],
+        difficulty: "Beginner",
+    },
+    {
+        exercise_name: "Standing Cable Pullover",
+        muscle_group: ["Back"],
+        required_equipment: ["Cable Machine"],
+        primary_muscles: ["Latissimus Dorsi"],
+        secondary_muscles: ["Serratus Anterior"],
+        stabilizing_muscles: ["Abs", "Triceps"],
+        difficulty: "Intermediate",
+    },
+    {
+        exercise_name: "Cable Face Pull",
+        muscle_group: ["Back", "Shoulders"],
+        required_equipment: ["Cable Machine"],
+        primary_muscles: ["Rear Deltoids", "Trapezius"],
+        secondary_muscles: ["Rhomboids"],
+        stabilizing_muscles: ["Abs"],
+        difficulty: "Beginner",
+    },
+    {
+        exercise_name: "Straight Arm Cable Pulldown",
+        muscle_group: ["Back"],
+        required_equipment: ["Cable Machine"],
+        primary_muscles: ["Latissimus Dorsi"],
+        secondary_muscles: ["Serratus Anterior"],
+        stabilizing_muscles: ["Triceps", "Abs"],
+        difficulty: "Beginner",
     },
 ];
 
@@ -599,4 +716,24 @@ const AB_EXERCISES: Exercise[] = [
     },
 ];
 
-export const EXERCISES = [...BACK_EXERCISES, ...BICEP_EXERCISES, ...CHEST_EXERCISES, ...LEG_EXERCISES, ...SHOULDER_EXERCISES, ...TRICEP_EXERCISES, ...OBLIQUE_EXERCISES, ...AB_EXERCISES];
+export const EXERCISES = [
+    ...BACK_EXERCISES,
+    ...BICEP_EXERCISES,
+    ...CHEST_EXERCISES,
+    ...LEG_EXERCISES,
+    ...SHOULDER_EXERCISES,
+    ...TRICEP_EXERCISES,
+    ...OBLIQUE_EXERCISES,
+    ...AB_EXERCISES,
+];
+
+export const EXERCISES_BY_MUSCLE_GROUP = {
+    Back: BACK_EXERCISES,
+    Biceps: BICEP_EXERCISES,
+    Chest: CHEST_EXERCISES,
+    Legs: LEG_EXERCISES,
+    Shoulders: SHOULDER_EXERCISES,
+    Triceps: TRICEP_EXERCISES,
+    Abs: AB_EXERCISES,
+    Obliques: OBLIQUE_EXERCISES,
+};

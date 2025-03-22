@@ -1,5 +1,12 @@
 .selector-searchable {
     position: relative;
+
+    overflow: hidden-y;
+}
+
+.selector-searchable {
+    width: auto;
+    
 }
 
 .selector-dropdown {
@@ -9,17 +16,18 @@
 
     overflow: hidden;
     width: 100%;
-    
+    min-width: 15rem;
+
     border: 1px solid var(--card-border);
     background-color: var(--card-background);
     box-shadow: var(--card-shadow);
-    
-    z-index: 1000;
+
+    z-index: 2000;
 }
 
 .options-container {
-    max-height: 20rem;
-    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
     width: 100%;
 
     scrollbar-width: none;

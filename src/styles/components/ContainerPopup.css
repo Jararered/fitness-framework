@@ -1,45 +1,45 @@
-@keyframes fadeInUp {
-    0% {
-        transform: translateY(10px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+.container-popup.open {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    visibility: visible;
 }
 
-@keyframes fadeOutDown {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(10px);
-        opacity: 0;
-    }
+.container-popup.closing {
+    transform: translate(-50%, -50%) translateY(10px);
+    opacity: 0;
+}
+
+.container-popup.closed {
+    opacity: 0;
+    visibility: hidden;
 }
 
 .container-popup {
     position: fixed;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background-color: var(--card-background);
-    box-shadow: var(--card-shadow);
     outline: 3px solid var(--card-border);
     border-radius: 2rem;
     opacity: 0;
     visibility: hidden;
     z-index: 1000;
-    min-width: 300px;
-    max-width: 90%;
-    max-height: 90vh;
+    min-width: 350px;
     overflow-y: auto;
+
+    transition: all 250ms ease-in-out;
 }
 
 .container-popup-content h1 {
     margin-left: 3rem;
     margin-right: 3rem;
+    margin-top: 0;
 }
 
 .container-popup-content {
@@ -50,16 +50,4 @@
     position: absolute;
     top: 1rem;
     left: 1rem;
-}
-
-.container-popup.open {
-    opacity: 1;
-    visibility: visible;
-    animation: fadeInUp 250ms forwards;
-}
-
-.container-popup.closing {
-    animation: fadeOutDown 250ms forwards;
-    opacity: 0;
-    visibility: hidden;
 }

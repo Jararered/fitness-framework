@@ -2,19 +2,29 @@
 
 .dockbar {
     background-color: var(--card-background);
-    box-shadow: var(--card-shadow);
     outline: 3px solid var(--card-border);
 
     border-radius: 2rem;
-    padding: 0.5rem;
+
+    /* Settings to make the dock bar merge with the bottom of the screen */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    bottom: 0;
+    padding-bottom: 1.5rem;
+
+    /* Settings to make the dock bar floating at the bottom of the screen */
+    /* padding-bottom: 0.5rem;
+    bottom: 2rem; */
+
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
 
     left: 50%;
-    bottom: 2rem;
     position: fixed;
-    width: auto;
 
     transform: translateX(-50%);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 250ms ease-in-out;
 
     z-index: 500;
 }

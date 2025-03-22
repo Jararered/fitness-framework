@@ -5,7 +5,9 @@ interface Settings {
     weight: number;
     height: number;
     unit: "imperial" | "metric";
+    weightUnit: "lbs" | "kg";
     darkMode: boolean;
+    quoteMode: "gentle" | "moderate" | "hardcore" | "xxx";
 }
 
 interface UserContextType {
@@ -18,7 +20,17 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [settings, setSettings] = useState<Settings>(() => {
         const saved = localStorage.getItem("user-context");
-        return saved ? JSON.parse(saved) : { name: "", weight: 0, height: 0, unit: "imperial", darkMode: true };
+        return saved
+            ? JSON.parse(saved)
+            : {
+                  name: "",
+                  weight: 0,
+                  height: 0,
+                  unit: "imperial",
+                  weightUnit: "lbs",
+                  darkMode: true,
+                  quoteMode: "moderate",
+              };
     });
 
     useEffect(() => {
