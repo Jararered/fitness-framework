@@ -156,7 +156,7 @@ const BACK_EXERCISES: Exercise[] = [
     },
 ];
 
-const BICEP_EXERCISES = [
+const BICEP_EXERCISES: Exercise[] = [
     {
         exercise_name: "Barbell Curl",
         muscle_group: ["Biceps"],
@@ -213,7 +213,7 @@ const BICEP_EXERCISES = [
     },
 ];
 
-const CHEST_EXERCISES = [
+const CHEST_EXERCISES: Exercise[] = [
     {
         exercise_name: "Barbell Bench Press",
         muscle_group: ["Chest"],
@@ -226,7 +226,7 @@ const CHEST_EXERCISES = [
     {
         exercise_name: "Barbell Decline Bench Press",
         muscle_group: ["Chest"],
-        required_equipment: ["Barbell", "Flat Bench"],
+        required_equipment: ["Barbell", "Decline Bench"],
         primary_muscles: [""],
         secondary_muscles: [""],
         stabilizing_muscles: [""],
@@ -235,7 +235,7 @@ const CHEST_EXERCISES = [
     {
         exercise_name: "Barbell Incline Bench Press",
         muscle_group: ["Chest"],
-        required_equipment: ["Barbell", "Flat Bench"],
+        required_equipment: ["Barbell", "Incline Bench"],
         primary_muscles: [""],
         secondary_muscles: [""],
         stabilizing_muscles: [""],
@@ -288,7 +288,7 @@ const CHEST_EXERCISES = [
     },
 ];
 
-const LEG_EXERCISES = [
+const LEG_EXERCISES: Exercise[] = [
     {
         exercise_name: "Barbell Front Squat",
         muscle_group: ["Legs"],
@@ -408,7 +408,7 @@ const LEG_EXERCISES = [
     },
 ];
 
-const SHOULDER_EXERCISES = [
+const SHOULDER_EXERCISES: Exercise[] = [
     {
         exercise_name: "Barbell Overhead Press",
         muscle_group: ["Shoulders"],
@@ -546,7 +546,7 @@ const SHOULDER_EXERCISES = [
     },
 ];
 
-const TRICEP_EXERCISES = [
+const TRICEP_EXERCISES: Exercise[] = [
     {
         exercise_name: "Dumbbell Skull Crushers",
         muscle_group: ["Triceps"],

@@ -1,14 +1,6 @@
-import { EXERCISES, EXERCISES_BY_MUSCLE_GROUP } from "./exercises.ts";
+import { EXERCISES_BY_MUSCLE_GROUP } from "./exercises.ts";
 
 import { CircuitPlan, ExercisePlan, WorkoutPlan, MuscleGroup, Equipment } from "./types.ts";
-
-// Calculate number of exercises per muscle group per equipment
-const CalculateExercisesPerMuscleGroupPerEquipment = (muscleGroup: MuscleGroup, equipment: Equipment): number => {
-    const exercises = EXERCISES_BY_MUSCLE_GROUP[muscleGroup].filter(
-        (exercise) => exercise.muscle_group.includes(muscleGroup) && exercise.required_equipment.includes(equipment)
-    );
-    return exercises.length;
-};
 
 const BACK_EQUIPMENT: Equipment[] = [
     "Barbell",
@@ -97,10 +89,13 @@ const calculateRepsArray = (sets: number, baseReps: number, style: "drop" | "fla
 };
 
 const generateRandomEquipment = (muscleGroup: MuscleGroup, availableEquipment: Equipment[]): Equipment => {
-    // Generate a random number between 0 and the length of the available equipment array
-    const equipment = EQUIPMENT_LIST[muscleGroup].equipment;
-    const randomIndex = Math.floor(Math.random() * equipment.length);
-    return equipment[randomIndex];
+    // Filter the available equipment by the muscle group
+    const filteredEquipment = availableEquipment.filter((equipment) =>
+        EQUIPMENT_LIST[muscleGroup].equipment.includes(equipment)
+    );
+
+    // Return a random equipment from the filtered equipment array
+    return filteredEquipment[Math.floor(Math.random() * filteredEquipment.length)];
 };
 
 const generateRandomSetCount = (): number => {

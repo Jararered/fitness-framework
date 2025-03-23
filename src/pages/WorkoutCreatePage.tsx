@@ -1,20 +1,23 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { LuChartNoAxesColumnDecreasing, LuAlignJustify, LuPencil, LuSave } from "react-icons/lu";
 import { LuPlus, LuMinus, LuTrash } from "react-icons/lu";
 import { LuDumbbell, LuArrowDown } from "react-icons/lu";
 import { LuSparkles } from "react-icons/lu";
 
-import { useNavigate } from "react-router-dom";
 import { useEquipment } from "../context/EquipmentContext.tsx";
 import { useContainer } from "../context/ContainerContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
+import { ContainerCard } from "../components/ContainerCard.tsx";
 import { SelectorSearchable } from "../components/SelectorSearchable.tsx";
+
 import { ExercisePlan, CircuitPlan, WorkoutPlan, Equipment, MuscleGroup } from "../data/types.ts";
 import { generateRandomWorkout } from "../data/generator.ts";
-import "../styles/pages/CircuitPreviewPage.css";
+
+import "../styles/components/WorkoutOverview.css";
 import "../styles/pages/WorkoutCreatePage.css";
-import { ContainerCard } from "../components/ContainerCard.tsx";
 
 const repsChangeAmount = 2;
 
@@ -239,6 +242,12 @@ const WorkoutCreatePage: React.FC = () => {
     // Save temporary workout plan to local storage if workoutPlan has changed
     useEffect(() => {
         localStorage.setItem("temp-workout-plan", JSON.stringify(workoutPlanState));
+
+        // Update the workout state with the new workout plan
+        setWorkoutState({
+            ...workoutState,
+            currentPlan: workoutPlanState,
+        });
     }, [workoutPlanState]);
 
     const handleSaveWorkout = (startWorkout: boolean = false) => {
@@ -443,6 +452,7 @@ const WorkoutCreatePage: React.FC = () => {
                             onChange={(e) => {
                                 setSelectedMuscleGroup(e.target.value);
                             }}
+                            value={selectedMuscleGroup}
                         >
                             <option value="Back">Back</option>
                             <option value="Biceps">Biceps</option>

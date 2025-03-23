@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { LuTrash, LuSave, LuArrowDownToLine } from "react-icons/lu";
+import { LuTrash, LuSave, LuArrowDownToLine, LuCheck } from "react-icons/lu";
 import { LuDumbbell } from "react-icons/lu";
 
 import { useWorkout } from "../context/WorkoutContext.tsx";
@@ -125,11 +125,17 @@ const EquipmentSelectPage: React.FC = () => {
                         <React.Fragment>
                             {equipmentConfigs.map((gym) => (
                                 <span
-                                    key={gym.name}
                                     className="card-row"
+                                    key={gym.name}
                                 >
-                                    <label className="gym-list-item-name">{gym.name}</label>
-                                    <span className="gym-list-item-buttons">
+                                    <span className="gym-list-item">
+                                        <h2 className="gym-list-item-name">{gym.name}</h2>
+                                        {equipmentLast === gym.name && (
+                                            <p className="gym-list-item-auto-load-tag">Auto-Load</p>
+                                        )}
+                                    </span>
+
+                                    <span className="gym-list-item-buttons right">
                                         <button
                                             className="gym-list-item-button"
                                             onClick={() => handleLoadGym(gym)}

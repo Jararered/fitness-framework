@@ -5,9 +5,9 @@ import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import { ExampleWorkout } from "../data/types.ts";
 
-import "../styles/pages/CircuitPreviewPage.css";
+import "../styles/components/WorkoutOverview.css";
 
-const CircuitPreviewPage: React.FC = () => {
+const WorkoutOverview: React.FC = () => {
     const { workoutState, setWorkoutState } = useWorkout();
 
     // Intiialize workout state from example workout
@@ -105,4 +105,4 @@ const CircuitPreviewPage: React.FC = () => {
     );
 };
 
-export default CircuitPreviewPage;
+export default WorkoutOverview;

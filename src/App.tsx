@@ -15,9 +15,9 @@ import ExercisePage from "./pages/ExercisePage.tsx";
 import ExercisePreviewPage from "./pages/ExercisePreviewPage.tsx";
 import WorkoutCompletePage from "./pages/WorkoutCompletePage.tsx";
 import ManageDataPage from "./pages/ManageDataPage.tsx";
-import CircuitPreviewPage from "./pages/CircuitPreviewPage.tsx";
 import SandboxPage from "./pages/SandboxPage.tsx";
 
+import WorkoutOverview from "./components/WorkoutOverview.tsx";
 import ContainerPopup from "./components/ContainerPopup.tsx";
 import ContainerFooter from "./components/ContainerFooter.tsx";
 import ContainerToast from "./components/ContainerToast.tsx";
@@ -86,8 +86,8 @@ function App() {
                                 element={<ManageDataPage />}
                             />
                             <Route
-                                path="/circuit-preview"
-                                element={<CircuitPreviewPage />}
+                                path="/workout-overview"
+                                element={<WorkoutOverview />}
                             />
                             <Route
                                 path="/sandbox"
