@@ -426,6 +426,42 @@ const WorkoutCreatePage: React.FC = () => {
                 <h1>Create Workout</h1>
             </div>
 
+            <h1>Generate Workout</h1>
+            <div className="card">
+                <div className="card-header">
+                    <h2>Generate Workout</h2>
+                    <p>Generate a workout</p>
+                </div>
+                <div className="card-content">
+                    <select
+                        onChange={(e) => {
+                            setSelectedMuscleGroup(e.target.value);
+                        }}
+                    >
+                        <option value="Back">Back</option>
+                        <option value="Biceps">Biceps</option>
+                        <option value="Chest">Chest</option>
+                        <option value="Legs">Legs</option>
+                        <option value="Shoulders">Shoulders</option>
+                        <option value="Triceps">Triceps</option>
+                        <option value="Abs">Abs</option>
+                        <option value="Obliques">Obliques</option>
+                    </select>
+                    <button
+                        onClick={() => {
+                            const randomWorkout = generateRandomWorkout(
+                                selectedMuscleGroup as MuscleGroup,
+                                selectedEquipment
+                            );
+                            // Set the workout plan state to the random workout
+                            setWorkoutPlanState(randomWorkout);
+                        }}
+                    >
+                        Generate Workout
+                    </button>
+                </div>
+            </div>
+
             <div className="card-content">
                 <div className="workout-preview-container">
                     {/* Iterate over each circuit */}
@@ -524,42 +560,6 @@ const WorkoutCreatePage: React.FC = () => {
                 <div className="card-header">
                     <h2>Save Current Plan</h2>
                     <p>Save your workout</p>
-                </div>
-            </div>
-
-            <h1>Generate Workout</h1>
-            <div className="card">
-                <div className="card-header">
-                    <h2>Generate Workout</h2>
-                    <p>Generate a workout</p>
-                </div>
-                <div className="card-content">
-                    <select
-                        onChange={(e) => {
-                            setSelectedMuscleGroup(e.target.value);
-                        }}
-                    >
-                        <option value="Back">Back</option>
-                        <option value="Biceps">Biceps</option>
-                        <option value="Chest">Chest</option>
-                        <option value="Legs">Legs</option>
-                        <option value="Shoulders">Shoulders</option>
-                        <option value="Triceps">Triceps</option>
-                        <option value="Abs">Abs</option>
-                        <option value="Obliques">Obliques</option>
-                    </select>
-                    <button
-                        onClick={() => {
-                            const randomWorkout = generateRandomWorkout(
-                                selectedMuscleGroup as MuscleGroup,
-                                selectedEquipment
-                            );
-                            // Set the workout plan state to the random workout
-                            setWorkoutPlanState(randomWorkout);
-                        }}
-                    >
-                        Generate Workout
-                    </button>
                 </div>
             </div>
         </div>

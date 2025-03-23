@@ -123,13 +123,13 @@ export const generateRandomExercise = (
     equipment: Equipment,
     setCount: number
 ): ExercisePlan => {
-    console.log("Muscle Group: ", muscleGroup);
-    console.log("Equipment: ", equipment);
+    // console.log("Muscle Group: ", muscleGroup);
+    // console.log("Equipment: ", equipment);
     // Filter exercises by muscle group
     const filteredExercises = EXERCISES_BY_MUSCLE_GROUP[muscleGroup].filter(
         (exercise) => exercise.muscle_group.includes(muscleGroup) && exercise.required_equipment.includes(equipment)
     );
-    console.log("Filtered Exercises: ", JSON.stringify(filteredExercises));
+    // console.log("Filtered Exercises: ", JSON.stringify(filteredExercises));
 
     // Select a random exercise from the filtered list
     const randomExercise = filteredExercises[Math.floor(Math.random() * filteredExercises.length)];
@@ -184,6 +184,18 @@ export const generateRandomCircuit = (muscleGroup: MuscleGroup, availableEquipme
 export const generateRandomWorkout = (muscleGroup: MuscleGroup, availableEquipment: Equipment[]): WorkoutPlan => {
     // Generate a random number of circuits
     const circuitCount = generateRandomCircuitCount();
+
+    const equipmentForMuscleGroup = EQUIPMENT_LIST[muscleGroup].equipment;
+
+    const avaliableExercises = EXERCISES_BY_MUSCLE_GROUP[muscleGroup];
+    // Filter the exercises by equipment for each exercise
+    const avaliableExercisesWithEquipment = avaliableExercises.filter((exercise) =>
+        exercise.required_equipment.some((equipment) => equipmentForMuscleGroup.includes(equipment as Equipment))
+    );
+    const avaliableExerciseCount = avaliableExercisesWithEquipment.length;
+
+    console.log("Number of available exercises: ", avaliableExerciseCount);
+    console.log("Available exercises: ", JSON.stringify(avaliableExercisesWithEquipment));
 
     return {
         circuits: Array.from({ length: circuitCount }, () => generateRandomCircuit(muscleGroup, availableEquipment)),

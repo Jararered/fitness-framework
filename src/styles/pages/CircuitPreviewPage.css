@@ -6,6 +6,7 @@
 
 .workout-preview-container {
     min-width: 350px;
+    max-width: 50rem;
 }
 
 .circuit-container {
