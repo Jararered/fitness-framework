@@ -1,10 +1,15 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { LuTrash, LuSave, LuArrowDownToLine } from "react-icons/lu";
+import { LuDumbbell } from "react-icons/lu";
 
 import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useEquipment } from "../context/EquipmentContext.tsx";
 import { useContainer } from "../context/ContainerContext.tsx";
-import { EquipmentToggleListItem } from "../components/EquipmentToggle.tsx";
+
+import { ContainerCard } from "../components/ContainerCard.tsx";
+import { ListItemToggleButton } from "../components/ListItemToggleButton.tsx";
+
+import { Equipment } from "../data/types.ts";
 
 import "../styles/pages/EquipmentSelectPage.css";
 
@@ -43,7 +48,7 @@ const EquipmentSelectPage: React.FC = () => {
         // Prompt the user for a name if they haven't already entered one
         const name = prompt("Please enter a name for the gym");
         if (name && name.length > 0) {
-            setEquipmentConfigs([...equipmentConfigs, { name, equipment: selectedEquipment }]);
+            setEquipmentConfigs([...equipmentConfigs, { name, equipment: selectedEquipment as Equipment[] }]);
             setEquipmentLast(name);
         } else {
             addToast("Please enter a name for the gym", "error");
@@ -57,11 +62,11 @@ const EquipmentSelectPage: React.FC = () => {
             if (exists) {
                 setEquipmentConfigs([
                     ...equipmentConfigs.filter((config) => config.name !== name),
-                    { name, equipment: selectedEquipment },
+                    { name, equipment: selectedEquipment as Equipment[] },
                 ]);
                 setEquipmentLast(name);
             } else {
-                setEquipmentConfigs([...equipmentConfigs, { name, equipment: selectedEquipment }]);
+                setEquipmentConfigs([...equipmentConfigs, { name, equipment: selectedEquipment as Equipment[] }]);
                 setEquipmentLast(name);
             }
         }
@@ -86,69 +91,65 @@ const EquipmentSelectPage: React.FC = () => {
         <div className="equipment-select-page page-container">
             <h1>Gym Equipment</h1>
 
-            <div className="card">
-                <div className="card-header">
-                    <h2>Equipment Selection</h2>
-                    <p>Select the equipment that is available at your gym</p>
-                </div>
+            <ContainerCard
+                title="Equipment Selection"
+                description="Select the equipment that is available at your gym"
+                content={
+                    <React.Fragment>
+                        <div className="equipment-toggle-container">
+                            {equipment.map((equipment) => (
+                                <ListItemToggleButton
+                                    key={equipment}
+                                    icon={<LuDumbbell />}
+                                    equipment={equipment}
+                                    enabled={selectedEquipment.includes(equipment)}
+                                    handleEquipmentToggle={handleEquipmentToggle}
+                                />
+                            ))}
+                        </div>
+                        <div className="equipment-toggles-buttons">
+                            <button onClick={handleSaveEquipment}>
+                                Save
+                                <LuSave />
+                            </button>
+                        </div>
+                    </React.Fragment>
+                }
+            />
 
-                <div className="card-content">
-                    <div className="equipment-toggle-container">
-                        {equipment.map((equipment) => (
-                            <EquipmentToggleListItem
-                                key={equipment}
-                                equipment={equipment}
-                                enabled={selectedEquipment.includes(equipment)}
-                                handleEquipmentToggle={handleEquipmentToggle}
-                            />
-                        ))}
-                    </div>
-                    <div className="equipment-toggles-buttons">
-                        <button onClick={handleSaveEquipment}>
-                            Save
-                            <LuSave />
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div className="card">
-                <div className="card-header">
-                    <h2>Load Gym</h2>
-                    <p>
-                        Below is a list of all the gyms you have saved. <br />
-                        The last gym used will be auto-loaded next time you open the app.
-                    </p>
-                </div>
-
-                <hr />
-
-                <div className="card-content">
-                    {equipmentConfigs.map((gym) => (
-                        <span
-                            key={gym.name}
-                            className="card-row"
-                        >
-                            <label className="gym-list-item-name">{gym.name}</label>
-                            <span className="gym-list-item-buttons">
-                                <button
-                                    className="gym-list-item-button"
-                                    onClick={() => handleLoadGym(gym)}
+            {equipmentConfigs.length > 0 && (
+                <ContainerCard
+                    title="Load Gym"
+                    description="Below is a list of all the gyms you have saved. The last gym used will be auto-loaded next time you open the app."
+                    content={
+                        <React.Fragment>
+                            {equipmentConfigs.map((gym) => (
+                                <span
+                                    key={gym.name}
+                                    className="card-row"
                                 >
-                                    Load
-                                    <LuArrowDownToLine />
-                                </button>
-                                <button
-                                    className="gym-list-item-button caution icon"
-                                    onClick={() => handleDeleteGym(gym.name)}
-                                >
-                                    <LuTrash />
-                                </button>
-                            </span>
-                        </span>
-                    ))}
-                </div>
-            </div>
+                                    <label className="gym-list-item-name">{gym.name}</label>
+                                    <span className="gym-list-item-buttons">
+                                        <button
+                                            className="gym-list-item-button"
+                                            onClick={() => handleLoadGym(gym)}
+                                        >
+                                            Load
+                                            <LuArrowDownToLine />
+                                        </button>
+                                        <button
+                                            className="gym-list-item-button caution icon"
+                                            onClick={() => handleDeleteGym(gym.name)}
+                                        >
+                                            <LuTrash />
+                                        </button>
+                                    </span>
+                                </span>
+                            ))}
+                        </React.Fragment>
+                    }
+                />
+            )}
         </div>
     );
 };

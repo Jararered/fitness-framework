@@ -105,6 +105,22 @@ button.icon {
     padding: 0;
 }
 
+button.disabled {
+    background-color: var(--card-border);
+}
+
+button.disabled:hover {
+    background-color: var(--card-hover);
+}
+
+button.enabled {
+    background-color: var(--main-accent);
+}
+
+button.enabled:hover {
+    background-color: var(--main-accent-hover);
+}
+
 label {
     display: block;
     font-weight: bold;
