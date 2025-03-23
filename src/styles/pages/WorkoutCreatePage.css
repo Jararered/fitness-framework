@@ -6,7 +6,7 @@
 .add-exercise-button-container {
     width: 100%;
     justify-content: center;
-    margin: 0.5rem 0;
+    margin-bottom: 0.5rem;
 }
 
 .add-circuit-button-container {
@@ -19,7 +19,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: calc(100% - 4rem);
+    width: calc(100% - 1rem);
 }
 
 .circuit-header button {

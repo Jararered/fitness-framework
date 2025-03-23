@@ -1,3 +1,5 @@
+import "../styles/components/Card.css";
+
 interface ContainerCardProps {
     title: string;
     description: string;
@@ -9,7 +11,7 @@ export const ContainerCard: React.FC<ContainerCardProps> = ({ title, description
         <div className="card">
             <div className="card-header">
                 <h2>{title}</h2>
-                <p>{description}</p>
+                <p className="card-description">{description}</p>
             </div>
 
             <hr />

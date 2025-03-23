@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import { LuChartNoAxesColumnDecreasing, LuAlignJustify, LuPencil, LuSave } from "react-icons/lu";
 import { LuPlus, LuMinus, LuTrash } from "react-icons/lu";
 import { LuDumbbell, LuArrowDown } from "react-icons/lu";
+import { LuSparkles } from "react-icons/lu";
 
 import { useNavigate } from "react-router-dom";
 import { useEquipment } from "../context/EquipmentContext.tsx";
@@ -13,6 +14,7 @@ import { ExercisePlan, CircuitPlan, WorkoutPlan, Equipment, MuscleGroup } from "
 import { generateRandomWorkout } from "../data/generator.ts";
 import "../styles/pages/CircuitPreviewPage.css";
 import "../styles/pages/WorkoutCreatePage.css";
+import { ContainerCard } from "../components/ContainerCard.tsx";
 
 const repsChangeAmount = 2;
 
@@ -390,16 +392,16 @@ const WorkoutCreatePage: React.FC = () => {
         });
     };
 
-    const handleEditExercise = (circuitIndex: number, exerciseIndex: number) => {
+    const handleOpenEditExercise = (circuitIndex: number, exerciseIndex: number) => {
         showPopup(
             <EditExercisePopup
                 initialExercise={workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex]}
-                onClose={(updatedExercise) => handleEditExerciseClose(circuitIndex, exerciseIndex, updatedExercise)}
+                onClose={(updatedExercise) => handleCloseEditExercise(circuitIndex, exerciseIndex, updatedExercise)}
             />
         );
     };
 
-    const handleEditExerciseClose = (circuitIndex: number, exerciseIndex: number, updatedExercise: ExercisePlan) => {
+    const handleCloseEditExercise = (circuitIndex: number, exerciseIndex: number, updatedExercise: ExercisePlan) => {
         setWorkoutPlanState({
             ...workoutPlanState,
             circuits: workoutPlanState.circuits.map((circuit, index) =>
@@ -422,45 +424,46 @@ const WorkoutCreatePage: React.FC = () => {
 
     return (
         <div className="workout-create-page page-container">
-            <div className="card-header">
-                <h1>Create Workout</h1>
-            </div>
+            <h1>Create Workout</h1>
 
-            <h1>Generate Workout</h1>
-            <div className="card">
-                <div className="card-header">
-                    <h2>Generate Workout</h2>
-                    <p>Generate a workout</p>
-                </div>
-                <div className="card-content">
-                    <select
-                        onChange={(e) => {
-                            setSelectedMuscleGroup(e.target.value);
-                        }}
-                    >
-                        <option value="Back">Back</option>
-                        <option value="Biceps">Biceps</option>
-                        <option value="Chest">Chest</option>
-                        <option value="Legs">Legs</option>
-                        <option value="Shoulders">Shoulders</option>
-                        <option value="Triceps">Triceps</option>
-                        <option value="Abs">Abs</option>
-                        <option value="Obliques">Obliques</option>
-                    </select>
-                    <button
-                        onClick={() => {
-                            const randomWorkout = generateRandomWorkout(
-                                selectedMuscleGroup as MuscleGroup,
-                                selectedEquipment
-                            );
-                            // Set the workout plan state to the random workout
-                            setWorkoutPlanState(randomWorkout);
-                        }}
-                    >
-                        Generate Workout
-                    </button>
-                </div>
-            </div>
+            <ContainerCard
+                title="Generate Workout"
+                description="Select a muscle group to generate a random workout"
+                content={
+                    <span className="card-row">
+                        <select
+                            className="left expanding"
+                            onChange={(e) => {
+                                setSelectedMuscleGroup(e.target.value);
+                            }}
+                        >
+                            <option value="Back">Back</option>
+                            <option value="Biceps">Biceps</option>
+                            <option value="Chest">Chest</option>
+                            <option value="Legs">Legs</option>
+                            <option value="Shoulders">Shoulders</option>
+                            <option value="Triceps">Triceps</option>
+                            <option value="Abs">Abs</option>
+                            <option value="Obliques">Obliques</option>
+                        </select>
+                        <button
+                            className="right"
+                            onClick={() => {
+                                const randomWorkout = generateRandomWorkout(
+                                    selectedMuscleGroup as MuscleGroup,
+                                    selectedEquipment
+                                );
+                                // Set the workout plan state to the random workout
+                                setWorkoutPlanState(randomWorkout);
+                            }}
+                        >
+                            Generate Workout <LuSparkles />
+                        </button>
+                    </span>
+                }
+            />
+
+            <h1> Workout Preview </h1>
 
             <div className="card-content">
                 <div className="workout-preview-container">
@@ -502,7 +505,7 @@ const WorkoutCreatePage: React.FC = () => {
                                                 <span className="exercise-edit-buttons">
                                                     <button
                                                         className="exercise-edit-button icon"
-                                                        onClick={() => handleEditExercise(circuitIndex, exerciseIndex)}
+                                                        onClick={() => handleOpenEditExercise(circuitIndex, exerciseIndex)}
                                                     >
                                                         <LuPencil />
                                                     </button>
@@ -527,10 +530,10 @@ const WorkoutCreatePage: React.FC = () => {
                                 ))}
                                 <div className="add-exercise-button-container">
                                     <button
-                                        className="add-exercise-button"
+                                        className="icon"
                                         onClick={() => handleAddExerciseToCircuit(circuitIndex)}
                                     >
-                                        Add Exercise <LuPlus />
+                                        <LuPlus />
                                     </button>
                                 </div>
                                 <div className="circuit-rep-index">{handleRepTag(circuitIndex)}</div>

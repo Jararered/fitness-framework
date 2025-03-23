@@ -12,14 +12,14 @@ import "./styles/global.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <WorkoutProvider>
-            <EquipmentProvider>
-                <ContainerProvider>
+        <ContainerProvider>
+            <WorkoutProvider>
+                <EquipmentProvider>
                     <BrowserRouter>
                         <App />
                     </BrowserRouter>
-                </ContainerProvider>
-            </EquipmentProvider>
-        </WorkoutProvider>
+                </EquipmentProvider>
+            </WorkoutProvider>
+        </ContainerProvider>
     </React.StrictMode>
 );

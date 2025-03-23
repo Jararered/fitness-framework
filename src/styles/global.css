@@ -121,11 +121,6 @@ button.enabled:hover {
     background-color: var(--main-accent-hover);
 }
 
-label {
-    display: block;
-    font-weight: bold;
-}
-
 input,
 select {
     color: var(--text-color);
@@ -192,4 +187,18 @@ a:active {
 
 a:visited {
     color: var(--main-accent);
+}
+
+.left {
+    margin-right: auto;
+    text-align: left;
+}
+
+.right {
+    margin-left: auto;
+    text-align: right;
+}
+
+.expanding {
+    flex-grow: 1;
 }

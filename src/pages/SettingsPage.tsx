@@ -1,10 +1,22 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
+// User Settings Icons
+import { LuUser } from "react-icons/lu";
+import { LuWeight } from "react-icons/lu";
+import { LuRuler } from "react-icons/lu";
+
+// App Settings Icons
+import { LuMessageSquareQuote, LuMoon, LuShieldX } from "react-icons/lu";
+import { LuArrowRight } from "react-icons/lu";
+
+// About Icons
+import { LuGithub } from "react-icons/lu";
+import { LuMail } from "react-icons/lu";
 
 import { useUser } from "../context/UserContext.tsx";
 
 import "../styles/components/PillToggle.css";
-import { LuArrowRight, LuGithub, LuMail } from "react-icons/lu";
-import { useNavigate } from "react-router-dom";
 
 // This function calculates the height in cm from the height in feet and inches
 const calculateHeightCm = (feet: number, inches: number) => {
@@ -55,7 +67,7 @@ const WeightInput = () => {
                     setSettings({ ...settings, weight: weightInGrams });
                 }}
             />
-            <div className="units-label">{isImperial ? "lbs" : "kg"}</div>
+            <div className="units-strong">{isImperial ? "lbs" : "kg"}</div>
         </span>
     );
 };
@@ -72,7 +84,7 @@ const HeightInputMetric = () => {
                 inputMode="decimal"
                 onChange={(e) => setSettings({ ...settings, height: Number(e.target.value) })}
             />
-            <div className="units-label">cm</div>
+            <div className="units-strong">cm</div>
         </span>
     );
 };
@@ -96,7 +108,7 @@ const HeightInputImperial = () => {
                 placeholder="ft"
                 min="0"
             />
-            <div className="units-label">ft</div>
+            <div className="units-strong">ft</div>
             <input
                 className="number-input"
                 type="number"
@@ -111,7 +123,7 @@ const HeightInputImperial = () => {
                 min="0"
                 max="11"
             />
-            <div className="units-label">in</div>
+            <div className="units-strong">in</div>
         </span>
     );
 };
@@ -148,22 +160,37 @@ const SettingsPage: React.FC = () => {
 
                 <div className="card-content">
                     <span className="card-row">
-                        <label>Name</label>
-                        <input
-                            type="text"
-                            value={settings.name}
-                            onChange={(e) => setSettings({ ...settings, name: e.target.value })}
-                        />
+                        <span className="left">
+                            <LuUser />
+                            <strong>Name</strong>
+                        </span>
+                        <div className="right">
+                            <input
+                                type="text"
+                                value={settings.name}
+                                onChange={(e) => setSettings({ ...settings, name: e.target.value })}
+                            />
+                        </div>
                     </span>
 
                     <span className="card-row">
-                        <label>Weight</label>
-                        <WeightInput />
+                        <span className="left">
+                            <LuWeight />
+                            <strong>Weight</strong>
+                        </span>
+                        <div className="right">
+                            <WeightInput />
+                        </div>
                     </span>
 
                     <span className="card-row">
-                        <label>Height</label>
-                        {settings.unit === "imperial" ? <HeightInputImperial /> : <HeightInputMetric />}
+                        <span className="left">
+                            <LuRuler />
+                            <strong>Height</strong>
+                        </span>
+                        <div className="right">
+                            {settings.unit === "imperial" ? <HeightInputImperial /> : <HeightInputMetric />}
+                        </div>
                     </span>
 
                     <hr />
@@ -177,8 +204,12 @@ const SettingsPage: React.FC = () => {
                     </div>
 
                     <span className="card-row">
-                        <label>Units</label>
+                        <span className="left">
+                            <LuRuler />
+                            <strong>Units</strong>
+                        </span>
                         <select
+                            className="right"
                             value={settings.unit}
                             onChange={handleUnitChange}
                         >
@@ -188,8 +219,12 @@ const SettingsPage: React.FC = () => {
                     </span>
 
                     <span className="card-row">
-                        <label>Quote Mode</label>
+                        <span className="left">
+                            <LuMessageSquareQuote />
+                            <strong>Quote Mode</strong>
+                        </span>
                         <select
+                            className="right"
                             value={settings.quoteMode}
                             onChange={handleQuoteModeChange}
                         >
@@ -201,9 +236,12 @@ const SettingsPage: React.FC = () => {
                     </span>
 
                     <span className="card-row">
-                        <label>Dark Mode</label>
+                        <span className="left">
+                            <LuMoon />
+                            <strong>Dark Mode</strong>
+                        </span>
                         <button
-                            className={`pill-toggle ${settings.darkMode ? "active" : ""}`}
+                            className={`pill-toggle right ${settings.darkMode ? "active" : ""}`}
                             onClick={() => setSettings({ ...settings, darkMode: !settings.darkMode })}
                         >
                             <span className="pill-circle"></span>
@@ -211,9 +249,12 @@ const SettingsPage: React.FC = () => {
                     </span>
 
                     <span className="card-row">
-                        <label>Manage Data</label>
+                        <span className="left">
+                            <LuShieldX />
+                            <strong>Manage Data</strong>
+                        </span>
                         <button
-                            className="caution"
+                            className="right caution"
                             onClick={() => navigate("/manage-data")}
                         >
                             Manage Data
@@ -231,27 +272,41 @@ const SettingsPage: React.FC = () => {
                         </p>
                     </div>
                     <span className="card-row">
-                        <label>Version</label>
-                        <span className="version-number">0.0.1</span>
+                        <span className="left">
+                            <strong>Version</strong>
+                        </span>
+                        <span className="right">0.0.1</span>
                     </span>
                     <span className="card-row">
-                        <label>Developer</label>
+                        <span className="left">
+                            <strong>Developer</strong>
+                        </span>
                         <a
                             href="mailto:jararered@icloud.com"
-                            className="developer-name"
+                            className="right"
                         >
                             Email <LuMail />
                         </a>
                     </span>
                     <span className="card-row">
-                        <label>Github</label>
-                        <a href="https://github.com/Jararered">
+                        <span className="left">
+                            <strong>Github</strong>
+                        </span>
+                        <a
+                            className="right"
+                            href="https://github.com/Jararered"
+                        >
                             Github <LuGithub />
                         </a>
                     </span>
                     <span className="card-row">
-                        <label>Source Code</label>
-                        <a href="https://github.com/Jararered/fitness-framework">
+                        <span className="left">
+                            <strong>Source Code</strong>
+                        </span>
+                        <a
+                            className="right"
+                            href="https://github.com/Jararered/fitness-framework"
+                        >
                             Github <LuGithub />
                         </a>
                     </span>
