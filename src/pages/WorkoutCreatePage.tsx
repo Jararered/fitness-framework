@@ -122,77 +122,84 @@ const EditExercisePopup = ({ initialExercise, onClose }: EditExercisePopupProps)
 
     return (
         <div className="edit-exercise-popup">
-            <h1>Edit Exercise</h1>
-
-            <SelectorSearchable
-                options={avaliableExerciseNames}
-                onChange={(exerciseName) => {
-                    const newExerciseName = availableExercises.find((e) => e.exercise_name === exerciseName);
-                    if (newExerciseName) {
-                        setExercise({ ...exercise, exercise: newExerciseName.exercise_name });
-                    }
-                }}
-                value={exercise.exercise}
-                getOptionLabel={(option) => option}
-            />
-
-            <div className="reps-display">
-                <p>{exercise.reps.join(", ")} reps</p>
+            <div className="card-header">
+                <h2>Edit Exercise</h2>
+                <p>Select an exercise and edit the amount of reps, sets, and style</p>
             </div>
 
-            <span className="card-row">
-                <label>Set Count</label>
-                <button
-                    className="icon"
-                    onClick={() => handleSetsChange("decrease")}
-                >
-                    <LuMinus />
-                </button>
-                <button
-                    className="icon"
-                    onClick={() => handleSetsChange("increase")}
-                >
-                    <LuPlus />
-                </button>
-            </span>
-            <span className="card-row">
-                <label>Rep Count</label>
-                <button
-                    className="icon"
-                    onClick={() => handleChangeBaseReps("decrease")}
-                >
-                    <LuMinus />
-                </button>
-                <button
-                    className="icon"
-                    onClick={() => handleChangeBaseReps("increase")}
-                >
-                    <LuPlus />
-                </button>
-            </span>
+            <div className="card-content">
+                <span className="card-row expanding">
+                    <SelectorSearchable
+                        options={avaliableExerciseNames}
+                        onChange={(exerciseName) => {
+                            const newExerciseName = availableExercises.find((e) => e.exercise_name === exerciseName);
+                            if (newExerciseName) {
+                                setExercise({ ...exercise, exercise: newExerciseName.exercise_name });
+                            }
+                        }}
+                        value={exercise.exercise}
+                        getOptionLabel={(option) => option}
+                    />
+                </span>
 
-            <span className="card-row">
-                <label>Set Style</label>
-                <button
-                    className="icon"
-                    onClick={() => handleSetStyle("flat")}
-                >
-                    <LuAlignJustify style={{ transform: "rotate(90deg)" }} />
-                </button>
-                <button
-                    className="icon"
-                    onClick={() => handleSetStyle("drop")}
-                >
-                    <LuChartNoAxesColumnDecreasing />
-                </button>
-            </span>
+                <div className="reps-display">
+                    <p>{exercise.reps.join(", ")} reps</p>
+                </div>
 
-            <button
-                className="save-exercise-button"
-                onClick={handleClose}
-            >
-                Save <LuSave />
-            </button>
+                <span className="card-row">
+                    <label className="left">Set Count</label>
+                    <button
+                        className="icon"
+                        onClick={() => handleSetsChange("decrease")}
+                    >
+                        <LuMinus />
+                    </button>
+                    <button
+                        className="icon"
+                        onClick={() => handleSetsChange("increase")}
+                    >
+                        <LuPlus />
+                    </button>
+                </span>
+                <span className="card-row">
+                    <label className="left">Rep Count</label>
+                    <button
+                        className="icon"
+                        onClick={() => handleChangeBaseReps("decrease")}
+                    >
+                        <LuMinus />
+                    </button>
+                    <button
+                        className="icon"
+                        onClick={() => handleChangeBaseReps("increase")}
+                    >
+                        <LuPlus />
+                    </button>
+                </span>
+
+                <span className="card-row">
+                    <label className="left">Set Style</label>
+                    <button
+                        className="icon"
+                        onClick={() => handleSetStyle("flat")}
+                    >
+                        <LuAlignJustify style={{ transform: "rotate(90deg)" }} />
+                    </button>
+                    <button
+                        className="icon"
+                        onClick={() => handleSetStyle("drop")}
+                    >
+                        <LuChartNoAxesColumnDecreasing />
+                    </button>
+                </span>
+
+                <button
+                    className="save-exercise-button"
+                    onClick={handleClose}
+                >
+                    Save <LuSave />
+                </button>
+            </div>
         </div>
     );
 };
@@ -505,7 +512,9 @@ const WorkoutCreatePage: React.FC = () => {
                                                 <span className="exercise-edit-buttons">
                                                     <button
                                                         className="exercise-edit-button icon"
-                                                        onClick={() => handleOpenEditExercise(circuitIndex, exerciseIndex)}
+                                                        onClick={() =>
+                                                            handleOpenEditExercise(circuitIndex, exerciseIndex)
+                                                        }
                                                     >
                                                         <LuPencil />
                                                     </button>

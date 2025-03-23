@@ -5,8 +5,7 @@
 }
 
 .selector-searchable {
-    width: auto;
-    
+    flex-grow: 1;
 }
 
 .selector-dropdown {

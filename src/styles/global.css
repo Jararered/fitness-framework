@@ -81,44 +81,48 @@ button {
     gap: 0.5rem;
 }
 
-button:hover {
-    background-color: var(--main-accent-hover);
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    transform: translate(1px, 1px);
-}
-
-button:active {
-    transform: translate(2px, 2px);
-}
-
-button.caution {
-    background-color: var(--caution-color);
-}
-
-button.caution:hover {
-    background-color: var(--caution-hover);
-}
-
 button.icon {
     width: 2.5rem;
     height: 2.5rem;
     padding: 0;
 }
 
-button.disabled {
-    background-color: var(--card-border);
-}
-
-button.disabled:hover {
-    background-color: var(--card-hover);
-}
-
 button.enabled {
     background-color: var(--main-accent);
 }
 
-button.enabled:hover {
-    background-color: var(--main-accent-hover);
+button.disabled {
+    background-color: var(--card-border);
+}
+
+button.caution {
+    background-color: var(--caution-color);
+}
+
+@media (hover: hover) {
+    button:hover {
+        background-color: var(--main-accent-hover);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        transform: translate(1px, 1px);
+    }
+
+    button.caution:hover {
+        background-color: var(--caution-hover);
+    }
+
+    button.enabled:hover {
+        background-color: var(--main-accent-hover);
+    }
+
+    button.disabled:hover {
+        background-color: var(--card-hover);
+    }
+}
+
+@media (hover: none) {
+    button:active {
+        transform: translate(2px, 2px);
+    }
 }
 
 input,

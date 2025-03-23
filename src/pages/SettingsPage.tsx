@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useUser } from "../context/UserContext.tsx";
+
 // User Settings Icons
 import { LuUser } from "react-icons/lu";
 import { LuWeight } from "react-icons/lu";
@@ -14,7 +16,6 @@ import { LuArrowRight } from "react-icons/lu";
 import { LuGithub } from "react-icons/lu";
 import { LuMail } from "react-icons/lu";
 
-import { useUser } from "../context/UserContext.tsx";
 
 import "../styles/components/PillToggle.css";
 

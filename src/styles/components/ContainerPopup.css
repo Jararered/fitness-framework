@@ -31,15 +31,9 @@
     visibility: hidden;
     z-index: 1000;
     min-width: 350px;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 
     transition: all 250ms ease-in-out;
-}
-
-.container-popup-content h1 {
-    margin-left: 3rem;
-    margin-right: 3rem;
-    margin-top: 0;
 }
 
 .container-popup-content {

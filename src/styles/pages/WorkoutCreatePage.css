@@ -29,3 +29,11 @@
 .reps-display {
     margin-top: 0.5rem;
 }
+
+.edit-exercise-popup {
+    gap: 1rem;
+}
+
+.edit-exercise-popup input {
+    width: 100%;
+}
