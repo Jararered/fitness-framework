@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { LuTrash, LuSave, LuArrowDownToLine, LuCheck } from "react-icons/lu";
+import { LuTrash, LuSave, LuArrowDownToLine } from "react-icons/lu";
 import { LuDumbbell } from "react-icons/lu";
 
 import { useWorkout } from "../context/WorkoutContext.tsx";

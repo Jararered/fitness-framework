@@ -35,15 +35,22 @@ const WorkoutPreview: React.FC = () => {
             </div>
 
             <div className="card-content">
-                {workoutState.currentPlan?.exercises ? (
+                {workoutState.currentPlan?.circuits ? (
                     <React.Fragment>
-                        {workoutState.currentPlan.exercises.map((exercise, index) => (
-                            <span className="card-row" key={index}>
-                                <label>{exercise.exercise}</label>
-                                <p>{exercise.reps.join(", ")} reps</p>
-                            </span>
+                        {workoutState.currentPlan.circuits.map((circuit, index) => (
+                            <React.Fragment key={index}>
+                                <h2>Circuit {index + 1}</h2>
+                                {circuit.exercises.map((exercise, index) => (
+                                    <span
+                                        className="card-row"
+                                        key={index}
+                                    >
+                                        <label className="left">{exercise.exercise}</label>
+                                        <p className="right">{exercise.reps.join(", ")} Reps</p>
+                                    </span>
+                                ))}
+                            </React.Fragment>
                         ))}
-
                         {workoutState.isStarted ? (
                             <button onClick={handleResumeWorkout}>
                                 Resume Workout

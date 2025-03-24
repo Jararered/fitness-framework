@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LuArrowRight, LuTrophy, LuCircleAlert, LuX, LuEqual } from "react-icons/lu";
+import { LuArrowRight, LuTrophy, LuCircleAlert, LuX, LuEqual, LuDumbbell } from "react-icons/lu";
 
 import { useUser } from "../context/UserContext.tsx";
 import { useWorkout } from "../context/WorkoutContext.tsx";
@@ -32,7 +32,7 @@ const MuscularLoadInfoFooter: React.FC<MuscularLoadInfoFooterProps> = ({ reps, w
                 </div>
 
                 <div className="multiply-icon">
-                    <LuX size={20} />
+                    <LuX />
                 </div>
 
                 <div className="weight-container">
@@ -41,7 +41,7 @@ const MuscularLoadInfoFooter: React.FC<MuscularLoadInfoFooterProps> = ({ reps, w
                 </div>
 
                 <div className="equals-icon">
-                    <LuEqual size={20} />
+                    <LuEqual />
                 </div>
 
                 <div className="result-container">
@@ -77,8 +77,11 @@ const ExercisePreviewPage: React.FC = () => {
     const { workoutState } = useWorkout();
     const { settings } = useUser();
     const navigate = useNavigate();
-    const [breakTime, setBreakTime] = useState<number>(60);
     const { showFooterCard } = useContainer();
+
+    const [isTimerDone, setIsTimerDone] = useState(false);
+    const [resetTimer, setResetTimer] = useState(false);
+    const breakTime = 60;
 
     const [quote] = useState<string>(
         QUOTES[settings.quoteMode][Math.floor(Math.random() * QUOTES[settings.quoteMode].length)].quote
@@ -117,22 +120,12 @@ const ExercisePreviewPage: React.FC = () => {
         );
     };
 
-    const handleTimeUpdate = (timeLeft: number) => {
-        setBreakTime(timeLeft);
-    };
-
     if (!workoutState.currentPlan) return <div>No workout loaded</div>;
 
     /* These should always be valid since this page is only called after an exercise has been completed */
     /* Last exercise, last set of last exercise */
-    const lastExerciseReps =
-        workoutState.repsCompleted[workoutState.currentExerciseIndex - 1][
-            workoutState.repsCompleted[workoutState.currentExerciseIndex - 1].length - 1
-        ];
-    const lastExerciseWeight =
-        workoutState.weightsUsed[workoutState.currentExerciseIndex - 1][
-            workoutState.weightsUsed[workoutState.currentExerciseIndex - 1].length - 1
-        ];
+    const lastExerciseReps = 1;
+    const lastExerciseWeight = 1;
 
     return (
         <div className="exercise-preview-page">
@@ -148,19 +141,23 @@ const ExercisePreviewPage: React.FC = () => {
                             <div className="break-timer-text">REST</div>
                             <TimerCircular
                                 duration={breakTime}
-                                onTimeUpdate={handleTimeUpdate}
+                                reset={resetTimer}
+                                onComplete={() => setIsTimerDone(true)}
                             />
                         </div>
                     }
                     right={
                         <div className="navigation-button-container">
                             <button
-                                className={`icon ${breakTime === 0 ? "" : "caution"}`}
-                                onClick={() => navigate("/exercise")}
+                                className={`icon ${isTimerDone ? "" : "caution"}`}
+                                onClick={() => {
+                                    setResetTimer(true);
+                                    navigate("/exercise");
+                                }}
                             >
                                 <LuArrowRight />
                             </button>
-                            <div className="navigation-button-text">{breakTime === 0 ? "Next" : "Skip Break"}</div>
+                            <div className="navigation-button-text">{isTimerDone ? "Next" : "Skip Break"}</div>
                         </div>
                     }
                 />
@@ -170,6 +167,46 @@ const ExercisePreviewPage: React.FC = () => {
                     units={settings.weightUnit}
                     totalWeight={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)}
                 />
+            </div>
+            <UpNextCard
+                name={
+                    workoutState.currentPlan.circuits[workoutState.currentCircuitIndex].exercises[
+                        workoutState.currentExerciseIndex
+                    ].exercise
+                }
+                reps={
+                    workoutState.currentPlan.circuits[workoutState.currentCircuitIndex].exercises[
+                        workoutState.currentExerciseIndex
+                    ].reps[workoutState.currentSetIndex]
+                }
+            />
+        </div>
+    );
+};
+
+interface ExerciseDetailsProps {
+    name: string;
+    reps: number;
+}
+
+const UpNextCard: React.FC<ExerciseDetailsProps> = ({ name, reps }) => {
+    return (
+        <div className="card">
+            <div className="card-content">
+                <span className="card-row">
+                    <div className="up-next-text tag left">Up Next</div>
+                </span>
+                <span className="card-row">
+                    <div className="video-placeholder">
+                        <div className="video-placeholder-icon">
+                            <LuDumbbell />
+                        </div>
+                    </div>
+                    <div className="exercise-details left">
+                        <div className="exercise-name">{name}</div>
+                        <div className="exercise-sets-reps">{reps} Reps</div>
+                    </div>
+                </span>
             </div>
         </div>
     );

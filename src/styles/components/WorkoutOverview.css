@@ -1,10 +1,10 @@
-.workout-preview-page,
-.workout-preview-container,
+.workout-overview-page,
+.workout-overview-container,
 .circuit-container {
     width: calc(100%);
 }
 
-.workout-preview-container {
+.workout-overview-container {
     min-width: 350px;
     max-width: 50rem;
 }

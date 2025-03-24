@@ -222,7 +222,7 @@ const SettingsPage: React.FC = () => {
                     <span className="card-row">
                         <span className="left">
                             <LuMessageSquareQuote />
-                            <strong>Quote Mode</strong>
+                            <strong>Quote Style</strong>
                         </span>
                         <select
                             className="right"
@@ -252,13 +252,13 @@ const SettingsPage: React.FC = () => {
                     <span className="card-row">
                         <span className="left">
                             <LuShieldX />
-                            <strong>Manage Data</strong>
+                            <strong>App Data</strong>
                         </span>
                         <button
                             className="right caution"
                             onClick={() => navigate("/manage-data")}
                         >
-                            Manage Data
+                            Manage
                             <LuArrowRight size={24} />
                         </button>
                     </span>

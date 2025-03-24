@@ -53,12 +53,13 @@
     opacity: 0;
 }
 
-.container-footer-inner {
-    opacity: 1;
+.container-footer-content {
+    width: 100%;
 }
 
-.container-footer-content {
-    padding: 0 1rem;
+.container-footer-inner {
+    opacity: 1;
+    width: 100%;
 }
 
 .container-footer-close-icon {

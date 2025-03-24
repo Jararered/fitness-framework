@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
+import { useUser } from "../context/UserContext";
+
 interface ExerciseInputFooterProps {
     exerciseName: string;
     currentSet: number;
     initialReps: number;
     initialWeight: number;
-    weightUnit: string;
     onSave: (reps: number, weight: number) => void;
-    onCancel: () => void;
 }
 
 const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
@@ -15,10 +15,10 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
     currentSet,
     initialReps,
     initialWeight,
-    weightUnit,
     onSave,
-    onCancel,
 }) => {
+    const { settings } = useUser();
+
     const [reps, setReps] = useState(initialReps);
     const [weight, setWeight] = useState(initialWeight);
 
@@ -62,7 +62,7 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
                     onChange={(e) => setWeight(Math.max(0, Number(e.target.value)))}
                 />
 
-                <div className="input-label unit-label">{weightUnit}</div>
+                <div className="input-label unit-label">{settings.weightUnit}</div>
             </div>
 
             <div className="footer-actions">

@@ -119,3 +119,20 @@
 
     text-transform: uppercase;
 }
+
+.video-placeholder {
+    position: relative;
+    background-color: var(--card-border);
+    border-radius: 0.5rem;
+    width: 5rem;
+    height: 3rem;
+}
+
+.video-placeholder-icon {
+    position: absolute;
+}
+
+.up-next-text {
+    box-sizing: border-box;
+    width: 5rem;
+}

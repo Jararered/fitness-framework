@@ -3,16 +3,15 @@
     border-radius: 1rem;
     background-color: var(--card-background);
 
-    width: calc(100% - 4rem);
-
-    margin: 1rem;
-    margin-top: 0;
     padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: calc(100% - 4rem);
 
     min-width: 20rem;
     max-width: 50rem;
 
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .card-header p {
@@ -20,7 +19,7 @@
 }
 
 .card-content {
-    width: calc(100% - 2rem);
+    width: 100%;
     gap: 0.5rem;
 }
 
@@ -29,8 +28,6 @@
 }
 
 .card-row {
-    border-radius: 1rem;
     min-height: 2rem;
-    padding: 0.25rem;
     width: 100%;
 }

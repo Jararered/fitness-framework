@@ -1,35 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { LuDumbbell, LuArrowDown } from "react-icons/lu";
 
 import { useWorkout } from "../context/WorkoutContext.tsx";
 
-import { ExampleWorkout } from "../data/types.ts";
-
 import "../styles/components/WorkoutOverview.css";
 
 const WorkoutOverview: React.FC = () => {
-    const { workoutState, setWorkoutState } = useWorkout();
-
-    // Intiialize workout state from example workout
-    useEffect(() => {
-        setWorkoutState({
-            ...workoutState,
-            currentPlan: ExampleWorkout,
-            isStarted: false,
-            currentCircuitIndex: 0,
-            currentExerciseIndex: 0,
-            currentSetIndex: 0,
-            repsCompleted: [],
-            weightsUsed: [],
-        });
-        handleValidateWorkout();
-    }, [setWorkoutState]);
-
-    const handleValidateWorkout = () => {
-        if (workoutState.currentPlan?.circuits.length === 0) {
-            return;
-        }
-    };
+    const { workoutState } = useWorkout();
 
     const handleRepTag = (circuitIndex: number, exerciseIndex: number) => {
         // Returns "Completed" if the circuit index is less than the current circuit index
@@ -47,12 +24,12 @@ const WorkoutOverview: React.FC = () => {
     };
 
     return (
-        <div className="workout-preview-page">
+        <div className="workout-overview-page">
             <div className="card-header">
                 <h2>FOR TODAY</h2>
             </div>
             <div className="card-content">
-                <div className="workout-preview-container">
+                <div className="workout-overview-container">
                     {/* Iterate over each circuit */}
                     {workoutState.currentPlan?.circuits.map((circuit, circuitIndex) => (
                         <React.Fragment key={circuitIndex}>

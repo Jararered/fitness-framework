@@ -4,13 +4,15 @@
 
 * {
     user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
     text-align: center;
     list-style-type: none;
 
     /* Apple-specific font family */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-    /* Android-Chrome specific fix for tap highlight */
     -webkit-tap-highlight-color: transparent;
 }
 

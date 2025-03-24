@@ -72,4 +72,8 @@ button.caution {
     button:active {
         transform: translate(2px, 2px);
     }
+
+    button.caution:active {
+        background-color: var(--caution-hover);
+    }
 }

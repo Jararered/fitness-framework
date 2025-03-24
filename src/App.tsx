@@ -11,7 +11,7 @@ import EquipmentSelectPage from "./pages/EquipmentSelectPage.tsx";
 import WorkoutCreatePage from "./pages/WorkoutCreatePage.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
 import SettingsPage from "./pages/SettingsPage.tsx";
-import ExercisePage from "./pages/ExercisePage.tsx";
+import { ExercisePage, PreviewNextExercise, PreviewNextCircuit } from "./pages/ExercisePage.tsx";
 import ExercisePreviewPage from "./pages/ExercisePreviewPage.tsx";
 import WorkoutCompletePage from "./pages/WorkoutCompletePage.tsx";
 import ManageDataPage from "./pages/ManageDataPage.tsx";
@@ -30,11 +30,10 @@ function App() {
     const location = useLocation();
     const { isFooterOpen, contentFooter, hideFooterCard } = useContainer();
     const { isPopupOpen, contentPopup, hidePopup } = useContainer();
-
-    const dimApp = isPopupOpen || isFooterOpen;
+    const { dimRequested } = useContainer();
 
     return (
-        <div className={`App ${settings.darkMode ? "dark-mode" : ""} `}>
+        <div className={`App ${dimRequested ? "dimmed" : ""} ${settings.darkMode ? "dark-mode" : ""}`}>
             <IconContext.Provider value={{ size: "1.5rem" }}>
                 <ContainerPopup
                     isOpen={isPopupOpen}
@@ -43,7 +42,7 @@ function App() {
                 />
                 <ContainerToast />
 
-                <div className={`app-content ${dimApp ? "dimmed" : ""}`}>
+                <div className={`app-content ${dimRequested ? "dimmed" : ""}`}>
                     <PageTransition>
                         <Routes
                             location={location}
@@ -93,11 +92,19 @@ function App() {
                                 path="/sandbox"
                                 element={<SandboxPage />}
                             />
+                            <Route
+                                path="/preview-next-exercise"
+                                element={<PreviewNextExercise />}
+                            />
+                            <Route
+                                path="/preview-next-circuit"
+                                element={<PreviewNextCircuit />}
+                            />
                         </Routes>
                     </PageTransition>
                 </div>
 
-                <div className={dimApp ? "dimmed" : ""}>
+                <div className={dimRequested ? "dimmed" : ""}>
                     <DockBar />
                 </div>
 

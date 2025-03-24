@@ -9,6 +9,7 @@ interface Toast {
 }
 
 interface ContainerContextType {
+    dimRequested: boolean;
     isFooterOpen: boolean;
     isPopupOpen: boolean;
     contentFooter: ReactNode;
@@ -36,6 +37,7 @@ export const useContainer = () => {
 };
 
 export const ContainerProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [dimRequested, setDimRequested] = useState(false);
     const [isFooterOpen, setIsFooterOpen] = useState(false);
     const [isFooterClosing, setIsFooterClosing] = useState(false);
 
@@ -45,16 +47,6 @@ export const ContainerProvider: React.FC<{ children: ReactNode }> = ({ children 
     const [contentFooter, setContentFooter] = useState<ReactNode>(null);
     const [contentPopup, setContentPopup] = useState<ReactNode>(null);
     const [contentToast, setContentToast] = useState<Toast[]>([]);
-
-    // Reset closing state when popup is fully closed
-    // useEffect(() => {
-    //     if (isPopupClosing) {
-    //         const timer = setTimeout(() => {
-    //             setIsPopupClosing(false);
-    //         }, 250);
-    //         return () => clearTimeout(timer);
-    //     }
-    // }, [isPopupClosing]);
 
     // Reset closing state when footer is fully closed
     useEffect(() => {
@@ -125,6 +117,7 @@ export const ContainerProvider: React.FC<{ children: ReactNode }> = ({ children 
     return (
         <ContainerContext.Provider
             value={{
+                dimRequested,
                 isFooterOpen,
                 isFooterClosing,
                 isPopupOpen,

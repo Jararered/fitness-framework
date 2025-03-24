@@ -474,7 +474,7 @@ const WorkoutCreatePage: React.FC = () => {
                                 setWorkoutPlanState(randomWorkout);
                             }}
                         >
-                            Generate Workout <LuSparkles />
+                            Generate<LuSparkles />
                         </button>
                     </span>
                 }
