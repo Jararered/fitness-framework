@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-import { useUser } from "../context/UserContext";
-
+import { useSettingStore } from "../features/settings/hooks/useSettingStore.ts";
 interface ExerciseInputFooterProps {
     exerciseName: string;
     currentSet: number;
@@ -17,7 +16,7 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
     initialWeight,
     onSave,
 }) => {
-    const { settings } = useUser();
+    const { weightUnit } = useSettingStore();
 
     const [reps, setReps] = useState(initialReps);
     const [weight, setWeight] = useState(initialWeight);
@@ -62,7 +61,7 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
                     onChange={(e) => setWeight(Math.max(0, Number(e.target.value)))}
                 />
 
-                <div className="input-label unit-label">{settings.weightUnit}</div>
+                <div className="input-label unit-label">{weightUnit}</div>
             </div>
 
             <div className="footer-actions">

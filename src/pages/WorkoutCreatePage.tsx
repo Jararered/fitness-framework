@@ -6,18 +6,21 @@ import { LuPlus, LuMinus, LuTrash } from "react-icons/lu";
 import { LuDumbbell, LuArrowDown } from "react-icons/lu";
 import { LuSparkles } from "react-icons/lu";
 
-import { useEquipment } from "../context/EquipmentContext.tsx";
 import { useContainer } from "../context/ContainerContext.tsx";
-import { useWorkout } from "../context/WorkoutContext.tsx";
+// import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import { ContainerCard } from "../components/ContainerCard.tsx";
 import { SelectorSearchable } from "../components/SelectorSearchable.tsx";
 
-import { ExercisePlan, CircuitPlan, WorkoutPlan, Equipment, MuscleGroup } from "../data/types.ts";
+import { ExercisePlan, CircuitPlan, WorkoutPlan, MuscleGroup } from "../data/types.ts";
 import { generateRandomWorkout } from "../data/generator.ts";
 
 import "../styles/components/WorkoutOverview.css";
 import "../styles/pages/WorkoutCreatePage.css";
+
+import { useWorkoutStore } from "../features/workouts/hooks/useWorkoutStore.ts";
+import { useEquipmentStore } from "../features/equipment/hooks/useEquipmentStore.ts";
+import { useExerciseStore } from "../features/exercises/hooks/useExerciseStore.ts";
 
 const repsChangeAmount = 2;
 
@@ -27,8 +30,9 @@ interface EditExercisePopupProps {
 }
 
 const EditExercisePopup = ({ initialExercise, onClose }: EditExercisePopupProps) => {
-    const { equipmentConfigs, equipmentLast } = useEquipment();
-    const { exercises } = useWorkout();
+    const { selectedEquipment } = useEquipmentStore();
+    const { exercises } = useExerciseStore();
+
     const { hidePopup } = useContainer();
 
     const [exercise, setExercise] = useState<ExercisePlan>(initialExercise);
@@ -73,10 +77,6 @@ const EditExercisePopup = ({ initialExercise, onClose }: EditExercisePopupProps)
         }
     }, [exercise.sets, exercise.baseReps, exercise.style]);
 
-    const selectedEquipment =
-        equipmentLast && equipmentConfigs.length > 0
-            ? equipmentConfigs.find((config) => config.name === equipmentLast)?.equipment || []
-            : [];
     const availableExercises = exercises.filter((exercise) =>
         exercise.required_equipment.every((equipment) => selectedEquipment.includes(equipment))
     );
@@ -211,61 +211,35 @@ const WorkoutCreatePage: React.FC = () => {
     const navigate = useNavigate();
     const { addToast, showPopup } = useContainer();
 
-    const { equipmentConfigs, equipmentLast } = useEquipment();
-
-    const { workoutPlans, setWorkoutPlans } = useWorkout();
-    const { workoutState, setWorkoutState } = useWorkout();
+    const { selectedEquipment } = useEquipmentStore();
+    const { workoutState, setWorkoutState } = useWorkoutStore();
+    const { workoutPlan, setWorkoutPlan } = useWorkoutStore();
+    const { workoutPlans, setWorkoutPlans } = useWorkoutStore();
 
     const [selectedMuscleGroup, setSelectedMuscleGroup] = useState<string>("Legs");
-
-    // State for the workout plan
-    const [workoutNameState, setWorkoutNameState] = useState<string>("");
-    const [workoutPlanState, setWorkoutPlanState] = useState<WorkoutPlan>(() => {
-        const savedPlan = localStorage.getItem("temp-workout-plan");
-        if (savedPlan) {
-            return JSON.parse(savedPlan);
-        }
-        return { circuits: [] };
-    });
-
-    const selectedEquipment: Equipment[] =
-        equipmentLast && equipmentConfigs.length > 0
-            ? equipmentConfigs.find((config) => config.name === equipmentLast)?.equipment || []
-            : ([] as Equipment[]);
 
     const handleRepTag = (circuitIndex: number) => {
         // Returns the number of exercises in the circuit
         // Ex: "2 Rounds" if there are 2 exercises in the circuit
-        return <React.Fragment>{workoutPlanState.circuits[circuitIndex].exercises.length} Rounds</React.Fragment>;
+        return <React.Fragment>{workoutPlan.circuits[circuitIndex].exercises.length} Rounds</React.Fragment>;
     };
 
-    // Save temporary workout plan to local storage if workoutPlan has changed
-    useEffect(() => {
-        localStorage.setItem("temp-workout-plan", JSON.stringify(workoutPlanState));
-
-        // Update the workout state with the new workout plan
-        setWorkoutState({
-            ...workoutState,
-            currentPlan: workoutPlanState,
-        });
-    }, [workoutPlanState]);
-
-    const handleSaveWorkout = (startWorkout: boolean = false) => {
+    const handleSaveWorkout = () => {
         // Prompt user for workout name if it is not already set
-        if (!workoutNameState) {
+        if (!workoutPlan.name) {
             const name = prompt("Enter a name for the workout");
             if (name) {
-                setWorkoutNameState(name);
+                setWorkoutPlan({ ...workoutPlan, name });
             }
         }
 
-        const validPlan: CircuitPlan[] = workoutPlanState.circuits.map((c) => ({
+        const validPlan: CircuitPlan[] = workoutPlan.circuits.map((c) => ({
             exercises: c.exercises.filter((e) => e.exercise && e.reps.every((r) => r > 0)),
         }));
 
         if (validPlan.length > 0) {
             const newWorkout: WorkoutPlan = {
-                name: workoutNameState || `Workout ${workoutPlans.length + 1}`,
+                name: workoutPlan.name || `Workout ${workoutPlans.length + 1}`,
                 circuits: validPlan,
             };
 
@@ -279,37 +253,23 @@ const WorkoutCreatePage: React.FC = () => {
                 setWorkoutPlans([...workoutPlans, newWorkout as WorkoutPlan]);
             }
 
-            if (startWorkout) {
-                setWorkoutState({
-                    currentPlan: newWorkout,
-                    isStarted: true,
-                    currentCircuitIndex: 0,
-                    currentExerciseIndex: 0,
-                    currentSetIndex: 0,
-                    repsCompleted: [],
-                    weightsUsed: [],
-                });
-                navigate("/exercise");
-            } else {
-                setWorkoutNameState("");
-                setWorkoutState((prevState) => ({
-                    ...prevState,
-                    currentPlan: newWorkout,
-                    isStarted: false,
-                    currentExerciseIndex: 0,
-                    currentSetIndex: 0,
-                    repsCompleted: [],
-                    weightsUsed: [],
-                }));
-            }
+            setWorkoutPlan({ ...workoutPlan, name: "" });
+            setWorkoutState({
+                ...workoutState,
+                currentPlan: newWorkout,
+                isStarted: false,
+                currentExerciseIndex: 0,
+                currentSetIndex: 0,
+                repsCompleted: [],
+                weightsUsed: [],
+            });
         }
 
-        addToast(`Workout saved: ${workoutNameState}`, "success");
+        addToast(`Workout saved: ${workoutPlan.name}`, "success");
     };
 
     const handleLoadWorkout = (workout: WorkoutPlan) => {
-        setWorkoutPlanState(workout);
-        setWorkoutNameState(workout.name || "");
+        setWorkoutPlan(workout);
         setWorkoutState({
             currentPlan: workout,
             isStarted: false,
@@ -324,13 +284,13 @@ const WorkoutCreatePage: React.FC = () => {
     };
 
     const handleStartWorkout = () => {
-        const validPlan = workoutPlanState.circuits.map((circuit) =>
+        const validPlan = workoutPlan.circuits.map((circuit) =>
             circuit.exercises.filter((exercise) => exercise.exercise && exercise.reps.every((rep) => rep > 0))
         );
 
         if (validPlan.length > 0) {
             setWorkoutState({
-                currentPlan: workoutPlanState,
+                currentPlan: workoutPlan,
                 isStarted: false,
                 currentCircuitIndex: 0,
                 currentExerciseIndex: 0,
@@ -344,32 +304,32 @@ const WorkoutCreatePage: React.FC = () => {
 
     const handleAddCircuit = () => {
         // Append a new circuit to the workout plan
-        setWorkoutPlanState({
-            ...workoutPlanState,
+        setWorkoutPlan({
+            ...workoutPlan,
             circuits: [
-                ...workoutPlanState.circuits,
+                ...workoutPlan.circuits,
                 { exercises: [{ exercise: "", reps: [10, 10, 10], sets: 3, style: "flat", baseReps: 10 }] },
             ],
         });
     };
 
     const handleDeleteCircuit = (circuitIndex: number) => {
-        setWorkoutPlanState({
-            ...workoutPlanState,
-            circuits: workoutPlanState.circuits.filter((_, i) => i !== circuitIndex),
+        setWorkoutPlan({
+            ...workoutPlan,
+            circuits: workoutPlan.circuits.filter((_, i) => i !== circuitIndex),
         });
     };
 
     const handleAddExerciseToCircuit = (circuitIndex: number) => {
         const newExercise: ExercisePlan = { exercise: "", reps: [10, 10, 10], sets: 3, style: "flat", baseReps: 10 };
 
-        const newCircuit = workoutPlanState.circuits[circuitIndex];
+        const newCircuit = workoutPlan.circuits[circuitIndex];
         const newExercises = [...newCircuit.exercises, newExercise];
 
         // Append a new exercise to the circuit at the given index
-        setWorkoutPlanState({
-            ...workoutPlanState,
-            circuits: workoutPlanState.circuits.map((circuit, index) =>
+        setWorkoutPlan({
+            ...workoutPlan,
+            circuits: workoutPlan.circuits.map((circuit, index) =>
                 index === circuitIndex
                     ? {
                           ...circuit,
@@ -385,9 +345,9 @@ const WorkoutCreatePage: React.FC = () => {
                 <EditExercisePopup
                     initialExercise={newExercises[newExercises.length - 1]}
                     onClose={(updatedExercise) => {
-                        setWorkoutPlanState({
-                            ...workoutPlanState,
-                            circuits: workoutPlanState.circuits.map((circuit, index) =>
+                        setWorkoutPlan({
+                            ...workoutPlan,
+                            circuits: workoutPlan.circuits.map((circuit, index) =>
                                 index === circuitIndex ? { ...circuit, exercises: newExercises } : circuit
                             ),
                         });
@@ -398,9 +358,9 @@ const WorkoutCreatePage: React.FC = () => {
     };
 
     const handleDeleteExerciseFromCircuit = (circuitIndex: number, exerciseIndex: number) => {
-        setWorkoutPlanState({
-            ...workoutPlanState,
-            circuits: workoutPlanState.circuits.map((circuit, index) =>
+        setWorkoutPlan({
+            ...workoutPlan,
+            circuits: workoutPlan.circuits.map((circuit, index) =>
                 index === circuitIndex
                     ? { ...circuit, exercises: circuit.exercises.filter((_, i) => i !== exerciseIndex) }
                     : circuit
@@ -411,16 +371,16 @@ const WorkoutCreatePage: React.FC = () => {
     const handleOpenEditExercise = (circuitIndex: number, exerciseIndex: number) => {
         showPopup(
             <EditExercisePopup
-                initialExercise={workoutPlanState.circuits[circuitIndex].exercises[exerciseIndex]}
+                initialExercise={workoutPlan.circuits[circuitIndex].exercises[exerciseIndex]}
                 onClose={(updatedExercise) => handleCloseEditExercise(circuitIndex, exerciseIndex, updatedExercise)}
             />
         );
     };
 
     const handleCloseEditExercise = (circuitIndex: number, exerciseIndex: number, updatedExercise: ExercisePlan) => {
-        setWorkoutPlanState({
-            ...workoutPlanState,
-            circuits: workoutPlanState.circuits.map((circuit, index) =>
+        setWorkoutPlan({
+            ...workoutPlan,
+            circuits: workoutPlan.circuits.map((circuit, index) =>
                 index === circuitIndex
                     ? {
                           ...circuit,
@@ -471,10 +431,11 @@ const WorkoutCreatePage: React.FC = () => {
                                     selectedEquipment
                                 );
                                 // Set the workout plan state to the random workout
-                                setWorkoutPlanState(randomWorkout);
+                                setWorkoutPlan(randomWorkout);
                             }}
                         >
-                            Generate<LuSparkles />
+                            Generate
+                            <LuSparkles />
                         </button>
                     </span>
                 }
@@ -485,7 +446,7 @@ const WorkoutCreatePage: React.FC = () => {
             <div className="card-content">
                 <div className="workout-preview-container">
                     {/* Iterate over each circuit */}
-                    {workoutPlanState.circuits.map((circuit, circuitIndex) => (
+                    {workoutPlan.circuits.map((circuit, circuitIndex) => (
                         <React.Fragment key={circuitIndex}>
                             <div className="circuit-container">
                                 <div className="circuit-header">
@@ -558,7 +519,7 @@ const WorkoutCreatePage: React.FC = () => {
                                 <div className="circuit-rep-index">{handleRepTag(circuitIndex)}</div>
                             </div>
 
-                            {circuitIndex < workoutPlanState.circuits.length - 1 && (
+                            {circuitIndex < workoutPlan.circuits.length - 1 && (
                                 <div className="circuit-divider">
                                     <div className="circuit-divider-text">Move to next circuit</div>
                                 </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { LuX } from "react-icons/lu";
 
 import { useContainer } from "../context/ContainerContext";

@@ -52,11 +52,11 @@ export type Difficulty = "" | "Beginner" | "Intermediate" | "Advanced";
 
 export type Exercise = {
     exercise_name: string;
-    muscle_group: MuscleGroup[];
+    muscle_group: MuscleGroup;
     required_equipment: Equipment[];
-    primary_muscles: Muscle[];
-    secondary_muscles: Muscle[];
-    stabilizing_muscles: Muscle[];
+    // primary_muscles: Muscle[];
+    // secondary_muscles: Muscle[];
+    // stabilizing_muscles: Muscle[];
     difficulty: Difficulty;
 };
 

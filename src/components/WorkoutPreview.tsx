@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useWorkout } from "../context/WorkoutContext";
 import { LuPlay } from "react-icons/lu";
 import React from "react";
 
+import { useWorkoutStore } from "../features/workouts/hooks/useWorkoutStore.ts";
+
 const WorkoutPreview: React.FC = () => {
-    const { workoutState, setWorkoutState } = useWorkout();
     const navigate = useNavigate();
+    const { workoutState, setWorkoutState } = useWorkoutStore();
 
     const handleStartWorkout = () => {
         if (workoutState.currentPlan) {

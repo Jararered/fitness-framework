@@ -15,21 +15,17 @@ const handleDeleteAllData = () => {
 };
 
 const handleDeleteGyms = () => {
-    localStorage.removeItem("equipment-configs");
-    localStorage.removeItem("equipment-last");
+    localStorage.removeItem("equipment-store");
     window.location.reload();
 };
 
 const handleDeleteUserData = () => {
-    localStorage.removeItem("user-context");
-    localStorage.removeItem("workout-logs");
+    localStorage.removeItem("settings-store");
     window.location.reload();
 };
 
 const handleDeleteWorkouts = () => {
-    localStorage.removeItem("workout-plans");
-    localStorage.removeItem("workout-state");
-    localStorage.removeItem("temp-workout-plan");
+    localStorage.removeItem("workout-store");
     window.location.reload();
 };
 

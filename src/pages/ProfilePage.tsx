@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 
-import { useUser } from "../context/UserContext.tsx";
-import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useContainer } from "../context/ContainerContext.tsx";
 
+import { useWorkoutStore } from "../features/workouts/hooks/useWorkoutStore.ts";
+import { useSettingStore } from "../features/settings/hooks/useSettingStore.ts";
+
 const ProfilePage: React.FC = () => {
-    const { workoutLogs } = useWorkout();
+    const { workoutLogs } = useWorkoutStore();
     const { addToast } = useContainer();
     const [expanded, setExpanded] = useState(false);
-    const { settings } = useUser();
+    const { name, unit } = useSettingStore();
 
     const now = new Date();
     const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -33,7 +34,7 @@ const ProfilePage: React.FC = () => {
 
             <div className="card">
                 <div className="card-header">
-                    <h2>Hi, {settings.name || "User"}</h2>
+                    <h2>Hi, {name || "User"}</h2>
                     <p>Below is your profile information and info about your workout history.</p>
                 </div>
             </div>
@@ -48,10 +49,10 @@ const ProfilePage: React.FC = () => {
                     <p>Workouts Last Week: {lastWeekLogs.length}</p>
                     <p>Workouts Last Month: {lastMonthLogs.length}</p>
                     <p>
-                        Total Weekly Load: {totalWeightWeek} {settings.unit}
+                        Total Weekly Load: {totalWeightWeek} {unit}
                     </p>
                     <p>
-                        Total Monthly Load: {totalWeightMonth} {settings.unit}
+                        Total Monthly Load: {totalWeightMonth} {unit}
                     </p>
                 </div>
             </div>

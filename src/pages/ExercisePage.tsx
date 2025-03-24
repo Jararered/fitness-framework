@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LuCheck, LuCirclePlus, LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
-import { useUser } from "../context/UserContext.tsx";
-import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useContainer } from "../context/ContainerContext.tsx";
 
 import { DividerSpaced } from "../components/DividerSpaced.tsx";
@@ -13,10 +11,13 @@ import { QUOTES } from "../data/quotes.ts";
 
 import "../styles/pages/ExercisePage.css";
 
+import { useWorkoutStore } from "../features/workouts/hooks/useWorkoutStore.ts";
+import { useSettingStore } from "../features/settings/hooks/useSettingStore.ts";
+
 const ExercisePage: React.FC = () => {
     const navigate = useNavigate();
-    const { workoutState, setWorkoutState } = useWorkout();
-    const { settings } = useUser();
+    const { workoutState, setWorkoutState } = useWorkoutStore();
+    const { quoteMode, weightUnit } = useSettingStore();
     const { showFooterCard, hideFooterCard } = useContainer();
 
     const [repsInput, setRepsInput] = useState<number>(0);
@@ -30,12 +31,8 @@ const ExercisePage: React.FC = () => {
         ];
     if (!currentExercise) return <div>Invalid exercise index</div>;
 
-    const [quote] = useState<string>(
-        QUOTES[settings.quoteMode][Math.floor(Math.random() * QUOTES[settings.quoteMode].length)].quote
-    );
-    const [author] = useState<string>(
-        QUOTES[settings.quoteMode][Math.floor(Math.random() * QUOTES[settings.quoteMode].length)].author
-    );
+    const [quote] = useState<string>(QUOTES[quoteMode][Math.floor(Math.random() * QUOTES[quoteMode].length)].quote);
+    const [author] = useState<string>(QUOTES[quoteMode][Math.floor(Math.random() * QUOTES[quoteMode].length)].author);
 
     // These are all relative to their respective parent circuit/exercise/set
     const isFirstCircuit = workoutState.currentCircuitIndex === 0;
@@ -196,7 +193,7 @@ const ExercisePage: React.FC = () => {
                             className="last-weight-weight"
                             onClick={handleShowRepsInputFooter}
                         >
-                            {weightInput} {settings.weightUnit} {<LuCirclePlus />}
+                            {weightInput} {weightUnit} {<LuCirclePlus />}
                         </span>
                     </div>
 

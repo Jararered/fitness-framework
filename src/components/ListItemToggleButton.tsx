@@ -6,24 +6,24 @@ import "../styles/components/ListItemToggleButton.css";
 
 interface ListItemToggleButtonProps {
     icon: React.ReactNode;
-    equipment: string;
+    name: string;
     enabled: boolean;
-    handleEquipmentToggle: (name: string) => void;
+    handleToggle: (name: string) => void;
 }
 
 const ListItemToggleButton: React.FC<ListItemToggleButtonProps> = ({
     icon,
-    equipment,
+    name,
     enabled,
-    handleEquipmentToggle,
+    handleToggle,
 }) => {
     return (
         <button
             className={`list-item-toggle-button ${enabled ? "enabled" : "disabled"}`}
-            onClick={() => handleEquipmentToggle(equipment)}
+            onClick={() => handleToggle(name)}
         >
             <div className="icon"> {icon} </div>
-            <strong className="name">{equipment}</strong>
+            <strong className="name">{name}</strong>
             <div className="check-box">{enabled ? <LuSquareCheckBig /> : <LuSquare />}</div>
         </button>
     );

@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useUser } from "../context/UserContext.tsx";
-
 // User Settings Icons
 import { LuUser } from "react-icons/lu";
 import { LuWeight } from "react-icons/lu";
@@ -16,6 +14,7 @@ import { LuArrowRight } from "react-icons/lu";
 import { LuGithub } from "react-icons/lu";
 import { LuMail } from "react-icons/lu";
 
+import { useSettingStore } from "../features/settings/hooks/useSettingStore.ts";
 
 import "../styles/components/PillToggle.css";
 
@@ -49,10 +48,10 @@ const kgToGrams = (kg: number) => {
 };
 
 const WeightInput = () => {
-    const { settings, setSettings } = useUser();
-    const isImperial = settings.unit === "imperial";
+    const { unit, weight, setWeight } = useSettingStore();
+    const isImperial = unit === "imperial";
 
-    const displayWeight = isImperial ? gramsToLbs(settings.weight) : gramsToKg(settings.weight);
+    const displayWeight = isImperial ? gramsToLbs(weight) : gramsToKg(weight);
 
     return (
         <span className="weight-input-container">
@@ -65,7 +64,7 @@ const WeightInput = () => {
                 onChange={(e) => {
                     const value = Number(e.target.value);
                     const weightInGrams = isImperial ? lbsToGrams(value) : kgToGrams(value);
-                    setSettings({ ...settings, weight: weightInGrams });
+                    setWeight(weightInGrams);
                 }}
             />
             <div className="units-strong">{isImperial ? "lbs" : "kg"}</div>
@@ -74,16 +73,16 @@ const WeightInput = () => {
 };
 
 const HeightInputMetric = () => {
-    const { settings, setSettings } = useUser();
+    const { height, setHeight } = useSettingStore();
 
     return (
         <span className="height-input-container">
             <input
                 className="number-input"
                 type="number"
-                value={settings.height}
+                value={height}
                 inputMode="decimal"
-                onChange={(e) => setSettings({ ...settings, height: Number(e.target.value) })}
+                onChange={(e) => setHeight(Number(e.target.value))}
             />
             <div className="units-strong">cm</div>
         </span>
@@ -91,8 +90,8 @@ const HeightInputMetric = () => {
 };
 
 const HeightInputImperial = () => {
-    const { settings, setSettings } = useUser();
-    const { feet, inches } = calculateHeightImperial(settings.height);
+    const { height, setHeight } = useSettingStore();
+    const { feet, inches } = calculateHeightImperial(height);
 
     return (
         <span className="imperial-height-input-container">
@@ -104,7 +103,7 @@ const HeightInputImperial = () => {
                 onChange={(e) => {
                     const newFeet = Number(e.target.value);
                     const heightCm = calculateHeightCm(newFeet, inches);
-                    setSettings({ ...settings, height: heightCm });
+                    setHeight(heightCm);
                 }}
                 placeholder="ft"
                 min="0"
@@ -118,7 +117,7 @@ const HeightInputImperial = () => {
                 onChange={(e) => {
                     const newInches = Number(e.target.value);
                     const heightCm = calculateHeightCm(feet, newInches);
-                    setSettings({ ...settings, height: heightCm });
+                    setHeight(heightCm);
                 }}
                 placeholder="in"
                 min="0"
@@ -130,21 +129,21 @@ const HeightInputImperial = () => {
 };
 
 const SettingsPage: React.FC = () => {
-    const { settings, setSettings } = useUser();
+    const { unit, setUnit, quoteMode, setQuoteMode, darkMode, setDarkMode, name, setName } = useSettingStore();
     const navigate = useNavigate();
 
     const handleUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const unit = e.target.value as "imperial" | "metric";
 
         if (unit === "imperial") {
-            setSettings({ ...settings, unit, weightUnit: "lbs" });
+            setUnit("imperial");
         } else {
-            setSettings({ ...settings, unit, weightUnit: "kg" });
+            setUnit("metric");
         }
     };
 
     const handleQuoteModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setSettings({ ...settings, quoteMode: e.target.value as "gentle" | "moderate" | "hardcore" | "xxx" });
+        setQuoteMode(e.target.value as "gentle" | "moderate" | "hardcore" | "xxx");
     };
 
     return (
@@ -168,8 +167,8 @@ const SettingsPage: React.FC = () => {
                         <div className="right">
                             <input
                                 type="text"
-                                value={settings.name}
-                                onChange={(e) => setSettings({ ...settings, name: e.target.value })}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                             />
                         </div>
                     </span>
@@ -190,7 +189,7 @@ const SettingsPage: React.FC = () => {
                             <strong>Height</strong>
                         </span>
                         <div className="right">
-                            {settings.unit === "imperial" ? <HeightInputImperial /> : <HeightInputMetric />}
+                            {unit === "imperial" ? <HeightInputImperial /> : <HeightInputMetric />}
                         </div>
                     </span>
 
@@ -211,7 +210,7 @@ const SettingsPage: React.FC = () => {
                         </span>
                         <select
                             className="right"
-                            value={settings.unit}
+                            value={unit}
                             onChange={handleUnitChange}
                         >
                             <option value="imperial">Imperial</option>
@@ -226,7 +225,7 @@ const SettingsPage: React.FC = () => {
                         </span>
                         <select
                             className="right"
-                            value={settings.quoteMode}
+                            value={quoteMode}
                             onChange={handleQuoteModeChange}
                         >
                             <option value="gentle">Gentle</option>
@@ -242,8 +241,8 @@ const SettingsPage: React.FC = () => {
                             <strong>Dark Mode</strong>
                         </span>
                         <button
-                            className={`pill-toggle right ${settings.darkMode ? "active" : ""}`}
-                            onClick={() => setSettings({ ...settings, darkMode: !settings.darkMode })}
+                            className={`pill-toggle right ${darkMode ? "active" : ""}`}
+                            onClick={() => setDarkMode(!darkMode)}
                         >
                             <span className="pill-circle"></span>
                         </button>

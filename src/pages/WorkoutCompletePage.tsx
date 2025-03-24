@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useUser } from "../context/UserContext.tsx";
-import { useWorkout } from "../context/WorkoutContext.tsx";
 
 import { WorkoutStatistics } from "../components/WorkoutStatistics.tsx";
 
+import { useWorkoutStore } from "../features/workouts/hooks/useWorkoutStore.ts";
+
 const WorkoutCompletePage: React.FC = () => {
-    const { workoutState, setWorkoutState, workoutLogs, setWorkoutLogs } = useWorkout();
-    const { settings } = useUser();
     const navigate = useNavigate();
+    const { workoutState, setWorkoutState, workoutLogs, setWorkoutLogs } = useWorkoutStore();
+    const { settings } = useUser();
+
     const [stats, setStats] = useState<{
         repsCompleted: number[][];
         weightsUsed: number[][];
@@ -23,13 +25,15 @@ const WorkoutCompletePage: React.FC = () => {
                 weightsUsed: [...workoutState.weightsUsed],
             });
 
-            const exerciseLogs = workoutState.currentPlan.circuits[workoutState.currentCircuitIndex].exercises.map((ex, index) => ({
-                exercise: ex.exercise,
-                reps: workoutState.repsCompleted[index] || ex.reps.map(() => 0),
-                weight: workoutState.weightsUsed[index] || ex.reps.map(() => 0),
-                startTime: new Date(), // Placeholder; could track actual times
-                endTime: new Date(),
-            }));
+            const exerciseLogs = workoutState.currentPlan.circuits[workoutState.currentCircuitIndex].exercises.map(
+                (ex, index) => ({
+                    exercise: ex.exercise,
+                    reps: workoutState.repsCompleted[index] || ex.reps.map(() => 0),
+                    weight: workoutState.weightsUsed[index] || ex.reps.map(() => 0),
+                    startTime: new Date(), // Placeholder; could track actual times
+                    endTime: new Date(),
+                })
+            );
             const totalReps = workoutState.repsCompleted.flat().reduce((sum, val) => sum + (val || 0), 0);
             const totalWeight = workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0);
             setWorkoutLogs([
@@ -73,7 +77,13 @@ const WorkoutCompletePage: React.FC = () => {
                 <h1>Congratulations!</h1>
                 <button onClick={() => navigate("/")}>Back to Home</button>
             </div>
-            {stats && <WorkoutStatistics repsCompleted={stats.repsCompleted} weightsUsed={stats.weightsUsed} units={handleWeightUnit()} />}
+            {stats && (
+                <WorkoutStatistics
+                    repsCompleted={stats.repsCompleted}
+                    weightsUsed={stats.weightsUsed}
+                    units={handleWeightUnit()}
+                />
+            )}
         </div>
     );
 };

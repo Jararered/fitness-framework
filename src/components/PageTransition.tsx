@@ -10,28 +10,32 @@ interface PageTransitionProps {
 const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
     const location = useLocation();
     const [displayChildren, setDisplayChildren] = useState(children);
-    const [transitionStage, setTransitionStage] = useState("fadeIn");
+    const [transitionState, setTransitionState] = useState("visible");
     const [prevPath, setPrevPath] = useState(location.pathname);
 
     useEffect(() => {
         // Only trigger transition if the path actually changed
         if (location.pathname !== prevPath) {
-            setTransitionStage("fadeOut");
+            // Step 1: Start fade out
+            setTransitionState("fadeOut");
 
-            const timeout = setTimeout(() => {
+            // Step 2: After fade out completes, update children and prepare for fade in
+            const switchContentTimeout = setTimeout(() => {
+                // Update the displayed content while component is invisible
                 setDisplayChildren(children);
-                setTransitionStage("fadeIn");
+                // Prepare for fade in
+                setTransitionState("fadeIn");
                 setPrevPath(location.pathname);
-            }, 200);
+            }, 300); // This should match your CSS fadeOut duration
 
-            return () => clearTimeout(timeout);
+            return () => clearTimeout(switchContentTimeout);
         } else {
             // Update children without transition if only state/search params changed
             setDisplayChildren(children);
         }
     }, [location, children, prevPath]);
 
-    return <div className={`page-transition ${transitionStage}`}>{displayChildren}</div>;
+    return <div className={`page-transition ${transitionState}`}>{displayChildren}</div>;
 };
 
 export default PageTransition;

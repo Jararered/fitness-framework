@@ -1,4 +1,4 @@
-@import "../variables.css";
+@import "../../../styles/variables.css";
 
 .dockbar {
     background-color: var(--card-background);
@@ -36,6 +36,18 @@
 .icon-button svg {
     width: 1.75rem;
     height: 1.75rem;
+    transition: all 200ms;
+}
+
+.icon-button {
+    height: 4rem;
+    width: 4rem;
+
+    border-radius: 1.5rem;
+
+    cursor: pointer;
+
+    transition: all 200ms;
 }
 
 .icon-button.active {

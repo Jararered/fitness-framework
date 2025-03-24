@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LuArrowRight, LuTrophy, LuCircleAlert, LuX, LuEqual, LuDumbbell } from "react-icons/lu";
 
-import { useUser } from "../context/UserContext.tsx";
-import { useWorkout } from "../context/WorkoutContext.tsx";
 import { useContainer } from "../context/ContainerContext.tsx";
 
 import { TimerCircular } from "../components/TimerCircular.tsx";
@@ -13,6 +11,8 @@ import "../styles/pages/ExercisePreviewPage.css";
 
 import { QUOTES } from "../data/quotes.ts";
 
+import { useWorkoutStore } from "../features/workouts/hooks/useWorkoutStore.ts";
+import { useSettingStore } from "../features/settings/hooks/useSettingStore.ts";
 interface MuscularLoadInfoFooterProps {
     reps: number;
     weight: number;
@@ -74,8 +74,8 @@ interface MuscularLoadProps {
 }
 
 const ExercisePreviewPage: React.FC = () => {
-    const { workoutState } = useWorkout();
-    const { settings } = useUser();
+    const { workoutState } = useWorkoutStore();
+    const { quoteMode, weightUnit } = useSettingStore();
     const navigate = useNavigate();
     const { showFooterCard } = useContainer();
 
@@ -83,12 +83,8 @@ const ExercisePreviewPage: React.FC = () => {
     const [resetTimer, setResetTimer] = useState(false);
     const breakTime = 60;
 
-    const [quote] = useState<string>(
-        QUOTES[settings.quoteMode][Math.floor(Math.random() * QUOTES[settings.quoteMode].length)].quote
-    );
-    const [author] = useState<string>(
-        QUOTES[settings.quoteMode][Math.floor(Math.random() * QUOTES[settings.quoteMode].length)].author
-    );
+    const [quote] = useState<string>(QUOTES[quoteMode][Math.floor(Math.random() * QUOTES[quoteMode].length)].quote);
+    const [author] = useState<string>(QUOTES[quoteMode][Math.floor(Math.random() * QUOTES[quoteMode].length)].author);
 
     const MuscularLoad: React.FC<MuscularLoadProps> = ({ reps, weight, units, totalWeight }) => {
         return (
@@ -164,8 +160,10 @@ const ExercisePreviewPage: React.FC = () => {
                 <MuscularLoad
                     reps={lastExerciseReps}
                     weight={lastExerciseWeight}
-                    units={settings.weightUnit}
-                    totalWeight={workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0)}
+                    units={weightUnit}
+                    totalWeight={workoutState.weightsUsed
+                        .flat()
+                        .reduce((sum: number, val: number) => sum + (val || 0), 0)}
                 />
             </div>
             <UpNextCard

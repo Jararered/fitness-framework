@@ -1,52 +1,6 @@
+import { Equipment } from "../../equipment/types/equipment.types";
+
 export type MuscleGroup = "Back" | "Biceps" | "Chest" | "Legs" | "Shoulders" | "Triceps" | "Abs" | "Obliques";
-
-export type Equipment =
-    | "Barbell"
-    | "Cable Machine"
-    | "Chest Press Machine"
-    | "Dumbbells"
-    | "EZ Bar"
-    | "Decline Bench"
-    | "Incline Bench"
-    | "Flat Bench"
-    | "Lat Pulldown Machine"
-    | "Leg Curl Machine"
-    | "Leg Extension Machine"
-    | "Leg Press Machine"
-    | "Pullup Bar"
-    | "Smith Machine";
-
-export type Muscle =
-    | ""
-    | "Abs"
-    | "Anterior Deltoids"
-    | "Biceps"
-    | "Brachialis"
-    | "Brachioradialis"
-    | "Erector Spinae"
-    | "Gluteus Maximus"
-    | "Hamstrings"
-    | "Lateral Deltoids"
-    | "Latissimus Dorsi"
-    | "Lower Trapezius"
-    | "Medial Deltoids"
-    | "Obliques"
-    | "Pectoralis Major"
-    | "Pectoralis Minor"
-    | "Posterior Deltoids"
-    | "Quadriceps"
-    | "Rear Deltoids"
-    | "Rhomboids"
-    | "Serratus Anterior"
-    | "Sternocleidomastoid"
-    | "Sternothyroid"
-    | "Supraspinatus"
-    | "Teres Major"
-    | "Teres Minor"
-    | "Trapezius"
-    | "Triceps Brachii"
-    | "Triceps"
-    | "Upper Trapezius";
 
 export type Difficulty = "" | "Beginner" | "Intermediate" | "Advanced";
 
@@ -54,10 +8,12 @@ export type Exercise = {
     exercise_name: string;
     muscle_group: MuscleGroup;
     required_equipment: Equipment[];
+    difficulty: Difficulty;
+
+    // TODO: Add primary, secondary, and stabilizing muscles
     // primary_muscles: Muscle[];
     // secondary_muscles: Muscle[];
     // stabilizing_muscles: Muscle[];
-    difficulty: Difficulty;
 };
 
 const BACK_EXERCISES: Exercise[] = [
@@ -524,3 +480,19 @@ export const EXERCISES_BY_MUSCLE_GROUP = {
     Abs: AB_EXERCISES,
     Obliques: OBLIQUE_EXERCISES,
 };
+
+export interface ExercisePlan {
+    exercise: string;
+    reps: number[];
+    sets: number;
+    style: "drop" | "flat";
+    baseReps: number;
+}
+
+export interface ExerciseLog {
+    exercise: string;
+    reps: number[];
+    weight: number[];
+    startTime: Date;
+    endTime: Date;
+}
