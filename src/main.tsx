@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 
 import { ContainerProvider } from "./context/ContainerContext.tsx";
-
+import { BrowserRouter } from "react-router-dom";
 import App from "./app/App.tsx";
 
 import "./styles/global.css";

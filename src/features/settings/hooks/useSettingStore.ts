@@ -1,20 +1,32 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
+import { QuoteMode } from "../../quotes/types/quotes.types";
+
+export enum UnitSystem {
+    Imperial = "imperial",
+    Metric = "metric",
+}
+
+export enum WeightUnit {
+    Lbs = "lbs",
+    Kg = "kg",
+}
+
 interface SettingsStore {
     name: string;
     setName: (name: string) => void;
-    weight: number;
-    setWeight: (weight: number) => void;
+    weightInGrams: number;
+    setWeightInGrams: (weightInGrams: number) => void;
     height: number;
     setHeight: (height: number) => void;
-    unit: "imperial" | "metric";
-    setUnit: (unit: "imperial" | "metric") => void;
-    weightUnit: "lbs" | "kg";
+    unit: UnitSystem;
+    setUnit: (unit: UnitSystem) => void;
+    weightUnit: WeightUnit;
     darkMode: boolean;
     setDarkMode: (darkMode: boolean) => void;
-    quoteMode: "gentle" | "moderate" | "hardcore" | "xxx";
-    setQuoteMode: (quoteMode: "gentle" | "moderate" | "hardcore" | "xxx") => void;
+    quoteMode: QuoteMode;
+    setQuoteMode: (quoteMode: QuoteMode) => void;
 }
 
 export const useSettingStore = create<SettingsStore>()(
@@ -22,20 +34,20 @@ export const useSettingStore = create<SettingsStore>()(
         (set) => ({
             name: "",
             setName: (name: string) => set({ name }),
-            weight: 0,
-            setWeight: (weight: number) => set({ weight }),
+            weightInGrams: 0,
+            setWeightInGrams: (weightInGrams: number) => set({ weightInGrams }),
             height: 0,
             setHeight: (height: number) => set({ height }),
-            unit: "imperial",
-            setUnit: (unit: "imperial" | "metric") => {
+            unit: UnitSystem.Imperial,
+            setUnit: (unit: UnitSystem) => {
                 set({ unit });
-                set({ weightUnit: unit === "imperial" ? "lbs" : "kg" });
+                set({ weightUnit: unit === UnitSystem.Imperial ? WeightUnit.Lbs : WeightUnit.Kg });
             },
-            weightUnit: "lbs",
+            weightUnit: WeightUnit.Lbs,
             darkMode: true,
             setDarkMode: (darkMode: boolean) => set({ darkMode }),
-            quoteMode: "moderate",
-            setQuoteMode: (quoteMode: "gentle" | "moderate" | "hardcore" | "xxx") => set({ quoteMode }),
+            quoteMode: QuoteMode.MODERATE,
+            setQuoteMode: (quoteMode: QuoteMode) => set({ quoteMode }),
         }),
         {
             name: "settings-store",

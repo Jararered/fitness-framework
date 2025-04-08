@@ -34,7 +34,7 @@ const ManageDataPage: React.FC = () => {
         <div className="settings-page">
             <h1>Manage Data</h1>
 
-            <div className="card">
+            <div className="card-container">
                 <div className="card-header">
                     <h2>Delete All Gyms</h2>
                     <p>This will delete all saved gyms from the app. This action is irreversible.</p>

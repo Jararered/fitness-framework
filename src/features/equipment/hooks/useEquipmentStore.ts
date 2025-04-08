@@ -2,8 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { Equipment } from "../types/equipment.types";
-
-import { EXERCISES } from "../../../data/exercises";
+import { EXERCISES } from "../../exercises/types/exercise.types";
 
 interface EquipmentConfig {
     name: string;

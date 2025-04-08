@@ -1,0 +1,15 @@
+.route-animation {
+    width: 100%;
+    transition: opacity 100ms ease-in-out, transform 100ms ease-in-out;
+}
+
+.route-animation.entering {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.route-animation.exiting {
+    opacity: 0;
+    transform: translateY(1rem);
+    pointer-events: none;
+}

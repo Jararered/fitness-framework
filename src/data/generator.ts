@@ -1,4 +1,4 @@
-import { EXERCISES_BY_MUSCLE_GROUP } from "./exercises.ts";
+import { EXERCISES_BY_MUSCLE_GROUP } from "../features/exercises/types/exercise.types.ts";
 
 import { CircuitPlan, ExercisePlan, WorkoutPlan, MuscleGroup, Equipment } from "./types.ts";
 

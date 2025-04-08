@@ -1,10 +1,17 @@
 @import "../../../styles/variables.css";
 
+.dockbar-padding {
+    height: 8rem;
+}
+
 .dockbar {
     background-color: var(--card-background);
-    outline: 3px solid var(--card-border);
 
+    border: 3px solid var(--card-border);
+    border-bottom: none;
     border-radius: 2rem;
+
+    flex-direction: row;
 
     /* Settings to make the dock bar merge with the bottom of the screen */
     border-bottom-left-radius: 0;
@@ -24,19 +31,13 @@
     position: fixed;
 
     transform: translateX(-50%);
-    transition: transform 250ms ease-in-out;
+    transition: transform 100ms ease-in-out;
 
     z-index: 500;
 }
 
 .dockbar.hidden {
     transform: translateX(-50%) translateY(150%);
-}
-
-.icon-button svg {
-    width: 1.75rem;
-    height: 1.75rem;
-    transition: all 200ms;
 }
 
 .icon-button {
@@ -47,7 +48,7 @@
 
     cursor: pointer;
 
-    transition: all 200ms;
+    transition: all 100ms;
 }
 
 .icon-button.active {

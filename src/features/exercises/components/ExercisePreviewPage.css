@@ -1,0 +1,136 @@
+.break-timer-container {
+    position: relative;
+}
+
+.break-timer-text {
+    position: absolute;
+    color: var(--main-accent);
+    font-weight: bold;
+    top: -2rem;
+}
+
+.muscular-load-container {
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--card-border);
+    border-radius: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 2rem);
+}
+
+.muscular-load-icon {
+    background-color: var(--main-accent);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+}
+
+.muscular-load-value {
+    margin-left: auto;
+}
+
+.muscular-load-info-title {
+    margin: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.muscular-load-info-visual-calculation {
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.reps-container {
+    background-color: var(--main-accent);
+
+    width: 5rem;
+    height: 5rem;
+
+    border-radius: 50%;
+}
+
+.weight-container {
+    background-color: var(--main-accent);
+
+    width: 5rem;
+    height: 5rem;
+
+    clip-path: polygon(25% 0%, 100% 0, 100% 75%, 75% 100%, 0 100%, 0% 25%);
+}
+
+.result-container {
+    color: var(--main-accent);
+
+    width: 5rem;
+    height: 5rem;
+
+    border: 3px solid var(--main-accent);
+    border-radius: 50%;
+}
+
+.result-value {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.result-units {
+    font-size: 1rem;
+}
+
+.muscular-load-info-explaination {
+    margin: 2rem 0;
+}
+
+.muscular-load-info-total-calculation {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr auto;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.muscular-load-info-total-calculation-title {
+    grid-area: 1 / 1 / 2 / 2;
+    margin-right: auto;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.muscular-load-info-total-calculation-subtitle {
+    grid-area: 2 / 1 / 3 / 2;
+    margin-right: auto;
+    font-style: italic;
+}
+
+.muscular-load-info-total-calculation-value {
+    grid-area: 1 / 2 / 3 / 3;
+
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+
+    font-size: 1.25rem;
+    font-weight: bold;
+
+    text-transform: uppercase;
+}
+
+.video-placeholder {
+    position: relative;
+    background-color: var(--card-border);
+    border-radius: 0.5rem;
+    width: 5rem;
+    height: 3rem;
+}
+
+.video-placeholder-icon {
+    position: absolute;
+}
+
+.up-next-text {
+    box-sizing: border-box;
+    width: 5rem;
+}

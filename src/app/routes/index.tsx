@@ -1,79 +1,68 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
 import HomePage from "../../pages/HomePage";
-import EquipmentSelectPage from "../../pages/EquipmentSelectPage";
-import WorkoutCreatePage from "../../pages/WorkoutCreatePage";
+import EquipmentSelectPage from "../../features/equipment/components/EquipmentSelectPage";
+import WorkoutCreate from "../../features/workouts/components/WorkoutCreate";
 import ProfilePage from "../../pages/ProfilePage";
-import SettingsPage from "../../pages/SettingsPage";
-import { ExercisePage, PreviewNextCircuit, PreviewNextExercise } from "../../pages/ExercisePage";
-import ExercisePreviewPage from "../../pages/ExercisePreviewPage";
-import WorkoutCompletePage from "../../pages/WorkoutCompletePage";
+import { Settings } from "../../features/settings/components/Settings";
+import { ExercisePage } from "../../features/exercises/components/ExercisePage";
+import ExercisePreviewPage from "../../features/exercises/components/ExercisePreviewPage";
+import WorkoutComplete from "../../features/workouts/components/WorkoutComplete";
 import ManageDataPage from "../../pages/ManageDataPage";
-import WorkoutOverview from "../../components/WorkoutOverview";
-import SandboxPage from "../../pages/SandboxPage";
+import WorkoutOverview from "../../features/workouts/components/WorkoutOverview";
 
-const AppRoutes = () => {
+import RouteAnimation from "../../features/layout/components/RouteAnimation";
+
+export const AppRoutes = () => {
     const location = useLocation();
 
     return (
-        <Routes
-            location={location}
-            key={location.pathname}
-        >
-            <Route
-                path="/"
-                element={<HomePage />}
-            />
-            <Route
-                path="/equipment"
-                element={<EquipmentSelectPage />}
-            />
-            <Route
-                path="/create"
-                element={<WorkoutCreatePage />}
-            />
-            <Route
-                path="/profile"
-                element={<ProfilePage />}
-            />
-            <Route
-                path="/settings"
-                element={<SettingsPage />}
-            />
-            <Route
-                path="/preview"
-                element={<ExercisePreviewPage />}
-            />
-            <Route
-                path="/exercise"
-                element={<ExercisePage />}
-            />
-            <Route
-                path="/complete"
-                element={<WorkoutCompletePage />}
-            />
-            <Route
-                path="/manage-data"
-                element={<ManageDataPage />}
-            />
-            <Route
-                path="/workout-overview"
-                element={<WorkoutOverview />}
-            />
-            <Route
-                path="/sandbox"
-                element={<SandboxPage />}
-            />
-            <Route
-                path="/preview-next-exercise"
-                element={<PreviewNextExercise />}
-            />
-            <Route
-                path="/preview-next-circuit"
-                element={<PreviewNextCircuit />}
-            />
-        </Routes>
+        <RouteAnimation>
+            <Routes
+                location={location}
+                key={location.pathname}
+            >
+                <Route
+                    path="/"
+                    element={<HomePage />}
+                />
+                <Route
+                    path="/equipment"
+                    element={<EquipmentSelectPage />}
+                />
+                <Route
+                    path="/create"
+                    element={<WorkoutCreate />}
+                />
+                <Route
+                    path="/profile"
+                    element={<ProfilePage />}
+                />
+                <Route
+                    path="/settings"
+                    element={<Settings />}
+                />
+                <Route
+                    path="/preview-exercise"
+                    element={<ExercisePreviewPage />}
+                />
+                <Route
+                    path="/exercise"
+                    element={<ExercisePage />}
+                />
+                <Route
+                    path="/complete"
+                    element={<WorkoutComplete />}
+                />
+                <Route
+                    path="/manage-data"
+                    element={<ManageDataPage />}
+                />
+                <Route
+                    path="/workout-overview"
+                    element={<WorkoutOverview />}
+                />
+            </Routes>
+        </RouteAnimation>
     );
 };
-
-export default AppRoutes;

@@ -1,0 +1,190 @@
+.quote-container {
+    background-color: var(--card-border);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 0.25rem;
+    margin-bottom: 2rem;
+}
+
+.quote-container .author {
+    color: var(--main-accent);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+.last-weight-weight {
+    background-color: var(--card-border);
+    border-radius: 1rem;
+    padding: 0.25rem 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.last-weight-weight svg {
+    color: var(--main-accent);
+}
+
+.reps-goal {
+    width: 7rem;
+    height: 7rem;
+
+    border: 5px solid var(--card-border);
+    border-radius: 50%;
+
+    flex-direction: column;
+    justify-content: center;
+}
+
+.reps-goal-number {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.reps-goal-text {
+    font-size: 1rem;
+}
+
+.back-exercise-button {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+
+    padding: 0;
+    line-height: 3rem;
+    text-align: center;
+
+    margin-bottom: 0;
+    color: var(--text-color);
+    background-color: var(--card-border);
+    font-size: 1.5rem;
+}
+
+.exercise-page-input-header {
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem;
+}
+
+.exercise-page-inputs input::-webkit-outer-spin-button,
+.exercise-page-inputs input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.exercise-page-inputs input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.exercise-page-inputs {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    grid-template-rows: auto auto;
+
+    column-gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.input-label {
+    grid-row: 1;
+    margin: 0;
+    padding-bottom: 0.25rem;
+    text-align: center;
+}
+
+.input-value {
+    grid-row: 2;
+    text-align: center;
+}
+
+.set-label {
+    color: var(--main-accent);
+    grid-column: 1;
+}
+
+.set-value {
+    grid-column: 1;
+    font-size: 1.5rem;
+    background-color: var(--main-accent);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.reps-label {
+    grid-column: 2;
+}
+
+.reps-value {
+    grid-column: 2;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0.25rem 0.75rem;
+}
+
+.weight-label {
+    grid-column: 3;
+}
+
+.weight-value {
+    grid-column: 3;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0.25rem 0.75rem;
+}
+
+.unit-label {
+    grid-row: 2;
+    grid-column: 4;
+    background-color: var(--card-border);
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+}
+
+.exercise-page-input-container {
+    width: calc(100% - 2rem);
+}
+
+.exercise-page-input-container .number-input {
+    grid-column: 3;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0 0.5rem;
+}
+
+.navigation-button-container {
+    position: relative;
+}
+
+.navigation-button-container button.icon {
+    height: 3.5rem;
+    width: 3.5rem;
+}
+
+.navigation-button-text {
+    position: absolute;
+    font-weight: bold;
+    font-size: 0.8rem;
+    top: 3.75rem;
+}
+
+.footer-actions {
+    width: 100%;
+}
+
+.footer-actions .save-button {
+    font-size: 1.25rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}

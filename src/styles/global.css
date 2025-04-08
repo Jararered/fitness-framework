@@ -2,6 +2,8 @@
 
 @import "button.css";
 
+@import "flex.css";
+
 * {
     user-select: none;
     -webkit-user-select: none;
@@ -22,7 +24,6 @@ html {
 
 body {
     margin: 0;
-    padding: 0;
 
     overflow-x: hidden;
     overscroll-behavior: none;
@@ -30,8 +31,8 @@ body {
 
 div {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
@@ -100,10 +101,9 @@ a {
     color: var(--main-accent);
     text-decoration: none;
     cursor: pointer;
-    transition: all 200ms;
+    transition: all 100ms;
     font-weight: bold;
     font-size: 1rem;
-    display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
@@ -119,18 +119,4 @@ a:active {
 
 a:visited {
     color: var(--main-accent);
-}
-
-.left {
-    margin-right: auto;
-    text-align: left;
-}
-
-.right {
-    margin-left: auto;
-    text-align: right;
-}
-
-.expanding {
-    flex-grow: 1;
 }

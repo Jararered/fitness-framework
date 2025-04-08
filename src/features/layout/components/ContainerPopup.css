@@ -1,0 +1,42 @@
+.popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--card-background);
+    outline: 3px solid var(--card-border);
+    border-radius: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    min-width: 350px;
+    /* overflow-y: auto; */
+
+    transition: all 100ms ease-in-out;
+}
+
+.popup-container.visible {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-container.hidden {
+    transform: translate(-50%, -50%) translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.popup-container-content {
+    margin: 1rem;
+}
+
+.popup-container-close-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}

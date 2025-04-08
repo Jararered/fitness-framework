@@ -2,50 +2,48 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LuHouse, LuDumbbell, LuMapPin, LuUser, LuCog } from "react-icons/lu";
 
-import { useWorkoutStore } from "../../workouts/hooks/useWorkoutStore";
-
 import "./DockBar.css";
 
-const DockBar: React.FC = () => {
+interface DockBarProps {
+    shouldHideDockBar: boolean;
+}
+
+export const DockBar: React.FC<DockBarProps> = ({ shouldHideDockBar }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { workoutState } = useWorkoutStore();
-
     return (
-        <span className={`dockbar ${workoutState.isStarted ? "hidden" : ""}`}>
+        <div className={`dockbar ${shouldHideDockBar ? "hidden" : ""}`}>
             <div
                 className={`icon-button ${location.pathname === "/" ? "active" : ""}`}
                 onClick={() => navigate("/")}
             >
-                <LuHouse />
+                <LuHouse size={28} />
             </div>
             <div
                 className={`icon-button ${location.pathname === "/equipment" ? "active" : ""}`}
                 onClick={() => navigate("/equipment")}
             >
-                <LuMapPin />
+                <LuMapPin size={28} />
             </div>
             <div
                 className={`icon-button ${location.pathname === "/create" ? "active" : ""}`}
                 onClick={() => navigate("/create")}
             >
-                <LuDumbbell />
+                <LuDumbbell size={28} />
             </div>
             <div
                 className={`icon-button ${location.pathname === "/profile" ? "active" : ""}`}
                 onClick={() => navigate("/profile")}
             >
-                <LuUser />
+                <LuUser size={28} />
             </div>
             <div
                 className={`icon-button ${location.pathname === "/settings" ? "active" : ""}`}
                 onClick={() => navigate("/settings")}
             >
-                <LuCog />
+                <LuCog size={28} />
             </div>
-        </span>
+        </div>
     );
 };
-
-export default DockBar;
