@@ -1,76 +1,76 @@
 @keyframes footerOpening {
-    0% {
-        transform: translate(-50%, 100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translate(-50%, 0);
-        opacity: 1;
-    }
+  0% {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
 }
 
 @keyframes footerClosing {
-    0% {
-        transform: translate(-50%, 0);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, 100%);
-        opacity: 0;
-    }
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
 }
 
 .footer-container {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--card-background);
-    outline: 3px solid var(--card-border);
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    z-index: 800;
-    padding: 0;
-    padding-bottom: 2rem;
-    min-height: 2rem;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--card-background);
+  outline: 3px solid var(--card-border);
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  z-index: 800;
+  padding: 0;
+  padding-bottom: 2rem;
+  min-height: 2rem;
 
-    width: 98%;
-    max-width: 40rem;
+  width: 98%;
+  max-width: 40rem;
 
-    opacity: 0;
-    visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .footer-container.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, 0);
-    animation: footerOpening 250ms ease-in-out;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  animation: footerOpening 250ms ease-in-out;
 }
 
 .footer-container.closing {
-    animation: footerClosing 250ms ease-in-out;
-    opacity: 0;
+  animation: footerClosing 250ms ease-in-out;
+  opacity: 0;
 }
 
 .footer-container-content {
-    width: 100%;
+  width: 100%;
 }
 
 .footer-container-inner {
-    opacity: 1;
-    width: 100%;
+  opacity: 1;
+  width: 100%;
 }
 
 .footer-container-close-icon {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    height: 2rem;
-    width: 2rem;
-    color: var(--text-color);
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  height: 2rem;
+  width: 2rem;
+  color: var(--text-color);
 }
 
 .footer-container-close-icon:hover {
-    color: var(--text-color-hover);
+  color: var(--text-color-hover);
 }

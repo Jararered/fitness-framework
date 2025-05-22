@@ -1,95 +1,95 @@
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    to {
-        opacity: 0;
-        transform: translateY(-50%);
-    }
+  to {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
 }
 
 .toast-container {
-    /* Gap */
-    gap: 0.5rem;
+  /* Gap */
+  gap: 0.5rem;
 
-    /* Layout */
-    position: fixed;
-    top: 4rem;
-    left: 50%;
-    transform: translateX(-50%);
-    flex-direction: column;
-    align-items: center;
-    z-index: 1000;
+  /* Layout */
+  position: fixed;
+  top: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
 }
 
 .toast {
-    /* Size */
-    min-width: 15rem;
-    max-width: 25rem;
-    padding: 0.75rem 1rem;
+  /* Size */
+  min-width: 15rem;
+  max-width: 25rem;
+  padding: 0.75rem 1rem;
 
-    /* Style */
-    color: var(--text-color);
-    background-color: var(--card-background);
-    border-radius: 2rem;
+  /* Style */
+  color: var(--text-color);
+  background-color: var(--card-background);
+  border-radius: 2rem;
 
-    /* Layout */
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  /* Layout */
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 
-    /* Animation */
-    animation: slideIn 200ms ease-out;
+  /* Animation */
+  animation: slideIn 200ms ease-out;
 }
 
 .toast-success {
-    /* Style */
-    background-color: var(--success-accent);
-    color: white;
+  /* Style */
+  background-color: var(--success-accent);
+  color: white;
 }
 
 .toast-error {
-    /* Style */
-    background-color: var(--error-accent);
-    color: white;
+  /* Style */
+  background-color: var(--error-accent);
+  color: white;
 }
 
 .toast-info {
-    /* Style */
-    color: white;
+  /* Style */
+  color: white;
 }
 
 .toast-icon {
-    /* Layout */
-    align-items: center;
-    justify-content: center;
+  /* Layout */
+  align-items: center;
+  justify-content: center;
 
-    /* Size */
-    margin: 0 0 0 1rem;
-    padding: 0;
-    width: 1.5rem;
-    height: 1.5rem;
+  /* Size */
+  margin: 0 0 0 1rem;
+  padding: 0;
+  width: 1.5rem;
+  height: 1.5rem;
 
-    /* Style */
-    font-size: 1.5rem;
-    border-radius: 50%;
+  /* Style */
+  font-size: 1.5rem;
+  border-radius: 50%;
 }
 
 .toast-exiting {
-    /* Animation */
-    animation: fadeOut 0.5s ease-out forwards;
+  /* Animation */
+  animation: fadeOut 0.5s ease-out forwards;
 }

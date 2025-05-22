@@ -1,50 +1,50 @@
 .selector-searchable {
-    position: relative;
+  position: relative;
 
-    overflow: hidden-y;
+  overflow: hidden-y;
 }
 
 .selector-searchable {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .selector-dropdown {
-    position: absolute;
-    top: 100%;
-    border-radius: 1rem;
+  position: absolute;
+  top: 100%;
+  border-radius: 1rem;
 
-    overflow: hidden;
-    width: 100%;
-    min-width: 15rem;
+  overflow: hidden;
+  width: 100%;
+  min-width: 15rem;
 
-    border: 1px solid var(--card-border);
-    background-color: var(--card-background);
-    box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-border);
+  background-color: var(--card-background);
+  box-shadow: var(--card-shadow);
 
-    z-index: 2000;
+  z-index: 2000;
 }
 
 .options-container {
-    overflow-x: hidden;
-    overflow-y: hidden;
-    width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
 
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .option-item {
-    width: 100%;
-    padding: 0.5rem;
-    cursor: pointer;
+  width: 100%;
+  padding: 0.5rem;
+  cursor: pointer;
 }
 
 .option-item:hover {
-    color: var(--text-color-hover);
-    background-color: var(--toggle-background);
+  color: var(--text-color-hover);
+  background-color: var(--toggle-background);
 }
 
 .no-results {
-    padding: 0.5rem;
-    color: #666;
+  padding: 0.5rem;
+  color: #666;
 }

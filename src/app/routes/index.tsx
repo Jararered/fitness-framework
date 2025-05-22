@@ -14,55 +14,55 @@ import WorkoutOverview from "../../features/workouts/components/WorkoutOverview"
 import RouteAnimation from "../../features/layout/components/RouteAnimation";
 
 export const AppRoutes = () => {
-    const location = useLocation();
+  const location = useLocation();
 
-    return (
-        <RouteAnimation>
-            <Routes
-                location={location}
-                key={location.pathname}
-            >
-                <Route
-                    path="/"
-                    element={<HomePage />}
-                />
-                <Route
-                    path="/equipment"
-                    element={<EquipmentSelectPage />}
-                />
-                <Route
-                    path="/create"
-                    element={<WorkoutCreate />}
-                />
-                <Route
-                    path="/profile"
-                    element={<ProfilePage />}
-                />
-                <Route
-                    path="/settings"
-                    element={<Settings />}
-                />
-                <Route
-                    path="/preview-exercise"
-                    element={<ExercisePreviewPage />}
-                />
-                <Route
-                    path="/exercise"
-                    element={<ExercisePage />}
-                />
-                <Route
-                    path="/complete"
-                    element={<WorkoutComplete />}
-                />
-                <Route
-                    path="/manage-data"
-                    element={<ManageDataPage />}
-                />
-                <Route
-                    path="/workout-overview"
-                    element={<WorkoutOverview />}
-                />
-            </Routes>
-        </RouteAnimation>
-    );
+  return (
+    <RouteAnimation>
+      <Routes
+        location={location}
+        key={location.pathname}
+      >
+        <Route
+          path="/"
+          element={<HomePage />}
+        />
+        <Route
+          path="/equipment"
+          element={<EquipmentSelectPage />}
+        />
+        <Route
+          path="/create"
+          element={<WorkoutCreate />}
+        />
+        <Route
+          path="/profile"
+          element={<ProfilePage />}
+        />
+        <Route
+          path="/settings"
+          element={<Settings />}
+        />
+        <Route
+          path="/preview-exercise"
+          element={<ExercisePreviewPage />}
+        />
+        <Route
+          path="/exercise"
+          element={<ExercisePage />}
+        />
+        <Route
+          path="/complete"
+          element={<WorkoutComplete />}
+        />
+        <Route
+          path="/manage-data"
+          element={<ManageDataPage />}
+        />
+        <Route
+          path="/workout-overview"
+          element={<WorkoutOverview />}
+        />
+      </Routes>
+    </RouteAnimation>
+  );
 };

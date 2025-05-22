@@ -1,140 +1,140 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 interface Toast {
-    id: number;
-    message: string;
-    type: "success" | "error" | "info";
-    duration?: number; // in milliseconds
-    isExiting?: boolean;
+  id: number;
+  message: string;
+  type: "success" | "error" | "info";
+  duration?: number; // in milliseconds
+  isExiting?: boolean;
 }
 
 interface ContainerContextType {
-    dimRequested: boolean;
-    isFooterOpen: boolean;
-    isPopupOpen: boolean;
-    contentFooter: ReactNode;
-    contentPopup: ReactNode;
-    contentToast: Toast[];
-    isFooterClosing: boolean;
-    isPopupClosing: boolean;
-    showFooterCard: (content: ReactNode) => void;
-    hideFooterCard: () => void;
-    showPopup: (content: ReactNode) => void;
-    hidePopup: () => void;
-    addToast: (message: string, type: "success" | "error" | "info", duration?: number) => void;
-    showToast: (message: string, type: "success" | "error" | "info") => void;
-    hideToast: () => void;
+  dimRequested: boolean;
+  isFooterOpen: boolean;
+  isPopupOpen: boolean;
+  contentFooter: ReactNode;
+  contentPopup: ReactNode;
+  contentToast: Toast[];
+  isFooterClosing: boolean;
+  isPopupClosing: boolean;
+  showFooterCard: (content: ReactNode) => void;
+  hideFooterCard: () => void;
+  showPopup: (content: ReactNode) => void;
+  hidePopup: () => void;
+  addToast: (message: string, type: "success" | "error" | "info", duration?: number) => void;
+  showToast: (message: string, type: "success" | "error" | "info") => void;
+  hideToast: () => void;
 }
 
 const ContainerContext = createContext<ContainerContextType | undefined>(undefined);
 
 export const useContainer = () => {
-    const context = useContext(ContainerContext);
-    if (!context) {
-        throw new Error("useContainer must be used within a ContainerProvider");
-    }
-    return context;
+  const context = useContext(ContainerContext);
+  if (!context) {
+    throw new Error("useContainer must be used within a ContainerProvider");
+  }
+  return context;
 };
 
 export const ContainerProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [dimRequested, setDimRequested] = useState(false);
-    const [isFooterOpen, setIsFooterOpen] = useState(false);
-    const [isFooterClosing, setIsFooterClosing] = useState(false);
+  const [dimRequested, setDimRequested] = useState(false);
+  const [isFooterOpen, setIsFooterOpen] = useState(false);
+  const [isFooterClosing, setIsFooterClosing] = useState(false);
 
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [isPopupClosing, setIsPopupClosing] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isPopupClosing, setIsPopupClosing] = useState(false);
 
-    const [contentFooter, setContentFooter] = useState<ReactNode>(null);
-    const [contentPopup, setContentPopup] = useState<ReactNode>(null);
-    const [contentToast, setContentToast] = useState<Toast[]>([]);
+  const [contentFooter, setContentFooter] = useState<ReactNode>(null);
+  const [contentPopup, setContentPopup] = useState<ReactNode>(null);
+  const [contentToast, setContentToast] = useState<Toast[]>([]);
 
-    // Reset closing state when footer is fully closed
-    useEffect(() => {
-        if (isFooterClosing) {
-            const timer = setTimeout(() => {
-                setIsFooterClosing(false);
-            }, 250);
-            return () => clearTimeout(timer);
-        }
-    }, [isFooterClosing]);
-
-    const showFooterCard = (content: ReactNode) => {
-        setContentFooter(content);
-        setIsFooterOpen(true);
+  // Reset closing state when footer is fully closed
+  useEffect(() => {
+    if (isFooterClosing) {
+      const timer = setTimeout(() => {
         setIsFooterClosing(false);
-    };
+      }, 250);
+      return () => clearTimeout(timer);
+    }
+  }, [isFooterClosing]);
 
-    const hideFooterCard = () => {
-        setIsFooterClosing(true);
-        setTimeout(() => {
-            setIsFooterOpen(false);
-        }, 250);
-    };
+  const showFooterCard = (content: ReactNode) => {
+    setContentFooter(content);
+    setIsFooterOpen(true);
+    setIsFooterClosing(false);
+  };
 
-    const showPopup = (content: ReactNode) => {
-        setContentPopup(content);
-        setIsPopupOpen(true);
-        setIsPopupClosing(false);
-    };
+  const hideFooterCard = () => {
+    setIsFooterClosing(true);
+    setTimeout(() => {
+      setIsFooterOpen(false);
+    }, 250);
+  };
 
-    const hidePopup = () => {
-        setIsPopupClosing(true);
-        setTimeout(() => {
-            setIsPopupOpen(false);
-        }, 250);
-    };
+  const showPopup = (content: ReactNode) => {
+    setContentPopup(content);
+    setIsPopupOpen(true);
+    setIsPopupClosing(false);
+  };
 
-    const showToast = (message: string, type: "success" | "error" | "info") => {
-        setContentToast((prev) => [...prev, { id: Date.now(), message, type }]);
-    };
+  const hidePopup = () => {
+    setIsPopupClosing(true);
+    setTimeout(() => {
+      setIsPopupOpen(false);
+    }, 250);
+  };
 
-    const hideToast = () => {
-        setContentToast([]);
-    };
+  const showToast = (message: string, type: "success" | "error" | "info") => {
+    setContentToast((prev) => [...prev, { id: Date.now(), message, type }]);
+  };
 
-    const addToast = (message: string, type: "success" | "error" | "info", duration = 3000) => {
-        const id = Date.now();
-        setContentToast((prev) => [...prev, { id, message, type, duration }]);
+  const hideToast = () => {
+    setContentToast([]);
+  };
 
-        // Start the exit animation after the duration
-        setTimeout(() => startToastExit(id), duration);
-    };
+  const addToast = (message: string, type: "success" | "error" | "info", duration = 3000) => {
+    const id = Date.now();
+    setContentToast((prev) => [...prev, { id, message, type, duration }]);
 
-    const startToastExit = (id: number) => {
-        // Mark the toast as exiting to trigger animation
-        setContentToast((prev) => prev.map((toast) => (toast.id === id ? { ...toast, isExiting: true } : toast)));
+    // Start the exit animation after the duration
+    setTimeout(() => startToastExit(id), duration);
+  };
 
-        // Remove the toast after animation completes
-        setTimeout(() => {
-            removeToast(id);
-        }, 500); // Match this with the CSS animation duration
-    };
+  const startToastExit = (id: number) => {
+    // Mark the toast as exiting to trigger animation
+    setContentToast((prev) => prev.map((toast) => (toast.id === id ? { ...toast, isExiting: true } : toast)));
 
-    const removeToast = (id: number) => {
-        setContentToast((prev) => prev.filter((toast) => toast.id !== id));
-    };
+    // Remove the toast after animation completes
+    setTimeout(() => {
+      removeToast(id);
+    }, 500); // Match this with the CSS animation duration
+  };
 
-    return (
-        <ContainerContext.Provider
-            value={{
-                dimRequested,
-                isFooterOpen,
-                isFooterClosing,
-                isPopupOpen,
-                isPopupClosing,
-                contentFooter,
-                contentPopup,
-                contentToast,
-                showFooterCard,
-                hideFooterCard,
-                showPopup,
-                hidePopup,
-                addToast,
-                showToast,
-                hideToast,
-            }}
-        >
-            {children}
-        </ContainerContext.Provider>
-    );
+  const removeToast = (id: number) => {
+    setContentToast((prev) => prev.filter((toast) => toast.id !== id));
+  };
+
+  return (
+    <ContainerContext.Provider
+      value={{
+        dimRequested,
+        isFooterOpen,
+        isFooterClosing,
+        isPopupOpen,
+        isPopupClosing,
+        contentFooter,
+        contentPopup,
+        contentToast,
+        showFooterCard,
+        hideFooterCard,
+        showPopup,
+        hidePopup,
+        addToast,
+        showToast,
+        hideToast,
+      }}
+    >
+      {children}
+    </ContainerContext.Provider>
+  );
 };

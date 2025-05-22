@@ -1,60 +1,60 @@
 @import "../../../styles/variables.css";
 
 .dockbar-padding {
-    height: 8rem;
+  height: 8rem;
 }
 
 .dockbar {
-    background-color: var(--card-background);
+  background-color: var(--card-background);
 
-    border: 3px solid var(--card-border);
-    border-bottom: none;
-    border-radius: 2rem;
+  border: 3px solid var(--card-border);
+  border-bottom: none;
+  border-radius: 2rem;
 
-    flex-direction: row;
+  flex-direction: row;
 
-    /* Settings to make the dock bar merge with the bottom of the screen */
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    bottom: 0;
-    padding-bottom: 1.5rem;
+  /* Settings to make the dock bar merge with the bottom of the screen */
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  bottom: 0;
+  padding-bottom: 1.5rem;
 
-    /* Settings to make the dock bar floating at the bottom of the screen */
-    /* padding-bottom: 0.5rem;
+  /* Settings to make the dock bar floating at the bottom of the screen */
+  /* padding-bottom: 0.5rem;
     bottom: 2rem; */
 
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
 
-    left: 50%;
-    position: fixed;
+  left: 50%;
+  position: fixed;
 
-    transform: translateX(-50%);
-    transition: transform 100ms ease-in-out;
+  transform: translateX(-50%);
+  transition: transform 100ms ease-in-out;
 
-    z-index: 500;
+  z-index: 500;
 }
 
 .dockbar.hidden {
-    transform: translateX(-50%) translateY(150%);
+  transform: translateX(-50%) translateY(150%);
 }
 
 .icon-button {
-    height: 4rem;
-    width: 4rem;
+  height: 4rem;
+  width: 4rem;
 
-    border-radius: 1.5rem;
+  border-radius: 1.5rem;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    transition: all 100ms;
+  transition: all 100ms;
 }
 
 .icon-button.active {
-    background-color: var(--main-accent);
+  background-color: var(--main-accent);
 }
 
 .icon-button.active svg {
-    color: white;
+  color: white;
 }

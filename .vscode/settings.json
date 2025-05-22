@@ -15,6 +15,6 @@
     },
     "autoHide.autoHideSideBar": false,
     "prettier.printWidth": 120,
-    "prettier.tabWidth": 4,
-    "prettier.singleAttributePerLine": true
+    "prettier.tabWidth": 2,
+    "prettier.singleAttributePerLine": true,
 }

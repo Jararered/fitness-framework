@@ -4,19 +4,19 @@ Fitness Framework is a fitness application that allows users to create, manage, 
 
 ## Features
 
--   Create and manage workouts
--   Track exercises with sets and reps
--   User profile and preferences
--   Responsive design
+- Create and manage workouts
+- Track exercises with sets and reps
+- User profile and preferences
+- Responsive design
 
 ## Tools Used
 
--   Vite
--   React
--   TypeScript
--   Tailwind CSS
--   Bun
--   ESLint
+- Vite
+- React
+- TypeScript
+- Tailwind CSS
+- Bun
+- ESLint
 
 ## Getting Started
 
@@ -24,21 +24,21 @@ To start the development server using Vite after cloning the repository, follow 
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/Jararered/fitness-framework.git
-    cd fitness-framework
-    ```
+```bash
+git clone https://github.com/Jararered/fitness-framework.git
+cd fitness-framework
+```
 
 2. Install the dependencies:
 
-    ```bash
-    bun install
-    ```
+```bash
+bun install
+```
 
 3. Run the development server:
 
-    ```bash
-    bun dev
-    ```
+```bash
+bun dev
+```
 
-The application will be available at `http://localhost:3000`.
+The application will be available at `http://localhost:5173`.

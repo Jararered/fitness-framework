@@ -15,45 +15,45 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function App() {
-    const { darkMode } = useSettingStore();
+  const { darkMode } = useSettingStore();
 
-    const { isFooterOpen, contentFooter, hideFooterCard } = useContainer();
-    const { isPopupOpen, contentPopup, hidePopup } = useContainer();
-    const { dimRequested } = useContainer();
+  const { isFooterOpen, contentFooter, hideFooterCard } = useContainer();
+  const { isPopupOpen, contentPopup, hidePopup } = useContainer();
+  const { dimRequested } = useContainer();
 
-    const [shouldHideDockBar, setShouldHideDockBar] = useState(false);
+  const [shouldHideDockBar, setShouldHideDockBar] = useState(false);
 
-    useEffect(() => {
-        setShouldHideDockBar(location.pathname === "/exercise" || location.pathname === "/preview-exercise");
-    }, [location.pathname]);
+  useEffect(() => {
+    setShouldHideDockBar(location.pathname === "/exercise" || location.pathname === "/preview-exercise");
+  }, [location.pathname]);
 
-    return (
-        <div className={`app flex-column ${dimRequested ? "dimmed" : ""} ${darkMode ? "dark-mode" : ""}`}>
-            <div className={`app-content flex-column ${dimRequested ? "dimmed" : ""}`}>
-                <AppRoutes />
-            </div>
+  return (
+    <div className={`app flex-column ${dimRequested ? "dimmed" : ""} ${darkMode ? "dark-mode" : ""}`}>
+      <div className={`app-content flex-column ${dimRequested ? "dimmed" : ""}`}>
+        <AppRoutes />
+      </div>
 
-            <ContainerToast />
+      <ContainerToast />
 
-            <ContainerPopup
-                isOpen={isPopupOpen}
-                content={contentPopup}
-                onClose={hidePopup}
-            />
+      <ContainerPopup
+        isOpen={isPopupOpen}
+        content={contentPopup}
+        onClose={hidePopup}
+      />
 
-            <ContainerFooter
-                isOpen={isFooterOpen}
-                content={contentFooter}
-                onClose={hideFooterCard}
-            />
+      <ContainerFooter
+        isOpen={isFooterOpen}
+        content={contentFooter}
+        onClose={hideFooterCard}
+      />
 
-            {!shouldHideDockBar && <div className="dockbar-padding" />}
+      {!shouldHideDockBar && <div className="dockbar-padding" />}
 
-            <div className={dimRequested ? "dimmed" : ""}>
-                <DockBar shouldHideDockBar={shouldHideDockBar} />
-            </div>
-        </div>
-    );
+      <div className={dimRequested ? "dimmed" : ""}>
+        <DockBar shouldHideDockBar={shouldHideDockBar} />
+      </div>
+    </div>
+  );
 }
 
 export default App;
