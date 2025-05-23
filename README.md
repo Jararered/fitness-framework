@@ -41,4 +41,4 @@ To start the development server using Vite after cloning the repository, follow 
     bun dev
     ```
 
-The application will be available at `http://localhost:3000`.
+The application will be available at `http://localhost:5173`.
