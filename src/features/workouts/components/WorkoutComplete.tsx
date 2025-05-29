@@ -6,6 +6,7 @@ import { useSettingStore } from "../../../features/settings/hooks/useSettingStor
 import { WorkoutStatistics } from "./WorkoutStatistics.tsx";
 
 import { useWorkoutStore } from "../hooks/useWorkoutStore.ts";
+import { Difficulty, ExerciseLog } from "../../../data/types.ts";
 
 const WorkoutCompletePage: React.FC = () => {
   const navigate = useNavigate();
@@ -34,19 +35,9 @@ const WorkoutCompletePage: React.FC = () => {
           endTime: new Date(),
         })
       );
+
       const totalReps = workoutState.repsCompleted.flat().reduce((sum, val) => sum + (val || 0), 0);
       const totalWeight = workoutState.weightsUsed.flat().reduce((sum, val) => sum + (val || 0), 0);
-      setWorkoutLogs([
-        ...workoutLogs,
-        {
-          workoutId: Date.now(),
-          exercises: exerciseLogs,
-          startTime: new Date(),
-          endTime: new Date(),
-          totalWeight,
-          totalReps,
-        },
-      ]);
 
       // Reset workout state after storing the statistics
       setWorkoutState({

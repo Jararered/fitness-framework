@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import { useContainer } from "../context/ContainerContext.tsx";
 
 import ContainerPopup from "../features/layout/components/ContainerPopup.tsx";
@@ -11,8 +13,6 @@ import { DockBar } from "../features/layout/components/DockBar.tsx";
 import { useSettingStore } from "../features/settings/hooks/useSettingStore.ts";
 
 import "./App.css";
-import { useState } from "react";
-import { useEffect } from "react";
 
 function App() {
   const { darkMode } = useSettingStore();
