@@ -2,9 +2,9 @@ import React, { useState, useCallback, useEffect } from "react";
 import { LuTrash, LuSave, LuArrowDownToLine } from "react-icons/lu";
 import { LuDumbbell } from "react-icons/lu";
 
-import { useWorkout } from "../context/WorkoutContext.tsx";
-import { useEquipment } from "../context/EquipmentContext.tsx";
-import { useContainer } from "../context/ContainerContext.tsx";
+import { useWorkoutStore } from "../stores/workoutStore";
+import { useEquipmentStore } from "../stores/equipmentStore";
+import { useContainerStore } from "../stores/containerStore";
 
 import { ContainerCard } from "../components/ContainerCard.tsx";
 import { ListItemToggleButton } from "../components/ListItemToggleButton.tsx";
@@ -14,9 +14,9 @@ import { Equipment } from "../data/types.ts";
 import "../styles/pages/EquipmentSelectPage.css";
 
 const EquipmentSelectPage: React.FC = () => {
-    const { addToast } = useContainer();
-    const { equipment } = useWorkout();
-    const { equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useEquipment();
+    const { addToast } = useContainerStore();
+    const { equipment } = useWorkoutStore();
+    const { equipmentConfigs, setEquipmentConfigs, equipmentLast, setEquipmentLast } = useEquipmentStore();
 
     const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
 

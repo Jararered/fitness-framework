@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-import { useUser } from "../context/UserContext.tsx";
-import { useWorkout } from "../context/WorkoutContext.tsx";
-import { useContainer } from "../context/ContainerContext.tsx";
+import { useUserStore } from "../stores/userStore";
+import { useWorkoutStore } from "../stores/workoutStore";
+import { useContainerStore } from "../stores/containerStore";
 
 const ProfilePage: React.FC = () => {
-    const { workoutLogs } = useWorkout();
-    const { addToast } = useContainer();
+    const { workoutLogs } = useWorkoutStore();
+    const { addToast } = useContainerStore();
     const [expanded, setExpanded] = useState(false);
-    const { settings } = useUser();
+    const { settings } = useUserStore();
 
     const now = new Date();
     const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);

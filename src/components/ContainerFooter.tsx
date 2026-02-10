@@ -1,6 +1,6 @@
 import React from "react";
 import { IoMdCloseCircle } from "react-icons/io";
-import { useContainer } from "../context/ContainerContext";
+import { useContainerStore } from "../stores/containerStore";
 
 import "../styles/components/ContainerFooter.css";
 
@@ -11,7 +11,7 @@ interface ContainerFooterProps {
 }
 
 const ContainerFooter: React.FC<ContainerFooterProps> = ({ isOpen, content, onClose }) => {
-    const { isFooterClosing } = useContainer();
+    const { isFooterClosing } = useContainerStore();
 
     const handleClose = () => {
         if (onClose) {

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { LuX } from "react-icons/lu";
 
-import { useContainer } from "../context/ContainerContext";
+import { useContainerStore } from "../stores/containerStore";
 
 import "../styles/components/ContainerPopup.css";
 
@@ -12,7 +12,7 @@ interface ContainerPopupProps {
 }
 
 const ContainerPopup = ({ isOpen, content, onClose }: ContainerPopupProps) => {
-    const { isPopupClosing } = useContainer();
+    const { isPopupClosing } = useContainerStore();
 
     const handleClose = () => {
         onClose();

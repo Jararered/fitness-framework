@@ -1,12 +1,12 @@
 import React from "react";
-import { LuDumbbell, LuArrowDown } from "react-icons/lu";
 
-import { useWorkout } from "../context/WorkoutContext.tsx";
+import ContainerCard from "./ContainerCard";
+import { useWorkoutStore } from "../stores/workoutStore";
 
 import "../styles/components/WorkoutOverview.css";
 
 const WorkoutOverview: React.FC = () => {
-    const { workoutState } = useWorkout();
+    const { workoutState } = useWorkoutStore();
 
     const handleRepTag = (circuitIndex: number, exerciseIndex: number) => {
         // Returns "Completed" if the circuit index is less than the current circuit index

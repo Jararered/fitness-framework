@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useWorkout } from "../context/WorkoutContext";
+import { useWorkoutStore } from "../stores/workoutStore";
 import { LuHouse, LuDumbbell, LuMapPin, LuUser, LuCog } from "react-icons/lu";
 
 import "../styles/components/DockBar.css";
@@ -8,7 +8,7 @@ import "../styles/components/IconButton.css";
 
 const DockBar: React.FC = () => {
     const navigate = useNavigate();
-    const { workoutState } = useWorkout();
+    const { workoutState } = useWorkoutStore();
     const location = useLocation();
     return (
         <span className={`dockbar ${workoutState.isStarted ? "hidden" : ""}`}>

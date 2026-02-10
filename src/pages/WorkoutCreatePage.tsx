@@ -6,9 +6,9 @@ import { LuPlus, LuMinus, LuTrash } from "react-icons/lu";
 import { LuDumbbell, LuArrowDown } from "react-icons/lu";
 import { LuSparkles } from "react-icons/lu";
 
-import { useEquipment } from "../context/EquipmentContext.tsx";
-import { useContainer } from "../context/ContainerContext.tsx";
-import { useWorkout } from "../context/WorkoutContext.tsx";
+import { useEquipmentStore } from "../stores/equipmentStore";
+import { useContainerStore } from "../stores/containerStore";
+import { useWorkoutStore } from "../stores/workoutStore";
 
 import { ContainerCard } from "../components/ContainerCard.tsx";
 import { SelectorSearchable } from "../components/SelectorSearchable.tsx";
@@ -27,9 +27,9 @@ interface EditExercisePopupProps {
 }
 
 const EditExercisePopup = ({ initialExercise, onClose }: EditExercisePopupProps) => {
-    const { equipmentConfigs, equipmentLast } = useEquipment();
-    const { exercises } = useWorkout();
-    const { hidePopup } = useContainer();
+    const { equipmentConfigs, equipmentLast } = useEquipmentStore();
+    const { exercises } = useWorkoutStore();
+    const { hidePopup } = useContainerStore();
 
     const [exercise, setExercise] = useState<ExercisePlan>(initialExercise);
     // Null check for exercise, create exercise if it is not set
@@ -209,12 +209,12 @@ const EditExercisePopup = ({ initialExercise, onClose }: EditExercisePopupProps)
 
 const WorkoutCreatePage: React.FC = () => {
     const navigate = useNavigate();
-    const { addToast, showPopup } = useContainer();
+    const { addToast, showPopup } = useContainerStore();
 
-    const { equipmentConfigs, equipmentLast } = useEquipment();
+    const { equipmentConfigs, equipmentLast } = useEquipmentStore();
 
-    const { workoutPlans, setWorkoutPlans } = useWorkout();
-    const { workoutState, setWorkoutState } = useWorkout();
+    const { workoutPlans, setWorkoutPlans } = useWorkoutStore();
+    const { workoutState, setWorkoutState } = useWorkoutStore();
 
     const [selectedMuscleGroup, setSelectedMuscleGroup] = useState<string>("Legs");
 

@@ -7,13 +7,13 @@ import { LuCirclePlus, LuCircleMinus } from "react-icons/lu";
 // It is also not included in the production build
 
 // Import the ContainerPopup component
-import { useContainer } from "../context/ContainerContext.tsx";
+import { useContainerStore } from "../stores/containerStore";
 
 const ToastExample = "Test Toast";
 const ToastType = "success";
 
 const ContentPopupExample = () => {
-    const { addToast } = useContainer();
+    const { addToast } = useContainerStore();
 
     return (
         <div className="card-content">
@@ -30,7 +30,7 @@ const ContentPopupExample = () => {
 };
 
 const ContentFooterExample = () => {
-    const { addToast } = useContainer();
+    const { addToast } = useContainerStore();
 
     return (
         <div className="card-content">
@@ -47,7 +47,7 @@ const ContentFooterExample = () => {
 };
 
 const SandboxPage: React.FC = () => {
-    const { showPopup, hidePopup, showFooterCard, addToast } = useContainer();
+    const { showPopup, hidePopup, showFooterCard, addToast } = useContainerStore();
 
     const [number, setNumber] = useState(0);
 

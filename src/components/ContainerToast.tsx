@@ -1,7 +1,7 @@
 import React from "react";
 import { LuCheck, LuX, LuInfo } from "react-icons/lu";
 
-import { useContainer } from "../context/ContainerContext.tsx";
+import { useContainerStore } from "../stores/containerStore";
 
 import "../styles/components/ContainerToast.css";
 
@@ -26,7 +26,7 @@ const Toast: React.FC<ToastProps> = ({ toast }) => {
 };
 
 const ContainerToast: React.FC = () => {
-    const { contentToast } = useContainer();
+    const { contentToast } = useContainerStore();
 
     return (
         <div className="container-toast">

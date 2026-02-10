@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useUser } from "../context/UserContext.tsx";
-import { useWorkout } from "../context/WorkoutContext.tsx";
+import { useUserStore } from "../stores/userStore";
+import { useWorkoutStore } from "../stores/workoutStore";
 
 import { WorkoutStatistics } from "../components/WorkoutStatistics.tsx";
 
 const WorkoutCompletePage: React.FC = () => {
-    const { workoutState, setWorkoutState, workoutLogs, setWorkoutLogs } = useWorkout();
-    const { settings } = useUser();
+    const { workoutState, setWorkoutState, workoutLogs, setWorkoutLogs } = useWorkoutStore();
+    const { settings } = useUserStore();
     const navigate = useNavigate();
     const [stats, setStats] = useState<{
         repsCompleted: number[][];

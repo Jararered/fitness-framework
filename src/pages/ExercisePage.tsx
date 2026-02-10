@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LuCheck, LuCirclePlus, LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
-import { useUser } from "../context/UserContext.tsx";
-import { useWorkout } from "../context/WorkoutContext.tsx";
-import { useContainer } from "../context/ContainerContext.tsx";
+import { useUserStore } from "../stores/userStore";
+import { useWorkoutStore } from "../stores/workoutStore";
+import { useContainerStore } from "../stores/containerStore";
 
 import { DividerSpaced } from "../components/DividerSpaced.tsx";
 import ExerciseInputFooter from "../components/ExerciseInputFooter.tsx";
@@ -15,9 +15,9 @@ import "../styles/pages/ExercisePage.css";
 
 const ExercisePage: React.FC = () => {
     const navigate = useNavigate();
-    const { workoutState, setWorkoutState } = useWorkout();
-    const { settings } = useUser();
-    const { showFooterCard, hideFooterCard } = useContainer();
+    const { workoutState, setWorkoutState } = useWorkoutStore();
+    const { settings } = useUserStore();
+    const { showFooterCard, hideFooterCard } = useContainerStore();
 
     const [repsInput, setRepsInput] = useState<number>(0);
     const [weightInput, setWeightInput] = useState<number>(0);

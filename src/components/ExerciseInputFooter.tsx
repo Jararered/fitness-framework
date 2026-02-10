@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useUser } from "../context/UserContext";
+import { useUserStore } from "../stores/userStore";
 
 interface ExerciseInputFooterProps {
     exerciseName: string;
@@ -17,7 +17,7 @@ const ExerciseInputFooter: React.FC<ExerciseInputFooterProps> = ({
     initialWeight,
     onSave,
 }) => {
-    const { settings } = useUser();
+    const { settings } = useUserStore();
 
     const [reps, setReps] = useState(initialReps);
     const [weight, setWeight] = useState(initialWeight);

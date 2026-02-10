@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LuArrowRight, LuTrophy, LuCircleAlert, LuX, LuEqual, LuDumbbell } from "react-icons/lu";
 
-import { useUser } from "../context/UserContext.tsx";
-import { useWorkout } from "../context/WorkoutContext.tsx";
-import { useContainer } from "../context/ContainerContext.tsx";
+import { useUserStore } from "../stores/userStore";
+import { useWorkoutStore } from "../stores/workoutStore";
+import { useContainerStore } from "../stores/containerStore";
 
 import { TimerCircular } from "../components/TimerCircular.tsx";
 import { DividerSpaced } from "../components/DividerSpaced.tsx";
@@ -74,10 +74,10 @@ interface MuscularLoadProps {
 }
 
 const ExercisePreviewPage: React.FC = () => {
-    const { workoutState } = useWorkout();
-    const { settings } = useUser();
+    const { workoutState } = useWorkoutStore();
+    const { settings } = useUserStore();
     const navigate = useNavigate();
-    const { showFooterCard } = useContainer();
+    const { showFooterCard } = useContainerStore();
 
     const [isTimerDone, setIsTimerDone] = useState(false);
     const [resetTimer, setResetTimer] = useState(false);

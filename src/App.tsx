@@ -1,10 +1,10 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useUser } from "./context/UserContext.tsx";
+import { useUserStore } from "./stores/userStore";
 import { IconContext } from "react-icons";
 
 import DockBar from "./components/DockBar.tsx";
 import PageTransition from "./components/PageTransition.tsx";
-import { useContainer } from "./context/ContainerContext.tsx";
+import { useContainerStore } from "./stores/containerStore";
 
 import HomePage from "./pages/HomePage.tsx";
 import EquipmentSelectPage from "./pages/EquipmentSelectPage.tsx";
@@ -26,11 +26,11 @@ import "./styles/components/App.css";
 import "./styles/components/Card.css";
 
 function App() {
-    const { settings } = useUser();
+    const { settings } = useUserStore();
     const location = useLocation();
-    const { isFooterOpen, contentFooter, hideFooterCard } = useContainer();
-    const { isPopupOpen, contentPopup, hidePopup } = useContainer();
-    const { dimRequested } = useContainer();
+    const { isFooterOpen, contentFooter, hideFooterCard } = useContainerStore();
+    const { isPopupOpen, contentPopup, hidePopup } = useContainerStore();
+    const { dimRequested } = useContainerStore();
 
     return (
         <div className={`App ${dimRequested ? "dimmed" : ""} ${settings.darkMode ? "dark-mode" : ""}`}>

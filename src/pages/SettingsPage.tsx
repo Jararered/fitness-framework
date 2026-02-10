@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useUser } from "../context/UserContext.tsx";
+import { useUserStore } from "../stores/userStore";
 
 // User Settings Icons
 import { LuUser } from "react-icons/lu";
@@ -49,7 +49,7 @@ const kgToGrams = (kg: number) => {
 };
 
 const WeightInput = () => {
-    const { settings, setSettings } = useUser();
+    const { settings, setSettings } = useUserStore();
     const isImperial = settings.unit === "imperial";
 
     const displayWeight = isImperial ? gramsToLbs(settings.weight) : gramsToKg(settings.weight);
@@ -74,7 +74,7 @@ const WeightInput = () => {
 };
 
 const HeightInputMetric = () => {
-    const { settings, setSettings } = useUser();
+    const { settings, setSettings } = useUserStore();
 
     return (
         <span className="height-input-container">
@@ -91,7 +91,7 @@ const HeightInputMetric = () => {
 };
 
 const HeightInputImperial = () => {
-    const { settings, setSettings } = useUser();
+    const { settings, setSettings } = useUserStore();
     const { feet, inches } = calculateHeightImperial(settings.height);
 
     return (
@@ -130,7 +130,7 @@ const HeightInputImperial = () => {
 };
 
 const SettingsPage: React.FC = () => {
-    const { settings, setSettings } = useUser();
+    const { settings, setSettings } = useUserStore();
     const navigate = useNavigate();
 
     const handleUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
